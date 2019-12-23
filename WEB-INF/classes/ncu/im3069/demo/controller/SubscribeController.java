@@ -86,7 +86,7 @@ public class SubscribeController extends HttpServlet {
         /** 透過JsonReader類別將Request之JSON格式資料解析並取回 */
         JsonReader jsr = new JsonReader(request);
         /** 若直接透過前端AJAX之data以key=value之字串方式進行傳遞參數，可以直接由此方法取回資料 */
-        String stuId = jsr.getParameter("foll_stuId");
+        String stuId = jsr.getParameter("sub_stuId");
         String courId = jsr.getParameter("id");
         JSONObject query = null;
         int count = 0;
@@ -102,7 +102,7 @@ public class SubscribeController extends HttpServlet {
         /** 新建一個JSONObject用於將回傳之資料進行封裝 */
         JSONObject resp = new JSONObject();
         resp.put("status", "200");
-        resp.put("message", "所有追蹤資料取得成功");
+        resp.put("message", "所有訂閱資料取得成功");
         resp.put("response", query);
         resp.put("count", count);
         

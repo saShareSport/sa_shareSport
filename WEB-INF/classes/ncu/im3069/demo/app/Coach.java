@@ -132,7 +132,17 @@ public class Coach {
         this.id = id;
         this.name = name;
     }
-    
+    /**
+     * 實例化（Instantiates）一個新的（new）Coach物件<br>
+     * 採用多載（overload）方法進行，此建構子用於follow查詢教練時，將每一筆資料新增為一個教練物件
+     *
+     * @param id 教練編號
+     * @param name 教練姓名
+     */
+    public Coach(String name, String information) {
+        this.name = name;
+        this.information = information;
+    }
     /**
      * 取得教練之編號
      *
@@ -282,5 +292,14 @@ public class Coach {
         return jso;
     }
     
+   //for student getting follow's coach
+  	public JSONObject getFollData() {
+          /** 透過JSONObject將該項產品所需之資料全部進行封裝*/ 
+          JSONObject jso = new JSONObject(); 
+          jso.put("name", getName());
+          jso.put("information", getInformation());
+          
+          return jso;
+      }
  
 }

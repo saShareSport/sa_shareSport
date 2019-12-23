@@ -315,13 +315,11 @@ public class StudentHelper {
                 row += 1;
 
                 /** 將 ResultSet 之資料取出 */
-                int student_id = rs.getInt("id");
                 String name = rs.getString("name");
-
                 /** 將每一筆學生資料產生一名新Member物件 */
-                s = new Student(student_id,name);
+                s = new Student(name);
                 /** 取出該名學生之資料並封裝至 JSONsonArray 內 */
-                jsa.put(s.getData());
+                jsa.put(s.getSubData());
             }
 
         } catch (SQLException e) {
@@ -342,9 +340,9 @@ public class StudentHelper {
 
         /** 將SQL指令、花費時間、影響行數與所有學生資料之JSONArray，封裝成JSONObject回傳 */
         JSONObject response = new JSONObject();
-        response.put("sql", exexcute_sql);
-        response.put("row", row);
-        response.put("time", duration);
+        //response.put("sql", exexcute_sql);
+        //response.put("row", row);
+        //response.put("time", duration);
         response.put("data", jsa);
 
         return response;

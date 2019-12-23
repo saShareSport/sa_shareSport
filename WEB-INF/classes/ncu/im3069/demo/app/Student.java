@@ -111,6 +111,15 @@ public class Student {
     }
     /**
      * 實例化（Instantiates）一個新的（new）Member物件<br>
+     * 採用多載（overload）方法進行，此建構子用於subscribe&follow查詢學生資料時，將每一筆資料新增為一個學生物件
+     *
+     * @param name 學生姓名
+     */
+    public Student(String name) {
+        this.name = name;
+    }
+    /**
+     * 實例化（Instantiates）一個新的（new）Member物件<br>
      * 採用多載（overload）方法進行，此建構子用於查詢學生資料&儲存照片時，將每一筆資料新增為一個學生物件
      *
      * @param id 學生編號
@@ -252,5 +261,13 @@ public class Student {
         return jso;
     }
     
+    //for student getting subscribe
+  	public JSONObject getSubData() {
+          /** 透過JSONObject將該項產品所需之資料全部進行封裝*/ 
+          JSONObject jso = new JSONObject(); 
+          jso.put("name", getName());
+   
+          return jso;
+      }
  
 }

@@ -388,7 +388,7 @@ public class CourseHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令，?為變數的意思 */
-            String sql = "SELECT `name` FROM `sa_sharesport`.`courses` WHERE `id` = ? LIMIT 1";
+            String sql = "SELECT `name`,`information`FROM `sa_sharesport`.`courses` WHERE `id` = ? LIMIT 1";
 
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
@@ -407,13 +407,12 @@ public class CourseHelper {
                 row += 1;
 
                 /** 將 ResultSet 之資料取出 */
-                int course_id = rs.getInt("id");
                 String name = rs.getString("name");
-
+                String information = rs.getString("information");
                 /** 將每一筆教練資料產生一名新Course物件 */
-                c = new Course(course_id, name);
+                c = new Course(name, information);
                 /** 取出該名教練之資料並封裝至 JSONsonArray 內 */
-                jsa.put(c.getData());
+                jsa.put(c.getSubData());
             }
 
         } catch (SQLException e) {
@@ -434,9 +433,9 @@ public class CourseHelper {
 
         /** 將SQL指令、花費時間、影響行數與所有教練資料之JSONArray，封裝成JSONObject回傳 */
         JSONObject response = new JSONObject();
-        response.put("sql", exexcute_sql);
-        response.put("row", row);
-        response.put("time", duration);
+        //response.put("sql", exexcute_sql);
+        //response.put("row", row);
+        //response.put("time", duration);
         response.put("data", jsa);
 
         return response;

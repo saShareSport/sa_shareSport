@@ -63,13 +63,13 @@ public class Subscribe{
         return jso;
     }
 
-	//get student's follow list of courses'id and name
-    public JSONObject getStudentFollowData() {
-        JSONObject jso = new JSONObject();
-        jso.put("id", getId());
-        jso.put("sub_courId", getSubCourseId());
-        jso.put("course_name", getCourName(getSubCourseId()));
-        return jso;
-    }
+//	//get student's follow list of courses'id and name
+//    public JSONObject getStudentFollowData() {
+//        JSONObject jso = new JSONObject();
+//        jso.put("id", getId());
+//        jso.put("sub_courId", getSubCourseId());
+//        jso.put("course_name", getCourName(getSubCourseId()));
+//        return jso;
+//    }
     
 }

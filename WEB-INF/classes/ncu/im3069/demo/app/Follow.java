@@ -62,21 +62,21 @@ public class Follow{
         jso.put("coach_name", getCoachName(getFollowsCoachId()));
         return jso;
     }
-    //get coach's follower's id and name
-    public JSONObject getCoachFollowData() {
-        JSONObject jso = new JSONObject();
-        jso.put("id", getId());
-        jso.put("foll_stuId", getFollowsStudentId());
-        jso.put("student_name", getStudentName(getFollowsStudentId()));
-        return jso;
-    }
+//    //get coach's follower's id and name
+//    public JSONObject getCoachFollowData() {
+//        JSONObject jso = new JSONObject();
+//        jso.put("id", getId());
+//        jso.put("foll_stuId", getFollowsStudentId());
+//        jso.put("student_name", getStudentName(getFollowsStudentId()));
+//        return jso;
+//    }
 
-	//get student's follow list of coaches'id and name
-    public JSONObject getStudentFollowData() {
-        JSONObject jso = new JSONObject();
-        jso.put("id", getId());
-        jso.put("foll_coaId", getFollowsCoachId());
-        jso.put("coach_name", getCoachName(getFollowsCoachId()));
-        return jso;
-    }
+//	//get student's follow list of coaches'id and name
+//    public JSONObject getStudentFollowData() {
+//        JSONObject jso = new JSONObject();
+//        jso.put("id", getId());
+//        jso.put("foll_coaId", getFollowsCoachId());
+//        jso.put("coach_name", getCoachName(getFollowsCoachId()));
+//        return jso;
+//    }
 }

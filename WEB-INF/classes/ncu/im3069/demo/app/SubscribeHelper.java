@@ -205,7 +205,7 @@ public class SubscribeHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM `sa_sharesport`.`subscribes` WHERE `subscribe_student_id` = ? LIMIT 1";
+            String sql = "SELECT * FROM `sa_sharesport`.`subscribes` WHERE `subscribe_student_id` = ?";
             
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
@@ -218,20 +218,21 @@ public class SubscribeHelper {
             System.out.println(exexcute_sql);
             
             /** 透過 while 迴圈移動pointer，取得每一筆回傳資料 */
-            /** 正確來說資料庫只會有一筆該教練編號之資料，因此其實可以不用使用 while 迴圈 */
+        
             while(rs.next()) {
                 /** 每執行一次迴圈表示有一筆資料 */
                 row += 1;
                 
                 /** 將 ResultSet 之資料取出 */
                 int subscribe_id = rs.getInt("id");
-                int sub_stuId = rs.getInt("sub_stuId");
-                int sub_courId = rs.getInt("sub_courId");
-                
+                int sub_stuId = rs.getInt("subscribe_student_id");
+                int sub_courId = rs.getInt("subscribe_course_id");
+//                System.out.println(sub_courId);
                 /** 將每一筆訂閱資料產生一名新SubscribeCoach物件 */
                 s = new Subscribe(subscribe_id, sub_stuId, sub_courId);
                 /** 取出該名訂閱之資料並封裝至 JSONsonArray 內 */
                 jsa.put(s.getData());
+//              jsa.put(s.getStudentFollowData());
             }
             
         } catch (SQLException e) {
@@ -252,9 +253,9 @@ public class SubscribeHelper {
         
         /** 將SQL指令、花費時間、影響行數與所有訂閱資料之JSONArray，封裝成JSONObject回傳 */
         JSONObject response = new JSONObject();
-        response.put("sql", exexcute_sql);
-        response.put("row", row);
-        response.put("time", duration);
+        //response.put("sql", exexcute_sql);
+        //response.put("row", row);
+        //response.put("time", duration);
         response.put("data", jsa);
 
         return response;

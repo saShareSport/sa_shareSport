@@ -66,9 +66,9 @@ public class Course {
 	
 	}
 	// 為了取得訂閱中的教程資訊 
-	public Course (int id, String name) {
-		this.id = id;
+	public Course (String name, String information) {
 		this.name = name;
+		this.information = information;
 	}
 		
 	public int getID() {
@@ -162,6 +162,15 @@ public class Course {
         jso.put("status", getStatus());
 
         
+        return jso;
+    }
+	//for student getting subscribe
+	public JSONObject getSubData() {
+        /** 透過JSONObject將該項產品所需之資料全部進行封裝*/ 
+        JSONObject jso = new JSONObject(); 
+        jso.put("name", getName());
+        jso.put("information", getInfo());
+ 
         return jso;
     }
 }

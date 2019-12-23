@@ -86,16 +86,25 @@ public class FollowController extends HttpServlet {
         JsonReader jsr = new JsonReader(request);
         /** 若直接透過前端AJAX之data以key=value之字串方式進行傳遞參數，可以直接由此方法取回資料 */
         String stuId = jsr.getParameter("foll_stuId");
+        String coaId = jsr.getParameter("id");
+        JSONObject query = null;
+        int count = 0;
         
-        /** 透過MemberHelper物件之getAll()方法取回所有追蹤之資料，回傳之資料為JSONObject物件 */
-        JSONObject query = fh.getByID(stuId);
+        if(stuId != null) {
+        	/** 透過FollowHelper物件之getByID()方法取回該學生所有訂閱之資料，回傳之資料為JSONObject物件 */
+            query = fh.getByID(stuId);
+        }
+        if(coaId != null){
+        	count = fh.countFoll(coaId);
+        }
         
         /** 新建一個JSONObject用於將回傳之資料進行封裝 */
         JSONObject resp = new JSONObject();
         resp.put("status", "200");
         resp.put("message", "所有追蹤資料取得成功");
         resp.put("response", query);
-    
+        resp.put("count", count);
+        
             /** 透過JsonReader物件回傳到前端（以JSONObject方式） */
             jsr.response(resp, response);
     }
