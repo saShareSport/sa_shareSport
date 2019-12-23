@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="brow_courses.css">
+     
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>shareSport - 新增教程</title>
+    <link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
+    <link href="statics/icon/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <link rel="stylesheet" type="text/css" href="statics/css/cake.generic.css">
+
+    <script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+	<nav class="nav" style="background-color: #e3f2fd;">
+ 	 <a class="navbar-brand" href="#">shareSport</a>
+    <ul class="nav justify-content-end">
+    <li class="nav-item">
+     <a class="nav-link active" href="#">首頁</a>
+   </li>
+   <li class="nav-item">
+     <a class="nav-link active" href="#">瀏覽教練</a>
+   </li>
+   <li class="nav-item">
+     <a class="nav-link active" href="#">瀏覽教程</a>
+   </li>
+   <li class="nav-item">
+     <a class="nav-link active" href="#">個人專區</a>
+   </li>
+   <li class="nav-item">
+     <a class="nav-link active" href="#">管理介面</a>
+   </li>
+   <li class="nav-item">
+     <a class="nav-link active" id="sign" href="#">登入</a>
+   </li>
+   <li class="nav-item">
+     <a class="nav-link active" id="regsign" href="#">註冊</a>
+   </li>
+   </ul>
+	</nav>
+
+    <div id="container">
+        
+        <div id="content">
+			<h1>新增教程</h1>
+            <h5 class="star">*為必填</h5><br>
+
+            <div id="flashMessage" class="message" style="display: none;"></div>
+
+            <form id="form" accept-charset="utf-8">
+            
+                <div style="display:none;"><input type="hidden" name="_method" value="POST"></div>
+               
+               
+                <div class="input text required">
+                    <label for="course_name">教程名稱</label><label class="star">*</label><br>
+                    <input name="name" maxlength="45" type="text" id="course_name" required="required">
+                </div><br>
+
+                <div class="input area required">
+               		<label for="course_area">教程類別</label><label class="star">*</label><br>
+                	<input type="checkbox" id="upper_limb" value="upper_limb">上肢<br>
+					<input type="checkbox" id="core"       value="core">核心<br>
+					<input type="checkbox" id="lower_limb" value="lower_limb">下肢<br>
+                </div><br>
+               
+                <div class="input information required">
+                	<label for="course_information">教程簡介</label><br>
+                    <textarea name="information" id="course_information" required="required"></textarea>
+                </div><br>
+                
+                <div class="input image required">
+                <label for="course_image">教程封面</label><br>
+                	 <form action="" enctype="multipart/form-data">
+                	 <img id="preview_default" style="display: block;" src="img/file.jpg" />
+        			 <img id="preview_img" style="display: none;" src="#" />
+        			 <label class="btn btn-dark">
+        			 <input type="file" id="imgInput" style="display:none;" accept="image/gif, image/jpeg, image/png"/ >
+        			 瀏覽
+        			 </label>
+   					 </form>
+                </div><br>
+              
+				<div class="input video required">
+				<label for="course_video">新增影片</label><label class="star">*</label>
+				<label class="star">原網址為「https://www.youtube.com/watch?v=影片id」，請將網址改為「https://www.youtube.com/embed/影片id」再按新增！</label><br>
+                <br><input name="video" maxlength="45" type="text" id="course_video" style="width:350px;" required="required">
+                <input type="button" value="新增" id="add" class="btn btn-dark">
+                </div><br>
+                
+                <div id="list">
+                </div>
+          
+                <div class="submit"><input type="button" value="上傳" id="submit" class="btn btn-primary"></div>
+            </form>
+            
+            	<div>
+           			 <br>
+            	</div>
+            
+            <script type="text/javascript">
+            
+            var i = 0;//控制登入登出
+            $("#sign").click(function () {
+                if (i == 0) {
+                    document.getElementById("sign").innerHTML = "登出";
+                    i = 1;
+                    document.getElementById("regsign").style.display="none";
+                } else {
+                    document.getElementById("sign").innerHTML = "登入";
+                    i = 0;
+                    document.getElementById("regsign").style.display="block";
+                }
+            });
+            
+            
+            $("#imgInput").change(function(){   //瀏覽
+                readURL(this);
+            });
+            function readURL(input){
+                if(input.files && input.files[0]){
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        document.getElementById("preview_default").style.display = "none";
+                        document.getElementById("preview_img").style.display = "block";
+                        $("#preview_img").attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                  }
+            }
+           
+            //add
+            $(document).ready(function() {  
+                $('#add').click(function() {
+                    add();
+                });
+              
+                var counter=0;
+                
+                function add(){
+                $("#list").append("<table border=\"1\">");  //加頭
+                	var video = $('#course_video').val();
+                	$("#list").append("<iframe width=\"320\" height=\"240\" id="+counter+" src="+video+"></iframe>"); 
+                $("#list").append("</table>");              //加尾
+                $('#course_video').val('');                 //清空input格
+                counter++;
+                }; 
+                
+            });
+            
+            $(document).ready(function() {
+                var $form = $('#submit');         //上傳
+                $form.click(function() {
+                    submit();
+                });
+
+                function submit() {
+                	var cname = $('#course_name').val();
+                	
+                	var checkU = $('#upper_limb').prop('checked');
+                	var checkC = $('#core').prop('checked');
+                	var checkL = $('#lower_limb').prop('checked');
+                	
+                	var information = $('#course_information').val();
+                	var image = $('#imgInput').val();
+                	var list = $('#list').html();
+                    
+                    if(!cname){
+                    	alert("請輸入教程名稱！");
+                    }
+                    
+                    else if(checkU==false&&checkC==false&&checkL==false){
+                   		alert("請選擇教程類別！");
+                    }
+                    
+                    else if($('#list').children().length === 0){
+                    	alert("請上傳至少一個影片！");
+                    }
+    
+                    else {
+                    	  
+                        // 將資料組成JSON格式
+                        var data_object = {
+                            "name" : cname,
+                        	"upper_limb": checkU,
+                            "core" : checkC,
+                        	"lower_limb": checkL,
+                            "information": information,
+                            "image": image,
+                            "video" : list
+                        };
+
+                        // 將JSON格式轉換成字串
+                        var data_string = JSON.stringify(data_object);
+                        
+                        // 發出POST的AJAX請求
+                        var options = {
+                        	 type: "POST",
+                             url: "/api/course.do",
+                             data: data_string,
+                             crossDomain: true,
+                             cache: false,
+                             dataType: 'json',
+                             timeout: 5000,
+                             
+                             success: function (response) {
+                                 $('#flashMessage').html(response.message);
+                                 $('#flashMessage').show();
+                                 if(response.status == 200){
+                                     updateSQLTable(response.response);
+                                 }
+                             },
+                             
+                             error: function () {
+                                 alert("無法連線到伺服器！");
+                                 
+                             }
+                        }
+                           
+                        alert("上傳成功！");
+                    }
+                }
+            });
+            
+            </script>
+        </div>
+    </div>
+    
+    
+   <style type="text/css">
+* {
+    box-sizing: border-box;
+}
+
+#submit {
+    margin-left: 80px;
+}
+
+#content {
+    margin-left: 200px;
+    margin-right: 340px;
+}
+
+#course_intro {
+	width:300px;
+	height:100px;
+}
+
+
+html,
+body {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 27px;
+    margin-right: 27px;
+
+    padding: 0px;
+}
+
+.nav {
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+
+
+#coach-name {
+    font-size: 25px;
+    color: rgb(53, 121, 247)
+}
+
+.star {
+	color: red;
+}
+
+</style>
+</body>
+
+</html>

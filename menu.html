@@ -26,10 +26,10 @@
 
     <script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
 </head>
-	
+
 <body>
 
-	<nav class="nav" style="background-color: #e3f2fd;">
+		<nav class="nav" style="background-color: #e3f2fd;">
  	 <a class="navbar-brand" href="#">shareSport</a>
     <ul class="nav justify-content-end">
     <li class="nav-item">
@@ -59,40 +59,23 @@
     <div id="container">
         
         <div id="content">
-            <h1>登入</h1>
-            <h5 class="star">*為必填</h5><br>
-				 
-			<img id="image" width="30%" length="30%" alt="圖片失效" src="https://pic3.zhimg.com/v2-85b57a0b9636664bb47b5b4bf097826b_1200x500.jpg">
+            <h1>首頁</h1>
 			
             <div id="flashMessage" class="message" style="display: none;"></div>
 
-            <form id="form" accept-charset="utf-8">
             
                 <div style="display:none;"><input type="hidden" name="_method" value="POST"></div>
                
                               
-               <div class="input select required">
-					<label for="member_identity">身分</label><label class="star">*</label><br>
-					<select name="identity" id="member_identity" required="required">
-					<option value="default">選擇身分</option>
-					<option value="student">學生</option>
-					<option value="coach">教練</option>
-					</select>
+               <div id="course" style="width:1200px;height:300px;overflow:scroll;">
+					<label class="title">推薦教程</label><br>
+					
                </div><br>
                
-                <div class="input email required">
-                    <label for="member_email">電子信箱</label><label class="star">*</label><br>
-                    <input name="email" maxlength="45" type="email" id="member_email" required="required">
-                </div><br>
-              
-                <div class="input password required">
-                    <label for="member_password">密碼</label><label class="star">*</label><br>
-                    <input name="password" maxlength="45" type="password" id="member_password" required="required">
-                </div><br>
-                    
-				<input type="button" value="立即註冊" id="regnow"  class="btn btn-warning">
-                <input type="button" value="登入" id="submit" class="btn btn-primary">
-            </form>
+               <div id="coach" style="width:1200px;height:300px;overflow:scroll;">
+					<label class="title">推薦教練</label><br>
+					
+               </div><br>
             </div>
             
             <script type="text/javascript">
@@ -109,40 +92,7 @@
                 }
             });
             
-               $(document).ready(function() {
-                    // 處理表單點擊事件
-                    var $form = $('#submit');
-                    $form.click(function() {
-                        submit();
-                    });
-
-                    function submit() {
-                    	var identity = $('#member_identity').val();
-                        var email = $('#member_email').val();
-                        var password = $('#member_password').val();
-                        
-                        if(identity=="default"){
-                       		alert("請選擇身分！");
-                        }
-                        
-                        else if(!name){
-                        	alert("請輸入姓名！");
-                        }
-                        
-                        else if(!email) {
-                            alert("請輸入Email！");
-                        }
-                        
-                        else if(!password) {
-                            alert("請輸入密碼！");
-                        }
-                        
-                        else {
-                      
-                            alert("登入成功！\n正在為您導回首頁！");
-                        } 
-                    }
-                });
+               
             </script>
         </div>
     </div>
@@ -168,8 +118,7 @@
 }
 
 #content {
-    margin-top: 80px;
-    margin-left: 170px;
+    margin-top: 40px;
     margin-right: 340px;
 }
 
