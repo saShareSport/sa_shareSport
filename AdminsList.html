@@ -79,13 +79,12 @@ body {
             <th scope="col">帳號</th>
             <th scope="col">更新時間</th>
             <th scope="col">編輯</th>
-            <th scope="col">停權／復權</th>
           </tr>
         </thead>
         <tbody>
         </tbody>
       </table>
-      <div align="center"><button type="button" class="btn btn-primary">新增管理員</button></div>
+      <div align="center"><button type="button" class="btn btn-primary" id="AddAdmin"  onclick="NewAdmin()">新增管理員</button></div>
 		
 	<script>
 	
@@ -122,6 +121,10 @@ body {
         }
     }
     
+function NewAdmin(){
+	location.href="/sa_shareSport/RegisterAdmin.html";
+	}
+    
 	function getAllMember(){
 		$.ajax({
             type: "GET",
@@ -153,25 +156,30 @@ body {
 			 AdminsTable_html +='<td>' + value['email'] + '</td>';
 			 AdminsTable_html +='<td>' + value['modified'] + '</td>';
 			 AdminsTable_html +='<td>' + '<a class="btn btn-primary href="edit.html?id=' + value['id'] + '">編輯</a>'+'</td>';
-			 AdminsTable_html +='<td>'+'<a href="javascript: deleteMember(' + value['id'] + ');">停權</a></td></tr>';
+			 //AdminsTable_html +='<td>'+'<a href="javascript: deleteMember(' + value['id'] + ');">停權</a></td></tr>';
 		 })
 		 $("#AdminsTable > tbody").append(AdminsTable_html);
 	}
 	$("#AdminList").click(function () {
-		location.href="managerlist.html";
+		location.href="/sa_shareSport/AdminsList.html";
 	});
 	
 	$("#StudentList").click(function () {
-		location.href="studentlist.html";
+		location.href="/sa_shareSport/studentlist.html";
 	});
 	
 	$("#CoachList").click(function () {
-		location.href="teacherlist.html";
+		location.href="/sa_shareSport/CoachList.html";
 	});
 	
 	$("#CourseList").click(function () {
-		location.href="teachinglist.html";
+		location.href="/sa_shareSport/CourseList.html";
 	});
+	
+	$(document).ready(function() {
+        getAllMember();
+    });
+	
 	$(document).ready(function() {
         getAllMember();
     });

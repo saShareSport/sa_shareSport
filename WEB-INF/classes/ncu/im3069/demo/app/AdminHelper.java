@@ -66,7 +66,7 @@ public class AdminHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "INSERT INTO `sa_sharesport`.`admins`(`name`, `email`, `password`, `modified`, `created``)"
+            String sql = "INSERT INTO `sa_sharesport`.`admins`(`name`, `email`, `password`, `modified`, `created`)"
                     + " VALUES(?, ?, ?, ?, ?)";
             
             /** 取得所需之參數 */

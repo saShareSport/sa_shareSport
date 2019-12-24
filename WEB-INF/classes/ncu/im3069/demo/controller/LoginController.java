@@ -37,11 +37,15 @@ public class LoginController extends HttpServlet {
     private StudentHelper sh =  StudentHelper.getHelper();
     private CoachHelper ch =  CoachHelper.getHelper();
     private AdminHelper ah =  AdminHelper.getHelper();
-//    private String role = null;
+
     private String srole;
     private String crole;
     private String arole;
     
+    private Cookie idCookie;
+    private Cookie nameCookie;
+    private Cookie roleCookie;
+	
 	@SuppressWarnings("unused")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
@@ -55,18 +59,15 @@ public class LoginController extends HttpServlet {
 		String role = null;
 		
 		if(arole != null) {
-//			System.out.println(arole);
 			flag = ah.checkLogin(email, password);
 			result = ah.getLogin(email, password);	
 			role = "admin";
 		}
 		else if(srole != null) {
-//			System.out.println(srole);
 			result = sh.checkLogin(email, password);
 			role = "student";
 		}
 		else if(crole != null){
-//			System.out.println(crole);
 			result = ch.checkLogin(email, password);
 			role = "coach";
 		}
@@ -80,17 +81,22 @@ public class LoginController extends HttpServlet {
 		String id = URLEncoder.encode(Integer.toString((int) result.getJSONArray("data").getJSONObject(0).get("id")),"utf-8");
 		
 		if(flag){
-			Cookie idCookie = new Cookie("id", id);
-			Cookie nameCookie = new Cookie("name", name);
-			Cookie roleCookie = new Cookie("role", role);
+			idCookie = new Cookie("id", id);
+			nameCookie = new Cookie("name", name);
+			roleCookie = new Cookie("role", role);
+			
 			//setting cookie to expiry in 30 mins
 			idCookie.setMaxAge(30*60);
 			nameCookie.setMaxAge(30*60);
 			roleCookie.setMaxAge(30*60);
+			
+			//將cookie傳給client端
 			response.addCookie(idCookie);
 			response.addCookie(nameCookie);
 			response.addCookie(roleCookie);
+			
 			response.sendRedirect("/sa_shareSport/index.html");
+			
 		}else{
 //			RequestDispatcher rd = getServletContext().getRequestDispatcher("/NCU_MIS_SA/index.html");
 //			PrintWriter out= response.getWriter();
@@ -99,9 +105,6 @@ public class LoginController extends HttpServlet {
 			response.sendRedirect("/sa_shareSport/index.html");
 			System.out.println("not correct");
 		}
-		
-		
-		
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -109,6 +112,8 @@ public class LoginController extends HttpServlet {
 			
 	    	String userId = null;
 	    	String userRole = null;
+	    	
+	    	//從client端拿cookie，為陣列型式所以再用for迴圈去找要的cookie
 			Cookie[] cookies = request.getCookies();
 			if(cookies !=null){
 				for(Cookie cookie : cookies){
@@ -116,9 +121,7 @@ public class LoginController extends HttpServlet {
 					if(cookie.getName().equals("role")) userRole = cookie.getValue();
 				}
 			}
-			if(userId == null) response.sendRedirect("/sa_shareSport/login.html");
-			
-			//System.out.println(userId);
+//			if(userId == null) response.sendRedirect("/sa_shareSport/login_demo.html");
 	       
 			/** 透過JsonReader類別將Request之JSON格式資料解析並取回 */
 	        JsonReader jsr = new JsonReader(request);
@@ -141,6 +144,32 @@ public class LoginController extends HttpServlet {
 	        resp.put("message", "cookie資料取得成功");
 	        resp.put("response", query);
 	        resp.put("role", userRole);
+	        
+	        /** 透過JsonReader物件回傳到前端（以JSONObject方式） */
+	        jsr.response(resp, response);
+	}
+	
+	public void doDelete(HttpServletRequest request, HttpServletResponse response)
+	        throws ServletException, IOException {
+			
+			//setting cookie to expiry in 30 mins
+			idCookie.setMaxAge(0);
+			nameCookie.setMaxAge(0);
+			roleCookie.setMaxAge(0);
+			
+			//將cookie傳給client端
+			response.addCookie(idCookie);
+			response.addCookie(nameCookie);
+			response.addCookie(roleCookie);
+			
+			/** 透過JsonReader類別將Request之JSON格式資料解析並取回 */
+	        JsonReader jsr = new JsonReader(request);
+	        JSONObject query = null;
+   
+	        /** 新建一個JSONObject用於將回傳之資料進行封裝 */
+	        JSONObject resp = new JSONObject();
+	        resp.put("status", "200");
+	        resp.put("message", "cookie資料刪除成功");
 	        
 	        /** 透過JsonReader物件回傳到前端（以JSONObject方式） */
 	        jsr.response(resp, response);

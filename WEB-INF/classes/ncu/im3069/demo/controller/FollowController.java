@@ -123,10 +123,11 @@ public class FollowController extends HttpServlet {
         JSONObject jso = jsr.getObject();
         
         /** 取出經解析到JSONObject之Request參數 */
-        int id = jso.getInt("id");
+        int stuId = jso.getInt("foll_stuId");
+        int coaId = jso.getInt("foll_coaId ");
         
         /** 透過MemberHelper物件的deleteByID()方法至資料庫刪除該名教練，回傳之資料為JSONObject物件 */
-        JSONObject query = fh.deleteByID(id);
+        JSONObject query = fh.deleteByID(stuId, coaId);
         
         /** 新建一個JSONObject用於將回傳之資料進行封裝 */
         JSONObject resp = new JSONObject();

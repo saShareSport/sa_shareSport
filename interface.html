@@ -89,20 +89,28 @@ body {
 	});
 	
 	$("#AdminList").click(function () {
-		location.href="managerlist.html";
+		location.href="/sa_shareSport/AdminsList.html";
 	});
 	
 	$("#StudentList").click(function () {
-		location.href="studentlist.html";
+		location.href="/sa_shareSport/studentlist.html";
 	});
 	
 	$("#CoachList").click(function () {
-		location.href="teacherlist.html";
+		location.href="/sa_shareSport/CoachList.html";
 	});
 	
 	$("#CourseList").click(function () {
-		location.href="teachinglist.html";
+		location.href="/sa_shareSport/CourseList.html";
 	});
+	
+	$(document).ready(function() {
+        getAllMember();
+    });
+	
+	$(document).ready(function() {
+        getAllMember();
+    });
 	</script>
 </body>
 </html>

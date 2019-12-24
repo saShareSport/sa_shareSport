@@ -124,10 +124,13 @@ public class SubscribeController extends HttpServlet {
         JSONObject jso = jsr.getObject();
         
         /** 取出經解析到JSONObject之Request參數 */
-        int id = jso.getInt("id");
+//        int id = jso.getInt("id");
+        int stuId = jso.getInt("sub_stuId");
+        int courId = jso.getInt("sub_courId ");
         
-        /** 透過MemberHelper物件的deleteByID()方法至資料庫刪除該訂閱紀錄，回傳之資料為JSONObject物件 */
-        JSONObject query = subh.deleteByID(id);
+        /** 透過SubscriberHelper物件的deleteByID()方法至資料庫刪除該訂閱紀錄，回傳之資料為JSONObject物件 */
+//        JSONObject query = subh.deleteByID(id);
+        JSONObject query = subh.deleteByID(stuId, courId);
         
         /** 新建一個JSONObject用於將回傳之資料進行封裝 */
         JSONObject resp = new JSONObject();

@@ -20,6 +20,8 @@
     	<input type="submit" value="submit" />
     </form>
     
+    <button id="logout">logout</button><br>
+    
     <button id="sub">getSub</button>
     <button id="fol">getFollow</button>
     
@@ -30,6 +32,12 @@
     	    		$(this).prop('checked',true);
     	    	}
     	    });
+			$('#logout').click(function(){
+        	    
+        	    alert("logout!!!");
+        	    logout(); 
+        	  
+        	});
     		$('#sub').click(function(){
         	    
         	    alert("yes");
@@ -42,7 +50,27 @@
     	    	getCoach(1); 
     	  
     		});
-    		function getCourse(stu_id) {//取得courseid教程
+    		function logout() {
+    	        $.ajax({
+    	            type: "DELETE",
+    	            url: "api/login.do",
+    	            crossDomain: true,
+    	            //data: data_string,
+    	            cache: false,
+    	            dataType: 'json',
+    	            timeout: 5000,
+    	            success: function (response) {
+    	             console.log(response);
+    	                if(response.status == 200){
+    	                 console.log("logout")
+    	              }
+    	            },
+    	            error: function () {
+    	                alert("無法連線到伺服器！");
+    	            }
+    	        });
+    	    }
+    		function getCourse(stu_id) {//取得subscribe student id
     	        $.ajax({
     	            type: "GET",
     	            url: "api/subscribe.do",
@@ -64,12 +92,12 @@
     	            }
     	        });
     	    }
-    		function getCoach(foll_id) {//取得courseid教程
+    		function getCoach(stu_id) {//取得follow student id教程
     	        $.ajax({
     	            type: "GET",
     	            url: "api/follow.do",
     	            crossDomain: true,
-    	            data: "foll_stuId=" +foll_id,
+    	            data: "foll_stuId=" +stu_id,
     	            cache: false,
     	            dataType: 'json',
     	            timeout: 5000,

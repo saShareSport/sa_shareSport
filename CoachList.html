@@ -80,7 +80,6 @@ body {
             <th scope="col">性別</th>
             <th scope="col">更新時間</th>
             <th scope="col">編輯</th>
-            <th scope="col">停權／復權</th>
           </tr>
         </thead>
         <tbody>
@@ -154,26 +153,31 @@ body {
 			 CoachTable_html +='<td>' + value['email'] + '</td>';
 			 CoachTable_html +='<td>' + value['sex'] + '</td>';
 			 CoachTable_html +='<td>' + value['modified'] + '</td>';
-			 CoachTable_html +='<td>' + '<a class="btn btn-primary href="edit.html?id=' + value['id'] + '">編輯</a>'+'</td>';
-			 CoachTable_html +='<td>'+'<a href="javascript: deleteMember(' + value['id'] + ');">停權</a></td></tr>';
+			 CoachTable_html +='<td>' + '<a class="btn btn-primary href="/sa_shareSport/coachmodify.html?id=' + value['id'] + '">編輯</a>'+'</td>';
+			 //StudentTable_html +='<td>'+'<a id="StudentButton" class="btn btn-primary" href="javascript:deleteMember(' + value['id'] + ') onclick="click()" ; ">復權</a></td></tr>';
 		 })
-		 $("#CoachTable_html > tbody").append(CoachTable_html);
+		 $("#CoachTable > tbody").append(CoachTable_html);
 	}
+	
 	$("#AdminList").click(function () {
-		location.href="managerlist.html";
+		location.href="/sa_shareSport/AdminsList.html";
 	});
 	
 	$("#StudentList").click(function () {
-		location.href="studentlist.html";
+		location.href="/sa_shareSport/studentlist.html";
 	});
 	
 	$("#CoachList").click(function () {
-		location.href="teacherlist.html";
+		location.href="/sa_shareSport/CoachList.html";
 	});
 	
 	$("#CourseList").click(function () {
-		location.href="teachinglist.html";
+		location.href="/sa_shareSport/CourseList.html";
 	});
+	
+	$(document).ready(function() {
+        getAllMember();
+    });
 	
 	$(document).ready(function() {
         getAllMember();

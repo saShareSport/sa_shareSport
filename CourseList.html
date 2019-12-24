@@ -79,7 +79,6 @@ body {
             <th scope="col">教練</th>
             <th scope="col">更新時間</th>
             <th scope="col">編輯</th>
-            <th scope="col">封鎖/解除封鎖</th>
           </tr>
         </thead>
         <tbody>
@@ -152,12 +151,12 @@ body {
 			 CourseTable_html +='<td>' + value['course_coach_id'] + '</td>';
 			 CourseTable_html +='<td>' + value['modified'] + '</td>';
 			 CourseTable_html +='<td>' + '<a class="btn btn-primary href="edit.html?id=' + value['id'] + '">編輯</a>'+'</td>';
-			 CourseTable_html +='<td>'+'<a href="javascript: deleteMember(' + value['id'] + ');">封鎖</a></td></tr>';
+			 //CourseTable_html +='<td>'+'<a href="javascript: deleteMember(' + value['id'] + ');">封鎖</a></td></tr>';
 		 })
 		 $("#CourseTable > tbody").append(CourseTable_html);
 	}
 	$("#AdminList").click(function () {
-		location.href="managerlist.html";
+		location.href="AdminsList.html";
 	});
 	
 	$("#StudentList").click(function () {
@@ -165,12 +164,13 @@ body {
 	});
 	
 	$("#CoachList").click(function () {
-		location.href="teacherlist.html";
+		location.href="CoachList.html";
 	});
 	
 	$("#CourseList").click(function () {
-		location.href="teachinglist.html";
+		location.href="/CourseList.html";
 	});
+	
 	$(document).ready(function() {
         getAllMember();
     });

@@ -52,10 +52,11 @@ public class FollowHelper {
     /**
      * 透過追蹤編號（ID）刪除追蹤
      *
-     * @param id 追蹤編號
+     * @param stuId 學生編號
+     * @param coaId 教練編號
      * @return the JSONObject 回傳SQL執行結果
      */
-    public JSONObject deleteByID(int id) {
+    public JSONObject deleteByID(int stuId, int coaId) {
         /** 記錄實際執行之SQL指令 */
         String exexcute_sql = "";
         /** 紀錄程式開始執行時間 */
@@ -70,11 +71,12 @@ public class FollowHelper {
             conn = DBMgr.getConnection();
 
             /** SQL指令 */
-            String sql = "DELETE FROM `sa_sharesport`.`follows` WHERE `id` = ? LIMIT 1";
+            String sql = "DELETE FROM `sa_sharesport`.`follows` WHERE `follows_student_id` = ? and `follows_coach_id` = ? LIMIT 1";
 
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
-            pres.setInt(1, id);
+            pres.setInt(1, stuId);
+            pres.setInt(2, coaId);
             
             /** 執行刪除之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();
