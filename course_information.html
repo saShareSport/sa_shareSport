@@ -2,244 +2,313 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>教程資訊</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>教程資訊</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous">
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous">
     </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous">
     </script>
-    <link rel="stylesheet" href="course_information.css">
-  <style>
-  	* {
-    box-sizing: border-box;
+
+<script src="statics/js/jquery-3.4.1.min.js"></script>
+<style>
+* {
+	box-sizing: border-box;
 }
 
-html,
-body {
-    margin-top: 2px;
-    margin-bottom: 2px;
-    margin-left: 27px;
-    margin-right: 27px;
-
-    padding: 0px;
+html, body {
+	margin-top: 2px;
+	margin-bottom: 2px;
+	margin-left: 27px;
+	margin-right: 27px;
+	padding: 0px;
 }
 
 .nav {
-    font-size: 20px;
-    margin-bottom: 25px;
+	font-size: 20px;
+	margin-bottom: 25px;
 }
 
 #course-img {
-    float: left;
+	float: left;
 }
 
 #course-name {
-    font-size: 25px;
-    color: rgb(53, 121, 247)
+	font-size: 25px;
+	color: rgb(53, 121, 247)
 }
 
 #coach-name {
-    font-size: 20px;
-    color: rgb(53, 121, 247)
+	font-size: 20px;
+	color: rgb(53, 121, 247)
 }
-
 
 .table {
-    margin-left: -55px;
-}
-
-
-#information {
-    float: left;
-    margin-left: -45px;
+	margin-left: -55px;
 }
 
 .courses {
-    float: right;
+	float: right;
 }
 
 #hot-courses {
-    font-size: 25px;
-    color: rgb(53, 121, 247)
+	font-size: 25px;
+	color: rgb(53, 121, 247)
 }
 
 #course-introduction {
-    font-size: 25px;
-    color: rgb(53, 121, 247);
-    margin-left: -45px;
+	font-size: 25px;
+	color: rgb(53, 121, 247);
 }
-
-.btn {
-    margin-left: -45px;
-
-}
-    
-  </style>
+</style>
 
 </head>
 
 <body>
 	<nav class="nav" style="background-color: #e3f2fd;">
-        <a class="navbar-brand" href="#">shareSport</a>
-        <ul class="nav justify-content-end">
-            <li class="nav-item">
-                <a class="nav-link active" href="#">首頁</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="#">瀏覽教練</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="#">瀏覽教練</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="#">個人專區</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="#">管理介面</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" id="sign" href="#">登入</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="#">註冊</a>
-            </li>
-        </ul>
+		<a class="navbar-brand" href="#">shareSport</a>
+		<ul class="nav justify-content-end">
+			<li class="nav-item"><a class="nav-link active" href="#">首頁</a>
+			</li>
+			<li class="nav-item"><a class="nav-link active" href="#">瀏覽教練</a>
+			</li>
+			<li class="nav-item"><a class="nav-link active" href="#">瀏覽教練</a>
+			</li>
+			<li class="nav-item"><a class="nav-link active" href="#">個人專區</a>
+			</li>
+			<li class="nav-item"><a class="nav-link active" href="#">管理介面</a>
+			</li>
+			<li class="nav-item"><a class="nav-link active" id="sign"
+				href="#">登入</a></li>
+			<li class="nav-item"><a class="nav-link active" href="#">註冊</a>
+			</li>
+		</ul>
 
-    </nav>
+	</nav>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-7">
-                <table class="table table-borderless">
-                    <tr>
-                        <td id="course-name" width="150px">教程名稱<br><br><span id="coach-name">OOO教練</span></td>
-                        <td id="course-img" rowspan="2">
-                            <img src="https://img.ltn.com.tw/Upload/partner/page/2019/09/14/190914-4886-01-WvNZA.jpg"
-                                width="150px" width="100%" height="100%" class="figure-img img-fluid rounded" alt="...">
-                        </td>
-                    </tr>
+	<div class="card mb-3" style="max-width: 540px;">
+		<div class="row no-gutters">
+			<div class="col-md-4">
+				<img
+					src="https://img.ltn.com.tw/Upload/partner/page/2019/09/14/190914-4886-01-WvNZA.jpg"
+					class="card-img" alt="...">
+			</div>
+			<div class="col-md-8">
+				<div class="card-body">
+					<h2 class="card-title" id="course_name">要是教程名稱</h2>
+					<p class="card-text" id="coach_name">要是教練名稱</p>
+				</div>
+			</div>
+		</div>
+	</div>
 
-                </table>
-                <div id="course-introduction">教程介紹</div>
-                <br>
-                <table>
-                    <tr>
-                        <td>
-                            <div class="card" id="information" style="width: 35rem;">
-                                <div class="card-body">
-                                    教程詳細介紹
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <br>
-                            <button type="button" class="btn btn-primary" id="subscribeBtn">訂閱</button>
-                        </td>
-                    </tr>
+	<div id="course-introduction">教程介紹</div>
+	<br>
+	<table>
+		<tr>
+			<td>
+				<div class="card" style="width: 35rem;">
+					<div class="card-body" id="course_information">要是 教程詳細介紹</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td><br>
+				<button type="button" class="btn btn-primary" id="subscribeBtn">訂閱</button>
+			</td>
+		</tr>
 
-                </table>
+	</table>
 
 
-                <div>
-                </div>
+	<div></div>
 
-            </div>
-            <div class="col-sm-5 courses">
-                <div id="hot-courses">熱門教程</div>
-                <br>
-                <div class="card mb-3" style="max-width: 550px;">
-                    <div class="row no-gutters">
-                        <div class="col-md-4">
-                            <img src="https://i1.kknews.cc/SIG=1f7b232/39o40001pr9sp48r151q.jpg" width="100%"
-                                height="100%" class="card-img" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body text-right">
-                                <h5 class="card-title text-left">教程名稱</h5>
-                                <p class="card-text text-left"><small class="text-muted">教程簡介</small></p>
-                                <a href="#" class="btn btn-primary ">前往</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-3" style="max-width: 500px;">
-                    <div class="row no-gutters">
-                        <div class="col-md-4">
-                            <img src="https://i1.kknews.cc/SIG=1f7b232/39o40001pr9sp48r151q.jpg" width="100%"
-                                height="100%" class="card-img" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body text-right">
-                                <h5 class="card-title text-left">教程名稱</h5>
-                                <p class="card-text text-left"><small class="text-muted">教程簡介</small></p>
-                                <a href="#" class="btn btn-primary ">前往</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-3" style="max-width: 500px;">
-                    <div class="row no-gutters">
-                        <div class="col-md-4">
-                            <img src="https://i1.kknews.cc/SIG=1f7b232/39o40001pr9sp48r151q.jpg" width="100%"
-                                height="100%" class="card-img" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body text-right">
-                                <h5 class="card-title text-left">教程名稱</h5>
-                                <p class="card-text text-left"><small class="text-muted">教程簡介</small></p>
-                                <a href="#" class="btn btn-primary ">前往</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-3" style="max-width: 500px;">
-                    <div class="row no-gutters">
-                        <div class="col-md-4">
-                            <img src="https://i1.kknews.cc/SIG=1f7b232/39o40001pr9sp48r151q.jpg" width="100%"
-                                height="100%" class="card-img" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body text-right">
-                                <h5 class="card-title text-left">教程名稱</h5>
-                                <p class="card-text text-left"><small class="text-muted">教程簡介</small></p>
-                                <a href="#" class="btn btn-primary ">前往</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-3" style="max-width: 500px;">
-                    <div class="row no-gutters">
-                        <div class="col-md-4">
-                            <img src="https://i1.kknews.cc/SIG=1f7b232/39o40001pr9sp48r151q.jpg" width="100%"
-                                height="100%" class="card-img" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body text-right">
-                                <h5 class="card-title text-left">教程名稱</h5>
-                                <p class="card-text text-left"><small class="text-muted">教程簡介</small></p>
-                                <a href="#" class="btn btn-primary ">前往</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+	</div>
+	<div class="col-sm-5 courses"></div>
+	</div>
 
-    </div>
+	</div>
+
+
+	<script>   
+  
+//取得網址參數
+  var url_string = window.location.href;
+  var url = new URL(url_string);
+  var id = url.searchParams.get("id");
+  var coach_id;
+  var course_id=id;
+  var identity_id;
+  var identity;
+  var subscribe_id;
+  var j = 0; //訂閱、取消訂閱鈕變換，j=0時按鈕顯示訂閱
+  
+  
+
+  function getCourseData() {
+	  $.ajax({
+          type: "GET",
+          url: "api/course.do",
+          data: "id=" + id,
+          crossDomain: true,
+          cache: false,
+          dataType: 'json',
+          timeout: 5000,
+          success: function (response) {
+              if(response.status == 200){
+            	  console.log(response)
+            	  coach_id=response['response']['data'][0]['coach_id'];
+            	  
+            	  document.getElementById('course_name').innerHTML = response['response']['data'][0]['name'];
+            	  document.getElementById('course_information').innerHTML = response['response']['data'][0]['information'];
+            	  
+            	  //順序問題，先整個跑完getCourseData()再跑getCoachData()，不然來不及取coach_id值
+            	  getCoachData();
+              }
+          },
+          error: function () {
+              alert("無法連線到伺服器！");
+          }
+    });
+  }
+  
+
+
+
+function getCoachData() {
+	  $.ajax({
+        type: "GET",
+        url: "api/coach.do",
+        data: "id=" + coach_id,
+        crossDomain: true,
+        cache: false,
+        dataType: 'json',
+        timeout: 5000,
+        success: function (response) {
+            if(response.status == 200){
+          	  console.log(coach_id);
+          
+          	  document.getElementById('coach_name').innerHTML = response['response']['data'][0]['name'];
+          	  
+          	  
+            }
+        },
+        error: function () {
+            alert("無法連線到伺服器！");           
+        }
+        
+  });
+	  
+}
+
+//按下訂閱教程按鈕	  
+$("#subscribeBtn").click(function () {
+	
+	if(identity=="student"){
+		
+		if(j==0){
+			
+			// 將資料組成JSON格式
+	        var data_object = {
+					
+	            'sub_stuId': identity_id,
+	            'sub_courId ': course_id,
+	            
+	        };
+	
+	        // 將JSON格式轉換成字串
+	        var data_string = JSON.stringify(data_object);
+	        
+		    $.ajax({
+		        type: "POST",
+		        url: "api/subscribe.do",
+		        data: data_string,
+		        crossDomain: true,
+		        cache: false,
+		        dataType: 'json',
+		        timeout: 5000,
+		        success: function (response) {
+		            
+		            if(response.status == 200){
+		            	document.getElementById("subscribeBtn").innerHTML = "取消訂閱";		            	
+		                j = 1;
+		                
+		                //訂閱成立後，取得這筆訂閱ID
+		                //getSubscribeID();
+		                
+		                //updateSQLTable(response.response);
+		                console.log(response);
+		            }
+		        },
+		        error: function () {
+		            alert("無法連線到伺服器！");
+		        }
+			});
+		
+		}
+		else if(j==1){
+			
+			// 將資料組成JSON格式
+	        var data_object = {
+					
+	            'id ': subscribe_id,
+	            
+	        };
+	
+	        // 將JSON格式轉換成字串
+	        var data_string = JSON.stringify(data_object);
+			
+			$.ajax({
+		        type: "DELETE",
+		        url: "api/subscribe.do",
+		        data: data_string,
+		        crossDomain: true,
+		        cache: false,
+		        dataType: 'json',
+		        timeout: 5000,
+		        success: function (response) {
+		            
+		            if(response.status == 200){
+		            	document.getElementById("subscribeBtn").innerHTML = "訂閱";
+		                j = 0;
+		                //updateSQLTable(response.response);
+		            }
+		        },
+		        error: function () {
+		            alert("無法連線到伺服器！");
+		        }
+			})
+			
+		}
+	
+	}
+	else{
+		//導入登入頁面
+		return window.location.href = 'login_demo.html';
+	}
+		
+});
 
   
-  <script>   
+
+
+  
+  
 //登入登出鈕變換，i=0時按鈕顯示登入
   var i = 0;
 
@@ -254,21 +323,32 @@ body {
       }
 
   });
+  
 
-
-  //訂閱、取消訂閱鈕變換，j=0時按鈕顯示訂閱
-  var j = 0;
-
-  $("#subscribeBtn").click(function () {
-
-      if (j == 0) {
-          document.getElementById("subscribeBtn").innerHTML = "取消訂閱";
-          j = 1;
-      } else {
-          document.getElementById("subscribeBtn").innerHTML = "訂閱";
-          j = 0;
-      }
-
+  $(document).ready(function() {
+	  getCourseData();
+	//先去抓身分
+		$.ajax({
+		              type: "GET",
+		              url: "api/login.do",
+		              crossDomain: true,
+		              cache: false,
+		              dataType: 'json',
+		              timeout: 5000,
+		              success: function (response) {
+		                  if(response.status == 200){
+		                	 console.log(response);
+		                	 identity=response.role;
+		                	 identity_id=response['response']['data'][0]['id']
+		                	 console.log(identity);
+		                	 console.log(identity_id);
+		                  }
+		                  		              },
+		              error: function () {
+		                  alert("無法連線到伺服器！");
+		              }
+		      	   });
+			   
   });
    
   </script>
