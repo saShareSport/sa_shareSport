@@ -2,179 +2,211 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>CakePHP: the rapid development php framework: Members</title>
-    <link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
-    <link href="statics/icon/favicon.ico" type="image/x-icon" rel="shortcut icon">
-    <link rel="stylesheet" type="text/css" href="statics/css/cake.generic.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous">
+	
+</script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous">
+	
+</script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous">
+	
+</script>
+<link rel="stylesheet" href="brow_courses.css">
 
-    <script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>shareSport - 登入</title>
+
+
+
+<script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <div id="container">
-        <div id="header">
-            <h1><a href="http://cakephp.org/">CakePHP: the rapid development php framework</a></h1>
-        </div>
-        <div id="content">
+	<header>
+		<div style="font-family: Microsoft JhengHei; color: white;">
+
+			<nav class="navbar fixed-top navbar-dark bg-dark">
+				<a class="navbar-brand" style="font-size: 30px">ShareSport</a>
+				<ul class="nav mr-auto">
+					<li class="nav-item"><a class="nav-link"
+						href="index.html" style="color: white;">首頁</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="brow_coaches.html" style="color: white;">瀏覽教練</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="brow_courses.html" style="color: white;">瀏覽教程</a></li>
+					<li class="nav-item"><a id="self" class="nav-link active"
+						href=" " style="color: white;">個人專區</a></li>
+					<li class="nav-item"><a class="nav-link active" id="sign"
+						href="login.html" style="color: white;">登入</a></li>
+					<li class="nav-item"><a class="nav-link active" id="regsign"
+						href="register.html" style="color: white;">註冊</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	<div id="container">
+
+		<div id="content">
+			<h1>首頁</h1>
+
+			<div id="flashMessage" class="message" style="display: none;"></div>
+
+
+			<div style="display: none;">
+				<input type="hidden" name="_method" value="POST">
+			</div>
+
+
+			<div id="course"
+				style="width: 1200px; height: 300px; overflow: scroll;">
+				<label class="title">推薦教程</label><br>
+
+			</div>
 			<br>
-            <h2>會員清單</h2>
-            <a href="register.html">新增會員</a>
-            <a href="product.html">購物車模組</a>
 
-            <div id="flashMessage" class="message" style="display: none;"></div>
+			<div id="coach"
+				style="width: 1200px; height: 300px; overflow: scroll;">
+				<label class="title">推薦教練</label><br>
 
-            <table id="table">
-                <thead>
-                    <tr>
-                        <th>編號</th>
-                        <th>姓名</th>
-                        <th>電郵</th>
-                        <th>更新時間</th>
-                        <th>會員組別</th>
-                        <th>功能</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-            <script type="text/javascript">
-                // 全域變數紀錄SQL指令下的次數
-                var sql_num = 0;
-                function deleteMember(id) {
-                    var check = window.confirm("確認刪除會員？");
-                    if (check == true) {
-                        console.log("You pressed OK!");
-                        var request = {'id': id};
-                        var data_string = JSON.stringify(request);
-                        $.ajax({
-                            type: "DELETE",
-                            url: "api/student.do",
-                            crossDomain: true,
-                            data: data_string,
-                            cache: false,
-                            dataType: 'json',
-                            timeout: 5000,
-                            success: function (response) {
-                                if(response.status == 200){
-                                    $("#flashMessage").html("成功! 已經成功刪除會員...");
-                                    $("#flashMessage").show();
-                                    getAllMember();
-                                }
-                                console.log(response);
-                            },
-                            error: function () {
-                                alert("無法連線到伺服器！");
-                            }
-                        });
-                    }
-                    else {
-                        console.log("You pressed Cancel!");
-                    }
-                }
+			</div>
+			<br>
+		</div>
 
-                function getAllMember() {
-                    // 發出POST的GET請求取得所有會員列表
-                    $.ajax({
-                            type: "GET",
-                            url: "api/student.do",
-                            crossDomain: true,
-                            cache: false,
-                            dataType: 'json',
-                            timeout: 5000,
-                            success: function (response) {
-                                if(response.status == 200){
-                                    updateTable(response.response.data);
-                                    updateSQLTable(response.response);
-                                }
-                                console.log(response);
-                            },
-                            error: function () {
-                                alert("無法連線到伺服器！");
-                            }
-                    });
-                }
-                //拿cookie
-                function getCookie() {
-                    // 發出POST的GET請求取得cookie
-                    $.ajax({
-                            type: "GET",
-                            url: "api/login.do",
-                            crossDomain: true,
-                            cache: false,
-                            dataType: 'json',
-                            timeout: 5000,
-                            success: function (response) {
-                                console.log(response);
-                            },
-                            error: function () {
-                                alert("無法連線到伺服器！");
-                            }
-                    });
-                }
-                // 更新會員列表表格
-                function updateTable(data) {
-                    $("#table > tbody").empty();
-                    var table_html = '';
-                    $.each(data, function(index, value) {
-                        table_html += '<tr><td scope="row">' + value['id'] + '</td>';
-                        table_html += '<td>' + value['name'] + '</td>';
-                        table_html += '<td>' + value['email'] + '</td>';
-                        table_html += '<td>' + value['login_times'] + '</td>';
-                        table_html += '<td>' + value['status'] + '</td>';
-                        table_html += '<td>' + '<a href="edit.html?id=' + value['id'] + '">編輯</a> | ';
-                        table_html += '<a href="javascript: deleteMember(' + value['id'] + ');">刪除</a></td></tr>';
-                    })
+		<script type="text/javascript">
+			var id = 0;
+			var role = null;
+			$("#self").click(function() {
+				$.ajax({
+					type : "GET",
+					url : "api/login.do",
+					crossDomain : true,
+					cache : false,
+					dataType : 'json',
+					timeout : 5000,
+					success : function(response) {
+						if (response.status == 200) {
+							// console.log(response);
+							console.log(response);
+							id = response.response.data[0].id;
+							role = response.role;
+							console.log(role);
+						}
 
-                    $("#table > tbody").append(table_html);
-                }
-                
-                // 更新SQL指令歷史表格
-                function updateSQLTable(data) {
-                    $("#sql_log > tbody").empty();
-                    var time = (data.time / 1000000).toFixed(2);
-                    var table_html = "";
-                    
-                    sql_num = 0;
-                    sql_num += 1
+						if (role == "student") {
+							location.href = "studentself.html"
+						} else if (role == "coach") {
+							location.href = "coachself.html"
+						} else if (role == "admin") {
+							location.href = "interface.html"
+						} else {
+							alert("請登入會員")
+						}
+					},
+					error : function() {
+						alert("無法連線到伺服器！");
+					}
+				});
 
-                    table_html += '<tr>';
-                    table_html += '<td>' + sql_num + '</td>';
-                    table_html += '<td>' + data.sql + '</td>';
-                    table_html += '<td style="text-align: right">' + '0' + '</td>';
-                    table_html += '<td style="text-align: right">' + data.row + '</td>';
-                    table_html += '<td style="text-align: right">' + data.row + '</td>';
-                    table_html += '<td style="text-align: right">' + time + '</td>';
-                    table_html += '</tr>';
-                    $("#sql_log > tbody").append(table_html);
-                    $("#sql_summary").html("(default) " + data.row + " queries took " + time + " ms");
-                }
-                $(document).ready(function() {
-                    getAllMember();
-                    getCookie();
-                });
-            </script>
-        </div>
-        <div id="footer">
-            <a href="http://www.cakephp.org/" target="_blank" id="cake-powered"><img src="statics/img/cake.power.gif" alt="CakePHP: the rapid development php framework" border="0"></a>
-            <p>CakePHP 2.6.10</p>
-        </div>
-    </div>
-    <table class="cake-sql-log" id="sql_log" summary="Cake SQL Log" cellspacing="0">
-        <caption id="sql_summary">(default) 0 query took 0 ms</caption>
-        <thead>
-            <tr>
-                <th>Nr</th>
-                <th>Query</th>
-                <th>Error</th>
-                <th>Affected</th>
-                <th>Num. rows</th>
-                <th>Took (ms)</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+			})
+
+			var i = 0;//控制登入登出
+			$("#sign").click(function() {
+				if (i == 0) {
+					document.getElementById("sign").innerHTML = "登出";
+					i = 1;
+					document.getElementById("regsign").style.display = "none";
+				} else {
+					document.getElementById("sign").innerHTML = "登入";
+					i = 0;
+					document.getElementById("regsign").style.display = "block";
+				}
+			});
+		</script>
+	</div>
+	</div>
+
+
+	<style type="text/css">
+* {
+	box-sizing: border-box;
+}
+
+#submit {
+	margin-left: 62px;
+}
+
+#regnow {
+	margin-left: 0px;
+}
+
+#image {
+	position: absolute;
+	top: 80px;
+	right: 250px;
+}
+
+#content {
+	margin-top: 40px;
+	margin-right: 340px;
+}
+
+html, body {
+	margin-top: 60px;
+	margin-bottom: 2px;
+	margin-left: 27px;
+	margin-right: 27px;
+	padding: 0px;
+}
+
+.nav {
+	font-size: 20px;
+	margin-bottom: 0px;
+}
+
+#coach-name {
+	font-size: 25px;
+	color: rgb(53, 121, 247)
+}
+
+.card {
+	margin-bottom: 33px;
+	margin-left: 55px;
+}
+
+.table {
+	margin-left: 45px;
+}
+
+.course {
+	display: inline-block;
+	margin-top: 10px;
+	margin-right: 55px;
+	margin-left: 55px;
+}
+
+.star {
+	color: red;
+}
+
+#ps {
+	color: red;
+}
+</style>
 </body>
 
 </html>
