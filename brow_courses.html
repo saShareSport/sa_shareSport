@@ -175,10 +175,10 @@ html, body {
 			inner_html += '<p class="card-text text-left"><small class="text-muted">訂閱人數<span id ="subscribecount'+ data.id +'">這裡要是數字</span></small></p>'
 			inner_html += '<p class="text-left">' + data.information + '</p>'
 			inner_html += '<a href="course_information.html?id=' + data.id + '"	class="btn btn-primary">查看教程</a>'
-			inner_html += '<a href="#" class="btn btn-primary" id="subscribeBtn' + data.id + '" name="subscribe">訂閱</a>'
+			inner_html += '<a href="#" class="btn btn-primary" id="subscribeBtn' + data.id + '" >訂閱</a>'
 			inner_html += '<div><small class="text-muted">id: ' + data.id + '</small></div>';
 			inner_html += '</div></div>'
-
+			console.log(data.id);
 			return inner_html;
 		}
 
@@ -202,12 +202,12 @@ html, body {
 						var i = 0;
 						var array = new Array();
 						
-						$.each(response.response.data, function(i) {
-							SubCourseId = response['response']['data'][i]['sub_courId'];
-							document.getElementById('subscribeBtn" + SubCourseId + "').innerHTML = '取消訂閱';
-							console.log(SubCourseId);
+						//$.each(response.response.data, function(i) {
+						//	SubCourseId = response['response']['data'][i]['sub_courId'];
+						//	document.getElementById('subscribeBtn" + SubCourseId + "').innerHTML = '取消訂閱';
+						//	console.log(SubCourseId);
 							
-						})
+						//})
 						console.log(array);
 
 						
@@ -245,9 +245,11 @@ html, body {
 					alert("無法連線到伺服器！");
 				}
 			});
+			document.getElementById("subscribeBtn3").innerHTML = '取消訂閱';
 		});
 		
-		
+		//document.getElementById("subscribeBtn3").innerHTML = '取消訂閱';
+		console.log(identity);
 		
 	</script>
 
