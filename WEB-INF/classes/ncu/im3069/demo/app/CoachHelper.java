@@ -423,7 +423,7 @@ public class CoachHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "INSERT INTO `sa_sharesport`.`coaches`(`name`, `email`, `password`,`sex`, `modified`, `created``)"
+            String sql = "INSERT INTO `sa_sharesport`.`coaches`(`name`, `email`, `password`,`sex`, `modified`, `created`)"
                     + " VALUES(?, ?, ?, ?, ?, ?)";
             
             /** 取得所需之參數 */
