@@ -190,7 +190,7 @@ body {
 		       });
 		   }
 		  ///////////////////////////////////////
-		   function getCoach(id) {//取得coachid
+		   function getCoach(id) {//取得coachinfo
 		       $.ajax({
 		           type: "GET",
 		           url: "api/coach.do",
@@ -294,7 +294,7 @@ body {
 		           success: function (response) {
 		        	   //console.log(response);
 		               if(response.status == 200){
-		            	   document.getElementById('subscribe'+id).innerHTML = "<small>追蹤人數"+response.count;
+		            	   document.getElementById('subscribe'+id).innerHTML = "<small>訂閱人數"+response.count;
 		            	   console.log("id:"+id+" amount="+response.count);
 		               	}
 		               console.log(response);
