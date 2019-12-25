@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html >
+<head>
+ <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>shareSport</title>
+     <script src="https://code.jquery.com/jquery-3.1.1.min.js">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+.nav {
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 27px;
+    margin-right: 27px;
+
+    padding: 0px;
+}
+</style>
+</head>
+<body>
+<nav class="nav" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" href="#">shareSport</a>
+      <ul class="nav justify-content-end">
+      <li class="nav-item">
+       <a class="nav-link active" href="#">首頁</a>
+     </li>
+     <li class="nav-item">
+       <a class="nav-link active" href="#">瀏覽教練</a>
+     </li>
+     <li class="nav-item">
+       <a class="nav-link active" href="#">瀏覽教練</a>
+     </li>
+     <li class="nav-item">
+       <a class="nav-link active" href="#">個人專區</a>
+     </li>
+     <li class="nav-item">
+       <a class="nav-link active" href="#">管理介面</a>
+     </li>
+     <li class="nav-item">
+       <a class="nav-link active" id="sign" href="#">登入</a>
+     </li>
+     <li class="nav-item">
+       <a class="nav-link active" href="#">註冊</a>
+     </li>
+     </ul>
+    
+  </nav>
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <a id=AdminList class="nav-link active" href="#">管理員列表</a>
+        </li>
+        <li class="nav-item">
+          <a id=StudentList class="nav-link" href="#">管理學生列表</a>
+        </li>
+        <li class="nav-item">
+          <a id=CoachList class="nav-link" href="#">管理教練列表</a>
+        </li>
+        <li class="nav-item">
+            <a id=CourseList class="nav-link" href="#">管理教程列表</a>
+          </li> 
+      </ul>
+      <form id=registeredManagerForm >
+        <div class="form-group">
+            <label for="name">姓名</label>
+            <input type="name" style="width:600px" class="form-control" id="registeredAdminName " placeholder="請輸入姓名">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">E-mail</label>
+          <input type="email" style="width:600px" class="form-control" id="registeredAdminEmail" aria-describedby="emailHelp" placeholder="請輸入e-mail">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">密碼</label>
+          <input type="password" style="width:600px" class="form-control" id="registeredAdminPassword1" placeholder="請輸入密碼">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">重複輸入密碼</label>
+            <input type="password" style="width:600px" class="form-control" id="registeredAdminPassword2" placeholder="請確認密碼">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputStatus">會員狀態</label>
+          <input type="text" style="width:600px" class="form-control" id="registeredAdminStatus" placeholder="請輸入狀態">
+        </div>
+        <button type="submit" class="btn btn-primary" id="RegisterAdmin">註冊</button>
+      </form>
+		
+	<script type="text/javascript">
+	
+    $('#RegisterAdmin').click(function() {
+        updateMember()
+
+    });
+    
+	 function updateMember() {
+         var name = $('#registeredAdminName').val();
+         var email = $('#registeredAdminEmail').val();
+         var password = $('#registeredAdminPassword1').val();
+         var password2 = $('#registeredAdminPassword2').val();
+         if(password !== password2) {
+             alert("重複密碼錯誤");
+         }
+         else {
+             // 將資料組成JSON格式
+             var data_object = {
+                 "id": id,
+                 "name": name,
+                 "email": email,
+                 "password": password
+             };
+             
+             var data_string=JSON.stringify(data_object);
+             
+             $.ajax({
+                 type: "POST",
+                 url: "api/admin.do",
+                 data: data_string,
+                 crossDomain: true,
+                 cache: false,
+                 dataType: 'json',
+                 timeout: 5000,
+                 success: function (resp) {
+                     if(resp.status == 200){
+                    	 console.log(resp.message);
+                     }
+                 },
+                 error: function () {
+                     alert("無法連線到伺服器！");
+                 }
+         });
+     }
+ }         
+	 
+	 
+             
+	$("#AdminList").click(function () {
+		location.href="/sa_shareSport/AdminsList.html";
+	});
+	
+	$("#StudentList").click(function () {
+		location.href="/sa_shareSport/studentlist.html";
+	});
+	
+	$("#CoachList").click(function () {
+		location.href="/sa_shareSport/CoachList.html";
+	});
+	
+	$("#CourseList").click(function () {
+		location.href="/sa_shareSport/CourseList.html";
+	});
+	
+	</script>
+</body>
+</html>

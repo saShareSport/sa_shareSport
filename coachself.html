@@ -19,6 +19,15 @@
 .saveclass {
   visibility: hidden;
 }
+#uploadPicture{
+	visibility: hidden;
+}
+#confirm{
+	visibility: hidden;
+}
+.savePicture{
+	visibility: hidden;
+}
 .course{
 	width:13rem;
 	display: inline-block;
@@ -74,22 +83,22 @@ body {
    </ul>
   
 </nav>
-
- 
 	<div class="card mb-3"  style="max-width: 540px;">
   		<div class="row no-gutters">
-	    	<div class="col-md-4">
-	      		<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTxDQcl1SA2jzxtsOqnl0eA-zF9p0JoDFZCALHVI25lqAdzR-Ec" 
-	      			 class="card-img" 
-	      			 alt="...">
-	    	</div>
+	    	<div id ="coachPicture" class="col-md-4"></div>
 	    	<div class="col-md-8">
 				<div class="card-body">
 		        	<h2 id="coachName" class="card-title" ></h2>
 		        	<p id="coachTextarea" class="card-text"></p>
 		        	<p id ="coachFollows" class="card-text followers"><small class="text-muted"></small></p>
-		        	<a href="coachmodify.html?id=' + value['id'] + '" type="button" class="btn btn-outline-primary" >修改個人資料</a>
-		        	
+		        	<a id = "coachAddress" href="coachmodify.html?id=' + value['id'] + '" type="button" class="btn btn-outline-primary" >修改個人資料</a>
+		        	<button type="button" class="btn btn-outline-primary newPicture" >新增個人照片</button>
+		        	<button type="button" class="btn btn-outline-primary savePicture" >儲存</button>
+		        	<form id="uploadPicture" enctype="multipart/form-data">
+						<input id="file" type="file" name="file" />
+						<button id="upload" type="button">upload</button>
+					</form>
+	<button id="confirm" type="button">confirm</button>
 				</div>
 	    	</div>
 	  </div>
@@ -99,16 +108,63 @@ body {
 		<button id ="modifyclass" type="button" class="btn btn-outline-primary " >管理教程</button>
 	    <button type="button" class="btn btn-outline-primary" >新增課程</button>
 	    <button  type="button" class="btn btn-outline-primary saveclass" >儲存</button><br>
-		
-			<div id="coursesPanel" ></div>
-		<script>
+		<div id="coursesPanel" ></div>
+	<script>
 		var url_string = window.location.href;
 		var url = new URL(url_string);
 		//var id = url.searchParams.get("id");
 		var sql_num = 0;
-		
 		var id;
-		   function getCoach(id) {
+		var role;
+		  $("#upload").click(function() {
+				var formData = new FormData($('#uploadPicture')[0]);
+				$.ajax({
+					url:'api/upload.do',
+					type:'POST',
+					cache:false,
+					data:formData,
+					processData : false,
+					contentType : false,
+					success: function (response) {	                  
+		                  console.log("upload success!");	                  
+		            },
+		            error: function () {
+		                  alert("無法連線到伺服器！");
+		            }
+				})
+				
+			});
+
+		  $("#confirm").click(function() {
+			  // put不能用getParameter 所以要傳object，後端才撈得到
+			  var data_object = {
+	                  "id": id,
+	                  "role":role,
+	              };
+
+	              // 將JSON格式轉換成字串
+	          var data_string = JSON.stringify(data_object);
+			  $.ajax({
+					url:'api/upload.do',
+					type:'PUT',
+					crossDomain: true,
+	                data: data_string,
+	                cache: false,
+	                dataType: 'json',
+	                timeout: 5000,
+	                success: function (response) {	                  
+		                  console.log(response);	 
+		                  document.getElementById('coachPicture').empty();
+		            },
+		            error: function () {
+		                  alert("無法連線到伺服器！");
+		            }
+				})
+				getCoachPic(id)
+				
+			
+		  });
+		  function getCoachPic(id) {
 		       $.ajax({
 		           type: "GET",
 		           url: "api/coach.do",
@@ -121,9 +177,33 @@ body {
 		        	   
 		               if(response.status == 200){
 		               	//updateSQLTable(response.response);
-		               	document.getElementById('coachName').innerHTML = response['response']['data'][0]['name'];
-		                document.getElementById('coachTextarea').innerHTML = response['response']['data'][0]['information'];
-		                document.getElementById('coachFollows').innerHTML = "<small>追蹤人數"+response['response']['data'][0]['followers_count'];
+		               	console.log(response['response']['data'][0]['image']);
+		               	var imagePath='';
+		               	imagePath += '<img src="'+response['response']['data'][0]['image']+'" class="card-img" alt="...">';
+		               	document.getElementById('coachPicture').innerHTML=imagePath;
+		               	}
+		               console.log(response);
+		           },
+		           error: function () {
+		               alert("無法連線到伺服器！");
+		           }
+		       });
+		   }
+		  ///////////////////////////////////////
+		   function getCoach(id) {//取得coachid
+		       $.ajax({
+		           type: "GET",
+		           url: "api/coach.do",
+		           crossDomain: true,
+		           data: "id="+id,
+		           cache: false,
+		           dataType: 'json',
+		           timeout: 5000,
+		           success: function (response) {
+		        	   if(response.status == 200){
+			               	document.getElementById('coachName').innerHTML = response['response']['data'][0]['name'];
+			                document.getElementById('coachTextarea').innerHTML = response['response']['data'][0]['information'];
+			                document.getElementById('coachFollows').innerHTML = "<small>追蹤人數"+response['response']['data'][0]['followers_count'];
 		               	}
 		               console.log(response);
 		           },
@@ -133,12 +213,12 @@ body {
 		       });
 		   }
 		   
-		   function getCourse(id) {
+		   function getCourse(id) {//取得courseid刪除教程
 		       $.ajax({
 		           type: "GET",
 		           url: "api/course.do",
 		           crossDomain: true,
-		           data: "id="+id,
+		           data: "coach_id="+id,
 		           cache: false,
 		           dataType: 'json',
 		           timeout: 5000,
@@ -148,64 +228,61 @@ body {
 		            	   console.log(response.response.data)
 		            	   addCourses(response.response.data);
 		            	   isNumberKey();
-		               	
-		               	}
+		            	}
 		           },
 		           error: function () {
 		               alert("無法連線到伺服器！");
 		           }
 		       });
 		   }
-		   function isNumberKey(evt){
+		   
+		   function isNumberKey(evt){//刪除特定coursecard
 		   $('.deleteCourse').click(function(){
 				alert("delete");
 				console.log("刪除"+this.id);
 				deleteCourse(this.id);
+				//$("#coursesPanel").empty();
+				//getCourse(id);
 			});
 		   };
 		            
-		   function addCourses(data) {
+		   function addCourses(data) {//讀取教練的課程
 			   var arrCoursesid = [];
 			   var courseAll = ""; 
 			  
 			   $.each(data,function(index, value){
-				   if(value['status']=="1"){//如果status =0則跳過
+				   if(value['status']=="1"){//如果status =1(停權)則跳過
 					   //index++;
 					   return;         
 				   }
 				   //console.log(index);   
-               courseAll += ' <div class="card course">';
-               courseAll += ' <a href="該教程網址">';
-               courseAll += '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTxDQcl1SA2jzxtsOqnl0eA-zF9p0JoDFZCALHVI25lqAdzR-Ec" class="card-img-top" alt="..."  width="13rem" height="160rem">';
-               courseAll += '</a>';
-               courseAll += '<div class="card-body">';
-               courseAll += '<h5 id ="courseName" class="card-title">'+value['name']+'</h5>';
-               courseAll += '<p id ="courseTextarea" class="card-text">'+value['information']+'</p>';
-               courseAll += '<p id ="subscribe'+value['id']+'" class="card-text"><small class="text-muted">訂閱人數</small></p>';
-               courseAll += '<p hidden id ="status" class="card-text" ><small class="text-muted">'+value['status']+'</small></p>';
-               courseAll += '<p  id ="id" class="card-text" ><small class="text-muted">'+value['id']+'</small></p>';
-               courseAll += '<a href="#" class="btn btn-primary modifythiscourse" >修改教程</a>';
-               courseAll += '<button id="'+value['id']+'" type="button" name="deleteCourse" class="btn btn-primary deleteCourse" >刪除教程</button>';
-               courseAll += '</div>';
-               courseAll += '</div>';
-              
-               arrCoursesid.push(value['id']);
+	               courseAll += ' <div class="card course">';
+	               courseAll += ' <a href="該教程網址">';
+	               courseAll += '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTxDQcl1SA2jzxtsOqnl0eA-zF9p0JoDFZCALHVI25lqAdzR-Ec" class="card-img-top" alt="..."  width="13rem" height="160rem">';
+	               courseAll += '</a>';
+	               courseAll += '<div class="card-body">';
+	               courseAll += '<h5 id ="courseName" class="card-title">'+value['name']+'</h5>';
+	               courseAll += '<p id ="courseTextarea" class="card-text">'+value['information']+'</p>';
+	               courseAll += '<p id ="subscribe'+value['id']+'" class="card-text"><small class="text-muted">訂閱人數</small></p>';
+	               courseAll += '<p hidden id ="status" class="card-text" ><small class="text-muted">'+value['status']+'</small></p>';
+	               courseAll += '<p hidden id ="id" class="card-text" ><small class="text-muted">'+value['id']+'</small></p>';
+	               courseAll += '<a href="#" class="btn btn-primary modifythiscourse" >修改教程</a>';
+	               courseAll += '<button id="'+value['id']+'" type="button" name="deleteCourse" class="btn btn-primary deleteCourse" >刪除教程</button>';
+	               courseAll += '</div>';
+	               courseAll += '</div>';
+	              
+	               arrCoursesid.push(value['id']);//依據COURSEID查看訂閱人數
 			   })
-			  console.log(arrCoursesid);
-			 
-			  
+			  //console.log(arrCoursesid);
 			  for(var i=0; i<arrCoursesid.length; i++) {
 				  getSubscribes(arrCoursesid[i]);
-				  //console.log(arrCoursesid[i]);
+				  console.log(arrCoursesid[i]);
 				};
 				
-               	$("#coursesPanel").append(courseAll);
-				//return courseAll;
+               	$("#coursesPanel").append(courseAll);//把所有COURSE資料顯現在COURSE區
            }
 		   
-		   function getSubscribes(id) {
-			   
-			   
+		   function getSubscribes(id) {//取得訂閱人數
 		       $.ajax({
 		           type: "GET",
 		           url: "api/subscribe.do",
@@ -228,16 +305,14 @@ body {
 		       });
 		   }
 		  
-		   function deleteCourse(id) {
+		   function deleteCourse(deleteId) {//刪除COURSE並清空course資訊
 			// 將資料組成JSON格式
 		        var data_object = {
-		            "id": id,
-		            
+		            "id": deleteId,
 		        };
-		
 		        // 將JSON格式轉換成字串
 		        var data_string = JSON.stringify(data_object);
-		       $.ajax({
+		        $.ajax({
 		           type: "DELETE",
 		           url: "api/course.do",
 		           crossDomain: true,
@@ -246,10 +321,10 @@ body {
 		           dataType: 'json',
 		           timeout: 5000,
 		           success: function (response) {
-		        	   
 		               if(response.status == 200){
 		            	 	$("#coursesPanel").empty();
-		            	 	getCourse();
+		            	 	getCourse(id);
+		            	 	
 		               	}
 		               console.log(response);
 		           },
@@ -259,8 +334,7 @@ body {
 		       });
 		   }
 		   $(document).ready(function() {
-			   
-					  $.ajax({
+					  $.ajax({//取得登入者的ID
 			              type: "GET",
 			              url: "api/login.do",
 			              crossDomain: true,
@@ -273,16 +347,19 @@ body {
 			                  }
 			                  console.log(response);
 			                  id = response.response.data[0].id ;
+			                  role = response.role;
+			                  console.log(role);
 			                  console.log(id);
+			                  //document.getElementById('coachAddress').innerHTML = response['response']['data'][0]['id'];
 			                  getCoach(id);
-						       getCourse(id);
+			                  getCoachPic(id)
+						      getCourse(id);
 			              },
 			              error: function () {
 			                  alert("無法連線到伺服器！");
 			              }
 			      	   });
 				   console.log(id);
-			       
 			   });
 		  
 		$("#modifyclass").click(function () {
@@ -296,6 +373,16 @@ body {
 			$(".deleteCourse").css("visibility","hidden");
 			$(".saveclass").css("visibility","hidden");
 		});
+		$(".newPicture").click(function(){
+			$("#uploadPicture").css("visibility","visible");
+			$("#confirm").css("visibility","visible");
+			$(".savePicture").css("visibility","visible");
+		})
+		$(".savePicture").click(function(){
+			$("#uploadPicture").css("visibility","hidden");
+			$("#confirm").css("visibility","hidden");
+			$(".savePicture").css("visibility","hidden");
+		})
 	        var i = 0;//控制登入登出
 	        $("#sign").click(function () {
 	            if (i == 0) {
