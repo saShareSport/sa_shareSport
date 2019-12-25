@@ -2,118 +2,117 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>瀏覽教程</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
-    <script src="statics/js/jquery-3.4.1.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>瀏覽教程</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous">
 	
+</script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous">
 	
-  <style>
-  	* {
-    box-sizing: border-box;
+</script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous">
+	
+</script>
+<script src="statics/js/jquery-3.4.1.min.js"></script>
+
+
+<style>
+* {
+	box-sizing: border-box;
 }
 
-html,
-body {
-    margin-top: 2px;
-    margin-bottom: 2px;
-    margin-left: 27px;
-    margin-right: 27px;
-
-    padding: 0px;
+html, body {
+	margin-top: 2px;
+	margin-bottom: 2px;
+	margin-left: 27px;
+	margin-right: 27px;
+	padding: 0px;
 }
 
 .nav {
-    font-size: 20px;
-    margin-bottom: 25px;
+	font-size: 20px;
+	margin-bottom: 25px;
 }
 
 #brow-courses {
-    font-size: 4ch;
-    text-align: center;
+	font-size: 4ch;
+	text-align: center;
 }
 
 .search {
-    text-align: center;
+	text-align: center;
 }
 
 .card {
-    margin-bottom: 33px;
-    margin-left: 55px;
+	margin-bottom: 33px;
+	margin-left: 55px;
 }
 
 .table {
-    margin-left: 45px;
+	margin-left: 45px;
 }
 
 .course {
-    display: inline-block;
-    margin-top: 10px;
-    margin-right: 55px;
-    margin-left: 55px;
+	display: inline-block;
+	margin-top: 10px;
+	margin-right: 55px;
+	margin-left: 55px;
 }
-  
-  </style>
+</style>
 
 </head>
 
 <body>
 	<nav class="nav" style="background-color: #e3f2fd;">
-        <a class="navbar-brand" href="#">shareSport</a>
-        <ul class="nav justify-content-end">
-            <li class="nav-item">
-                <a class="nav-link active" href="#">首頁</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="#">瀏覽教練</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="#">瀏覽教練</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="#">個人專區</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="#">管理介面</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" id="sign" href="#">登入</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="#">註冊</a>
-            </li>
-        </ul>
+		<a class="navbar-brand" href="#">shareSport</a>
+		<ul class="nav justify-content-end">
+			<li class="nav-item"><a class="nav-link active" href="#">首頁</a>
+			</li>
+			<li class="nav-item"><a class="nav-link active" href="#">瀏覽教練</a>
+			</li>
+			<li class="nav-item"><a class="nav-link active" href="#">瀏覽教練</a>
+			</li>
+			<li class="nav-item"><a class="nav-link active" href="#">個人專區</a>
+			</li>
+			<li class="nav-item"><a class="nav-link active" href="#">管理介面</a>
+			</li>
+			<li class="nav-item"><a class="nav-link active" id="sign"
+				href="#">登入</a></li>
+			<li class="nav-item"><a class="nav-link active" href="#">註冊</a>
+			</li>
+		</ul>
 
-    </nav>
+	</nav>
 
-    <table class="table table-borderless">
-        <tr>
-            <td style="width: 55rem;">
-                <span id="brow-courses">瀏覽教程</span>
-            </td>
-            <td>
-                <form class="form-inline my-2 my-lg-0 search">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </td>
-        </tr>
+	<table class="table table-borderless">
+		<tr>
+			<td style="width: 55rem;"><span id="brow-courses">瀏覽教程</span></td>
+			<td>
+				<form class="form-inline my-2 my-lg-0 search">
+					<input class="form-control mr-sm-2" type="search"
+						placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				</form>
+			</td>
+		</tr>
 
-    </table>
+	</table>
 
-    <!--  <section class="coursesarea">
+	<!--  <section class="coursesarea">
         <div class="card course" style="width: 13rem;">
             <img src="https://i1.kknews.cc/SIG=1f7b232/39o40001pr9sp48r151q.jpg" width="13rem" height="160rem"
                 class="card-img-top" alt="...">
@@ -126,101 +125,131 @@ body {
         </div>
     </section>
     -->
-    
-    <div id="course_panel">
-		</div>  
-	
-	
-	
-	
-  <script>   
-  var id=1;
-  
-  function getAllCourse() {
-    $.ajax({
-      type: "GET",
-      url: "api/course.do",
-      crossDomain: true,
-      cache: false,
-      dataType: 'json',
-      timeout: 5000,
-      success: function (response) {
-        if (response.status == 200) {
-        	
-        	
-      	var course_panel = '';
-      	
-      	$.each(response.response.data, function (){
-      		course_panel += addCourse(this);
-      	})
-      	
-      	
-      	
-      	$("#course_panel").append(course_panel);
-      	//setButtonFunction();
-      	//checkIfExistInCart();
-        }
-      },
-      error: function () {
-        alert("無法連線到伺服器！");
-      }
-    });
-    
-  }
-  
-  
-  function getSubscribeCount() {
-	  $.ajax({
-        type: "GET",
-        url: "api/subscribe.do",
-        crossDomain: true,
-        cache: false,
-        dataType: 'json',
-        timeout: 5000,
-        success: function (response) {
-            if(response.status == 200){
-          	  console.log(response);
-          	console.log(response.count)
-          
-          	  document.getElementById('subscribecount"+ id +"').innerHTML = response.count;
-          	  
-          	  
-            }
-        },
-        error: function () {
-        	console.log(response);
-            alert("無法連線到伺服器！");           
-        }
-        
-  });
-	  
-}
+
+	<div id="course_panel"></div>
 
 
-  getAllCourse();
-  getSubscribeCount()
 
-  
-  function addCourse(data) {
-  	let inner_html = '';
-  		inner_html += '<div class="card course" style="width: 13rem;">';
- 		inner_html += '<img src="statics/img/course/' + data.image + '" width="13rem" height="160rem" class="card-img-top" alt="..."';
- 		inner_html += '<div class="card-body text-center">'
- 		inner_html += '<h5 class="card-title text-left">' + data.name + '</h5>'
- 		inner_html += '<p class="card-text text-left"><small class="text-muted">訂閱人數<span id ="subscribecount'+ id +'">這裡要是數字</span></small></p>'
- 		inner_html += '<p class="text-left">' + data.information + '</p>'
- 		inner_html += '<a href="course_information.html?id=' + data.id + '"	class="btn btn-primary">查看教程</a>'
- 		inner_html += '<a href="#" class="btn btn-primary" id="subscribeBtn' + data.id + '" name="subscribe">訂閱</a>'
- 		inner_html += '<div><small class="text-muted">id: ' + data.id + '</small></div>';
- 		inner_html += '</div></div>'
- 		id=id+1;
-  	
-		return inner_html;
-  }
 
-  console.log(id);
-  
-  </script>
+	<script>
+	var identity;
+		
+		function getAllCourse() {
+			$.ajax({
+				type : "GET",
+				url : "api/course.do",
+				crossDomain : true,
+				cache : false,
+				dataType : 'json',
+				timeout : 5000,
+				success : function(response) {
+					if (response.status == 200) {
+
+						var course_panel = '';
+
+						$.each(response.response.data, function() {
+							course_panel += addCourse(this);
+						})
+
+						$("#course_panel").append(course_panel);
+						
+					}
+				},
+				error : function() {
+					alert("無法連線到伺服器！");
+				}
+			});
+
+		}
+
+		
+
+		getAllCourse();
+
+		function addCourse(data) {
+			let inner_html = '';
+			inner_html += '<div class="card course" style="width: 13rem;">';
+			inner_html += '<img src="statics/img/course/'+ data.image + '" width="13rem" height="160rem" class="card-img-top" alt="..."';
+			inner_html += '<div class="card-body text-center">'
+			inner_html += '<h5 class="card-title text-left">' + data.name + '</h5>'
+			inner_html += '<p class="card-text text-left"><small class="text-muted">訂閱人數<span id ="subscribecount'+ data.id +'">這裡要是數字</span></small></p>'
+			inner_html += '<p class="text-left">' + data.information + '</p>'
+			inner_html += '<a href="course_information.html?id=' + data.id + '"	class="btn btn-primary">查看教程</a>'
+			inner_html += '<a href="#" class="btn btn-primary" id="subscribeBtn' + data.id + '" name="subscribe">訂閱</a>'
+			inner_html += '<div><small class="text-muted">id: ' + data.id + '</small></div>';
+			inner_html += '</div></div>'
+
+			return inner_html;
+		}
+
+	
+		
+		//取得api/subscribe.do
+		function getCourse(stu_id) {
+			$.ajax({
+				type : "GET",
+				url : "api/subscribe.do",
+				crossDomain : true,
+				data : "sub_stuId=" + stu_id,
+				cache : false,
+				dataType : 'json',
+				timeout : 5000,
+				success : function(response) {
+					console.log(response);
+					if (response.status == 200) {
+						console.log(response.response.data);
+
+						var i = 0;
+						var array = new Array();
+						
+						$.each(response.response.data, function(i) {
+							SubCourseId = response['response']['data'][i]['sub_courId'];
+							document.getElementById('subscribeBtn" + SubCourseId + "').innerHTML = '取消訂閱';
+							console.log(SubCourseId);
+							
+						})
+						console.log(array);
+
+						
+					}
+				},
+				error : function() {
+					alert("無法連線到伺服器！");
+				}
+			});
+		}
+		$(document).ready(function() {
+			//去抓身分
+			$.ajax({
+				type : "GET",
+				url : "api/login.do",
+				crossDomain : true,
+				cache : false,
+				dataType : 'json',
+				timeout : 5000,
+				success : function(response) {
+					if (response.status == 200) {
+						console.log(response);
+						identity = response.role;
+						identity_id = response['response']['data'][0]['id'];
+						console.log(identity);
+						console.log(identity_id);
+						alert(identity_id);
+						//for subscribe api
+						if (identity == "student") {
+							getCourse(identity_id);
+						}
+					}
+				},
+				error : function() {
+					alert("無法連線到伺服器！");
+				}
+			});
+		});
+		
+		
+		
+	</script>
 
 </body>
 

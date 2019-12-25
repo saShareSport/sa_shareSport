@@ -13,17 +13,20 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 	crossorigin="anonymous">
-    </script>
+	
+</script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
 	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
 	crossorigin="anonymous">
-    </script>
+	
+</script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous">
-    </script>
+	
+</script>
 
 <script src="statics/js/jquery-3.4.1.min.js"></script>
 <style>
@@ -145,213 +148,278 @@ html, body {
 	</div>
 
 
-	<script>   
-  
-//取得網址參數
-  var url_string = window.location.href;
-  var url = new URL(url_string);
-  var id = url.searchParams.get("id");
-  var coach_id;
-  var course_id=id;
-  var identity_id;
-  var identity;
-  var subscribe_id;
-  var j = 0; //訂閱、取消訂閱鈕變換，j=0時按鈕顯示訂閱
-  
-  
+	<script>
+		//取得網址參數
+		var url_string = window.location.href;
+		var url = new URL(url_string);
+		var id = url.searchParams.get("id");
+		var coach_id;
+		var course_id = id;
+		var identity_id;
+		var identity;
+		var subscribe_id;
+		var test = 10;
+		var j; //訂閱、取消訂閱鈕變換，j=0時按鈕顯示訂閱
 
-  function getCourseData() {
-	  $.ajax({
-          type: "GET",
-          url: "api/course.do",
-          data: "id=" + id,
-          crossDomain: true,
-          cache: false,
-          dataType: 'json',
-          timeout: 5000,
-          success: function (response) {
-              if(response.status == 200){
-            	  console.log(response)
-            	  coach_id=response['response']['data'][0]['coach_id'];
-            	  
-            	  document.getElementById('course_name').innerHTML = response['response']['data'][0]['name'];
-            	  document.getElementById('course_information').innerHTML = response['response']['data'][0]['information'];
-            	  
-            	  //順序問題，先整個跑完getCourseData()再跑getCoachData()，不然來不及取coach_id值
-            	  getCoachData();
-              }
-          },
-          error: function () {
-              alert("無法連線到伺服器！");
-          }
-    });
-  }
-  
-
-
-
-function getCoachData() {
-	  $.ajax({
-        type: "GET",
-        url: "api/coach.do",
-        data: "id=" + coach_id,
-        crossDomain: true,
-        cache: false,
-        dataType: 'json',
-        timeout: 5000,
-        success: function (response) {
-            if(response.status == 200){
-          	  console.log(coach_id);
-          
-          	  document.getElementById('coach_name').innerHTML = response['response']['data'][0]['name'];
-          	  
-          	  
-            }
-        },
-        error: function () {
-            alert("無法連線到伺服器！");           
-        }
-        
-  });
-	  
-}
-
-//按下訂閱教程按鈕	  
-$("#subscribeBtn").click(function () {
-	
-	if(identity=="student"){
-		
-		if(j==0){
-			
-			// 將資料組成JSON格式
-	        var data_object = {
-					
-	            'sub_stuId': identity_id,
-	            'sub_courId ': course_id,
-	            
-	        };
-	
-	        // 將JSON格式轉換成字串
-	        var data_string = JSON.stringify(data_object);
-	        
-		    $.ajax({
-		        type: "POST",
-		        url: "api/subscribe.do",
-		        data: data_string,
-		        crossDomain: true,
-		        cache: false,
-		        dataType: 'json',
-		        timeout: 5000,
-		        success: function (response) {
-		            
-		            if(response.status == 200){
-		            	document.getElementById("subscribeBtn").innerHTML = "取消訂閱";		            	
-		                j = 1;
-		                
-		                //訂閱成立後，取得這筆訂閱ID
-		                //getSubscribeID();
-		                
-		                //updateSQLTable(response.response);
-		                console.log(response);
-		            }
-		        },
-		        error: function () {
-		            alert("無法連線到伺服器！");
-		        }
-			});
-		
-		}
-		else if(j==1){
-			
-			// 將資料組成JSON格式
-	        var data_object = {
-					
-	            'id ': subscribe_id,
-	            
-	        };
-	
-	        // 將JSON格式轉換成字串
-	        var data_string = JSON.stringify(data_object);
+		function getCourseData() {
 			
 			$.ajax({
-		        type: "DELETE",
-		        url: "api/subscribe.do",
-		        data: data_string,
-		        crossDomain: true,
-		        cache: false,
-		        dataType: 'json',
-		        timeout: 5000,
-		        success: function (response) {
-		            
-		            if(response.status == 200){
-		            	document.getElementById("subscribeBtn").innerHTML = "訂閱";
-		                j = 0;
-		                //updateSQLTable(response.response);
-		            }
-		        },
-		        error: function () {
-		            alert("無法連線到伺服器！");
-		        }
-			})
-			
+						type : "GET",
+						url : "api/course.do",
+						data : "id=" + id,
+						crossDomain : true,
+						cache : false,
+						dataType : 'json',
+						timeout : 5000,
+						success : function(response) {
+							if (response.status == 200) {
+								console.log(response)
+								coach_id = response['response']['data'][0]['coach_id'];
+
+								document.getElementById('course_name').innerHTML = response['response']['data'][0]['name'];
+								document.getElementById('course_information').innerHTML = response['response']['data'][0]['information'];
+
+								//順序問題，先整個跑完getCourseData()再跑getCoachData()，不然來不及取coach_id值
+								getCoachData();
+							}
+						},
+						error : function() {
+							alert("無法連線到伺服器！");
+						}
+					});
 		}
-	
-	}
-	else{
-		//導入登入頁面
-		return window.location.href = 'login_demo.html';
-	}
-		
-});
 
-  
+		function getCoachData() {
+			$
+					.ajax({
+						type : "GET",
+						url : "api/coach.do",
+						data : "id=" + coach_id,
+						crossDomain : true,
+						cache : false,
+						dataType : 'json',
+						timeout : 5000,
+						success : function(response) {
+							if (response.status == 200) {
+								console.log(coach_id);
+
+								document.getElementById('coach_name').innerHTML = response['response']['data'][0]['name'];
+
+							}
+						},
+						error : function() {
+							alert("無法連線到伺服器！");
+						}
+
+					});
+
+		}
+
+		//按下訂閱教程按鈕	  
+		$("#subscribeBtn")
+				.click(
+						function() {
+
+							if (identity == "student") {
+
+								if (j == 0) {
+
+									// 將資料組成JSON格式
+									var data_object = {
+
+										'sub_stuId' : identity_id,
+										'sub_courId ' : course_id,
+
+									};
+
+									// 將JSON格式轉換成字串
+									var data_string = JSON
+											.stringify(data_object);
+
+									$
+											.ajax({
+												type : "POST",
+												url : "api/subscribe.do",
+												data : data_string,
+												crossDomain : true,
+												cache : false,
+												dataType : 'json',
+												timeout : 5000,
+												success : function(response) {
+
+													if (response.status == 200) {
+														document
+																.getElementById("subscribeBtn").innerHTML = "取消訂閱";
+														j = 1;
+
+														console.log(response);
+													}
+												},
+												error : function() {
+													alert("無法連線到伺服器！");
+												}
+											});
+
+								} else if (j == 1) {
+
+									// 將資料組成JSON格式
+									var data_object = {
+
+										'sub_stuId' : identity_id,
+										'sub_courId ' : course_id,
+									};
+
+									// 將JSON格式轉換成字串
+									var data_string = JSON
+											.stringify(data_object);
+
+									$
+											.ajax({
+												type : "DELETE",
+												url : "api/subscribe.do",
+												data : data_string,
+												crossDomain : true,
+												cache : false,
+												dataType : 'json',
+												timeout : 5000,
+												success : function(response) {
+
+													if (response.status == 200) {
+														document
+																.getElementById("subscribeBtn").innerHTML = "訂閱";
+														j = 0;
+														//updateSQLTable(response.response);
+													}
+												},
+												error : function() {
+													alert("無法連線到伺服器！");
+												}
+											})
+
+								}
+
+							} else {
+								//導入登入頁面
+								return window.location.href = 'login_demo.html';
+							}
+
+						});
+
+		//訂閱按鈕上的顯示文字
+		function getsubscribeBtnStatus() {
+
+			
+			$
+					.ajax({
+						type : "GET",
+						url : "api/subscribe.do",
+						data : 'sub_stuId=' + identity_id,
+						crossDomain : true,
+						cache : false,
+						dataType : 'json',
+						timeout : 5000,
+						success : function(response) {
+
+							if (response.status == 200) {
+								if (response.response.data == []) {
+
+									
+
+								} else {
+
+									document.getElementById("subscribeBtn").innerHTML = "取消訂閱";
+									j = 1;
+
+								}
+
+								console.log(response);
+							}
+						},
+						error : function() {
+							alert("無法連線到伺服器！");
+						}
+					});
+
+		}
 
 
-  
-  
-//登入登出鈕變換，i=0時按鈕顯示登入
-  var i = 0;
 
-  $("#sign").click(function () {
+		function getCourse(stu_id) {//取得subscribe student id
+			$.ajax({
+				type : "GET",
+				url : "api/subscribe.do",
+				crossDomain : true,
+				data : "id=" + course_id,
+				cache : false,
+				dataType : 'json',
+				timeout : 5000,
+				success : function(response) {
+					console.log(response);
+					if (response.status == 200) {
+						console.log(response);
+						console.log(response.response.data);
+						document.getElementById("subscribeBtn").innerHTML = "取消訂閱";
+						j = 1;
+						//addCourses(response.response.data);
+						//isNumberKey();
+					}
+				},
+				error : function() {
+					alert("無法連線到伺服器！");
+				}
+			});
+		}
+		//登入登出鈕變換，i=0時按鈕顯示登入
+		var i = 0;
 
-      if (i == 0) {
-          document.getElementById("sign").innerHTML = "登出";
-          i = 1;
-      } else {
-          document.getElementById("sign").innerHTML = "登入";
-          i = 0;
-      }
+		$("#sign").click(function() {
 
-  });
-  
+			if (i == 0) {
+				document.getElementById("sign").innerHTML = "登出";
+				i = 1;
+			} else {
+				document.getElementById("sign").innerHTML = "登入";
+				i = 0;
+			}
 
-  $(document).ready(function() {
-	  getCourseData();
-	//先去抓身分
-		$.ajax({
-		              type: "GET",
-		              url: "api/login.do",
-		              crossDomain: true,
-		              cache: false,
-		              dataType: 'json',
-		              timeout: 5000,
-		              success: function (response) {
-		                  if(response.status == 200){
-		                	 console.log(response);
-		                	 identity=response.role;
-		                	 identity_id=response['response']['data'][0]['id']
-		                	 console.log(identity);
-		                	 console.log(identity_id);
-		                  }
-		                  		              },
-		              error: function () {
-		                  alert("無法連線到伺服器！");
-		              }
-		      	   });
-			   
-  });
-   
-  </script>
+		});
+
+		$(document).ready(function() {
+
+			getCourseData();
+
+			//取得使用者是否已訂閱此教程，以決定按鈕文字應顯示為訂閱或是取消訂閱
+			getsubscribeBtnStatus();
+
+			//去抓身分
+			$.ajax({
+				type : "GET",
+				url : "api/login.do",
+				crossDomain : true,
+				cache : false,
+				dataType : 'json',
+				timeout : 5000,
+				success : function(response) {
+					if (response.status == 200) {
+						console.log(response);
+						identity = response.role;
+						identity_id = response['response']['data'][0]['id']
+						
+						console.log(identity);
+						console.log(identity_id);
+						//for subscribe api
+						if (identity == "student") {
+							getCourse(identity_id);
+						}
+					}
+				},
+				error : function() {
+					alert("無法連線到伺服器！");
+				}
+			});
+
+		});
+	</script>
 
 </body>
 
