@@ -155,11 +155,12 @@ function NewAdmin(){
 			 AdminsTable_html +='<td>' + value['name'] + '</td>';
 			 AdminsTable_html +='<td>' + value['email'] + '</td>';
 			 AdminsTable_html +='<td>' + value['modified'] + '</td>';
-			 AdminsTable_html +='<td>' + '<a class="btn btn-primary href="edit.html?id=' + value['id'] + '">編輯</a>'+'</td>';
+			 AdminsTable_html +='<td>' + '<a class="btn btn-primary href="/ModifyAdmin.html?id=' + value['id'] + '">編輯</a>'+'</td>';
 			 //AdminsTable_html +='<td>'+'<a href="javascript: deleteMember(' + value['id'] + ');">停權</a></td></tr>';
 		 })
 		 $("#AdminsTable > tbody").append(AdminsTable_html);
 	}
+	
 	$("#AdminList").click(function () {
 		location.href="/sa_shareSport/AdminsList.html";
 	});
@@ -180,9 +181,6 @@ function NewAdmin(){
         getAllMember();
     });
 	
-	$(document).ready(function() {
-        getAllMember();
-    });
 	
 </script>
 </body>

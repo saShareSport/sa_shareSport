@@ -74,7 +74,7 @@ body {
       <form id=registeredManagerForm >
         <div class="form-group">
             <label for="name">姓名</label>
-            <input type="name" style="width:600px" class="form-control" id="registeredAdminName " placeholder="請輸入姓名">
+            <input type="name" style="width:600px" class="form-control" id="registeredAdminName" placeholder="請輸入姓名">
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">E-mail</label>
@@ -89,15 +89,15 @@ body {
             <input type="password" style="width:600px" class="form-control" id="registeredAdminPassword2" placeholder="請確認密碼">
         </div>
         <div class="form-group">
-          <label for="exampleInputStatus">會員狀態</label>
-          <input type="text" style="width:600px" class="form-control" id="registeredAdminStatus" placeholder="請輸入狀態">
+          <label for="exampleInputData">管理員狀態</label>
+          <input type="text" style="width:600px" class="form-control" id="registeredAdminStatus" placeholder="1為封鎖，0為解除封鎖">
         </div>
-        <button type="submit" class="btn btn-primary" id="RegisterAdmin">註冊</button>
+        <button type="submit" class="btn btn-primary" id="ModifyAdmin">更新管理員資料</button>
       </form>
 		
 	<script type="text/javascript">
 	
-    $('#RegisterAdmin').click(function() {
+    $('#ModifyAdmin').click(function() {
         updateMember()
 
     });
@@ -141,6 +141,35 @@ body {
      }
  }         
 	 
+	 function getMember() {
+         $.ajax({
+             type: "GET",
+             url: "api/admin.do",
+             crossDomain: true,
+             data: "id=" + id,
+             cache: false,
+             dataType: 'json',
+             timeout: 5000,
+             success: function (resp) {
+             	var str = resp['status']['message']['response'];
+             	var name = str.substring(str.lastIndexOf("\\") + 1, str.length);
+                 if(resp.status == 200){
+                 	document.getElementById('registeredAdminName').value = resp['status']['message']['response'];
+                 	document.getElementById('registeredAdminEmail').value = resp['status']['message']['response'];
+                 	document.getElementById('registeredAdminPassword1').value = resp['status']['message']['response'];
+                 	document.getElementById('registeredAdminStatus').value = resp['status']['message']['response'];
+                 	//document.getElementById("picture").src = response['response']['data'][0]['image'];
+                 	//document.getElementById("picture").src = "./statics/img/image.png"
+                 	console.log('已取得資料')   
+                 }
+                 console.log(resp);
+             },
+             error: function () {
+                 alert("無法連線到伺服器！");
+             }
+         });
+     }
+
 	 
              
 	$("#AdminList").click(function () {
