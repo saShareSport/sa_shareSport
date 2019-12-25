@@ -8,13 +8,22 @@
 <meta charset="BIG5">
 <title>學生個人專區</title>
 <style>
-.manageclass {
+#uploadPicture{
+	visibility: hidden;
+}
+#confirm{
+	visibility: hidden;
+}
+.savePicture{
+	visibility: hidden;
+}
+.saveclass {
+  visibility: hidden;
+}
+.deleteCourse {
   visibility: hidden;
 }
 .managecoach {
-  visibility: hidden;
-}
-.deleteclass {
   visibility: hidden;
 }
 .deletecoach {
@@ -75,40 +84,35 @@ body {
    </ul>
   
 </nav>
-	<div class="card mb-3" style="max-width: 540px;">
-	  <div class="row no-gutters">
-	    <div class="col-md-4">
-	      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTxDQcl1SA2jzxtsOqnl0eA-zF9p0JoDFZCALHVI25lqAdzR-Ec" class="card-img" alt="...">
-	    </div>
-	    <div class="col-md-8">
-	      <div class="card-body">
-	        <h2 id=studentName class="card-title"></h2>
-	  		<button id=modifyself type="button" class="btn btn-outline-primary">修改個人資料</button>
-	      </div>
-	    </div>
+	<div class="card mb-3"  style="max-width: 540px;">
+  		<div class="row no-gutters">
+	    	<div id ="studentPicture" class="col-md-4"></div>
+	    	<div class="col-md-8">
+				<div class="card-body">
+		        	<h2 id="studentName" class="card-title" ></h2><br>
+		        	<a id = "studentAddress" href="coachmodify.html?id=' + value['id'] + '" type="button" class="btn btn-outline-primary" >修改個人資料</a>
+		        	<button type="button" class="btn btn-outline-primary newPicture" >新增個人照片</button>
+		        	<button type="button" class="btn btn-outline-primary savePicture" >儲存</button>
+		        	<form id="uploadPicture" enctype="multipart/form-data">
+						<input id="file" type="file" name="file" />
+						<button id="upload" type="button">upload</button>
+					</form>
+	<button id="confirm" type="button">confirm</button>
+				</div>
+	    	</div>
 	  </div>
 	</div>
 	
 	<h2>我的教程</h2>
 		<button id ="modifyclass" type="button" class="btn btn-outline-primary">管理教程</button>
-		<button type="button" class="btn btn-outline-primary manageclass">儲存</button><br>
+		<button type="button" class="btn btn-outline-primary saveclass">儲存</button><br>
 		<div id="coursesPanel" ></div>
 			
 	<h2>我的教練</h2>
 		<button id="modifycoach" type="button" class="btn btn-outline-primary">管理教練</button>
 		<button type="button" class="btn btn-outline-primary managecoach">儲存</button><br>
-		
-			<div class="card course">
-	  			<a href="該教練網址">
-	    		<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTxDQcl1SA2jzxtsOqnl0eA-zF9p0JoDFZCALHVI25lqAdzR-Ec" class="card-img-top" alt="..." width="13rem" height="160rem">
-	    		</a>
-	    		<div class="card-body">
-	      			<h5 class="card-title">教練名稱</h5>
-		        	<a href="#" class="btn btn-primary deletecoach">刪除教練</a>
-	    		</div>
-	  		</div>
-	  		
-	  		
+		<div id="coachesPanel" ></div>
+			
 		
 	<script>
 	var url_string = window.location.href;
@@ -127,12 +131,9 @@ body {
 	           dataType: 'json',
 	           timeout: 5000,
 	           success: function (response) {
-	        	   
 	               if(response.status == 200){
-	               	//updateSQLTable(response.response);
 	               	document.getElementById('studentName').innerHTML = response['response']['data'][0]['name'];
-	              
-	               	}
+	               	};
 	               console.log(response);
 	           },
 	           error: function () {
@@ -141,7 +142,7 @@ body {
 	       });
 	   }
 	
-	function getCourse(id) {//取得courseid教程
+	function getStuCourseId(id) {//取得學生訂閱courseid
 	       $.ajax({
 	           type: "GET",
 	           url: "api/subscribe.do",
@@ -153,16 +154,35 @@ body {
 	           success: function (response) {
 	        	   console.log(response);
 	               if(response.status == 200){
-	            	   console.log(response.response.data)
-	            	   //addCourses(response.response.data);
-	            	   isNumberKey();
+	            	   //console.log(response.response.data)
 	            	   var arrstuCoursesid = [];
-	            	   $.each(data,function(index, value){
+	            	   $.each(response.response.data,function(index, value){
 	            		   arrstuCoursesid.push(value['sub_courId']);
-		            	   console.log(arrstuCoursesid);
+	            		   getStuCourseInfo(value['sub_courId']);
+	            		   
 	            	   })
-	            	   
-	            	   
+	            	   console.log(arrstuCoursesid);
+	            	   };
+	           },
+	           error: function () {
+	               alert("無法連線到伺服器！");
+	           }
+	       });
+	   }
+	function getStuCourseInfo(id) {//取得學生訂閱courseinfo
+	       $.ajax({
+	           type: "GET",
+	           url: "api/course.do",
+	           crossDomain: true,
+	           data: "id="+id,
+	           cache: false,
+	           dataType: 'json',
+	           timeout: 5000,
+	           success: function (response) {
+	        	   console.log(response);
+	               if(response.status == 200){
+	            	   //console.log(response.response.data)
+	            	   addCourses(response.response.data);
 	            	   
 	            	}
 	           },
@@ -181,43 +201,32 @@ body {
 			});
 		   };
 		   
-	   function addCourses(data) {//讀取教練的課程
-		   var arrCoursesid = [];
+	   function addCourses(data) {//顯示學生訂閱課程
+		   //console.log(data);
 		   var courseAll = ""; 
-		  
-		   $.each(data,function(index, value){
-			   if(value['status']=="1"){//如果status =1(停權)則跳過
-				   //index++;
-				   return;         
+			   if(data[0]['status']=="0"){//如果status =1(停權)則跳過
+				 //console.log(index);   
+	               courseAll += ' <div class="card course">';
+	               courseAll += ' <a href="該教程網址">';
+	               courseAll += '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTxDQcl1SA2jzxtsOqnl0eA-zF9p0JoDFZCALHVI25lqAdzR-Ec" class="card-img-top" alt="..."  width="13rem" height="160rem">';
+	               courseAll += '</a>';
+	               courseAll += '<div class="card-body">';
+	               courseAll += '<h5 id ="courseName" class="card-title">'+data[0]['name']+'</h5>';
+	               courseAll += '<p id ="courseTextarea" class="card-text">'+data[0]['information']+'</p>';
+	               courseAll += '<p id ="subscribe'+data[0]['id']+'" class="card-text"><small class="text-muted">訂閱人數</small></p>';
+	               courseAll += '<p hidden id ="status" class="card-text" ><small class="text-muted">'+data[0]['status']+'</small></p>';
+	               courseAll += '<p hidden id ="id" class="card-text" ><small class="text-muted">'+data[0]['id']+'</small></p>';
+	               //courseAll += '<a href="#" class="btn btn-primary modifythiscourse" >修改教程</a>';
+	               courseAll += '<button id="'+data[0]['id']+'" type="button" name="deleteCourse" class="btn btn-primary deleteCourse" >取消訂閱</button>';
+	               courseAll += '</div>';
+	               courseAll += '</div>';
+	               getSubscribes(data[0]['id']);
+	               isNumberKey();
+	               $("#coursesPanel").append(courseAll);//把所有COURSE資料顯現在COURSE區        
 			   }
-			   //console.log(index);   
-               courseAll += ' <div class="card course">';
-               courseAll += ' <a href="該教程網址">';
-               courseAll += '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTxDQcl1SA2jzxtsOqnl0eA-zF9p0JoDFZCALHVI25lqAdzR-Ec" class="card-img-top" alt="..."  width="13rem" height="160rem">';
-               courseAll += '</a>';
-               courseAll += '<div class="card-body">';
-               courseAll += '<h5 id ="courseName" class="card-title">'+value['name']+'</h5>';
-               courseAll += '<p id ="courseTextarea" class="card-text">'+value['information']+'</p>';
-               courseAll += '<p id ="subscribe'+value['id']+'" class="card-text"><small class="text-muted">訂閱人數</small></p>';
-               courseAll += '<p hidden id ="status" class="card-text" ><small class="text-muted">'+value['status']+'</small></p>';
-               courseAll += '<p hidden id ="id" class="card-text" ><small class="text-muted">'+value['id']+'</small></p>';
-               courseAll += '<a href="#" class="btn btn-primary modifythiscourse" >修改教程</a>';
-               courseAll += '<button id="'+value['id']+'" type="button" name="deleteCourse" class="btn btn-primary deleteCourse" >刪除教程</button>';
-               courseAll += '</div>';
-               courseAll += '</div>';
-              
-               arrCoursesid.push(value['id']);//依據COURSEID查看訂閱人數
-		   })
-		  //console.log(arrCoursesid);
-		  for(var i=0; i<arrCoursesid.length; i++) {
-			  getSubscribes(arrCoursesid[i]);
-			  //console.log(arrCoursesid[i]);
-			};
-			
-           	$("#coursesPanel").append(courseAll);//把所有COURSE資料顯現在COURSE區
-       }
-	  
-	   function getSubscribes(id) {//取得訂閱人數
+		   }
+		  
+	   function getSubscribes(id) {//取得課程訂閱人數
 	       $.ajax({
 	           type: "GET",
 	           url: "api/subscribe.do",
@@ -229,10 +238,10 @@ body {
 	           success: function (response) {
 	        	   //console.log(response);
 	               if(response.status == 200){
-	            	   document.getElementById('subscribe'+id).innerHTML = "<small>追蹤人數"+response.count;
+	            	   document.getElementById('subscribe'+id).innerHTML = "<small>訂閱人數"+response.count;
 	            	   console.log("id:"+id+" amount="+response.count);
-	               	}
-	               console.log(response);
+	               	};
+	               //console.log(response);
 	           },
 	           error: function () {
 	               alert("無法連線到伺服器！");
@@ -267,8 +276,102 @@ body {
 		           }
 		       });
 		   }
+	   function getStuCoachId(id) {//取得學生訂閱courseid
+	       $.ajax({
+	           type: "GET",
+	           url: "api/follow.do",
+	           crossDomain: true,
+	           data: "foll_stuId=" +id,
+	           cache: false,
+	           dataType: 'json',
+	           timeout: 5000,
+	           success: function (response) {
+	        	   console.log(response);
+	               if(response.status == 200){
+	            	   //console.log(response.response.data)
+	            	   var arrstuCoachesid = [];
+	            	   $.each(response.response.data,function(index, value){
+	            		   arrstuCoachesid.push(value['foll_coaId']);
+	            		   getCoachInfo(value['foll_coaId']);
+	            		   
+	            	   })
+	            	   console.log(arrstuCoachesid);
+	            	   };
+	           },
+	           error: function () {
+	               alert("無法連線到伺服器！");
+	           }
+	       });
+	   }
+	   function getCoachInfo(id) {//取得coachinfo
+	       $.ajax({
+	           type: "GET",
+	           url: "api/coach.do",
+	           crossDomain: true,
+	           data: "id="+id,
+	           cache: false,
+	           dataType: 'json',
+	           timeout: 5000,
+	           success: function (response) {
+	        	   if(response.status == 200){
+	        		   console.log(response.response.data);
+	        		   addCoaches(response.response.data);
+		               	}
+	               console.log(response);
+	           },
+	           error: function () {
+	               alert("無法連線到伺服器！");
+	           }
+	       });
+	   }
+	   function addCoaches(data) {//顯示學生訂閱課程
+		   //console.log(data);
+		   var courseAll = ""; 
+			   if(data[0]['status']=="0"){//如果status =1(停權)則跳過
+				 //console.log(index);   
+	               courseAll += ' <div class="card course">';
+	               courseAll += ' <a href="該教程網址">';
+	               courseAll += '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTxDQcl1SA2jzxtsOqnl0eA-zF9p0JoDFZCALHVI25lqAdzR-Ec" class="card-img-top" alt="..."  width="13rem" height="160rem">';
+	               courseAll += '</a>';
+	               courseAll += '<div class="card-body">';
+	               courseAll += '<h5 id ="courseName" class="card-title">'+data[0]['name']+'</h5>';
+	               courseAll += '<p id ="courseTextarea" class="card-text">'+data[0]['information']+'</p>';
+	               courseAll += '<p id ="follow'+data[0]['id']+'" class="card-text"><small class="text-muted">訂閱人數</small></p>';
+	               courseAll += '<p hidden id ="status" class="card-text" ><small class="text-muted">'+data[0]['status']+'</small></p>';
+	               courseAll += '<p hidden id ="id" class="card-text" ><small class="text-muted">'+data[0]['id']+'</small></p>';
+	               //courseAll += '<a href="#" class="btn btn-primary modifythiscourse" >修改教程</a>';
+	               courseAll += '<button id="'+data[0]['id']+'" type="button" name="deleteCourse" class="btn btn-primary deletecoach" >取消追蹤</button>';
+	               courseAll += '</div>';
+	               courseAll += '</div>';
+	               getFollows(data[0]['id']);
+	               isNumberKey();
+	               $("#coachesPanel").append(courseAll);//把所有COURSE資料顯現在COURSE區        
+			   }
+		   }
+	   function getFollows(id) {//取得課程訂閱人數
+	       $.ajax({
+	           type: "GET",
+	           url: "api/follow.do",
+	           crossDomain: true,
+	           data: "id="+id,
+	           cache: false,
+	           dataType: 'json',
+	           timeout: 5000,
+	           success: function (response) {
+	        	   //console.log(response);
+	               if(response.status == 200){
+	            	   document.getElementById('follow'+id).innerHTML = "<small>追蹤人數"+response.count;
+	            	   console.log("id:"+id+" amount="+response.count);
+	               	};
+	               //console.log(response);
+	           },
+	           error: function () {
+	               alert("無法連線到伺服器！");
+	           }
+	       });
+	   }
 	 $(document).ready(function() {
-		 $.ajax({//取得登入者的ID
+		 /**$.ajax({//取得登入者的ID
              type: "GET",
              url: "api/login.do",
              crossDomain: true,
@@ -284,7 +387,7 @@ body {
                  role = response.role;
                  console.log(role);
                  console.log(id);
-                 //document.getElementById('coachAddress').innerHTML = response['response']['data'][0]['id'];
+                 //document.getElementById('studentAddress').innerHTML = response['response']['data'][0]['id'];
                  //getStudent(id);
                  //getCourse(id);
                  //getCoachPic(id);
@@ -293,26 +396,39 @@ body {
              error: function () {
                  alert("無法連線到伺服器！");
              }
-     	   });
+     	   });**/
 	   console.log(id);
-		 
 	   getStudent(id);
-       getCourse(id);
+	   getStuCourseId(id);
+	   getStuCoachId(id)
              
      	   });
-	  
+	 $(".newPicture").click(function(){
+			$("#uploadPicture").css("visibility","visible");
+			$("#confirm").css("visibility","visible");
+			$(".savePicture").css("visibility","visible");
+		})
+		$(".savePicture").click(function(){
+			$("#uploadPicture").css("visibility","hidden");
+			$("#confirm").css("visibility","hidden");
+			$(".savePicture").css("visibility","hidden");
+		})
 	$("#modifyself").click(function () {
 		//要導入修改網址
 	});
-	    $("#modifyclass").click(function () {//管理教程功能
-			$(".manageclass").css("visibility","visible");
-			$(".deleteclass").css("visibility","visible");
-		});
+	$("#modifyclass").click(function () {
+		$(".modifythiscourse").css("visibility","visible");
+		$(".deleteCourse").css("visibility","visible");
+		$(".saveclass").css("visibility","visible");
+	});
+		
+	$(".saveclass").click(function(){
+		$(".modifythiscourse").css("visibility","hidden");
+		$(".deleteCourse").css("visibility","hidden");
+		$(".saveclass").css("visibility","hidden");
+	});
+	     
 	    
-	    $(".manageclass").click(function () {//教程儲存
-			$(".manageclass").css("visibility","hidden");
-			$(".deleteclass").css("visibility","hidden");
-		});
 	    $("#modifycoach").click(function () {//管理教練
 			$(".managecoach").css("visibility","visible");
 			$(".deletecoach").css("visibility","visible");
