@@ -131,7 +131,7 @@ body {
                  timeout: 5000,
                  success: function (resp) {
                      if(resp.status == 200){
-                    	 console.log(resp.message);
+                         getMember();
                      }
                  },
                  error: function () {
@@ -139,7 +139,7 @@ body {
                  }
          });
      }
- }         
+ }
 	 
 	 function getMember() {
          $.ajax({
@@ -187,6 +187,10 @@ body {
 	$("#CourseList").click(function () {
 		location.href="/sa_shareSport/CourseList.html";
 	});
+	
+	$(document).ready(function() {
+        getMember();
+    });
 	
 	</script>
 </body>
