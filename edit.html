@@ -144,12 +144,17 @@
                             	document.getElementById('member_login_times').value = response['response']['data'][0]['login_times'];
                             	document.getElementById('member_status').value = response['response']['data'][0]['status'];
                             	//document.getElementById("picture").src = response['response']['data'][0]['image'];
-                            	//document.getElementById("picture").src = "./statics/img/image.png"
-                            	console.log("statics/img/"+name)
-                            	var img = "./statics/img/"+name
-                            	document.getElementById("picture").src = img
-                                
-                            
+                            	
+                            	
+                            	var img = response['response']['data'][0]['status'];
+                            	
+                            	
+                            	 //获得一个http格式的url路径:mozilla(firefox)||webkit or chrome
+                                //var windowURL = window.URL || window.webkitURL;
+                                //createObjectURL创建一个指向该参数对象(图片)的URL
+                                //var dataURL;
+                                //dataURL = windowURL.createObjectURL(img);
+                                document.getElementById("picture").src = img
                             }
                             console.log(response);
                         },

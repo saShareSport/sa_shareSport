@@ -2,115 +2,110 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>瀏覽教練</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
-    <script src="statics/js/jquery-3.4.1.min.js"></script>
-   	
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>瀏覽教練</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous">
 	
-  <style>
-  	* {
-    box-sizing: border-box;
+</script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous">
+	
+</script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous">
+	
+</script>
+<script src="statics/js/jquery-3.4.1.min.js"></script>
+
+
+<style>
+* {
+	box-sizing: border-box;
 }
 
-html,
-body {
-    margin-top: 2px;
-    margin-bottom: 2px;
-    margin-left: 27px;
-    margin-right: 27px;
-
-    padding: 0px;
+html, body {
+	margin-top: 2px;
+	margin-bottom: 2px;
+	margin-left: 27px;
+	margin-right: 27px;
+	padding: 0px;
 }
 
 .nav {
-    font-size: 20px;
-    margin-bottom: 25px;
+	font-size: 20px;
+	margin-bottom: 25px;
 }
 
 #brow-coachs {
-    font-size: 4ch;
-    
+	font-size: 4ch;
 }
 
 .search {
-    text-align: center;
+	text-align: center;
 }
 
 .card {
-    margin-bottom: 33px;
-  
+	margin-bottom: 33px;
 }
 
 .coach {
-    display: inline-block;
-    margin-top: 10px;
-    margin-right: 55px;
-
+	display: inline-block;
+	margin-top: 10px;
+	margin-right: 55px;
 }
-  
-  </style>
+</style>
 
 </head>
 
 <body>
 	<nav class="nav" style="background-color: #e3f2fd;">
-        <a class="navbar-brand" href="#">shareSport</a>
-        <ul class="nav justify-content-end">
-            <li class="nav-item">
-                <a class="nav-link active" href="#">首頁</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="#">瀏覽教練</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="#">瀏覽教練</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="#">個人專區</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="#">管理介面</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" id="sign" href="#">登入</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="#">註冊</a>
-            </li>
-        </ul>
+		<a class="navbar-brand" href="#">shareSport</a>
+		<ul class="nav justify-content-end">
+			<li class="nav-item"><a class="nav-link active"
+				href="index.html">首頁</a></li>
+			<li class="nav-item"><a class="nav-link active"
+				href="brow_coaches.html">瀏覽教練</a></li>
+			<li class="nav-item"><a class="nav-link active"
+				href="brow_courses.html">瀏覽教程</a></li>
+			<li class="nav-item"><a class="nav-link active" href="#">個人專區</a>
+			</li>
+			<li class="nav-item"><a class="nav-link active"
+				href="interface.html">管理介面</a></li>
+			<li class="nav-item"><a class="nav-link active" id="sign"
+				href="login.html">登入</a></li>
+			<li class="nav-item"><a class="nav-link active" id="regsign"
+				href="register.html">註冊</a></li>
+		</ul>
+	</nav>
 
-    </nav>
+	<table class="table table-borderless">
+		<tr>
+			<td style="width: 55rem;"><span id="brow-coachs">瀏覽教練</span></td>
+			<td>
+				<form class="form-inline my-2 my-lg-0 search">
+					<input class="form-control mr-sm-2" type="search"
+						placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				</form>
+			</td>
+		</tr>
 
-    <table class="table table-borderless">
-        <tr>
-            <td style="width: 55rem;">
-                <span id="brow-coachs">瀏覽教練</span>
-            </td>
-            <td>
-                <form class="form-inline my-2 my-lg-0 search">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </td>
-        </tr>
+	</table>
 
-    </table>
 
-    
-        <!--  <div class="card coach text-right" style="width: 13rem;">
+	<!--  <div class="card coach text-right" style="width: 13rem;">
             <img src="https://www.fluffytw.com/upload/article/original/a3631dd66105edbbf210a0e4b08a237b.jpg"
                 width="13rem" height="160rem" class="card-img-top" alt="...">
             <div class="card-body text-center">
@@ -121,94 +116,97 @@ body {
                 <a href="#" class="btn btn-primary">追蹤</a>
             </div>
         </div> -->
-		
-		<div id="coach_panel">
-		</div>     
 
-   
-	
-	
-  <script>   
-  
-  //1224
- // var [client_cart_obj, client_cart_amount]  = getCartDataFromClient();
-  
-  function getAllCoach() {
-    $.ajax({
-      type: "GET",
-      url: "api/coach.do",
-      crossDomain: true,
-      cache: false,
-      dataType: 'json',
-      timeout: 5000,
-      success: function (response) {
-        if (response.status == 200) {
-      	var coach_panel = '';
-      	
-      	$.each(response.response.data, function (){
-      		coach_panel += addCoach(this);
-      	})
-      	
-      	$("#coach_panel").append(coach_panel);
-      	//setButtonFunction();
-      	//checkIfExistInCart();
-        }
-      },
-      error: function () {
-        alert("無法連線到伺服器！");
-      }
-    });
-  }
+	<div id="coach_panel"></div>
 
-  getAllCoach();
-  
-  function addCoach(data) {
-  	let inner_html = '';
-  		inner_html += '<div class="card coach text-right" style="width: 13rem;">';
- 		inner_html += '<img src="statics/img/coach/' + data.image + '" width="13rem" height="160rem" class="card-img-top" alt="..."';
- 		inner_html += '<div class="card-body text-center">'
- 		inner_html += '<h5 class="card-title text-left">' + data.name + '</h5>'
- 		inner_html += '<p class="card-text text-left"><small class="text-muted">追蹤人數<span>' + data.followers_count + '</span></small></p>'
- 		inner_html += '<p class="text-left">' + data.information + '</p>'
- 		inner_html += '<a href="coach_information.html?id=' + data.id + '" class="btn btn-primary">查看教練</a>'
- 		inner_html += '<a href="#" class="btn btn-primary" id="followBtn' + data.id + '" name="follow">追蹤</a>'
- 		inner_html += '<div><small class="text-muted">id: ' + data.id + '</small></div>';
- 		inner_html += '</div></div>'
-  	
-		return inner_html;
-  }
-  
-//登入登出鈕變換i=0時按鈕顯示登入
-  var i = 0;
 
-  $("#sign").click(function () {
 
-      if (i == 0) {
-          document.getElementById("sign").innerHTML = "登出";
-          i = 1;
-      } else {
-          document.getElementById("sign").innerHTML = "登入";
-          i = 0;
-      }
 
-  });
+	<script>
+		//1224
+		// var [client_cart_obj, client_cart_amount]  = getCartDataFromClient();
 
-  //追蹤、取消追蹤鈕變換，i=0時按鈕顯示追蹤
-  var j = 0;
+		function getAllCoach() {
+			$.ajax({
+				type : "GET",
+				url : "api/coach.do",
+				crossDomain : true,
+				cache : false,
+				dataType : 'json',
+				timeout : 5000,
+				success : function(response) {
+					if (response.status == 200) {
+						var coach_panel = '';
 
-  $("#followBtn").click(function () {
+						$.each(response.response.data, function() {
+							coach_panel += addCoach(this);
+						})
 
-      if (j == 0) {
-          document.getElementById("followBtn").innerHTML = "取消追蹤";
-          j = 1;
-      } else {
-          document.getElementById("followBtn").innerHTML = "追蹤";
-          j = 0;
-      }
+						$("#coach_panel").append(coach_panel);
+						//setButtonFunction();
+						//checkIfExistInCart();
+					}
+				},
+				error : function() {
+					alert("無法連線到伺服器！");
+				}
+			});
+		}
 
-  });
-  
-  </script>
+		getAllCoach();
+
+		function addCoach(data) {
+			let inner_html = '';
+			inner_html += '<div class="card coach text-right" style="width: 13rem;">';
+			inner_html += '<img src="statics/img/coach/'
+					+ data.image
+					+ '" width="13rem" height="160rem" class="card-img-top" alt="..."';
+			inner_html += '<div class="card-body text-center">'
+			inner_html += '<h5 class="card-title text-left">' + data.name
+					+ '</h5>'
+			inner_html += '<p class="card-text text-left"><small class="text-muted">追蹤人數<span>'
+					+ data.followers_count + '</span></small></p>'
+			inner_html += '<p class="text-left">' + data.information + '</p>'
+			inner_html += '<a href="coach_information.html?id=' + data.id
+					+ '" class="btn btn-primary">查看教練</a>'
+			inner_html += '<a href="#" class="btn btn-primary" id="followBtn' + data.id + '" name="follow">追蹤</a>'
+			inner_html += '<div><small class="text-muted">id: ' + data.id
+					+ '</small></div>';
+			inner_html += '</div></div>'
+
+			return inner_html;
+		}
+
+		//登入登出鈕變換i=0時按鈕顯示登入
+		var i = 0;
+
+		$("#sign").click(function() {
+
+			if (i == 0) {
+				document.getElementById("sign").innerHTML = "登出";
+				i = 1;
+			} else {
+				document.getElementById("sign").innerHTML = "登入";
+				i = 0;
+			}
+
+		});
+
+		//追蹤、取消追蹤鈕變換，i=0時按鈕顯示追蹤
+		var j = 0;
+
+		$("#followBtn").click(function() {
+
+			if (j == 0) {
+				document.getElementById("followBtn").innerHTML = "取消追蹤";
+				j = 1;
+			} else {
+				document.getElementById("followBtn").innerHTML = "追蹤";
+				j = 0;
+			}
+
+		});
+	</script>
 
 </body>
 

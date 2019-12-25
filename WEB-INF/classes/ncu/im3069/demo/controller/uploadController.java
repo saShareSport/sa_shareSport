@@ -32,8 +32,9 @@ public class uploadController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	// 上傳檔案儲存目錄
-//	private static final String UPLOAD_DIRECTORY = "git\\sa_shareSport\\statics\\img";
-	private static final String UPLOAD_DIRECTORY = "statics\\img";
+	private static final String UPLOAD_DIRECTORY = "upload";
+
+//	private static final String UPLOAD_DIRECTORY = "statics\\img";
 	private String filePath = null;
 	private String fileName = null;
 	// 上傳配置
@@ -71,16 +72,16 @@ public class uploadController extends HttpServlet {
 		// 構造臨時路徑來儲存上傳的檔案
 		// 這個路徑相對當前應用的目錄
 		//String uploadPath = "."+ File.separator + UPLOAD_DIRECTORY;
-		String path = getServletContext().getRealPath("/");
-		//System.out.println(System.getProperty("java.io.tmpdir"));
-		System.out.println(path);
+		//String path = getServletContext().getRealPath("/");
+		String uploadPath = getServletContext().getRealPath("./")+ File.separator + UPLOAD_DIRECTORY;
+				
 		
 //		String uploadPath1 = System.getProperty("user.home")+ File.separator + UPLOAD_DIRECTORY;
-		String uploadPath1 = path + UPLOAD_DIRECTORY;
+//		String uploadPath = "C:\\" + UPLOAD_DIRECTORY;
 		//System.out.println(uploadPath1);
 		//String uploadPath =".\\image"+ File.separator + UPLOAD_DIRECTORY;
 		// 如果目錄不存在則建立
-		File uploadDir = new File(uploadPath1);
+		File uploadDir = new File(uploadPath);
 		if (!uploadDir.exists()) {
 			uploadDir.mkdir();
 		}
@@ -95,7 +96,7 @@ public class uploadController extends HttpServlet {
 					// 處理不在表單中的欄位
 					if (!item.isFormField()) {					
 						fileName = new File(item.getName()).getName();
-						filePath = uploadPath1 + File.separator+ fileName;
+						filePath = uploadPath + File.separator+ fileName;
 						
 //						JSONObject resp = new JSONObject();
 //						resp.put("status", "200");

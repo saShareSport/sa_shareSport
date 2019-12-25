@@ -112,6 +112,7 @@ public class LoginController extends HttpServlet {
 			
 	    	String userId = null;
 	    	String userRole = null;
+	    	String status = null;
 	    	
 	    	//從client端拿cookie，為陣列型式所以再用for迴圈去找要的cookie
 			Cookie[] cookies = request.getCookies();
@@ -137,10 +138,16 @@ public class LoginController extends HttpServlet {
 	        if(crole != null){
 	        	query = ch.getByID(userId); 
 	        }
-   
+	        
+	        if(userId == null && userRole == null) {
+	        	status = "400";
+	        }
+	        else {
+	        	status = "200";
+	        }
 	        /** 新建一個JSONObject用於將回傳之資料進行封裝 */
 	        JSONObject resp = new JSONObject();
-	        resp.put("status", "200");
+	        resp.put("status", status);
 	        resp.put("message", "cookie資料取得成功");
 	        resp.put("response", query);
 	        resp.put("role", userRole);
