@@ -1,391 +1,327 @@
 <!DOCTYPE html>
-<html >
+<html lang="en">
 <head>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<meta charset="utf-8">
+    
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+	crossorigin="anonymous"></script>
 <meta charset="BIG5">
-<title>±Ğ½m­Ó¤H±M°Ï</title>
-
-
+  </head>
 <style>
-.modifythiscourse{
-  visibility: hidden;
+.nav {
+	font-size: 20px;	
 }
-.deleteCourse {
-  visibility: hidden;
+.jumbotron{
+margin-top: 100px;
 }
-.saveclass {
-  visibility: hidden;
-}
-#uploadPicture{
+#saveclass {
 	visibility: hidden;
 }
-#confirm{
+.subTitle{
+	margin-bottom: 2px;
+	margin-left: 27px;
+}
+.modifythiscourse {
 	visibility: hidden;
-}
-.savePicture{
-	visibility: hidden;
-}
-.course{
-	width:13rem;
-	display: inline-block;
-	margin-bottom:33px;
-	margin-left:55px;
-}
-h2{
-	display: inline-block;
-}
-{
-    box-sizing: border-box;
 }
 
-html,
-body {
-    margin-top: 2px;
-    margin-bottom: 2px;
-    margin-left: 27px;
-    margin-right: 27px;
-    padding: 0px;
+.deleteCourse {
+	visibility: hidden;
 }
-.nav {
-    font-size: 20px;
-    margin-bottom: 25px;
-}
-</style>
-</head>
-<body>
-<nav class="nav" style="background-color: #e3f2fd;">
-		<a class="navbar-brand" href="#">shareSport</a>
-		<ul class="nav justify-content-end">
-			<li class="nav-item"><a class="nav-link active"
-				href="index.html">­º­¶</a></li>
-			<li class="nav-item"><a class="nav-link active"
-				href="brow_coaches.html">ÂsÄı±Ğ½m</a></li>
-			<li class="nav-item"><a class="nav-link active"
-				href="brow_courses.html">ÂsÄı±Ğµ{</a></li>
-			<li class="nav-item"><a class="nav-link active" href="#">­Ó¤H±M°Ï</a>
-			</li>
-			<li class="nav-item"><a class="nav-link active"
-				href="interface.html">ºŞ²z¤¶­±</a></li>
-			<li class="nav-item"><a class="nav-link active" id="sign"
-				href="login.html">µn¤J</a></li>
-			<li class="nav-item"><a class="nav-link active" id="regsign"
-				href="register.html">µù¥U</a></li>
-		</ul>
-	</nav>
-	<div class="card mb-3"  style="max-width: 540px;">
-  		<div class="row no-gutters">
-	    	<div id ="coachPicture" class="col-md-4"></div>
-	    	<div class="col-md-8">
-				<div class="card-body">
-		        	<h2 id="coachName" class="card-title" ></h2>
-		        	<p id="coachTextarea" class="card-text"></p>
-		        	<p id ="coachFollows" class="card-text followers"><small class="text-muted"></small></p>
-		        	<a id = "coachAddress" href="coachmodify.html?id=' + value['id'] + '" type="button" class="btn btn-outline-primary" >­×§ï­Ó¤H¸ê®Æ</a>
-		        	<button type="button" class="btn btn-outline-primary newPicture" >·s¼W­Ó¤H·Ó¤ù</button>
-		        	<button type="button" class="btn btn-outline-primary savePicture" >Àx¦s</button>
-		        	<form id="uploadPicture" enctype="multipart/form-data">
-						<input id="file" type="file" name="file" />
-						<button id="upload" type="button">upload</button>
-					</form>
-	<button id="confirm" type="button">confirm</button>
-				</div>
-	    	</div>
-	  </div>
-	</div>
-	
-	<h2>§Úªº±Ğµ{ <span ></span></h2>
-		<button id ="modifyclass" type="button" class="btn btn-outline-primary " >ºŞ²z±Ğµ{</button>
-	    <button type="button" class="btn btn-outline-primary" >·s¼W½Òµ{</button>
-	    <button  type="button" class="btn btn-outline-primary saveclass" >Àx¦s</button><br>
-		<div id="coursesPanel" ></div>
-	<script>
+  </style>
+
+  <body>
+  <header>
+		<div style="font-family: Microsoft JhengHei; color: white;">
+
+			<nav class="navbar fixed-top navbar-dark bg-dark">
+				<a class="navbar-brand" style="font-size: 30px">ShareSport</a>
+				<ul class="nav mr-auto">
+					<li class="nav-item"><a class="nav-link"
+						href="index.html" style="color: white;">é¦–é </a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="brow_coaches.html" style="color: white;">ç€è¦½æ•™ç·´</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="brow_courses.html" style="color: white;">ç€è¦½æ•™ç¨‹</a></li>
+					<li class="nav-item"><a id="self" class="nav-link active"
+						href=" " style="color: white;">å€‹äººå°ˆå€</a></li>
+					<li class="nav-item"><a class="nav-link active" id="sign"
+						href="login.html" style="color: white;">ç™»å…¥</a></li>
+					<li class="nav-item"><a class="nav-link active" id="regsign"
+						href="register.html" style="color: white;">è¨»å†Š</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+    <main role="main">
+
+      <section class="jumbotron text-center">
+        <div class="row no-gutters">
+			<div id="coachPicture" class="col-md-3">
+				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTxDQcl1SA2jzxtsOqnl0eA-zF9p0JoDFZCALHVI25lqAdzR-Ec" class="card-img-top" alt="..."  width="12rem" height="270rem">
+			</div>
+			<div class="col-md-9">
+       			<div class="container">
+          			<h1 id="coachName" class="jumbotron-heading"></h1>
+          			<p id="coachTextarea" class="lead text-muted"></p>
+          			<p id="coachFollows" class="card-text followers"><small class="text-muted"></small></p>
+          			<p>
+            			<a href="#" class="btn btn-secondary my-2">æ›´æ›å€‹äººç…§</a>
+            			<a href="coachmodify.html" class="btn btn-secondary my-2">ä¿®æ”¹å€‹äººè³‡æ–™</a>
+          			</p>
+        		</div>
+        	</div>
+        </div>
+      </section>
+	  
+      <div class="album py-5 bg-light">
+      	<div class="subTitle">
+      		<h2>æˆ‘çš„æ•™ç¨‹ <span></span></h2>
+				<button id="modifyclass" type="button" class="btn btn-outline-secondary ">ç®¡ç†æ•™ç¨‹</button>
+				<button id="newclass" type="button" class="btn btn-outline-secondary">æ–°å¢æ•™ç¨‹</button>
+				<button id="saveclass" type="button" class="btn btn-outline-secondary ">å„²å­˜</button><br>
+      	</div>
+      	<div class="container" >
+			
+				
+          <div class="row" id="coursesPanel">
+            
+            </div>
+            </div>
+            
+
+            
+    </main>
+
+    </body>
+<script>
 		var url_string = window.location.href;
 		var url = new URL(url_string);
 		//var id = url.searchParams.get("id");
 		var sql_num = 0;
-		var id;
-		var role;
-		  $("#upload").click(function() {
-				var formData = new FormData($('#uploadPicture')[0]);
-				$.ajax({
-					url:'api/upload.do',
-					type:'POST',
-					cache:false,
-					data:formData,
-					processData : false,
-					contentType : false,
-					success: function (response) {	                  
-		                  console.log("upload success!");	                  
-		            },
-		            error: function () {
-		                  alert("µLªk³s½u¨ì¦øªA¾¹¡I");
-		            }
-				})
-				
+		var id=1;
+		
+		function getCoach(id) {//å–å¾—coachinfo
+			$.ajax({
+						type : "GET",
+						url : "api/coach.do",
+						crossDomain : true,
+						data : "id=" + id,
+						cache : false,
+						dataType : 'json',
+						timeout : 5000,
+						success : function(response) {
+							if (response.status == 200) {
+								document.getElementById('coachName').innerHTML = response['response']['data'][0]['name'];
+								document.getElementById('coachTextarea').innerHTML = response['response']['data'][0]['information'];
+								document.getElementById('coachFollows').innerHTML = "<small>followers "
+										+ response['response']['data'][0]['followers_count'];
+							}
+							console.log(response);
+						},
+						error : function() {
+							alert("ç„¡æ³•é€£ç·šåˆ°ä¼ºæœå™¨ï¼");
+						}
+					});
+		}
+		function getCourse(id) {//å–å¾—courseid
+			$.ajax({
+				type : "GET",
+				url : "api/course.do",
+				crossDomain : true,
+				data : "coach_id=" + id,
+				cache : false,
+				dataType : 'json',
+				timeout : 5000,
+				success : function(response) {
+					console.log(response);
+					if (response.status == 200) {
+						console.log(response.response.data)
+						addCourses(response.response.data);
+						isNumberKey();
+					}
+				},
+				error : function() {
+					alert("ç„¡æ³•é€£ç·šåˆ°ä¼ºæœå™¨ï¼");
+				}
 			});
-
-		  $("#confirm").click(function() {
-			  // put¤£¯à¥ÎgetParameter ©Ò¥H­n¶Çobject¡A«áºİ¤~¼´±o¨ì
-			  var data_object = {
-	                  "id": id,
-	                  "role":role,
-	              };
-
-	              // ±NJSON®æ¦¡Âà´«¦¨¦r¦ê
-	          var data_string = JSON.stringify(data_object);
-			  $.ajax({
-					url:'api/upload.do',
-					type:'PUT',
-					crossDomain: true,
-	                data: data_string,
-	                cache: false,
-	                dataType: 'json',
-	                timeout: 5000,
-	                success: function (response) {	                  
-		                  console.log(response);	 
-		                  document.getElementById('coachPicture').empty();
-		            },
-		            error: function () {
-		                  alert("µLªk³s½u¨ì¦øªA¾¹¡I");
-		            }
-				})
-				getCoachPic(id)
-				
-			
-		  });
-		  function getCoachPic(id) {
-		       $.ajax({
-		           type: "GET",
-		           url: "api/coach.do",
-		           crossDomain: true,
-		           data: "id="+id,
-		           cache: false,
-		           dataType: 'json',
-		           timeout: 5000,
-		           success: function (response) {
-		        	   
-		               if(response.status == 200){
-		               	//updateSQLTable(response.response);
-		               	console.log(response['response']['data'][0]['image']);
-		               	var imagePath='';
-		               	imagePath += '<img src="'+response['response']['data'][0]['image']+'" class="card-img" alt="...">';
-		               	document.getElementById('coachPicture').innerHTML=imagePath;
-		               	}
-		               console.log(response);
-		           },
-		           error: function () {
-		               alert("µLªk³s½u¨ì¦øªA¾¹¡I");
-		           }
-		       });
-		   }
-		  ///////////////////////////////////////
-		   function getCoach(id) {//¨ú±ocoachinfo
-		       $.ajax({
-		           type: "GET",
-		           url: "api/coach.do",
-		           crossDomain: true,
-		           data: "id="+id,
-		           cache: false,
-		           dataType: 'json',
-		           timeout: 5000,
-		           success: function (response) {
-		        	   if(response.status == 200){
-			               	document.getElementById('coachName').innerHTML = response['response']['data'][0]['name'];
-			                document.getElementById('coachTextarea').innerHTML = response['response']['data'][0]['information'];
-			                document.getElementById('coachFollows').innerHTML = "<small>°lÂÜ¤H¼Æ"+response['response']['data'][0]['followers_count'];
-		               	}
-		               console.log(response);
-		           },
-		           error: function () {
-		               alert("µLªk³s½u¨ì¦øªA¾¹¡I");
-		           }
-		       });
-		   }
-		   
-		   function getCourse(id) {//¨ú±ocourseid§R°£±Ğµ{
-		       $.ajax({
-		           type: "GET",
-		           url: "api/course.do",
-		           crossDomain: true,
-		           data: "coach_id="+id,
-		           cache: false,
-		           dataType: 'json',
-		           timeout: 5000,
-		           success: function (response) {
-		        	   console.log(response);
-		               if(response.status == 200){
-		            	   console.log(response.response.data)
-		            	   addCourses(response.response.data);
-		            	   isNumberKey();
-		            	}
-		           },
-		           error: function () {
-		               alert("µLªk³s½u¨ì¦øªA¾¹¡I");
-		           }
-		       });
-		   }
-		   
-		   function isNumberKey(evt){//§R°£¯S©wcoursecard
-		   $('.deleteCourse').click(function(){
+		}
+		function isNumberKey(evt) {//åˆªé™¤ç‰¹å®šcoursecard
+			$('.deleteCourse').click(function() {
 				alert("delete");
-				console.log("§R°£"+this.id);
+				console.log("åˆªé™¤" + this.id);
 				deleteCourse(this.id);
 				//$("#coursesPanel").empty();
 				//getCourse(id);
 			});
-		   };
-		            
-		   function addCourses(data) {//Åª¨ú±Ğ½mªº½Òµ{
-			   var arrCoursesid = [];
-			   var courseAll = ""; 
-			  
-			   $.each(data,function(index, value){
-				   if(value['status']=="1"){//¦pªGstatus =1(°±Åv)«h¸õ¹L
-					   //index++;
-					   return;         
-				   }
-				   //console.log(index);   
-	               courseAll += ' <div class="card course">';
-	               courseAll += ' <a href="¸Ó±Ğµ{ºô§}">';
-	               courseAll += '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTxDQcl1SA2jzxtsOqnl0eA-zF9p0JoDFZCALHVI25lqAdzR-Ec" class="card-img-top" alt="..."  width="13rem" height="160rem">';
-	               courseAll += '</a>';
-	               courseAll += '<div class="card-body">';
-	               courseAll += '<h5 id ="courseName" class="card-title">'+value['name']+'</h5>';
-	               courseAll += '<p id ="courseTextarea" class="card-text">'+value['information']+'</p>';
-	               courseAll += '<p id ="subscribe'+value['id']+'" class="card-text"><small class="text-muted">­q¾\¤H¼Æ</small></p>';
-	               courseAll += '<p hidden id ="status" class="card-text" ><small class="text-muted">'+value['status']+'</small></p>';
-	               courseAll += '<p hidden id ="id" class="card-text" ><small class="text-muted">'+value['id']+'</small></p>';
-	               courseAll += '<a href="#" class="btn btn-primary modifythiscourse" >­×§ï±Ğµ{</a>';
-	               courseAll += '<button id="'+value['id']+'" type="button" name="deleteCourse" class="btn btn-primary deleteCourse" >§R°£±Ğµ{</button>';
-	               courseAll += '</div>';
-	               courseAll += '</div>';
-	              
-	               arrCoursesid.push(value['id']);//¨Ì¾ÚCOURSEID¬d¬İ­q¾\¤H¼Æ
-			   })
-			  //console.log(arrCoursesid);
-			  for(var i=0; i<arrCoursesid.length; i++) {
-				  getSubscribes(arrCoursesid[i]);
-				  console.log(arrCoursesid[i]);
-				};
-				
-               	$("#coursesPanel").append(courseAll);//§â©Ò¦³COURSE¸ê®ÆÅã²{¦bCOURSE°Ï
-           }
-		   
-		   function getSubscribes(id) {//¨ú±o­q¾\¤H¼Æ
-		       $.ajax({
-		           type: "GET",
-		           url: "api/subscribe.do",
-		           crossDomain: true,
-		           data: "id="+id,
-		           cache: false,
-		           dataType: 'json',
-		           timeout: 5000,
-		           success: function (response) {
-		        	   //console.log(response);
-		               if(response.status == 200){
-		            	   document.getElementById('subscribe'+id).innerHTML = "<small>­q¾\¤H¼Æ"+response.count;
-		            	   console.log("id:"+id+" amount="+response.count);
-		               	}
-		               console.log(response);
-		           },
-		           error: function () {
-		               alert("µLªk³s½u¨ì¦øªA¾¹¡I");
-		           }
-		       });
-		   }
-		  
-		   function deleteCourse(deleteId) {//§R°£COURSE¨Ã²MªÅcourse¸ê°T
-			// ±N¸ê®Æ²Õ¦¨JSON®æ¦¡
-		        var data_object = {
-		            "id": deleteId,
-		        };
-		        // ±NJSON®æ¦¡Âà´«¦¨¦r¦ê
-		        var data_string = JSON.stringify(data_object);
-		        $.ajax({
-		           type: "DELETE",
-		           url: "api/course.do",
-		           crossDomain: true,
-		           data: data_string,
-		           cache: false,
-		           dataType: 'json',
-		           timeout: 5000,
-		           success: function (response) {
-		               if(response.status == 200){
-		            	 	$("#coursesPanel").empty();
-		            	 	getCourse(id);
-		            	 	
-		               	}
-		               console.log(response);
-		           },
-		           error: function () {
-		               alert("µLªk³s½u¨ì¦øªA¾¹¡I");
-		           }
-		       });
-		   }
-		   $(document).ready(function() {
-					  $.ajax({//¨ú±oµn¤JªÌªºID
-			              type: "GET",
-			              url: "api/login.do",
-			              crossDomain: true,
-			              cache: false,
-			              dataType: 'json',
-			              timeout: 5000,
-			              success: function (response) {
-			                  if(response.status == 200){
-			                	 // console.log(response);
-			                  }
-			                  console.log(response);
-			                  id = response.response.data[0].id ;
-			                  role = response.role;
-			                  console.log(role);
-			                  console.log(id);
-			                  //document.getElementById('coachAddress').innerHTML = response['response']['data'][0]['id'];
-			                  getCoach(id);
-			                  getCoachPic(id)
-						      getCourse(id);
-			              },
-			              error: function () {
-			                  alert("µLªk³s½u¨ì¦øªA¾¹¡I");
-			              }
-			      	   });
-				   console.log(id);
-			   });
-		  
-		$("#modifyclass").click(function () {
-			$(".modifythiscourse").css("visibility","visible");
-			$(".deleteCourse").css("visibility","visible");
-			$(".saveclass").css("visibility","visible");
+		};
+		function addCourses(data) {//è®€å–æ•™ç·´çš„èª²ç¨‹
+			var arrCoursesid = [];
+			var courseAll = "";
+
+			$.each(data,function(index, value) {
+								if (value['status'] == "1") {//å¦‚æœstatus =1(åœæ¬Š)å‰‡è·³é
+									//index++;
+									return;
+								}
+								//console.log(index);   
+								courseAll += ' <div class="col-md-4">';
+								courseAll += '<div class="card mb-4 box-shadow">';
+								courseAll +='<img class="card-img-top"  alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTxDQcl1SA2jzxtsOqnl0eA-zF9p0JoDFZCALHVI25lqAdzR-Ec" data-holder-rendered="true">'
+					
+								courseAll += '<div class="card-body">';
+								courseAll += '<h5 id ="courseName" class="card-title">'
+										+ value['name'] + '</h5>';
+								courseAll += '<p id ="courseTextarea" class="card-text">'
+										+ value['information'] + '</p>';
+								courseAll += '<p id ="subscribe'+value['id']+'" class="card-text"><small class="text-muted">è¨‚é–±äººæ•¸</small></p>';
+								courseAll += '<p id ="status" class="card-text" ><small class="text-muted">'
+										+ value['status'] + '</small></p>';
+								courseAll += '<p hidden id ="id" class="card-text" ><small class="text-muted">'
+										+ value['id'] + '</small></p>';
+										
+								courseAll +='<div class="d-flex justify-content-between align-items-center">';
+								courseAll +='<div class="btn-group">';
+								courseAll += '<a href="editcourse.html?id=' + value['id'] +'" class="btn btn-sm btn-outline-secondary modifythiscourse" >ä¿®æ”¹æ•™ç¨‹</a>';
+								courseAll += '<button id="'+value['id']+'" type="button" name="deleteCourse" class="btn btn-sm btn-outline-secondary deleteCourse" >åˆªé™¤æ•™ç¨‹</button>';
+								courseAll += '</div>';
+								courseAll += '</div>';
+								courseAll += '</div>';
+								courseAll += '</div>';
+								courseAll += '</div>';
+					              
+					                
+								arrCoursesid.push(value['id']);//ä¾æ“šCOURSEIDæŸ¥çœ‹è¨‚é–±äººæ•¸
+							})
+			//console.log(arrCoursesid);
+			for (var i = 0; i < arrCoursesid.length; i++) {
+				getSubscribes(arrCoursesid[i]);
+				console.log(arrCoursesid[i]);
+			}
+			;
+
+			$("#coursesPanel").append(courseAll);//æŠŠæ‰€æœ‰COURSEè³‡æ–™é¡¯ç¾åœ¨COURSEå€
+		}
+		function getSubscribes(id) {//å–å¾—è¨‚é–±äººæ•¸
+			$.ajax({
+						type : "GET",
+						url : "api/subscribe.do",
+						crossDomain : true,
+						data : "id=" + id,
+						cache : false,
+						dataType : 'json',
+						timeout : 5000,
+						success : function(response) {
+							//console.log(response);
+							if (response.status == 200) {
+								document.getElementById('subscribe' + id).innerHTML = "<small class='text-muted'>è¨‚é–±äººæ•¸"
+										+ response.count;
+								console.log("id:" + id + " amount="
+										+ response.count);
+							}
+							console.log(response);
+						},
+						error : function() {
+							alert("ç„¡æ³•é€£ç·šåˆ°ä¼ºæœå™¨ï¼");
+						}
+					});
+		}
+		function deleteCourse(deleteId) {//åˆªé™¤COURSEä¸¦æ¸…ç©ºcourseè³‡è¨Š
+			// å°‡è³‡æ–™çµ„æˆJSONæ ¼å¼
+			var data_object = {
+				"id" : deleteId,
+			};
+			// å°‡JSONæ ¼å¼è½‰æ›æˆå­—ä¸²
+			var data_string = JSON.stringify(data_object);
+			$.ajax({
+				type : "DELETE",
+				url : "api/course.do",
+				crossDomain : true,
+				data : data_string,
+				cache : false,
+				dataType : 'json',
+				timeout : 5000,
+				success : function(response) {
+					if (response.status == 200) {
+						$("#coursesPanel").empty();
+						getCourse(id);
+
+					}
+					console.log(response);
+				},
+				error : function() {
+					alert("ç„¡æ³•é€£ç·šåˆ°ä¼ºæœå™¨ï¼");
+				}
+			});
+		}
+		$(document).ready(function() {
+			 /**$.ajax({//å–å¾—ç™»å…¥è€…çš„ID
+	             type: "GET",
+	             url: "api/login.do",
+	             crossDomain: true,
+	             cache: false,
+	             dataType: 'json',
+	             timeout: 5000,
+	             success: function (response) {
+	                 if(response.status == 200){
+	               	 // console.log(response);
+	                 }
+	                 console.log(response);
+	                 id = response.response.data[0].id ;
+	                 role = response.role;
+	                 console.log(role);
+	                 console.log(id);
+	                 //document.getElementById('studentAddress').innerHTML = response['response']['data'][0]['id'];
+	                 //getStudent(id);
+	                 //getCourse(id);
+	                 //getCoachPic(id);
+				      
+	             },
+	             error: function () {
+	                 alert("ç„¡æ³•é€£ç·šåˆ°ä¼ºæœå™¨ï¼");
+	             }
+	     	   });**/
+		   console.log(id);
+	       getCoach(id);
+	       getCourse(id);
+		   //getStuCourseId(id);
+		   //getStuCoachId(id)
+	             
+	     	   });
+		$("#modifyclass").click(function() {
+			$(".modifythiscourse").css("visibility", "visible");
+			$(".deleteCourse").css("visibility", "visible");
+			$("#saveclass").css("visibility", "visible");
 		});
-			
-		$(".saveclass").click(function(){
-			$(".modifythiscourse").css("visibility","hidden");
-			$(".deleteCourse").css("visibility","hidden");
-			$(".saveclass").css("visibility","hidden");
+
+		$("#saveclass").click(function() {
+			$(".modifythiscourse").css("visibility", "hidden");
+			$(".deleteCourse").css("visibility", "hidden");
+			$("#saveclass").css("visibility", "hidden");
 		});
-		$(".newPicture").click(function(){
-			$("#uploadPicture").css("visibility","visible");
-			$("#confirm").css("visibility","visible");
-			$(".savePicture").css("visibility","visible");
+		$("#newclass").click(function() {
+			location.href="newclass.html"
 		})
-		$(".savePicture").click(function(){
-			$("#uploadPicture").css("visibility","hidden");
-			$("#confirm").css("visibility","hidden");
-			$(".savePicture").css("visibility","hidden");
-		})
-	        var i = 0;//±±¨îµn¤Jµn¥X
-	        $("#sign").click(function () {
-	            if (i == 0) {
-	                document.getElementById("sign").innerHTML = "µn¥X";
-	                i = 1;
-	            } 
-	            else {
-	                document.getElementById("sign").innerHTML = "µn¤J";
-	                i = 0;
-	            }
-	        });
-	</script>
-</body>
-</html>
+</script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    
+  
+
+<svg xmlns="http://www.w3.org/2000/svg" width="208" height="226" viewBox="0 0 208 226" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="11" style="font-weight:bold;font-size:11pt;font-family:Arial, Helvetica, Open Sans, sans-serif">Thumbnail</text></svg></body></html><html lang="en"><head>
+    
