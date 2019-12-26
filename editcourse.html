@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	 <meta charset="utf-8">
+	 
     
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -69,17 +69,17 @@ body {
 				<a class="navbar-brand" style="font-size: 30px">ShareSport</a>
 				<ul class="nav mr-auto">
 					<li class="nav-item"><a class="nav-link"
-						href="index.html" style="color: white;">é¦–é </a></li>
+						href="index.html" style="color: white;">­º­¶</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						href="brow_coaches.html" style="color: white;">ç€è¦½æ•™ç·´</a></li>
+						href="brow_coaches.html" style="color: white;">ÂsÄı±Ğ½m</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						href="brow_courses.html" style="color: white;">ç€è¦½æ•™ç¨‹</a></li>
+						href="brow_courses.html" style="color: white;">ÂsÄı±Ğµ{</a></li>
 					<li class="nav-item"><a id="self" class="nav-link active"
-						href=" " style="color: white;">å€‹äººå°ˆå€</a></li>
+						href=" " style="color: white;">­Ó¤H±M°Ï</a></li>
 					<li class="nav-item"><a class="nav-link active" id="sign"
-						href="login.html" style="color: white;">ç™»å…¥</a></li>
+						href="login.html" style="color: white;">µn¤J</a></li>
 					<li class="nav-item"><a class="nav-link active" id="regsign"
-						href="register.html" style="color: white;">è¨»å†Š</a></li>
+						href="register.html" style="color: white;">µù¥U</a></li>
 				</ul>
 			</nav>
 		</div>
@@ -87,42 +87,42 @@ body {
     <div id="container">
         <form>
   			<div class="name">
-    			<h3 for="exampleFormControlInput1">æ•™ç¨‹åç¨±</h3>
+    			<h3 for="exampleFormControlInput1">±Ğµ{¦WºÙ</h3>
     			<input type='text' class="form-control" id="coursename" >
   			</div>
   			<br>
   			<br>
   			<div class="type">
-  				<h3 for="exampleFormControlInput1">æ•™ç¨‹é¡åˆ¥</h3>
+  				<h3 for="exampleFormControlInput1">±Ğµ{Ãş§O</h3>
   				
 	  			<div class="form-check" id="up">
 	  				<input class="form-check-input" type="radio" name="exampleRadios" id="upradio" value="0">
 	  				<h5 class="form-check-label" for="exampleRadios2">
-	  				ä¸Šè‚¢
+	  				¤WªÏ
 	  				</h5>
 				</div>
 				<div class="form-check" id="mid">
 	  				<input class="form-check-input" type="radio" name="exampleRadios" id="mid" value="0">
 	  				<h5 class="form-check-label" for="exampleRadios2">
-	    			æ ¸å¿ƒ
+	    			®Ö¤ß
 	  				</h5>
 				</div>
 	  			
 	  			<div class="form-check" id="down">
 	  				<input class="form-check-input" type="radio" name="exampleRadios" id="down" value="0">
 	  				<h5 class="form-check-label" for="exampleRadios2">
-	    			ä¸‹è‚¢
+	    			¤UªÏ
 	  				</h5>
 				</div>
 			</div>
 			<br>
 			<br>
   			<div class="form-group">
-    			<h3 for="exampleFormControlTextarea1">æ•™ç¨‹ç°¡ä»‹</h3>
+    			<h3 for="exampleFormControlTextarea1">±Ğµ{Â²¤¶</h3>
     			<textarea class="form-control" id="coursetext" rows="3"></textarea>
   			</div>
   			<div class="cover">
-  				<h3 for="exampleFormControlTextarea1">æ•™ç¨‹å°é¢</h3>
+  				<h3 for="exampleFormControlTextarea1">±Ğµ{«Ê­±</h3>
   			</div>
 		</form>
                 </div>
@@ -133,10 +133,10 @@ body {
     		var id = url.searchParams.get("id");
     		var sql_num = 0;
     		
-    		var ups='<input class="form-check-input" type="radio" name="exampleRadios" id="upradio" value="1" checked><h5 class="form-check-label" for="exampleRadios2">ä¸Šè‚¢</h5>';
-    		var mids='<input class="form-check-input" type="radio" name="exampleRadios" id="midradio" value="1" checked><h5 class="form-check-label" for="exampleRadios2">æ ¸å¿ƒ</h5>';
-    		var downs='<input class="form-check-input" type="radio" name="exampleRadios" id="downradio" value="1" checked><h5 class="form-check-label" for="exampleRadios2">ä¸‹è‚¢</h5>';
-    		function getCourse(id) {//å–å¾—courseid
+    		var ups='<input class="form-check-input" type="radio" name="exampleRadios" id="upradio" value="1" checked><h5 class="form-check-label" for="exampleRadios2">¤WªÏ</h5>';
+    		var mids='<input class="form-check-input" type="radio" name="exampleRadios" id="midradio" value="1" checked><h5 class="form-check-label" for="exampleRadios2">®Ö¤ß</h5>';
+    		var downs='<input class="form-check-input" type="radio" name="exampleRadios" id="downradio" value="1" checked><h5 class="form-check-label" for="exampleRadios2">¤UªÏ</h5>';
+    		function getCourse(id) {//¨ú±ocourseid
     			$.ajax({
     				type : "GET",
     				url : "api/course.do",
@@ -166,7 +166,7 @@ body {
     					}
     				},
     				error : function() {
-    					alert("ç„¡æ³•é€£ç·šåˆ°ä¼ºæœå™¨ï¼");
+    					alert("µLªk³s½u¨ì¦øªA¾¹¡I");
     				}
     			});
     		}
