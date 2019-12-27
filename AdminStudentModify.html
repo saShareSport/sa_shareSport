@@ -6,7 +6,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <meta charset="BIG5">
-<title>修改管理員資料</title>
+<title>修改學生資料</title>
 <style>
 	{
     box-sizing: border-box;
@@ -52,27 +52,35 @@ body {
 		</div>
 	<form>
   		<div class="form-group">
-    		<label for="adminName">名稱</label>
-    		<input type="text" id = "adminName" class="form-control name">
+    		<label for="studentName">名稱</label>
+    		<input type="text" id = "studentName" class="form-control name">
     		<small  class="form-text text-muted">長度為30字 可接受中英文字符</small>
   		</div>
+  		<div class="form-group " style= "width:80px">
+     		<label for="studentSex">性別</label>
+      		<select id="studentSex" class="form-control">
+       			<option selected disabled hidden id="selectedSex">...</option>
+        		<option value="female">女</option>
+        		<option value="male">男</option>
+      		</select>
+    	</div>
   		<div class="form-group">
   			<label for="disabledEmail">Email</label>
       		<input type="email" id="disabledEmail" class="form-control" placeholder="email@example.com">
   		</div> 
   		<div class="form-group">
-    		<label for="adminPassword">密碼</label>
-    		<input type="password" id = "adminPassword" class="form-control password" >
+    		<label for="studentPassword">密碼</label>
+    		<input type="password" id = "studentPassword" class="form-control password" >
     		<small  class="form-text text-muted">僅接受英文或數字 不可為空白鍵</small>
   		</div>
   		<div class="form-group">
-    		<label for="adminPasswordcheck">確認密碼</label>
-    		<input type="password" id = "adminPasswordcheck" class="form-control passwordtest" >
+    		<label for="studentPasswordcheck">確認密碼</label>
+    		<input type="password" id = "studentPasswordcheck" class="form-control passwordtest" >
     		<small  class="form-text text-muted">請再輸入一次密碼</small>
   		</div>
   		<div class="form-group">
   			<label for="status">status</label>
-  			<input type="text" id = "adminStatus" class="form-control status">
+  			<input type="text" id = "studentStatus" class="form-control status">
   		</div>
   		<button type="submit" class="btn btn-primary" id = "submit" href="interface.html">儲存</button>
 </form>
@@ -121,12 +129,14 @@ $("#self").click(function() {
 	
 	var id=1;
 		
-	function updateAdmin(id) {
-	    var name = $('#adminName').val();
+	function updateStudent(id) {
+	    var name = $('#studentName').val();
 	    var email = $('#disabledEmail').val();
-	    var password = $('#adminPassword').val();
-	    var repassword= $('#adminPasswordcheck').val();
-	    var status = $('#adminStatus').val();
+	    var password = $('#studentPassword').val();
+	    var repassword= $('#studentPasswordcheck').val();
+	    var sex = $("#studentSex :selected").val();
+	    var info = $('#studentTextarea').val();
+	    var status = $('#studentStatus').val();
 	    
 	
 	    var password_rule = /^.[A-Za-z0-9]+$/;
@@ -144,6 +154,8 @@ $("#self").click(function() {
 	            "name": name,
 	            "email": email,
 	            "password": password,
+	            "sex": sex,
+	            "image":"null",
 	            "status":status   
 	        };
 	
@@ -153,7 +165,7 @@ $("#self").click(function() {
 	        // 發出POST的PUT請求
 	        $.ajax({
 	                type: "PUT",
-	                url: "api/admin.do",
+	                url: "api/student.do",
 	                data: data_string,
 	                crossDomain: true,
 	                cache: false,
@@ -163,7 +175,7 @@ $("#self").click(function() {
 	                    $('#flashMessage').html(response.message);
 	                    $('#flashMessage').show();
 	                    if(response.status == 200){
-	                        getAdmin();
+	                        getStudent();
 	                    }
 	                },
 	                error: function () {
@@ -173,10 +185,10 @@ $("#self").click(function() {
 	    }
 	}
 	
-	   function getAdmin() {
+	   function getStudent() {
 	       $.ajax({
 	           type: "GET",
-	           url: "api/admin.do",
+	           url: "api/student.do",
 	           crossDomain: true,
 	           data: "id="+id,
 	           cache: false,
@@ -186,11 +198,12 @@ $("#self").click(function() {
 	        	   console.log(response);
 	               if(response.status == 200){
 	               	//updateSQLTable(response.response);
-	               	document.getElementById('adminName').value = response['response']['data'][0]['name'];
+	               	document.getElementById('studentName').value = response['response']['data'][0]['name'];
 	               	document.getElementById('disabledEmail').value = response['response']['data'][0]['email'];
-	               	document.getElementById('adminPassword').value = response['response']['data'][0]['password'];
-	               	document.getElementById('adminPasswordcheck').value = response['response']['data'][0]['password'];
-	               	document.getElementById('adminStatus').value = response['response']['data'][0]['status'];
+	               	document.getElementById('studentPassword').value = response['response']['data'][0]['password'];
+	               	document.getElementById('studentPasswordcheck').value = response['response']['data'][0]['password'];
+	               	document.getElementById('selectedSex').value = response['response']['data'][0]['sex'];
+	               	document.getElementById('studentStatus').value = response['response']['data'][0]['status'];
 	               	//document.getElementById('member_login_times').value = response['response']['data'][0]['login_times'];
 	               	//document.getElementById('member_status').value = response['response']['data'][0]['status'];
 	               }
@@ -203,13 +216,12 @@ $("#self").click(function() {
 	   }
 	   $('#submit').click(function() {
 		   console.log(id)
-	       updateAdmin(id)
+	       updateStudent(id)
 	   });
 	   
 	   $(document).ready(function() {
 	   	// 發出GET的AJAX請求取得原本該會員的資料
-	    	//$("#sql_log > tbody").empty();
-	       getAdmin();
+	       getStudent();
 	   });
 	
 	var i = 0;//控制登入登出

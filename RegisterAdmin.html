@@ -55,18 +55,19 @@ body {
 	
     <ul class="nav justify-content-center">
         <li class="nav-item">
-          <a id=AdminList class="nav-link active" href="#">管理員列表</a>
+          <a id=AdminList class="nav-link active" href="AdminsList.html">管理員列表</a>
         </li>
         <li class="nav-item">
-          <a id=StudentList class="nav-link" href="#">管理學生列表</a>
+          <a id=StudentList class="nav-link" href="studentlist.html">管理學生列表</a>
         </li>
         <li class="nav-item">
-          <a id=CoachList class="nav-link" href="#">管理教練列表</a>
+          <a id=CoachList class="nav-link" href="CoachList.html">管理教練列表</a>
         </li>
         <li class="nav-item">
-            <a id=CourseList class="nav-link" href="#">管理教程列表</a>
-          </li> 
+            <a id=CourseList class="nav-link" href="CourseList.html">管理教程列表</a>
+          </li>
       </ul>
+      
       <form id=registeredManagerForm >
         <div class="form-group">
             <label for="name">姓名</label>
@@ -168,23 +169,6 @@ body {
      }
  }         
 	 
-	 
-             
-	$("#AdminList").click(function () {
-		location.href="/sa_shareSport/AdminsList.html";
-	});
-	
-	$("#StudentList").click(function () {
-		location.href="/sa_shareSport/studentlist.html";
-	});
-	
-	$("#CoachList").click(function () {
-		location.href="/sa_shareSport/CoachList.html";
-	});
-	
-	$("#CourseList").click(function () {
-		location.href="/sa_shareSport/CourseList.html";
-	});
 	
 	</script>
 </body>

@@ -54,19 +54,19 @@ body {
 		</div>
 	</header>
 	
-    <ul class="nav justify-content-center">
+    <ul class="nav nav-tabs">
         <li class="nav-item">
           <a id=AdminList class="nav-link active" href="AdminsList.html">管理員列表</a>
         </li>
         <li class="nav-item">
-          <a id=StudentList class="nav-link" href="studentlist.html">管理學生列表</a>
+          <a id=StudentList class="nav-link active" href="studentlist.html">管理學生列表</a>
         </li>
         <li class="nav-item">
-          <a id=CoachList class="nav-link" href="CoachList.html">管理教練列表</a>
+          <a id=CoachList class="nav-link active" href="CoachList.html">管理教練列表</a>
         </li>
         <li class="nav-item">
-            <a id=CourseList class="nav-link" href="CourseList.html">管理教程列表</a>
-          </li>
+            <a id=CourseList class="nav-link active" href="CourseList.html">管理教程列表</a>
+          </li>       
       </ul>
 
 	<script>
@@ -120,21 +120,7 @@ body {
 
 	});
 	
-	$("#AdminList").click(function () {
-		location.href="/sa_shareSport/AdminsList.html";
-	});
 	
-	$("#StudentList").click(function () {
-		location.href="/sa_shareSport/studentlist.html";
-	});
-	
-	$("#CoachList").click(function () {
-		location.href="/sa_shareSport/CoachList.html";
-	});
-	
-	$("#CourseList").click(function () {
-		location.href="/sa_shareSport/CourseList.html";
-	});
 	
 	$(document).ready(function() {
         getAllMember();

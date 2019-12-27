@@ -53,20 +53,21 @@ body {
 		</div>
 	</header>
 	
-    <ul class="nav justify-content-center">
+     <ul class="nav nav-tabs">
         <li class="nav-item">
           <a id=AdminList class="nav-link active" href="AdminsList.html">管理員列表</a>
         </li>
         <li class="nav-item">
-          <a id=StudentList class="nav-link" href="studentlist.html">管理學生列表</a>
+          <a id=StudentList class="nav-link active" href="studentlist.html">管理學生列表</a>
         </li>
         <li class="nav-item">
-          <a id=CoachList class="nav-link" href="CoachList.html">管理教練列表</a>
+          <a id=CoachList class="nav-link active" href="CoachList.html">管理教練列表</a>
         </li>
         <li class="nav-item">
-            <a id=CourseList class="nav-link" href="CourseList.html">管理教程列表</a>
+            <a id=CourseList class="nav-link active" href="CourseList.html">管理教程列表</a>
           </li>
       </ul>
+      <h2>管理教程列表</h2>
       <table class="table" id="CourseTable">
         <thead>
           <tr>
@@ -181,30 +182,21 @@ body {
 			 CourseTable_html +='<td>' + value['information'] + '</td>';
 			 CourseTable_html +='<td>' + value['course_coach_id'] + '</td>';
 			 CourseTable_html +='<td>' + value['modified'] + '</td>';
-			 CourseTable_html +='<td>' + '<a class="btn btn-primary href="edit.html?id=' + value['id'] + '">編輯</a>'+'</td>';
+			 CourseTable_html +='<td>' + '<a class="btn btn-secondary" href="edit.html?id=' + value['id'] + '">編輯</a>'+'</td>';
 			 //CourseTable_html +='<td>'+'<a href="javascript: deleteMember(' + value['id'] + ');">封鎖</a></td></tr>';
 		 })
 		 $("#CourseTable > tbody").append(CourseTable_html);
 	}
+	
 	$("#AdminList").click(function () {
 		location.href="AdminsList.html";
-	});
-	
-	$("#StudentList").click(function () {
-		location.href="studentlist.html";
-	});
-	
-	$("#CoachList").click(function () {
-		location.href="CoachList.html";
-	});
-	
-	$("#CourseList").click(function () {
-		location.href="/CourseList.html";
 	});
 	
 	$(document).ready(function() {
         getAllMember();
     });
+	
+	
 	
 	</script>
 </body>
