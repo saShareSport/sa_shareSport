@@ -37,6 +37,7 @@ public class uploadController extends HttpServlet {
 //	private static final String UPLOAD_DIRECTORY = "statics\\img";
 	private String filePath = null;
 	private String fileName = null;
+	private String savePath = null;
 	// 上傳配置
 	private static final int MEMORY_THRESHOLD = 1024 * 1024 * 3; // 3MB
 	private static final int MAX_FILE_SIZE = 1024 * 1024 * 40; // 40MB
@@ -71,15 +72,9 @@ public class uploadController extends HttpServlet {
 		upload.setSizeMax(MAX_REQUEST_SIZE);
 		// 構造臨時路徑來儲存上傳的檔案
 		// 這個路徑相對當前應用的目錄
-		//String uploadPath = "."+ File.separator + UPLOAD_DIRECTORY;
-		//String path = getServletContext().getRealPath("/");
 		String uploadPath = getServletContext().getRealPath("./")+ File.separator + UPLOAD_DIRECTORY;
 				
-		
-//		String uploadPath1 = System.getProperty("user.home")+ File.separator + UPLOAD_DIRECTORY;
-//		String uploadPath = "C:\\" + UPLOAD_DIRECTORY;
-		//System.out.println(uploadPath1);
-		//String uploadPath =".\\image"+ File.separator + UPLOAD_DIRECTORY;
+		System.out.println(uploadPath);
 		// 如果目錄不存在則建立
 		File uploadDir = new File(uploadPath);
 		if (!uploadDir.exists()) {
@@ -97,19 +92,15 @@ public class uploadController extends HttpServlet {
 					if (!item.isFormField()) {					
 						fileName = new File(item.getName()).getName();
 						filePath = uploadPath + File.separator+ fileName;
-						
-//						JSONObject resp = new JSONObject();
-//						resp.put("status", "200");
-//				        resp.put("message", "成功! 更新教練資料...");
-//				        resp.put("response", data);
-//				        jsr.response(resp, response);
-//				        
+						//儲存在資料庫的路徑
+						savePath = ".\\upload\\"+fileName;
+
 						File storeFile = new File(filePath);
 						// 在控制檯輸出檔案的上傳路徑
 						System.out.println(filePath);
 						// 儲存檔案到硬碟
 						item.write(storeFile);
-						//request.setAttribute("message", "檔案上傳成功!");						
+						request.setAttribute("message", "照片上傳成功!");						
 					}
 				}
 				
@@ -141,11 +132,11 @@ public class uploadController extends HttpServlet {
         JSONObject data = null;
         if(role.equals("coach")) {
              /** 透過傳入之參數，新建一個以這些參數之教練物件 */
-             Coach c = new Coach(id,filePath);  		
+             Coach c = new Coach(id,savePath);  		
              /** 透過Coach物件的saveImg()方法至資料庫更新該名教練資料，回傳之資料為JSONObject物件 */
              data = c.saveImg();
         }else if(role.equals("student")) {
-        	 Student s = new Student(id,filePath);
+        	 Student s = new Student(id,savePath);
              data = s.saveImg();
         }
        

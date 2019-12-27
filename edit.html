@@ -4,17 +4,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>CakePHP: the rapid development php framework: Members</title>
-    <link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
-    <link href="statics/icon/favicon.ico" type="image/x-icon" rel="shortcut icon">
-    <link rel="stylesheet" type="text/css" href="statics/css/cake.generic.css">
     <script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <div id="container">
-        <div id="header">
-            <h1><a href="http://cakephp.org/">CakePHP: the rapid development php framework</a></h1>
-        </div>
+        
         <div id="content">
             <h2>更新會員資料</h2>
             <a href="index.html">會員清單</a>
@@ -143,18 +138,9 @@
                             	document.getElementById('member_password').value = response['response']['data'][0]['password'];
                             	document.getElementById('member_login_times').value = response['response']['data'][0]['login_times'];
                             	document.getElementById('member_status').value = response['response']['data'][0]['status'];
-                            	//document.getElementById("picture").src = response['response']['data'][0]['image'];
-                            	
-                            	
-                            	var img = response['response']['data'][0]['status'];
-                            	
-                            	
-                            	 //获得一个http格式的url路径:mozilla(firefox)||webkit or chrome
-                                //var windowURL = window.URL || window.webkitURL;
-                                //createObjectURL创建一个指向该参数对象(图片)的URL
-                                //var dataURL;
-                                //dataURL = windowURL.createObjectURL(img);
-                                document.getElementById("picture").src = img
+                            	document.getElementById("picture").src = response['response']['data'][0]['image'];
+                            	                          	
+                         
                             }
                             console.log(response);
                         },
@@ -177,10 +163,7 @@
             </script>
         </div>
         
-        <div id="footer">
-            <a href="http://www.cakephp.org/" target="_blank" id="cake-powered"><img src="statics/img/cake.power.gif" alt="CakePHP: the rapid development php framework" border="0"></a>
-            <p>CakePHP 2.6.10</p>
-        </div>
+        
     </div>
 
     <table class="cake-sql-log" id="sql_log" summary="Cake SQL Log" cellspacing="0">
