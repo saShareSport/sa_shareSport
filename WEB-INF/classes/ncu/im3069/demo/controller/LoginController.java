@@ -45,7 +45,8 @@ public class LoginController extends HttpServlet {
     private Cookie idCookie;
     private Cookie nameCookie;
     private Cookie roleCookie;
-	
+    private Cookie loginCookie;
+    
 	@SuppressWarnings("unused")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
@@ -55,55 +56,70 @@ public class LoginController extends HttpServlet {
 		crole = (String) request.getParameter("coach");
 		arole = (String) request.getParameter("admin");
 		JSONObject result = null;
-		boolean flag = true;
+		int flag = 0;
 		String role = null;
 		
 		if(arole != null) {
 			flag = ah.checkLogin(email, password);
+			System.out.println("flag= "+flag);
 			result = ah.getLogin(email, password);	
 			role = "admin";
 		}
-		else if(srole != null) {
-			result = sh.checkLogin(email, password);
+		
+		if(srole != null) {
+			flag = sh.checkLogin(email, password);
+			System.out.println("flag= "+flag);
+			result = sh.getLogin(email, password);
 			role = "student";
 		}
-		else if(crole != null){
-			result = ch.checkLogin(email, password);
+		
+		if(crole != null){
+			flag = ch.checkLogin(email, password);
+			System.out.println("flag= "+flag);
+			result = ch.getLogin(email, password);
 			role = "coach";
 		}
-		
+
 //		System.out.println(flag);
 //		System.out.println(result.getJSONArray("data").getJSONObject(0).get("name"));
 //		System.out.println(result.getJSONArray("data").getJSONObject(0).get("id"));
 		
 		// 编码，解决中文乱码  
-		String name = URLEncoder.encode((String) result.getJSONArray("data").getJSONObject(0).get("name"),"utf-8");
-		String id = URLEncoder.encode(Integer.toString((int) result.getJSONArray("data").getJSONObject(0).get("id")),"utf-8");
+//		String name = URLEncoder.encode((String) result.getJSONArray("data").getJSONObject(0).get("name"),"utf-8");
+//		String id = URLEncoder.encode(Integer.toString((int) result.getJSONArray("data").getJSONObject(0).get("id")),"utf-8");
 		
-		if(flag){
+		if(flag == 1){
+			// 编码，解决中文乱码  
+			String name = URLEncoder.encode((String) result.getJSONArray("data").getJSONObject(0).get("name"),"utf-8");
+			String id = URLEncoder.encode(Integer.toString((int) result.getJSONArray("data").getJSONObject(0).get("id")),"utf-8");
+			String login = "success";
+			
 			idCookie = new Cookie("id", id);
 			nameCookie = new Cookie("name", name);
 			roleCookie = new Cookie("role", role);
+			loginCookie = new Cookie("login", login);
 			
 			//setting cookie to expiry in 30 mins
 			idCookie.setMaxAge(30*60);
 			nameCookie.setMaxAge(30*60);
 			roleCookie.setMaxAge(30*60);
+			loginCookie.setMaxAge(30*60);
 			
 			//將cookie傳給client端
 			response.addCookie(idCookie);
 			response.addCookie(nameCookie);
 			response.addCookie(roleCookie);
+			response.addCookie(loginCookie);
 			
 			response.sendRedirect("/sa_shareSport/index.html");
 			
 		}else{
-//			RequestDispatcher rd = getServletContext().getRequestDispatcher("/NCU_MIS_SA/index.html");
-//			PrintWriter out= response.getWriter();
-//			out.println("<font color=red>Either user name or password is wrong.</font>");
-//			rd.include(request, response);
-			response.sendRedirect("/sa_shareSport/index.html");
-			System.out.println("not correct");
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/sa_shareSport/loginnew.html");
+			PrintWriter out= response.getWriter();
+			out.print("<script>alert('Please login again or register first.');</script>");
+			rd.include(request, response);
+			response.sendRedirect("/sa_shareSport/loginnew.html");
+//			System.out.println("not correct");
 		}
 	}
 	
@@ -113,6 +129,7 @@ public class LoginController extends HttpServlet {
 	    	String userId = null;
 	    	String userRole = null;
 	    	String status = null;
+	    	String login = null;
 	    	
 	    	//從client端拿cookie，為陣列型式所以再用for迴圈去找要的cookie
 			Cookie[] cookies = request.getCookies();
@@ -120,6 +137,7 @@ public class LoginController extends HttpServlet {
 				for(Cookie cookie : cookies){
 					if(cookie.getName().equals("id")) userId = cookie.getValue();
 					if(cookie.getName().equals("role")) userRole = cookie.getValue();
+					if(cookie.getName().equals("login")) login = cookie.getValue();
 				}
 			}
 //			if(userId == null) response.sendRedirect("/sa_shareSport/login_demo.html");
@@ -151,6 +169,7 @@ public class LoginController extends HttpServlet {
 	        resp.put("message", "cookie資料取得成功");
 	        resp.put("response", query);
 	        resp.put("role", userRole);
+	        resp.put("login", login);
 	        
 	        /** 透過JsonReader物件回傳到前端（以JSONObject方式） */
 	        jsr.response(resp, response);
@@ -163,11 +182,13 @@ public class LoginController extends HttpServlet {
 			idCookie.setMaxAge(0);
 			nameCookie.setMaxAge(0);
 			roleCookie.setMaxAge(0);
+			loginCookie.setMaxAge(0);
 			
 			//將cookie傳給client端
 			response.addCookie(idCookie);
 			response.addCookie(nameCookie);
 			response.addCookie(roleCookie);
+			response.addCookie(loginCookie);
 			
 			/** 透過JsonReader類別將Request之JSON格式資料解析並取回 */
 	        JsonReader jsr = new JsonReader(request);
