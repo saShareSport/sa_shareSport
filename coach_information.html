@@ -1,160 +1,173 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-	    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>教練資訊</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
-    <script src="statics/js/jquery-3.4.1.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous">
+	
+</script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous">
+	
+</script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous">
+	
+</script>
+<script src="statics/js/jquery-3.4.1.min.js"></script>
 
-  <style>
-  	* {
-    box-sizing: border-box;
-}
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-html,
-body {
-    margin-top: 2px;
-    margin-bottom: 2px;
-    margin-left: 27px;
-    margin-right: 27px;
+<title>教練資訊</title>
 
-    padding: 0px;
+<link rel="canonical"
+	href="https://getbootstrap.com/docs/4.0/examples/album/">
+
+<!-- Bootstrap core CSS -->
+<!-- Custom styles for this template -->
+</head>
+
+  <body>
+
+    <header>
+		<div style="font-family: Microsoft JhengHei; color: white;">
+
+			<nav class="navbar fixed-top navbar-dark bg-dark">
+				<a class="navbar-brand" style="font-size: 30px">ShareSport</a>
+				<ul class="nav mr-auto">
+					<li class="nav-item"><a class="nav-link"
+						href="index.html" style="color: white;">首頁</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="brow_coaches.html" style="color: white;">瀏覽教練</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="brow_courses.html" style="color: white;">瀏覽教程</a></li>
+					<li class="nav-item"><a id="self" class="nav-link active"
+						href=" " style="color: white;">個人專區</a></li>
+					<li class="nav-item"><a class="nav-link active" id="sign"
+						href="login.html" style="color: white;">登入</a></li>
+					<li class="nav-item"><a class="nav-link active" id="regsign"
+						href="register.html" style="color: white;">註冊</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+    <main role="main">
+
+      <section class="jumbotron text-center">
+        <div class="row no-gutters">
+				<div id="coachPicture" class="col-md-3">
+					<img
+						src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTxDQcl1SA2jzxtsOqnl0eA-zF9p0JoDFZCALHVI25lqAdzR-Ec"
+						class="card-img-top" alt="..." width="12rem" height="270rem">
+				</div>
+				<div class="col-md-9">
+					<div class="container">
+						<h1 id="coach_name" class="jumbotron-heading">這裡是教練名字</h1>
+						<p id="coach_information" class="lead text-muted">教練資訊</p>
+						<small  class="card-text followers">followers
+							<small id="coachFollows">這裡放追蹤人數</small>
+						</small>
+						<p>
+							
+							<button class="btn btn-secondary my-2" style="font-family: Microsoft JhengHei; color: white;">追蹤</button>
+						</p>
+					</div>
+				</div>
+			</div>
+      </section>
+
+      <div class="album py-5 bg-light">
+        <div class="container">
+
+          <div class="row" id="course_panel">
+            
+            
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+
+<svg xmlns="http://www.w3.org/2000/svg" width="508" height="225" viewBox="0 0 508 225" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">Thumbnail</text></svg>
+</body>
+
+
+<style>
+
+.jumbotron{
+	margin-top: 100px;
 }
 
 .nav {
-    font-size: 20px;
-    margin-bottom: 25px;
-}
-
-.card {
-    margin-bottom: 33px;
-    
-}
-
-.course {
-    display: inline-block;
-    margin-top: 10px;
-    margin-right: 55px;
-   
-}
-
-.cousearea {
-    margin-top: 50px;
-
-}
-    
-  </style>
-
-</head>
-
-<body>
-	<nav class="nav" style="background-color: #e3f2fd;">
-		<a class="navbar-brand" href="#">shareSport</a>
-		<ul class="nav justify-content-end">
-			<li class="nav-item"><a class="nav-link active"
-				href="index.html">首頁</a></li>
-			<li class="nav-item"><a class="nav-link active"
-				href="brow_coaches.html">瀏覽教練</a></li>
-			<li class="nav-item"><a class="nav-link active"
-				href="brow_courses.html">瀏覽教程</a></li>
-			<li class="nav-item"><a class="nav-link active" href="#">個人專區</a>
-			</li>
-			<li class="nav-item"><a class="nav-link active"
-				href="interface.html">管理介面</a></li>
-			<li class="nav-item"><a class="nav-link active" id="sign"
-				href="login.html">登入</a></li>
-			<li class="nav-item"><a class="nav-link active" id="regsign"
-				href="register.html">註冊</a></li>
-		</ul>
-	</nav>
-
-    <div class="card mb-3"  style="max-width: 540px;">
-        <div class="row no-gutters">
-            <div class="col-md-4">
-                <img src="https://img.ltn.com.tw/Upload/partner/page/2019/09/14/190914-4886-01-WvNZA.jpg"
-                    class="card-img" alt="...">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h2 class="card-title" id="coach_name">要是教練名稱</h2>
-                    <p class="card-text" id="coach_information">
-                        要是教練資訊
-                    </p>
-                    <button type="button" class="btn btn-outline-primary" id="followBtn">追蹤</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 
-    <section class="cousearea">
-        <div class="card course" style="width: 13rem;">
-            <img src="https://i1.kknews.cc/SIG=1f7b232/39o40001pr9sp48r151q.jpg" width="13rem" height="160rem"
-                class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">教程名稱</h5>
-                <a href="#" class="btn btn-primary">查看教程</a>
-            </div>
-        </div>
-
-    </section>
-	 -->
+	font-size: 20px;
 	
-    <div id="course_panel">
-		</div> 
-	
-  <script>   
-  
-  //1224
-  
+}
+
+</style>
+
+<script>
+
 //取得網址參數
-  var url_string = window.location.href;
-  var url = new URL(url_string);
-  var id = url.searchParams.get("id");
-  var coach_id;
-  
-  
-  function getCourse() {
-    $.ajax({
-      type: "GET",
-      url: "api/coach.do",
-      data: "id=" + id,
-      crossDomain: true,
-      cache: false,
-      dataType: 'json',
-      timeout: 5000,
-      success: function (response) {
-        if (response.status == 200) {
-        	
-        console.log(response)
-      	coach_id=id
-      	document.getElementById('coach_name').innerHTML = response['response']['data'][0]['name'];
-      	document.getElementById('coach_information').innerHTML = response['response']['data'][0]['information'];
-      	
-      	getCoachCourse()
-      	
-        }
-      },
-      error: function () {
-        alert("無法連線到伺服器！");
-      }
-    });
-  }
+var url_string = window.location.href;
+var url = new URL(url_string);
+var id = url.searchParams.get("id");
+var coach_id;
 
-  function getCoachCourse() {
+
+function getCourse() {
+  $.ajax({
+    type: "GET",
+    url: "api/coach.do",
+    data: "id=" + id,
+    crossDomain: true,
+    cache: false,
+    dataType: 'json',
+    timeout: 5000,
+    success: function (response) {
+      if (response.status == 200) {
+      	
+      console.log(response)
+    	coach_id=id
+    	document.getElementById('coach_name').innerHTML = response['response']['data'][0]['name'];
+    	document.getElementById('coach_information').innerHTML = response['response']['data'][0]['information'];
+    	document.getElementById('coachFollows').innerHTML = response['response']['data'][0]['followers_count'];
+    	
+    	getCoachCourse()
+    	
+      }
+    },
+    error: function () {
+      alert("無法連線到伺服器！");
+    }
+  });
+}
+
+function getCoachCourse() {
 	    $.ajax({
 	      type: "GET",
 	      url: "api/course.do",
@@ -184,59 +197,94 @@ body {
 
 	  
 	  function addCourse(data) {
-			let inner_html = '';
-		  		inner_html += '<div class="card course" style="width: 13rem;">';
-		 		inner_html += '<img src="statics/img/course/' + data.image + '" width="13rem" height="160rem" class="card-img-top" alt="..."';
-		 		inner_html += '<div class="card-body text-center">'
-		 		inner_html += '<h5 class="card-title text-left">' + data.name + '</h5>'
-		 		inner_html += '<p class="card-text text-left"><small class="text-muted">訂閱人數<span>' + data.subscribers_count + '</span></small></p>'
-		 		inner_html += '<p class="text-left">' + data.information + '</p>'
-		 		inner_html += '<a href="course_information.html?id=' + data.id + '"	class="btn btn-primary">查看教程</a>'
-		 		inner_html += '<a href="#" class="btn btn-primary" id="subscribeBtn' + data.id + '" name="subscribe">訂閱</a>'
-		 		inner_html += '<div><small class="text-muted">id: ' + data.id + '</small></div>';
-		 		inner_html += '</div></div>'
+		  let inner_html = '';
+	  		inner_html += '<div class="col-md-4">';
+	  		inner_html += '<div class="card mb-4 box-shadow">';
+	  		inner_html += '<img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="https://img.ltn.com.tw/Upload/partner/page/2019/09/14/190914-4886-01-WvNZA.jpg"> ';
+	  		inner_html += '<div class="card-body">';
+	  		inner_html += '<p class="card-text">';
+	  		inner_html += '<h5>'+ data.name +'</h5>';
+	  		inner_html += '<p class="card-text">' + data.information + '</p>';
+	  		inner_html += '<p class="card-text "><small class="text-muted">subscribers <span id ="subscribe'+data.id+'">這裡要是數字</span></small></p>';
+	  		inner_html += '</p>';
+	  		inner_html += '<div class="d-flex justify-content-between align-items-center">';
+	  		inner_html += '<div class="btn-group">';
+	  		inner_html += '<a href="course_information.html?id=' + data.id + '" class="btn btn-sm btn-outline-secondary">查看教程</a>';
+	  		inner_html += '</div>';
+	  		inner_html += '</div></div></div></div>';
 		  	
-				return inner_html;
+	  		getSubscribes(data.id);
+			console.log(data.id);
+			return inner_html;
 		  }
+	  
+	//取得課程訂閱人數
+		function getSubscribes(id) {
+		       $.ajax({
+		           type: "GET",
+		           url: "api/subscribe.do",
+		           crossDomain: true,
+		           data: "id="+id,
+		           cache: false,
+		           dataType: 'json',
+		           timeout: 5000,
+		           success: function (response) {
+		        	   //console.log(response);
+		               if(response.status == 200){
+		            	   document.getElementById('subscribe'+id).innerHTML = response.count;
+		            	   console.log("id:"+id+" amount="+response.count);
+		               	};
+		               //console.log(response);
+		           },
+		           error: function () {
+		               alert("無法連線到伺服器！");
+		           }
+		       });
+		   }
 
-  
-  
-//登入登出鈕變換i=0時按鈕顯示登入
-  var i = 0;
 
-  $("#sign").click(function () {
-
-      if (i == 0) {
-          document.getElementById("sign").innerHTML = "登出";
-          i = 1;
-      } else {
-          document.getElementById("sign").innerHTML = "登入";
-          i = 0;
-      }
-
-  });
-
-  //追蹤、取消追蹤鈕變換，i=0時按鈕顯示追蹤
-  var j = 0;
-
-  $("#followBtn").click(function () {
-
-      if (j == 0) {
-          document.getElementById("followBtn").innerHTML = "取消追蹤";
-          j = 1;
-      } else {
-          document.getElementById("followBtn").innerHTML = "追蹤";
-          j = 0;
-      }
-
-  });
-  
-  $(document).ready(function() {
+$(document).ready(function() {
 	  getCourse();
-  });
+});
 
-  </script>
 
-</body>
+
+
+var role_id = 0;
+var role = null;
+$("#self").click(function() {
+	$.ajax({
+		type : "GET",
+		url : "api/login.do",
+		crossDomain : true,
+		cache : false,
+		dataType : 'json',
+		timeout : 5000,
+		success : function(response) {
+			if (response.status == 200) {
+				// console.log(response);
+				console.log(response);
+				role_id = response.response.data[0].id;
+				role = response.role;
+				console.log(role);
+			}
+
+			if (role == "student") {
+				location.href = "studentself.html"
+			} else if (role == "coach") {
+				location.href = "coachself.html"
+			} else if (role == "admin") {
+				location.href = "interface.html"
+			} else {
+				alert("請登入會員")
+			}
+		},
+		error : function() {
+			alert("無法連線到伺服器！");
+		}
+	});
+
+})
+</script>
 
 </html>

@@ -1,11 +1,9 @@
 <!doctype html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>瀏覽教練</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -29,185 +27,194 @@
 </script>
 <script src="statics/js/jquery-3.4.1.min.js"></script>
 
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+<title>瀏覽教練</title>
+
+<link rel="canonical"
+	href="https://getbootstrap.com/docs/4.0/examples/album/">
+
+<!-- Bootstrap core CSS -->
+<!-- Custom styles for this template -->
+</head>
+
+<body>
+
+	<header>
+		<div style="font-family: Microsoft JhengHei; color: white;">
+
+			<nav class="navbar fixed-top navbar-dark bg-dark">
+				<a class="navbar-brand" style="font-size: 30px">ShareSport</a>
+				<ul class="nav mr-auto">
+					<li class="nav-item"><a class="nav-link" href="index.html"
+						style="color: white;">首頁</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="brow_coaches.html" style="color: white;">瀏覽教練</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="brow_courses.html" style="color: white;">瀏覽教程</a></li>
+					<li class="nav-item"><a id="self" class="nav-link active"
+						href=" " style="color: white;">個人專區</a></li>
+					<li class="nav-item"><a class="nav-link active" id="sign"
+						href="login.html" style="color: white;">登入</a></li>
+					<li class="nav-item"><a class="nav-link active" id="regsign"
+						href="register.html" style="color: white;">註冊</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<main role="main">
+
+		
+
+		<div class="album py-5 bg-light">
+			<div class="container">
+
+				<div class="row" id="coach_panel">
+				
+					
+
+				</div>
+			</div>
+		</div>
+
+	</main>
+
+
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
+	</script>
+
+	<svg xmlns="http://www.w3.org/2000/svg" width="508" height="225"
+		viewBox="0 0 508 225" preserveAspectRatio="none"
+		style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;">
+		<defs>
+		<style type="text/css"></style></defs>
+		<text x="0" y="25"
+			style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">Thumbnail</text></svg>
+</body>
+
 
 <style>
-* {
-	box-sizing: border-box;
-}
 
-html, body {
-	margin-top: 2px;
-	margin-bottom: 2px;
-	margin-left: 27px;
-	margin-right: 27px;
-	padding: 0px;
+.album{
+margin-top: 50px;
 }
 
 .nav {
 	font-size: 20px;
-	margin-bottom: 25px;
 }
 
-#brow-coachs {
-	font-size: 4ch;
+.btn{
+font-family: Microsoft JhengHei; 
+
 }
 
-.search {
-	text-align: center;
-}
 
-.card {
-	margin-bottom: 33px;
-}
-
-.coach {
-	display: inline-block;
-	margin-top: 10px;
-	margin-right: 55px;
-}
 </style>
 
-</head>
+<script>
 
-<body>
-	<nav class="nav" style="background-color: #e3f2fd;">
-		<a class="navbar-brand" href="#">shareSport</a>
-		<ul class="nav justify-content-end">
-			<li class="nav-item"><a class="nav-link active"
-				href="index.html">首頁</a></li>
-			<li class="nav-item"><a class="nav-link active"
-				href="brow_coaches.html">瀏覽教練</a></li>
-			<li class="nav-item"><a class="nav-link active"
-				href="brow_courses.html">瀏覽教程</a></li>
-			<li class="nav-item"><a class="nav-link active" href="#">個人專區</a>
-			</li>
-			<li class="nav-item"><a class="nav-link active"
-				href="interface.html">管理介面</a></li>
-			<li class="nav-item"><a class="nav-link active" id="sign"
-				href="login.html">登入</a></li>
-			<li class="nav-item"><a class="nav-link active" id="regsign"
-				href="register.html">註冊</a></li>
-		</ul>
-	</nav>
+function getAllCoach() {
+    $.ajax({
+      type: "GET",
+      url: "api/coach.do",
+      crossDomain: true,
+      cache: false,
+      dataType: 'json',
+      timeout: 5000,
+      success: function (response) {
+        if (response.status == 200) {
+      	var coach_panel = '';
+      	
+      	$.each(response.response.data, function (){
+      		coach_panel += addCoach(this);
+      	})
+      	
+      	$("#coach_panel").append(coach_panel);
+      	
+        }
+      },
+      error: function () {
+        alert("無法連線到伺服器！");
+      }
+    });
+  }
 
-	<table class="table table-borderless">
-		<tr>
-			<td style="width: 55rem;"><span id="brow-coachs">瀏覽教練</span></td>
-			<td>
-				<form class="form-inline my-2 my-lg-0 search">
-					<input class="form-control mr-sm-2" type="search"
-						placeholder="Search" aria-label="Search">
-					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-				</form>
-			</td>
-		</tr>
-
-	</table>
-
-
-	<!--  <div class="card coach text-right" style="width: 13rem;">
-            <img src="https://www.fluffytw.com/upload/article/original/a3631dd66105edbbf210a0e4b08a237b.jpg"
-                width="13rem" height="160rem" class="card-img-top" alt="...">
-            <div class="card-body text-center">
-                <h5 class="card-title text-left">教練名稱</h5>
-                <p class="card-text text-left"><small class="text-muted">追蹤人數<span></span></small></p>
-                <p class="text-left">教練簡介</p>
-                <a href="#" class="btn btn-primary">查看教練</a>
-                <a href="#" class="btn btn-primary">追蹤</a>
-            </div>
-        </div> -->
-
-	<div id="coach_panel"></div>
-
-
-
-
-	<script>
-		//1224
-		// var [client_cart_obj, client_cart_amount]  = getCartDataFromClient();
-
-		function getAllCoach() {
-			$.ajax({
-				type : "GET",
-				url : "api/coach.do",
-				crossDomain : true,
-				cache : false,
-				dataType : 'json',
-				timeout : 5000,
-				success : function(response) {
-					if (response.status == 200) {
-						var coach_panel = '';
-
-						$.each(response.response.data, function() {
-							coach_panel += addCoach(this);
-						})
-
-						$("#coach_panel").append(coach_panel);
-						//setButtonFunction();
-						//checkIfExistInCart();
-					}
-				},
-				error : function() {
-					alert("無法連線到伺服器！");
+  getAllCoach();
+  
+  
+  function addCoach(data) {
+  	let inner_html = '';
+  		inner_html += '<div class="col-md-4">';
+  		inner_html += '<div class="card mb-4 box-shadow">';
+  		inner_html += '<img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="statics/img/coach/' + data.image + '"> ';
+  		inner_html += '<div class="card-body">';
+  		inner_html += '<p class="card-text">';
+  		inner_html += '<h5>'+ data.name +'</h5>';
+  		inner_html += '<p class="card-text">' + data.information + '</p>';
+  		inner_html += '<p class="card-text "><small class="text-muted">followers ' + data.followers_count + '</small></p>';
+  		inner_html += '</p>';
+  		inner_html += '<div class="d-flex justify-content-between align-items-center">';
+  		inner_html += '<div class="btn-group">';
+  		inner_html += '<a href="coach_information.html?id=' + data.id + '" class="btn btn-sm btn-outline-secondary" >查看教練</a>';
+  		inner_html += '</div>';
+  		inner_html += '</div></div></div></div>';
+  	
+		return inner_html;
+  }
+  
+  
+    var id = 0;
+	var role = null;
+	$("#self").click(function() {
+		$.ajax({
+			type : "GET",
+			url : "api/login.do",
+			crossDomain : true,
+			cache : false,
+			dataType : 'json',
+			timeout : 5000,
+			success : function(response) {
+				if (response.status == 200) {
+					// console.log(response);
+					console.log(response);
+					id = response.response.data[0].id;
+					role = response.role;
+					console.log(role);
 				}
-			});
-		}
 
-		getAllCoach();
-
-		function addCoach(data) {
-			let inner_html = '';
-			inner_html += '<div class="card coach text-right" style="width: 13rem;">';
-			inner_html += '<img src="statics/img/coach/'
-					+ data.image
-					+ '" width="13rem" height="160rem" class="card-img-top" alt="..."';
-			inner_html += '<div class="card-body text-center">'
-			inner_html += '<h5 class="card-title text-left">' + data.name
-					+ '</h5>'
-			inner_html += '<p class="card-text text-left"><small class="text-muted">追蹤人數<span>'
-					+ data.followers_count + '</span></small></p>'
-			inner_html += '<p class="text-left">' + data.information + '</p>'
-			inner_html += '<a href="coach_information.html?id=' + data.id
-					+ '" class="btn btn-primary">查看教練</a>'
-			inner_html += '<a href="#" class="btn btn-primary" id="followBtn' + data.id + '" name="follow">追蹤</a>'
-			inner_html += '<div><small class="text-muted">id: ' + data.id
-					+ '</small></div>';
-			inner_html += '</div></div>'
-
-			return inner_html;
-		}
-
-		//登入登出鈕變換i=0時按鈕顯示登入
-		var i = 0;
-
-		$("#sign").click(function() {
-
-			if (i == 0) {
-				document.getElementById("sign").innerHTML = "登出";
-				i = 1;
-			} else {
-				document.getElementById("sign").innerHTML = "登入";
-				i = 0;
+				if (role == "student") {
+					location.href = "studentself.html"
+				} else if (role == "coach") {
+					location.href = "coachself.html"
+				} else if (role == "admin") {
+					location.href = "interface.html"
+				} else {
+					alert("請登入會員")
+				}
+			},
+			error : function() {
+				alert("無法連線到伺服器！");
 			}
-
 		});
 
-		//追蹤、取消追蹤鈕變換，i=0時按鈕顯示追蹤
-		var j = 0;
+	})
+  
 
-		$("#followBtn").click(function() {
 
-			if (j == 0) {
-				document.getElementById("followBtn").innerHTML = "取消追蹤";
-				j = 1;
-			} else {
-				document.getElementById("followBtn").innerHTML = "追蹤";
-				j = 0;
-			}
-
-		});
-	</script>
-
-</body>
+</script>
 
 </html>
