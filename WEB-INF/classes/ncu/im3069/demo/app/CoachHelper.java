@@ -555,7 +555,7 @@ public class CoachHelper {
      * @param password 教練密碼
      * @return the JSON object 回傳SQL執行結果與該教練編號之教練資料
      */
-    public JSONObject checkLogin(String email, String password) {
+    public JSONObject getLogin(String email, String password) {
         /** 新建一個 Coach 物件之 c 變數，用於紀錄每一位查詢回之教練資料 */
         Coach c = null;
         /** 用於儲存所有檢索回之教練，以JSONArray方式儲存 */
@@ -633,7 +633,54 @@ public class CoachHelper {
 
         return response;
     } 
-    
+    /**
+     * 檢查該名教練之登入資訊是否存在資料庫
+     *
+     * @param email 
+     * @param password
+     * @return boolean 若重複註冊回傳False，若該信箱不存在則回傳True
+     */
+    public int checkLogin(String email, String password){
+        /** 紀錄SQL總行數，若為「-1」代表資料庫檢索尚未完成 */
+        int row = -1;
+        /** 儲存JDBC檢索資料庫後回傳之結果，以 pointer 方式移動到下一筆資料 */
+        ResultSet rs = null;
+        
+        try {
+            /** 取得資料庫之連線 */
+            conn = DBMgr.getConnection();
+            /** SQL指令 */
+            String sql = "SELECT count(*) FROM `sa_sharesport`.`coaches` WHERE `email` = ?  and `password` = ? LIMIT 1";
+            
+            /** 將參數回填至SQL指令當中 */
+            pres = conn.prepareStatement(sql);
+            pres.setString(1, email);
+            pres.setString(2, password);
+            /** 執行查詢之SQL指令並記錄其回傳之資料 */
+            rs = pres.executeQuery();
+
+            /** 讓指標移往最後一列，取得目前有幾行在資料庫內 */
+            rs.next();
+            row = rs.getInt("count(*)");
+            System.out.print(row);
+
+        } catch (SQLException e) {
+            /** 印出JDBC SQL指令錯誤 **/
+            System.err.format("SQL State: %s\n%s\n%s", e.getErrorCode(), e.getSQLState(), e.getMessage());
+            System.out.print(row);
+        } catch (Exception e) {
+            /** 若錯誤則印出錯誤訊息 */
+            e.printStackTrace();
+        } finally {
+            /** 關閉連線並釋放所有資料庫相關之資源 **/
+            DBMgr.close(rs, pres, conn);
+        }
+        /** 
+         	* 判斷是否有管理員之資料 
+         	* 若無一筆則回傳False，否則回傳True 
+         */
+        return (row == 0) ? 0 : 1;
+    }
     /**
      * 上傳教練之照片
      *

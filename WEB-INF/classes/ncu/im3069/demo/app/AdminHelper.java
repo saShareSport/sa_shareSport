@@ -537,12 +537,13 @@ public class AdminHelper {
         return response;
     } 
     /**
-     * 檢查該名管理員之電子郵件信箱是否重複註冊
+     * 檢查該名管理員之登入資訊是否存在資料庫
      *
-     * @param a 一名管理員之Admin物件
+     * @param email 
+     * @param password
      * @return boolean 若重複註冊回傳False，若該信箱不存在則回傳True
      */
-    public boolean checkLogin(String email, String password){
+    public int checkLogin(String email, String password){
         /** 紀錄SQL總行數，若為「-1」代表資料庫檢索尚未完成 */
         int row = -1;
         /** 儲存JDBC檢索資料庫後回傳之結果，以 pointer 方式移動到下一筆資料 */
@@ -552,10 +553,7 @@ public class AdminHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM `sa_sharesport`.`admins` WHERE `email` = ?  and `password` = ? LIMIT 1";
-            
-//            /** 取得所需之參數 */
-//            String email = a.getEmail();
+            String sql = "SELECT count(*) FROM `sa_sharesport`.`admins` WHERE `email` = ?  and `password` = ? LIMIT 1";
             
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
@@ -572,6 +570,7 @@ public class AdminHelper {
         } catch (SQLException e) {
             /** 印出JDBC SQL指令錯誤 **/
             System.err.format("SQL State: %s\n%s\n%s", e.getErrorCode(), e.getSQLState(), e.getMessage());
+            System.out.print(row);
         } catch (Exception e) {
             /** 若錯誤則印出錯誤訊息 */
             e.printStackTrace();
@@ -583,6 +582,6 @@ public class AdminHelper {
          	* 判斷是否有管理員之資料 
          	* 若無一筆則回傳False，否則回傳True 
          */
-        return (row == 0) ? false : true;
+        return (row == 0) ? 0 : 1;
     }
 }

@@ -2,7 +2,18 @@
 <html>
 
 <head>
-	 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
      <meta http-equiv="X-UA-Compatible" content="ie=edge">
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -15,192 +26,77 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
-    <link rel="stylesheet" href="brow_courses.css">
-     
     
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>shareSport - 登入</title>
-    <link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
-    <link href="statics/icon/favicon.ico" type="image/x-icon" rel="shortcut icon">
-    <link rel="stylesheet" type="text/css" href="statics/css/cake.generic.css">
-
-    <script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/48e8c96052.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    
 </head>
+
+<body class="text-center">
+	<header>
+		<div style="font-family: Microsoft JhengHei; color: white;">
+
+			<nav class="navbar fixed-top navbar-dark bg-dark">
+				<a class="navbar-brand" style="font-size: 30px">ShareSport</a>
+				<ul class="nav mr-auto">
+					<li class="nav-item"><a class="nav-link"
+						href="index.html" style="color: white;">首頁</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="brow_coaches.html" style="color: white;">瀏覽教練</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="brow_courses.html" style="color: white;">瀏覽教程</a></li>
+					<li class="nav-item"><a id="self" class="nav-link active"
+						href=" " style="color: white;">個人專區</a></li>
+					<li class="nav-item"><a class="nav-link active" id="sign"
+						href="login.html" style="color: white;">登入</a></li>
+					<li class="nav-item"><a class="nav-link active" id="regsign"
+						href="register.html" style="color: white;">註冊</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
 	
-<body>
+    <form class="form-signin" style="font-family: Microsoft JhengHei;" action="api/login.do" method="POST">
+      
+      <h1 class="h5 mb-3 font-weight-normal"><i class="fas fa-dumbbell"></i> ShareSport</h1>
+      <h1 class="h3 mb-3 font-weight-normal">登入</h1>
+      <br>
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+      <br>
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+      <br>
+      <div id="checkboxGroup" class="checkbox mb-3">
+			<input type="checkbox" class="checkbox" name="student" value="student">student
+			<input type="checkbox" class="checkbox" name="coach" value="coach">coach
+			<input type="checkbox" class="checkbox" name="admin" value="admin">admin
+		</div>
+	  <br>
+      <button class="btn btn-lg btn-primary btn-block" type="submit" value="submit">Login</button>
+    </form>
+    <br>
+    <button class="btn btn-lg btn-primary btn-block" id="logout" value="logout" style="font-family: Microsoft JhengHei;">Logout</button>
 
-	<nav class="nav" style="background-color: #e3f2fd;">
-		<a class="navbar-brand" href="#">shareSport</a>
-		<ul class="nav justify-content-end">
-			<li class="nav-item"><a class="nav-link active"
-				href="index.html">首頁</a></li>
-			<li class="nav-item"><a class="nav-link active"
-				href="brow_coaches.html">瀏覽教練</a></li>
-			<li class="nav-item"><a class="nav-link active"
-				href="brow_courses.html">瀏覽教程</a></li>
-			<li class="nav-item"><a class="nav-link active" href="#">個人專區</a>
-			</li>
-			<li class="nav-item"><a class="nav-link active"
-				href="interface.html">管理介面</a></li>
-			<li class="nav-item"><a class="nav-link active" id="sign"
-				href="login.html">登入</a></li>
-			<li class="nav-item"><a class="nav-link active" id="regsign"
-				href="register.html">註冊</a></li>
-		</ul>
-	</nav>
-
-    <div id="container">
-        
-        <div id="content">
-            <h1>登入</h1>
-            <h5 class="star">*為必填</h5><br>
-				 
-			<img id="image" width="30%" length="30%" alt="圖片失效" src="https://pic3.zhimg.com/v2-85b57a0b9636664bb47b5b4bf097826b_1200x500.jpg">
-			
-            <div id="flashMessage" class="message" style="display: none;"></div>
-
-            <form id="form" accept-charset="utf-8">
-            
-                <div style="display:none;"><input type="hidden" name="_method" value="POST"></div>
-               
-                              
-               <div class="input select required">
-					<label for="member_identity">身分</label><label class="star">*</label><br>
-					<select name="identity" id="member_identity" required="required">
-					<option value="default">選擇身分</option>
-					<option value="student">學生</option>
-					<option value="coach">教練</option>
-					</select>
-               </div><br>
-               
-                <div class="input email required">
-                    <label for="member_email">電子信箱</label><label class="star">*</label><br>
-                    <input name="email" maxlength="45" type="email" id="member_email" required="required">
-                </div><br>
-              
-                <div class="input password required">
-                    <label for="member_password">密碼</label><label class="star">*</label><br>
-                    <input name="password" maxlength="45" type="password" id="member_password" required="required">
-                </div><br>
-                    
-				<input type="button" value="立即註冊" id="regnow"  class="btn btn-warning">
-                <input type="button" value="登入" id="submit" class="btn btn-primary">
-            </form>
-            </div>
-            
-            <script type="text/javascript">
-            var i = 0;//控制登入登出
-            $("#sign").click(function () {
-                if (i == 0) {
-                    document.getElementById("sign").innerHTML = "登出";
-                    i = 1;
-                    document.getElementById("regsign").style.display="none";
-                } else {
-                    document.getElementById("sign").innerHTML = "登入";
-                    i = 0;
-                    document.getElementById("regsign").style.display="block";
-                }
-            });
-            
-               $(document).ready(function() {
-                    // 處理表單點擊事件
-                    var $form = $('#submit');
-                    $form.click(function() {
-                        submit();
-                    });
-
-                    function submit() {
-                    	var identity = $('#member_identity').val();
-                        var email = $('#member_email').val();
-                        var password = $('#member_password').val();
-                        
-                        if(identity=="default"){
-                       		alert("請選擇身分！");
-                        }
-                        
-                        else if(!name){
-                        	alert("請輸入姓名！");
-                        }
-                        
-                        else if(!email) {
-                            alert("請輸入Email！");
-                        }
-                        
-                        else if(!password) {
-                            alert("請輸入密碼！");
-                        }
-                        
-                        else {
-                      
-                            alert("登入成功！\n正在為您導回首頁！");
-                        } 
-                    }
-                });
-            </script>
-        </div>
-    </div>
-    
-    
-   <style type="text/css">
+<style type="text/css">
 * {
     box-sizing: border-box;
 }
 
-#submit {
-    margin-left: 62px;
-}
-
-#regnow {
-    margin-left: 0px;
-}
-
-#image {
-	position: absolute; 
-	top: 80px;
-	right: 250px;
-}
-
-#content {
-    margin-top: 80px;
-    margin-left: 170px;
-    margin-right: 340px;
-}
-
 html,
 body {
-    margin-top: 2px;
+    margin-top: 7%;
     margin-bottom: 2px;
-    margin-left: 27px;
-    margin-right: 27px;
+    margin-left: 25%;
+    margin-right: 25%;
 
     padding: 0px;
 }
 
 .nav {
     font-size: 20px;
-    margin-bottom: 25px;
-}
-
-
-#coach-name {
-    font-size: 25px;
-    color: rgb(53, 121, 247)
-}
-
-.card {
-    margin-bottom: 33px;
-    margin-left: 55px;
-}
-
-.table {
-    margin-left: 45px;
-}
-
-.course {
-    display: inline-block;
-    margin-top: 10px;
-    margin-right: 55px;
-    margin-left: 55px;
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;
 }
 
 .star {
@@ -212,6 +108,78 @@ body {
 }
 
 </style>
-</body>
+<script type="text/javascript">
 
+			var login = "false";
+
+			$('#checkboxGroup input').click(function(){
+    			if($(this).prop('checked')){
+    	    	$('#checkboxGroup input:checkbox').prop('checked',false);
+    	    		$(this).prop('checked',true);
+    	    	}
+    	    });
+			$('#logout').click(function(){
+        	    alert("logout!!!");
+        	    logout(); 
+        	  
+        	});
+    		function logout() {
+    	        $.ajax({
+    	            type: "DELETE",
+    	            url: "api/login.do",
+    	            crossDomain: true,
+    	            cache: false,
+    	            dataType: 'json',
+    	            timeout: 5000,
+    	            success: function (response) {
+    	             console.log(response);
+    	                if(response.status == 200){
+    	                 console.log("logout");
+    	                 login = response.login;
+    	                 if(login == "success"){
+ 	       				 	document.getElementById("sign").innerHTML = "登出";
+ 	       				 }
+ 	       			 	 else{
+ 	       			 		document.getElementById("sign").innerHTML = "登入";
+ 	       			 	 }
+    	              }
+    	            },
+    	            error: function () {
+    	                alert("登出失敗");
+    	            }
+    	        });
+    	    }
+    		//get login status for the header button login/logout
+    		function getLogin(){
+    			$.ajax({
+    	            type: "GET",
+    	            url: "api/login.do",
+    	            crossDomain: true,
+    	            cache: false,
+    	            dataType: 'json',
+    	            timeout: 5000,
+    	            success: function (response) {
+    	                if(response.status == 200){
+    	                	login = response.login;
+    	                	console.log(login);
+    	       			 	if(login == "success"){
+    	       				 	document.getElementById("sign").innerHTML = "登出";
+    	       				}
+    	       			 	else{
+    	       			 		document.getElementById("sign").innerHTML = "登入";
+    	       			 	}
+    	              }
+    	            },
+    	            error: function () {
+    	                alert("拿登入狀態失敗");
+    	            }
+    	        });
+    		}
+    		
+    		 $(document).ready(function() {
+    			 getLogin();
+    			 
+    		 });
+    </script>
+</body>
 </html>
