@@ -29,7 +29,7 @@ public class Course {
 		this.upper_limb = upper;
 		this.lower_limb = lower;
 		this.core = core;
-		this.image = image;
+		this.image = ".\\upload\\"+image;
 		this.modified = Timestamp.valueOf(LocalDateTime.now());
 		this.created = Timestamp.valueOf(LocalDateTime.now());
 
@@ -38,7 +38,7 @@ public class Course {
 	public Course(int id, String name, String information, String image, int status) {
 		this.id = id;
 		this.name = name;
-		this.image = image;
+		this.image = ".\\upload\\"+image;
 		this.information = information;
 		this.status = status;
 		this.modified = Timestamp.valueOf(LocalDateTime.now());
