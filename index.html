@@ -94,6 +94,7 @@
 		<script type="text/javascript">
 			var id = 0;
 			var role = null;
+			var login = "false";
 			$("#self").click(function() {
 				$.ajax({
 					type : "GET",
@@ -226,10 +227,69 @@
 
 				return inner_html;
 			}
-
+			
+			$('#logout').click(function(){
+        	    alert("logout!!!");
+        	    logout(); 
+        	  
+        	});
+    		function logout() {
+    	        $.ajax({
+    	            type: "DELETE",
+    	            url: "api/login.do",
+    	            crossDomain: true,
+    	            cache: false,
+    	            dataType: 'json',
+    	            timeout: 5000,
+    	            success: function (response) {
+    	             console.log(response);
+    	                if(response.status == 200){
+    	                 console.log("logout");
+    	                 login = response.login;
+    	                 if(login == "success"){
+ 	       				 	document.getElementById("sign").innerHTML = "登出";
+ 	       				 }
+ 	       			 	 else{
+ 	       			 		document.getElementById("sign").innerHTML = "登入";
+ 	       			 	 }
+    	              }
+    	            },
+    	            error: function () {
+    	                alert("登出失敗");
+    	            }
+    	        });
+    	    }
+    		//get login status for the header button login/logout
+    		function getLogin(){
+    			$.ajax({
+    	            type: "GET",
+    	            url: "api/login.do",
+    	            crossDomain: true,
+    	            cache: false,
+    	            dataType: 'json',
+    	            timeout: 5000,
+    	            success: function (response) {
+    	                if(response.status == 200){
+    	                	login = response.login;
+    	                	console.log(login);
+    	       			 	if(login == "success"){
+    	       				 	document.getElementById("sign").innerHTML = "登出";
+    	       				}
+    	       			 	else{
+    	       			 		document.getElementById("sign").innerHTML = "登入";
+    	       			 	}
+    	              }
+    	            },
+    	            error: function () {
+    	                alert("拿登入狀態失敗");
+    	            }
+    	        });
+    		}
+			
 			$(document).ready(function() {
 				getAllCourse();
 				getAllCoach()
+				getLogin();
 			});
 		</script>
 
