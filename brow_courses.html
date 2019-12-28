@@ -1,11 +1,9 @@
 <!doctype html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>瀏覽教程</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -29,60 +27,32 @@
 </script>
 <script src="statics/js/jquery-3.4.1.min.js"></script>
 
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-<style>
-* {
-	box-sizing: border-box;
-}
+<title>瀏覽教程</title>
 
-html, body {
-	margin-top: 50px;
-	margin-bottom: 2px;
-	margin-left: 27px;
-	margin-right: 27px;
-	padding: 0px;
-}
+<link rel="canonical"
+	href="https://getbootstrap.com/docs/4.0/examples/album/">
 
-.nav {
-	font-size: 20px;
-}
-
-#brow-courses {
-	font-size: 4ch;
-	text-align: center;
-}
-
-.search {
-	text-align: center;
-}
-
-.card {
-	margin-bottom: 33px;
-	margin-left: 55px;
-}
-
-.table {
-	margin-left: 45px;
-}
-
-.course {
-	display: inline-block;
-	margin-top: 10px;
-	margin-right: 55px;
-	margin-left: 55px;
-}
-</style>
-
+<!-- Bootstrap core CSS -->
+<!-- Custom styles for this template -->
 </head>
 
-<body>
-	<header>
+  <body>
+
+    <header>
 		<div style="font-family: Microsoft JhengHei; color: white;">
+
 			<nav class="navbar fixed-top navbar-dark bg-dark">
 				<a class="navbar-brand" style="font-size: 30px">ShareSport</a>
 				<ul class="nav mr-auto">
-					<li class="nav-item"><a class="nav-link" href="index.html"
-						style="color: white;">首頁</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="index.html" style="color: white;">首頁</a></li>
 					<li class="nav-item"><a class="nav-link active"
 						href="brow_coaches.html" style="color: white;">瀏覽教練</a></li>
 					<li class="nav-item"><a class="nav-link active"
@@ -97,162 +67,173 @@ html, body {
 			</nav>
 		</div>
 	</header>
-	
-		<table class="table table-borderless">
-			<tr>
-				<td style="width: 55rem;"><span id="brow-courses">瀏覽教程</span></td>
-				<td>
-					<form class="form-inline my-2 my-lg-0 search">
-						<input class="form-control mr-sm-2" type="search"
-							placeholder="Search" aria-label="Search">
-						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-					</form>
-				</td>
-			</tr>
 
-		</table>
+    <main role="main">
 
+    
+      <div class="album py-5 bg-light">
+        <div class="container">
 
-	<!--  <section class="coursesarea">
-        <div class="card course" style="width: 13rem;">
-            <img src="https://i1.kknews.cc/SIG=1f7b232/39o40001pr9sp48r151q.jpg" width="13rem" height="160rem"
-                class="card-img-top" alt="...">
-            <div class="card-body text-center">
-                <h5 class="card-title text-left">教程名稱</h5>
-                <p class="text-left">教程簡介</p>
-                <a href="#" class="btn btn-primary">查看教程</a>
-                <a href="#" class="btn btn-primary">訂閱</a>
-            </div>
+          <div class="row" id="course_panel">
+            
+            
+            
+          </div>
         </div>
-    </section>
-    -->
+      </div>
 
-	<div id="course_panel"></div>
+    </main>
+
+    
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+
+<svg xmlns="http://www.w3.org/2000/svg" width="508" height="225" viewBox="0 0 508 225" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">Thumbnail</text></svg>
+</body>
 
 
+<style>
 
+.album{
+margin-top: 50px;
+}
 
-	<script>
-		var identity;
+.nav {
+	font-size: 20px;
+	
+}
 
-		function getAllCourse() {
-			$.ajax({
-				type : "GET",
-				url : "api/course.do",
-				crossDomain : true,
-				cache : false,
-				dataType : 'json',
-				timeout : 5000,
-				success : function(response) {
-					if (response.status == 200) {
+.btn{
+font-family: Microsoft JhengHei; 
 
-						var course_panel = '';
+}
 
-						$.each(response.response.data, function() {
-							course_panel += addCourse(this);
-						})
+</style>
 
-						$("#course_panel").append(course_panel);
+<script>
 
-					}
-				},
-				error : function() {
-					alert("無法連線到伺服器！");
+	
+	function getAllCourse() {
+		$.ajax({
+			type : "GET",
+			url : "api/course.do",
+			crossDomain : true,
+			cache : false,
+			dataType : 'json',
+			timeout : 5000,
+			success : function(response) {
+				if (response.status == 200) {
+
+					var course_panel = '';
+
+					$.each(response.response.data, function() {
+						course_panel += addCourse(this);
+					})
+
+					$("#course_panel").append(course_panel);
+					
 				}
-			});
-
-		}
-
-		getAllCourse();
-
-		function addCourse(data) {
-			let inner_html = '';
-			inner_html += '<div class="card course" style="width: 13rem;">';
-			inner_html += '<img src="statics/img/course/'
-					+ data.image
-					+ '" width="13rem" height="160rem" class="card-img-top" alt="..."';
-			inner_html += '<div class="card-body text-center">'
-			inner_html += '<h5 class="card-title text-left">' + data.name
-					+ '</h5>'
-			inner_html += '<p class="card-text text-left"><small class="text-muted">訂閱人數<span id ="subscribecount'+ data.id +'">這裡要是數字</span></small></p>'
-			inner_html += '<p class="text-left">' + data.information + '</p>'
-			inner_html += '<a href="course_information.html?id=' + data.id
-					+ '"	class="btn btn-primary">查看教程</a>'
-			inner_html += '<a href="#" class="btn btn-primary" id="subscribeBtn' + data.id + '" >訂閱</a>'
-			inner_html += '<div><small class="text-muted">id: ' + data.id
-					+ '</small></div>';
-			inner_html += '</div></div>'
-			console.log(data.id);
-			return inner_html;
-		}
-
-		//取得api/subscribe.do
-		function getCourse(stu_id) {
-			$.ajax({
-				type : "GET",
-				url : "api/subscribe.do",
-				crossDomain : true,
-				data : "sub_stuId=" + stu_id,
-				cache : false,
-				dataType : 'json',
-				timeout : 5000,
-				success : function(response) {
-					console.log(response);
-					if (response.status == 200) {
-						console.log(response.response.data);
-
-						var i = 0;
-						var array = new Array();
-
-						//$.each(response.response.data, function(i) {
-						//	SubCourseId = response['response']['data'][i]['sub_courId'];
-						//	document.getElementById('subscribeBtn" + SubCourseId + "').innerHTML = '取消訂閱';
-						//	console.log(SubCourseId);
-
-						//})
-						console.log(array);
-
-					}
-				},
-				error : function() {
-					alert("無法連線到伺服器！");
-				}
-			});
-		}
-		$(document).ready(function() {
-			//去抓身分
-			$.ajax({
-				type : "GET",
-				url : "api/login.do",
-				crossDomain : true,
-				cache : false,
-				dataType : 'json',
-				timeout : 5000,
-				success : function(response) {
-					if (response.status == 200) {
-						console.log(response);
-						identity = response.role;
-						identity_id = response['response']['data'][0]['id'];
-						console.log(identity);
-						console.log(identity_id);
-						alert(identity_id);
-						//for subscribe api
-						if (identity == "student") {
-							getCourse(identity_id);
-						}
-					}
-				},
-				error : function() {
-					alert("無法連線到伺服器！");
-				}
-			});
-			document.getElementById("subscribeBtn3").innerHTML = '取消訂閱';
+				
+			},
+			error : function() {
+				alert("無法連線到伺服器！");
+			}
 		});
 
-		//document.getElementById("subscribeBtn3").innerHTML = '取消訂閱';
-		console.log(identity);
-	</script>
+	}
 
-</body>
+	
+	getAllCourse();
+	
+
+	function addCourse(data) {
+		
+		let inner_html = '';
+  		inner_html += '<div class="col-md-4">';
+  		inner_html += '<div class="card mb-4 box-shadow">';
+  		inner_html += '<img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="https://img.ltn.com.tw/Upload/partner/page/2019/09/14/190914-4886-01-WvNZA.jpg"> ';
+  		inner_html += '<div class="card-body">';
+  		inner_html += '<p class="card-text">';
+  		inner_html += '<h5>'+ data.name +'</h5>';
+  		inner_html += '<p class="card-text">' + data.information + '</p>';
+  		inner_html += '<p class="card-text "><small class="text-muted">subscribers <span id ="subscribe'+data.id+'">這裡要是數字</span></small></p>';
+  		inner_html += '</p>';
+  		inner_html += '<div class="d-flex justify-content-between align-items-center">';
+  		inner_html += '<div class="btn-group">';
+  		inner_html += '<a href="course_information.html?id=' + data.id + '" class="btn btn-sm btn-outline-secondary">查看教程</a>';
+  		inner_html += '</div>';
+  		inner_html += '</div></div></div></div>';
+		
+  		
+		getSubscribes(data.id);
+		console.log(data.id);
+		return inner_html;
+	}
+
+	//取得課程訂閱人數
+	function getSubscribes(id) {
+	       $.ajax({
+	           type: "GET",
+	           url: "api/subscribe.do",
+	           crossDomain: true,
+	           data: "id="+id,
+	           cache: false,
+	           dataType: 'json',
+	           timeout: 5000,
+	           success: function (response) {
+	        	   //console.log(response);
+	               if(response.status == 200){
+	            	   document.getElementById('subscribe'+id).innerHTML = response.count;
+	            	   console.log("id:"+id+" amount="+response.count);
+	               	};
+	               //console.log(response);
+	           },
+	           error: function () {
+	               alert("無法連線到伺服器！");
+	           }
+	       });
+	   }
+
+	
+var id = 0;
+var role = null;
+$("#self").click(function() {
+	$.ajax({
+		type : "GET",
+		url : "api/login.do",
+		crossDomain : true,
+		cache : false,
+		dataType : 'json',
+		timeout : 5000,
+		success : function(response) {
+			if (response.status == 200) {
+				// console.log(response);
+				console.log(response);
+				id = response.response.data[0].id;
+				role = response.role;
+				console.log(role);
+			}
+
+			if (role == "student") {
+				location.href = "studentself.html"
+			} else if (role == "coach") {
+				location.href = "coachself.html"
+			} else if (role == "admin") {
+				location.href = "interface.html"
+			} else {
+				alert("請登入會員")
+			}
+		},
+		error : function() {
+			alert("無法連線到伺服器！");
+		}
+	});
+
+})
+</script>
 
 </html>
