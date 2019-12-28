@@ -26,6 +26,12 @@
 .jumbotron{
 margin-top: 100px;
 }
+#changePicture {
+	visibility: hidden;
+}
+#confirm {
+	visibility: hidden;
+}
 #saveclass {
 	visibility: hidden;
 }
@@ -69,18 +75,24 @@ margin-top: 100px;
 
       <section class="jumbotron text-center">
         <div class="row no-gutters">
-			<div id="coachPicture" class="col-md-3">
-				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTxDQcl1SA2jzxtsOqnl0eA-zF9p0JoDFZCALHVI25lqAdzR-Ec" class="card-img-top" alt="..."  width="12rem" height="270rem">
-			</div>
+			<div id="coachPicture" class="col-md-3"></div>
 			<div class="col-md-9">
        			<div class="container">
           			<h1 id="coachName" class="jumbotron-heading"></h1>
           			<p id="coachTextarea" class="lead text-muted"></p>
           			<p id="coachFollows" class="card-text followers"><small class="text-muted"></small></p>
-          			<p>
-            			<a href="#" class="btn btn-secondary my-2">更換個人照</a>
-            			<a href="coachmodify.html" class="btn btn-secondary my-2">修改個人資料</a>
-          			</p>
+          			
+            			<button type="button" id="newPicture" class="btn btn-secondary my-2">更換個人照</button>
+            			<a href="coachmodify.html?id=" id="coachAddress" class="btn btn-secondary my-2">修改個人資料</a>
+            			
+            			<div id="changePicture">
+							<form id="uploadPicture" enctype="multipart/form-data">
+								<input id="file" type="file" name="file" />
+								<button id="upload" type="button">上傳圖檔</button>
+							</form>
+							
+            			</div>
+            			<button id="confirm" type="button">完成</button>
         		</div>
         	</div>
         </div>
@@ -93,14 +105,11 @@ margin-top: 100px;
 				<button id="newclass" type="button" class="btn btn-outline-secondary">新增教程</button>
 				<button id="saveclass" type="button" class="btn btn-outline-secondary ">儲存</button><br>
       	</div>
-      	<div class="container" >
-			
-				
-          <div class="row" id="coursesPanel">
-            
+      	<div class="container" >	
+        	<div class="row" id="coursesPanel">
             </div>
-            </div>
-            
+        </div>
+       </div>     
 
             
     </main>
@@ -111,7 +120,81 @@ margin-top: 100px;
 		var url = new URL(url_string);
 		//var id = url.searchParams.get("id");
 		var sql_num = 0;
-		var id=1;
+		var id;
+		
+		$("#upload").click(function() {
+		var formData = new FormData($('#uploadPicture')[0]);
+		$.ajax({
+			url:'api/upload.do',
+			type:'POST',
+			cache:false,
+			data:formData,
+			processData : false,
+			contentType : false,
+			success: function (response) {	                  
+	                console.log("upload success!");	                  
+	          },
+	          error: function () {
+	                alert("無法連線到伺服器！");
+	          }
+		})
+		
+	});
+
+	$("#confirm").click(function() {
+	  // put不能用getParameter 所以要傳object，後端才撈得到
+	  var data_object = {
+	            "id": id,
+	            "role":role,
+	        };
+
+	        // 將JSON格式轉換成字串
+	    var data_string = JSON.stringify(data_object);
+	  $.ajax({
+			url:'api/upload.do',
+			type:'PUT',
+			crossDomain: true,
+	          data: data_string,
+	          cache: false,
+	          dataType: 'json',
+	          timeout: 5000,
+	          success: function (response) {	                  
+	                console.log(response);	 
+	                document.getElementById('coachPicture').value="";
+	                getCoachPic(id)
+	          },
+	          error: function () {
+	                alert("無法連線到伺服器！");
+	          }
+		})
+		//getCoachPic(id)
+		
+	
+	});
+	function getCoachPic(id) {
+	     $.ajax({
+	         type: "GET",
+	         url: "api/coach.do",
+	         crossDomain: true,
+	         data: "id="+id,
+	         cache: false,
+	         dataType: 'json',
+	         timeout: 5000,
+	         success: function (response) {
+	      	   
+	             if(response.status == 200){
+	             	console.log(response['response']['data'][0]['image']);
+	             	var imagePath='';
+	             	imagePath += '<img src="'+response['response']['data'][0]['image']+'" class="card-img" alt="...">';
+	             	document.getElementById('coachPicture').innerHTML=imagePath;
+	             	}
+	             console.log(response);
+	         },
+	         error: function () {
+	             alert("無法連線到伺服器！");
+	         }
+	     });
+	 }
 		
 		function getCoach(id) {//取得coachinfo
 			$.ajax({
@@ -163,8 +246,7 @@ margin-top: 100px;
 				alert("delete");
 				console.log("刪除" + this.id);
 				deleteCourse(this.id);
-				//$("#coursesPanel").empty();
-				//getCourse(id);
+
 			});
 		};
 		function addCourses(data) {//讀取教練的課程
@@ -187,7 +269,7 @@ margin-top: 100px;
 								courseAll += '<p id ="courseTextarea" class="card-text">'
 										+ value['information'] + '</p>';
 								courseAll += '<p id ="subscribe'+value['id']+'" class="card-text"><small class="text-muted">訂閱人數</small></p>';
-								courseAll += '<p id ="status" class="card-text" ><small class="text-muted">'
+								courseAll += '<p hidden id ="status" class="card-text" ><small class="text-muted">'
 										+ value['status'] + '</small></p>';
 								courseAll += '<p hidden id ="id" class="card-text" ><small class="text-muted">'
 										+ value['id'] + '</small></p>';
@@ -267,7 +349,7 @@ margin-top: 100px;
 			});
 		}
 		$(document).ready(function() {
-			 /**$.ajax({//取得登入者的ID
+			 $.ajax({//取得登入者的ID
 	             type: "GET",
 	             url: "api/login.do",
 	             crossDomain: true,
@@ -283,21 +365,20 @@ margin-top: 100px;
 	                 role = response.role;
 	                 console.log(role);
 	                 console.log(id);
-	                 //document.getElementById('studentAddress').innerHTML = response['response']['data'][0]['id'];
-	                 //getStudent(id);
-	                 //getCourse(id);
-	                 //getCoachPic(id);
-				      
+	                 getCoach(id);
+	                 getCourse(id);
+	                 getCoachPic(id);  
+	                 var _href = $("#coachAddress").attr("href");
+	     			$("#coachAddress").attr("href", _href + id);
+	     			//console.log($("#coachAddress").attr("href"));
+	     		
 	             },
 	             error: function () {
 	                 alert("無法連線到伺服器！");
 	             }
-	     	   });**/
-		   console.log(id);
-	       getCoach(id);
-	       getCourse(id);
-		   //getStuCourseId(id);
-		   //getStuCoachId(id)
+	     	   });
+		   
+	       
 	             
 	     	   });
 		$("#modifyclass").click(function() {
@@ -314,6 +395,17 @@ margin-top: 100px;
 		$("#newclass").click(function() {
 			location.href="newclass.html"
 		})
+		$("#newPicture").click(function() {
+			$("#changePicture").css("visibility", "visible");
+		})
+		$("#upload").click(function(){
+			$("#confirm").css("visibility", "visible");
+		})
+		$("#confirm").click(function() {
+			$("#uploadPicture").css("visibility", "hidden");
+			$("#confirm").css("visibility", "hidden");
+		})
+		
 </script>
     <!-- Bootstrap core JavaScript
     ================================================== -->
