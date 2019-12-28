@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<meta charset="BIG5">
+<title>修改個人資料</title>
+<style>
+	{
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 27px;
+    margin-right: 27px;
+    padding: 0px;
+}
+.nav {
+	font-size: 20px;	
+}
+.main{
+	margin-top: 100px;
+	margin-left: 150px;
+    margin-right: 700px;
+}
+</style>
+</head>
+<body>
+	<header>
+		<div style="font-family: Microsoft JhengHei; color: white;">
+
+			<nav class="navbar fixed-top navbar-dark bg-dark">
+				<a class="navbar-brand" style="font-size: 30px">ShareSport</a>
+				<ul class="nav mr-auto">
+					<li class="nav-item"><a class="nav-link"
+						href="index.html" style="color: white;">首頁</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="brow_coaches.html" style="color: white;">瀏覽教練</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="brow_courses.html" style="color: white;">瀏覽教程</a></li>
+					<li class="nav-item"><a id="self" class="nav-link active"
+						href=" " style="color: white;">個人專區</a></li>
+					<li class="nav-item"><a class="nav-link active" id="sign"
+						href="login.html" style="color: white;">登入</a></li>
+					<li class="nav-item"><a class="nav-link active" id="regsign"
+						href="register.html" style="color: white;">註冊</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	<div class="main">
+	<form>
+  		<div class="form-group">
+    		<label for="studentName">名稱</label>
+    		<input type="text" id ="studentName" class="form-control name">
+    		<small  class="form-text text-muted">長度為30字 可接受中英文字符</small>
+  		</div>
+  		<div class="form-group " style= "width:80px">
+     		<label for="studentSex">性別</label>
+      		<select id="studentSex" class="form-control">
+       			<option selected disabled hidden id="selectedSex">...</option>
+        		<option value="female">女</option>
+        		<option value="male">男</option>
+      		</select>
+    	</div>
+  		<div class="form-group">
+    		<label for="disabledEmail">Email</label>
+      		<input type="email" id="disabledEmail" class="form-control" placeholder="email@example.com" disabled>
+  		</div> 
+  		<div class="form-group">
+    		<label for="studentPassword">密碼</label>
+    		<input type="password" id="studentPassword" class="form-control password" >
+    		<small  class="form-text text-muted">僅接受英文或數字 不可為空白鍵</small>
+  		</div>
+  		<div class="form-group">
+    		<label for="studentPasswordcheck">確認密碼</label>
+    		<input type="password" id="studentPasswordcheck" class="form-control passwordtest" >
+    		<small  class="form-text text-muted">請再輸入一次密碼</small>
+  		</div>
+  		<div hidden class="form-group">
+  			<label for="status">status</label>
+  			<input type="text" id = "studentStatus" class="form-control status" disabled>
+  		</div>
+  		<button type="button" class="btn btn-primary" id="submit">儲存</button>
+</form>
+	</div>
+</body>
+<script>
+	var url_string = window.location.href;
+	var url = new URL(url_string);
+	//var id = url.searchParams.get("id");
+	var sql_num = 0;
+	var id;
+	var image
+	function getStudent() {//取得coachinfo
+		$.ajax({
+					type : "GET",
+					url : "api/student.do",
+					crossDomain : true,
+					data : "id=" + id,
+					cache : false,
+					dataType : 'json',
+					timeout : 5000,
+					success : function(response) {
+						if (response.status == 200) {
+							document.getElementById('studentName').value = response['response']['data'][0]['name'];
+		                   	document.getElementById('disabledEmail').value = response['response']['data'][0]['email'];
+		                   	document.getElementById('studentPassword').value = response['response']['data'][0]['password'];
+		                   	document.getElementById('studentPasswordcheck').value = response['response']['data'][0]['password'];
+		                   	document.getElementById('selectedSex').value = response['response']['data'][0]['sex'];
+		                   	document.getElementById('studentStatus').value = response['response']['data'][0]['status'];
+		                   	image=response['response']['data'][0]['image'];
+						}
+						console.log(response);
+					},
+					error : function() {
+						alert("無法連線到伺服器！");
+					}
+				});
+	}
+	function updateStudent(id) {
+        var name = $('#studentName').val();
+        var email = $('#disabledEmail').val();
+        var password = $('#studentPassword').val();
+        var sex = $("#studentSex :selected").val();
+        var status = $('#studentStatus').val();
+
+        var password_rule = /^.[A-Za-z0-9]+$/;
+
+        if(!password_rule.test(password)) {
+            alert("密碼格式不符，僅接受英文或數字 不可為空白鍵！");
+        }
+        else {
+            // 將資料組成JSON格式
+            var data_object = {
+                "id": id,
+                "name": name,
+                "email": email,
+                "password": password,
+                "sex": sex,
+                "image":image,
+                "status":status,
+            };
+
+            // 將JSON格式轉換成字串
+            var data_string = JSON.stringify(data_object);
+
+            // 發出POST的PUT請求
+            $.ajax({
+                    type: "PUT",
+                    url: "api/student.do",
+                    data: data_string,
+                    crossDomain: true,
+                    cache: false,
+                    dataType: 'json',
+                    timeout: 5000,
+                    success: function (response) {
+                    	console.log(response);
+                        if(response.status == 200){
+                        	location.href="studentself.html"
+                        }
+                        
+                    },
+                    error: function () {
+                        alert("無法連線到伺服器！");
+                    }
+            });
+        }
+    }
+	
+	
+	
+       $(document).ready(function() {
+		   $.ajax({//取得登入者的ID
+	             type: "GET",
+	             url: "api/login.do",
+	             crossDomain: true,
+	             cache: false,
+	             dataType: 'json',
+	             timeout: 5000,
+	             success: function (response) {
+	                 if(response.status == 200){
+	               	 
+	                 }
+	                 console.log(response);
+	                 id = response.response.data[0].id ;
+	                 console.log(id);
+	                 getStudent();
+	                 
+	             },
+	             error: function () {
+	                 alert("無法連線到伺服器！");
+	             }
+	     	   });
+	   });
+       $('#submit').click(function() {
+    	   updateStudent(id)
+       });
+	var i = 0;//控制登入登出
+	$("#sign").click(function () {
+	    if (i == 0) {
+	        document.getElementById("sign").innerHTML = "登出";
+	        i = 1;
+	    } else {
+	        document.getElementById("sign").innerHTML = "登入";
+	        i = 0;
+	    }
+	});
+</script>
+</html>
