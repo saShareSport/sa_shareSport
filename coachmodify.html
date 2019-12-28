@@ -24,39 +24,37 @@ body {
     font-size: 20px;
     margin-bottom: 25px;
 }
-.form-group{
-	width: 600px;
+.main{
+	margin-top: 100px;
+	margin-left: 150px;
+    margin-right: 700px;
 }
 </style>
 </head>
 <body>
-	<nav class="nav" style="background-color: #e3f2fd;">
-  <a class="navbar-brand" href="#">shareSport</a>
-    <ul class="nav justify-content-end">
-    <li class="nav-item">
-    	<a class="nav-link active" href="#">首頁</a>
-  	</li>
-  	<li class="nav-item">
-    	<a class="nav-link active" href="#">瀏覽教練</a>
-  	</li>
-  	<li class="nav-item">
-    	<a class="nav-link active" href="#">瀏覽教練</a>
-  	</li>
-  	<li class="nav-item">
-    	<a class="nav-link active" href="#">個人專區</a>
-  	</li>
-  	<li class="nav-item">
-    	<a class="nav-link active" href="#">管理介面</a>
-  	</li>
-  	<li class="nav-item">
-    	<a class="nav-link active" id="sign" href="#">登入</a>
-  	</li>
-  	<li class="nav-item">
-    	<a class="nav-link active" href="#">註冊</a>
-  	</li>
-   </ul>
-  
-</nav>
+	<header>
+		<div style="font-family: Microsoft JhengHei; color: white;">
+
+			<nav class="navbar fixed-top navbar-dark bg-dark">
+				<a class="navbar-brand" style="font-size: 30px">ShareSport</a>
+				<ul class="nav mr-auto">
+					<li class="nav-item"><a class="nav-link"
+						href="index.html" style="color: white;">首頁</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="brow_coaches.html" style="color: white;">瀏覽教練</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="brow_courses.html" style="color: white;">瀏覽教程</a></li>
+					<li class="nav-item"><a id="self" class="nav-link active"
+						href=" " style="color: white;">個人專區</a></li>
+					<li class="nav-item"><a class="nav-link active" id="sign"
+						href="login.html" style="color: white;">登入</a></li>
+					<li class="nav-item"><a class="nav-link active" id="regsign"
+						href="register.html" style="color: white;">註冊</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	<div class="main">
 	<form>
   		<div class="form-group">
     		<label for="coachName">名稱</label>
@@ -93,8 +91,9 @@ body {
   			<label for="status">status</label>
   			<input type="text" id = "coachStatus" class="form-control status" disabled>
   		</div>
-  		<button type="submit" class="btn btn-primary" id = "submit">儲存</button>
+  		<button type="button" class="btn btn-primary" id = "submit">儲存</button>
 </form>
+</div>
 </body>
 <script>
 	var url_string = window.location.href;
@@ -102,8 +101,9 @@ body {
 	//var id = url.searchParams.get("id");
 	var sql_num = 0;
 	
-	var id=1;
-		
+	var id;
+	var image;
+	
 	function updateCoach(id) {
 	    var name = $('#coachName').val();
 	    var email = $('#disabledEmail').val();
@@ -131,7 +131,7 @@ body {
 	            "password": password,
 	            "sex": sex,
 	            "information":info,
-	            "image":"null",
+	            "image":image,
 	            "status":status
 	        };
 	
@@ -148,12 +148,9 @@ body {
 	                dataType: 'json',
 	                timeout: 5000,
 	                success: function (response) {
-	                    $('#flashMessage').html(response.message);
-	                    $('#flashMessage').show();
+	                	location.href="coachself.html"
 	                    if(response.status == 200){
-	                        //updateSQLTable(response.response);
-	                        getCoach();
-	                        location.href="coachself.html"
+	                        //location.href="coachself.html"
 	                    }
 	                },
 	                error: function () {
@@ -163,7 +160,7 @@ body {
 	    }
 	}
 	
-	   function getCoach() {
+	   function getCoach(id) {
 	       $.ajax({
 	           type: "GET",
 	           url: "api/coach.do",
@@ -175,7 +172,6 @@ body {
 	           success: function (response) {
 	        	   console.log(response);
 	               if(response.status == 200){
-	               	//updateSQLTable(response.response);
 	               	document.getElementById('coachName').value = response['response']['data'][0]['name'];
 	               	document.getElementById('disabledEmail').value = response['response']['data'][0]['email'];
 	               	document.getElementById('coachPassword').value = response['response']['data'][0]['password'];
@@ -183,9 +179,9 @@ body {
 	               	document.getElementById('selectedSex').value = response['response']['data'][0]['sex'];
 	               	document.getElementById('coachTextarea').value = response['response']['data'][0]['information'];
 	               	document.getElementById('coachStatus').value = response['response']['data'][0]['status'];
-	               	//document.getElementById('member_login_times').value = response['response']['data'][0]['login_times'];
-	               	//document.getElementById('member_status').value = response['response']['data'][0]['status'];
-	               }
+	               	image=response['response']['data'][0]['image'];
+	               	console.log(image);
+	               	}
 	               console.log(response);
 	           },
 	           error: function () {
@@ -194,14 +190,33 @@ body {
 	       });
 	   }
 	   $('#submit').click(function() {
-		   console.log(id)
+		   //console.log(id)
 	       updateCoach(id)
 	   });
 	   
 	   $(document).ready(function() {
-	   	// 發出GET的AJAX請求取得原本該會員的資料
-	    	//$("#sql_log > tbody").empty();
-	       getCoach();
+		   $.ajax({//取得登入者的ID
+	             type: "GET",
+	             url: "api/login.do",
+	             crossDomain: true,
+	             cache: false,
+	             dataType: 'json',
+	             timeout: 5000,
+	             success: function (response) {
+	                 if(response.status == 200){
+	                	 console.log(response);
+		                 id = response.response.data[0].id ;
+		                 console.log(id);
+		                 getCoach(id);
+	                 }
+	                 
+	                 
+	             },
+	             error: function () {
+	                 alert("無法連線到伺服器！");
+	             }
+	     	   });
+	       
 	   });
 	
 	var i = 0;//控制登入登出
