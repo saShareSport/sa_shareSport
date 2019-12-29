@@ -48,7 +48,7 @@ public class LoginController extends HttpServlet {
     private Cookie loginCookie;
     
 	@SuppressWarnings("unused")
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");

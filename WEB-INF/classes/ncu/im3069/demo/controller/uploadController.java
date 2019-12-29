@@ -46,7 +46,7 @@ public class uploadController extends HttpServlet {
 	/**
 	 * 上傳資料及儲存檔案
 	 */
-	protected void doPost(HttpServletRequest request,
+	public void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		
 //		JsonReader jsr = new JsonReader(request);
