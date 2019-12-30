@@ -127,6 +127,11 @@ font-family: Microsoft JhengHei;
 
 <script>
 
+$(document).ready(function() {
+	 getLogin();
+	 
+});
+
 function getAllCoach() {
     $.ajax({
       type: "GET",
@@ -139,7 +144,10 @@ function getAllCoach() {
         if (response.status == 200) {
       	var coach_panel = '';
       	
+      	
+      	var i =0;
       	$.each(response.response.data, function (){
+      		console
       		coach_panel += addCoach(this);
       	})
       	
@@ -157,25 +165,61 @@ function getAllCoach() {
   
   
   function addCoach(data) {
-  	let inner_html = '';
-  		inner_html += '<div class="col-md-4">';
-  		inner_html += '<div class="card mb-4 box-shadow">';
-  		inner_html += '<img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="statics/img/coach/' + data.image + '"> ';
-  		inner_html += '<div class="card-body">';
-  		inner_html += '<p class="card-text">';
-  		inner_html += '<h5>'+ data.name +'</h5>';
-  		inner_html += '<p class="card-text">' + data.information + '</p>';
-  		inner_html += '<p class="card-text "><small class="text-muted">followers ' + data.followers_count + '</small></p>';
-  		inner_html += '</p>';
-  		inner_html += '<div class="d-flex justify-content-between align-items-center">';
-  		inner_html += '<div class="btn-group">';
-  		inner_html += '<a href="coach_information.html?id=' + data.id + '" class="btn btn-sm btn-outline-secondary" >查看教練</a>';
-  		inner_html += '</div>';
-  		inner_html += '</div></div></div></div>';
+	
+		console.log(data.status);
+		if(data.status=='1'){
+			let inner_html = '';
+			return inner_html;
+		}
+		else{
+			let inner_html = '';
+	  		inner_html += '<div class="col-md-4">';
+	  		inner_html += '<div class="card mb-4 box-shadow">';
+	  		inner_html += '<img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="' + data.image + '"> ';
+	  		inner_html += '<div class="card-body">';
+	  		inner_html += '<p class="card-text">';
+	  		inner_html += '<h5>'+ data.name +'</h5>';
+	  		inner_html += '<p class="card-text">' + data.information + '</p>';
+	  		inner_html += '<p class="card-text "><small class="text-muted">followers <span id ="follow'+data.id+'">這裡要是數字</span></small></p>';
+	  		inner_html += '</p>';
+	  		inner_html += '<div class="d-flex justify-content-between align-items-center">';
+	  		inner_html += '<div class="btn-group">';
+	  		inner_html += '<a href="coach_information.html?id=' + data.id + '" class="btn btn-sm btn-outline-secondary" >查看教練</a>';
+	  		inner_html += '</div>';
+	  		inner_html += '</div></div></div></div>';
+	  		
+	  		getfollows(data.id);
+			console.log(data.id);
+	  	
+			return inner_html;
+		}
+		
   	
-		return inner_html;
   }
   
+//取得教練追蹤人數
+	function getfollows(id) {
+	       $.ajax({
+	           type: "GET",
+	           url: "api/follow.do",
+	           crossDomain: true,
+	           data: "id="+id,
+	           cache: false,
+	           dataType: 'json',
+	           timeout: 5000,
+	           success: function (response) {
+	        	   //console.log(response);
+	               if(response.status == 200){
+	            	   document.getElementById('follow'+id).innerHTML = response.count;
+	            	   console.log("id:"+id+" amount="+response.count);
+	               	};
+	               //console.log(response);
+	           },
+	           error: function () {
+	               alert("無法連線到伺服器！");
+	           }
+	       });
+	   }
   
     var id = 0;
 	var role = null;
@@ -212,8 +256,73 @@ function getAllCoach() {
 		});
 
 	})
-  
+	
+	var login = "false";
 
+			$('#checkboxGroup input').click(function(){
+    			if($(this).prop('checked')){
+    	    	$('#checkboxGroup input:checkbox').prop('checked',false);
+    	    		$(this).prop('checked',true);
+    	    	}
+    	    });
+			$('#logout').click(function(){
+        	    alert("logout!!!");
+        	    logout(); 
+        	  
+        	});
+    		function logout() {
+    	        $.ajax({
+    	            type: "DELETE",
+    	            url: "api/login.do",
+    	            crossDomain: true,
+    	            cache: false,
+    	            dataType: 'json',
+    	            timeout: 5000,
+    	            success: function (response) {
+    	             console.log(response);
+    	                if(response.status == 200){
+    	                 console.log("logout");
+    	                 login = response.login;
+    	                 if(login == "success"){
+ 	       				 	document.getElementById("sign").innerHTML = "登出";
+ 	       				 }
+ 	       			 	 else{
+ 	       			 		document.getElementById("sign").innerHTML = "登入";
+ 	       			 	 }
+    	              }
+    	            },
+    	            error: function () {
+    	                alert("登出失敗");
+    	            }
+    	        });
+    	    }
+    		//get login status for the header button login/logout
+    		function getLogin(){
+    			$.ajax({
+    	            type: "GET",
+    	            url: "api/login.do",
+    	            crossDomain: true,
+    	            cache: false,
+    	            dataType: 'json',
+    	            timeout: 5000,
+    	            success: function (response) {
+    	                if(response.status == 200){
+    	                	login = response.login;
+    	                	console.log(login);
+    	       			 	if(login == "success"){
+    	       				 	document.getElementById("sign").innerHTML = "登出";
+    	       				}
+    	       			 	else{
+    	       			 		document.getElementById("sign").innerHTML = "登入";
+    	       			 	}
+    	              }
+    	            },
+    	            error: function () {
+    	                alert("拿登入狀態失敗");
+    	            }
+    	        });
+    		}
+   
 
 </script>
 
