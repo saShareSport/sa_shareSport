@@ -46,7 +46,7 @@ public class FollowController extends HttpServlet {
         
         /** 取出經解析到JSONObject之Request參數 */
         int stuId = jso.getInt("foll_stuId");
-        int coaId = jso.getInt("foll_coaId ");
+        int coaId = jso.getInt("foll_coaId");
         
         /** 建立一個新的追蹤物件 */
         Follow f = new Follow(stuId, coaId);

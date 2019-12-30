@@ -2,13 +2,14 @@
 <html>
 
 <head>
-	 
-    
+
+
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
-<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
+<link rel="canonical"
+	href="https://getbootstrap.com/docs/4.0/examples/album/">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
@@ -20,60 +21,59 @@
 	crossorigin="anonymous"></script>
 <meta charset="BIG5">
 </head>
-<style >
-
+<style>
 #submit {
-    margin-left: 80px;
+	margin-left: 80px;
 }
 
 #course_intro {
-	width:300px;
-	height:100px;
+	width: 300px;
+	height: 100px;
 }
 
-html,
-body {
-    margin-top: 2px;
-    margin-bottom: 2px;
-    margin-left: 27px;
-    margin-right: 27px;
-
-    padding: 0px;
+html, body {
+	margin-top: 2px;
+	margin-bottom: 2px;
+	margin-left: 27px;
+	margin-right: 27px;
+	padding: 0px;
 }
 
 .nav {
-    font-size: 20px;
+	font-size: 20px;
 }
-#container{
+
+#container {
 	margin-top: 100px;
 	margin-left: 150px;
-    margin-right: 700px;
+	margin-right: 700px;
 }
 
 #coach-name {
-    font-size: 25px;
-    color: rgb(53, 121, 247)
+	font-size: 25px;
+	color: rgb(53, 121, 247)
 }
 
 .star {
 	color: red;
 }
-#upload{
+
+#upload {
 	visibility: hidden;
 }
+
 #confirm {
 	visibility: hidden;
 }
 </style>
 <body>
-  <header>
+	<header>
 		<div style="font-family: Microsoft JhengHei; color: white;">
-
 			<nav class="navbar fixed-top navbar-dark bg-dark">
 				<a class="navbar-brand" style="font-size: 30px">ShareSport</a>
 				<ul class="nav mr-auto">
-					<li class="nav-item"><a class="nav-link"
-						href="index.html" style="color: white;">首頁</a></li>
+					<li class="nav-item"><a class="nav-link" href="index.html"
+						style="color: white;">首頁</a></li>
 					<li class="nav-item"><a class="nav-link active"
 						href="brow_coaches.html" style="color: white;">瀏覽教練</a></li>
 					<li class="nav-item"><a class="nav-link active"
@@ -88,164 +88,232 @@ body {
 			</nav>
 		</div>
 	</header>
-    <div id="container">
-        <form>
-  			<div class="name">
-    			<h3 for="exampleFormControlInput1">教程名稱</h3>
-    			<input type='text' class="form-control" id="coursename" >
-  			</div>
-  			<br>
-  			<br>
-  			<div class="type">
-  				<h3 for="exampleFormControlInput1">教程類別</h3>
-  				
-	  			<div class="form-check" id="up">
-	  				<input class="form-check-input" type="radio" name="exampleRadios" id="upradio" value="0">
-	  				<h5 class="form-check-label" for="exampleRadios2">
-	  				上肢
-	  				</h5>
+	<div id="container">
+		<form>
+			<div class="name">
+				<h3 for="exampleFormControlInput1">教程名稱</h3>
+				<input type='text' class="form-control" id="coursename">
+			</div>
+			<br> <br>
+			<div class="type">
+				<h3 for="exampleFormControlInput1">教程類別</h3>
+				<div class="form-check" id="up">
+					<input class="form-check-input" type="radio" name="exampleRadios"
+						id="upradio" value="0" disabled>
+					<h5 class="form-check-label" for="exampleRadios2">上肢</h5>
 				</div>
+
 				<div class="form-check" id="mid">
-	  				<input class="form-check-input" type="radio" name="exampleRadios" id="mid" value="0">
-	  				<h5 class="form-check-label" for="exampleRadios2">
-	    			核心
-	  				</h5>
+					<input class="form-check-input" type="radio" name="exampleRadios"
+						id="midradio" value="0" disabled>
+					<h5 class="form-check-label" for="exampleRadios2">核心</h5>
 				</div>
-	  			
-	  			<div class="form-check" id="down">
-	  				<input class="form-check-input" type="radio" name="exampleRadios" id="down" value="0">
-	  				<h5 class="form-check-label" for="exampleRadios2">
-	    			下肢
-	  				</h5>
+
+				<div class="form-check" id="down">
+					<input class="form-check-input" type="radio" name="exampleRadios"
+						id="downradio" value="0" disabled>
+					<h5 class="form-check-label" for="exampleRadios2">下肢</h5>
 				</div>
 			</div>
-			<br>
-			<br>
-  			<div class="form-group">
-    			<h3 for="exampleFormControlTextarea1">教程簡介</h3>
-    			<textarea class="form-control" id="coursetext" rows="3"></textarea>
-  			</div>
-  			<div class="cover">
-  				<h3 for="exampleFormControlTextarea1">教程封面</h3>
-  				 <input id="file" type="file"/>
-  				 <img id="demo"/>
-  				 <button id="upload" type="button">上傳圖檔</button>
-  				 <button id="confirm" type="button">完成</button>
-  			</div>
+			<br> <br>
+			<div class="form-group">
+				<h3 for="exampleFormControlTextarea1">教程簡介</h3>
+				<textarea class="form-control" id="coursetext" rows="3"></textarea>
+				<button id="textinfo" type="button">完成</button>
+			</div>
+
 		</form>
-                </div>
-            
-            <script>
-            var url_string = window.location.href;
-    		var url = new URL(url_string);
-    		var id = url.searchParams.get("id");
-    		var sql_num = 0;
-    		
-    		var ups='<input class="form-check-input" type="radio" name="exampleRadios" id="upradio" value="1" checked><h5 class="form-check-label" for="exampleRadios2">上肢</h5>';
-    		var mids='<input class="form-check-input" type="radio" name="exampleRadios" id="midradio" value="1" checked><h5 class="form-check-label" for="exampleRadios2">核心</h5>';
-    		var downs='<input class="form-check-input" type="radio" name="exampleRadios" id="downradio" value="1" checked><h5 class="form-check-label" for="exampleRadios2">下肢</h5>';
-    		function getCourse(id) {//取得courseid
-    			$.ajax({
-    				type : "GET",
-    				url : "api/course.do",
-    				crossDomain : true,
-    				data : "id=" + id,
-    				cache : false,
-    				dataType : 'json',
-    				timeout : 5000,
-    				success : function(response) {
-    					console.log(response);
-    					if (response.status == 200) {
-    						document.getElementById('coursename').value = response['response']['data'][0]['name'];
-    						//console.log(response['response']['data'][0]['name']);
-    						document.getElementById('coursetext').value = response['response']['data'][0]['information'];
-    						if(response['response']['data'][0]['upper_limb']=="1"){
-    							$("#up").empty();
-    							$("#up").append(ups);
-    						};
-    						if(response['response']['data'][0]['core']=="1"){
-    							$("#mid").empty();
-    							$("#mid").append(mids);
-    						};
-    						if(response['response']['data'][0]['lower_limb']=="1"){
-    							$("#down").empty();
-    							$("#down").append(downs);
-    						}
-    					}
-    				},
-    				error : function() {
-    					alert("無法連線到伺服器！");
-    				}
-    			});
-    		}
-    		$('#file').change(function() {
-    			  var file = $('#file')[0].files[0];
-    			  var reader = new FileReader;
-    			  reader.onload = function(e) {
-    			    $('#demo').attr('src', e.target.result);
-    			  };
-    			  reader.readAsDataURL(file);
-    			});
-    		$("#upload").click(function() {
-    			var formData = new FormData($('#uploadPicture')[0]);
-    			$.ajax({
-    				url:'api/upload.do',
-    				type:'POST',
-    				cache:false,
-    				data:formData,
-    				processData : false,
-    				contentType : false,
-    				success: function (response) {	                  
-    		                console.log("upload success!");	                  
-    		          },
-    		          error: function () {
-    		                alert("無法連線到伺服器！");
-    		          }
-    			})
-    			
-    		});
+		<div class="cover">
+			<h3>教程封面</h3>
+			<form id="uploadPicture" enctype="multipart/form-data">
+			<input id="file" type="file" name="file" /> <img id="demo" />
+			<button id="upload" type="button">上傳圖檔</button>
+		</form>
+		<button id="confirm" type="button">完成</button>
+		</div>
+		<br>
+		<br>
+		<div class="video">
+				<label for="course_video">新增影片</label>
+				<label class="star">原網址為「https://www.youtube.com/watch?v=影片id」，請將網址改為「https://www.youtube.com/embed/影片id」再按新增！</label><br>
+                <br><input type="text" id="videoAddress">
+                <button type="button" id="add" class="btn btn-dark">上傳</button>
+        </div>
+	</div>
 
-    		$("#confirm").click(function() {
-    		  // put不能用getParameter 所以要傳object，後端才撈得到
-    		  var data_object = {
-    		            "id": id,
-    		        };
+	<script>
+		var url_string = window.location.href;
+		var url = new URL(url_string);
+		var id = url.searchParams.get("id");
+		var sql_num = 0;
 
-    		        // 將JSON格式轉換成字串
-    		    var data_string = JSON.stringify(data_object);
-    		  $.ajax({
-    				url:'api/course.do',
-    				type:'PUT',
-    				crossDomain: true,
-    		          data: data_string,
-    		          cache: false,
-    		          dataType: 'json',
-    		          timeout: 5000,
-    		          success: function (response) {	                  
-    		                console.log(response);	 
-    		          },
-    		          error: function () {
-    		                alert("無法連線到伺服器！");
-    		          }
-    			})
-    		});
-    		$(document).ready(function() {
-    			getCourse(id)
-    			
-    		});
-    		$("#file").click(function(){   //瀏覽
-                $("#upload").css("visibility","visible");
-            });
-    		$("#upload").click(function(){
-    			$("#confirm").css("visibility", "visible");
-    		})
-    		$("#confirm").click(function() {
-    			$("#upload").css("visibility", "hidden");
-    			$("#confirm").css("visibility", "hidden");
-    		})
-            </script>
-            
-            
+		var course_status;
+		var image = "";
+
+		var ups = '<input class="form-check-input" type="radio" name="exampleRadios" id="upradio" value="1" checked disabled><h5 class="form-check-label" >上肢</h5>';
+		var mids = '<input class="form-check-input" type="radio" name="exampleRadios" id="midradio" value="1" checked disabled><h5 class="form-check-label" >核心</h5>';
+		var downs = '<input class="form-check-input" type="radio" name="exampleRadios" id="downradio" value="1" checked disabled><h5 class="form-check-label" >下肢</h5>';
+		function getCourse(id) {//取得courseid
+			$
+					.ajax({
+						type : "GET",
+						url : "api/course.do",
+						crossDomain : true,
+						data : "id=" + id,
+						cache : false,
+						dataType : 'json',
+						timeout : 5000,
+						success : function(response) {
+							console.log(response);
+							if (response.status == 200) {
+								document.getElementById('coursename').value = response['response']['data'][0]['name'];
+								course_status = (response['response']['data'][0]['status']);
+
+								document.getElementById('coursetext').value = response['response']['data'][0]['information'];
+								if (response['response']['data'][0]['upper_limb'] == "1") {
+									$("#up").empty();
+									$("#up").append(ups);
+								}
+								;
+								if (response['response']['data'][0]['core'] == "1") {
+									$("#mid").empty();
+									$("#mid").append(mids);
+								}
+								;
+								if (response['response']['data'][0]['lower_limb'] == "1") {
+									$("#down").empty();
+									$("#down").append(downs);
+								}
+							}
+						},
+						error : function() {
+							alert("無法連線到伺服器！");
+						}
+					});
+		}
+
+		//var cname = $('#coursename').val();
+		//var cinfo = $('#coursetext').val();
+
+		function updatetextinfo(id) {//更新coursetextinfo
+
+			var data_object = {
+				"id" : id,
+				//"course_coach_id": coach_id,
+				"name" : $('#coursename').val(),
+				"information" : $('#coursetext').val(),
+				"status" : course_status,
+				"image" : "",
+
+			};
+			console.log(data_object);
+			// 將JSON格式轉換成字串
+			var data_string = JSON.stringify(data_object);
+			$.ajax({
+				type : "PUT",
+				url : "api/course.do",
+				crossDomain : true,
+				data : data_string,
+				cache : false,
+				dataType : 'json',
+				timeout : 5000,
+				success : function(response) {
+					console.log(response);
+					if (response.status == 200) {
+
+					}
+				},
+				error : function() {
+					alert("無法連線到伺服器！");
+				}
+			});
+		}
+
+		$('#file').change(function() {
+			var file = $('#file')[0].files[0];
+			image = $('#file')[0].files[0].name;
+			var reader = new FileReader;
+			reader.onload = function(e) {
+				$('#demo').attr('src', e.target.result);
+			};
+			reader.readAsDataURL(file);
+		});
+		$("#upload").click(function() {
+			var formData = new FormData($('#uploadPicture')[0]);
+			console.log(formData)
+			$.ajax({
+				url : 'api/upload.do',
+				type : 'POST',
+				cache : false,
+				data : formData,
+				processData : false,
+				contentType : false,
+				success : function(response) {
+					console.log("upload success!");
+				},
+				error : function() {
+					alert("無法連線到伺服器！");
+				}
+			})
+
+		});
+
+		$("#confirm").click(function() {
+
+			
+			// put不能用getParameter 所以要傳object，後端才撈得到
+			var data_object = {
+				"id" : id,
+				"name" : $('#coursename').val(),
+				"information" : $('#coursetext').val(),
+				"status" : course_status,
+				"image" : image,
+			};
+
+			// 將JSON格式轉換成字串
+			var data_string = JSON.stringify(data_object);
+			$.ajax({
+				url : 'api/course.do',
+				type : 'PUT',
+				crossDomain : true,
+				data : data_string,
+				cache : false,
+				dataType : 'json',
+				timeout : 5000,
+				success : function(response) {
+					console.log(response);
+				},
+				error : function() {
+					alert("無法連線到伺服器！");
+				}
+			})
+		});
+		$(document).ready(function() {
+			getCourse(id)
+
+		});
+		$("#add").click(function() {
+			var result=$('#videoAddress').val();
+			console.log(result);
+			var address=document.write(result.replace(/watch?v=/, "embed/"));
+			console.log(address);
+		})
+		$("#file").click(function() { //瀏覽
+			$("#upload").css("visibility", "visible");
+		});
+		$("#upload").click(function() {
+			$("#confirm").css("visibility", "visible");
+		})
+		$("#confirm").click(function() {
+			$("#upload").css("visibility", "hidden");
+			$("#confirm").css("visibility", "hidden");
+		})
+		$("#textinfo").click(function() {
+			updatetextinfo(id);
+		})
+	</script>
+
+
 </body>
 
 </html>
