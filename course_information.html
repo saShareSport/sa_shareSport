@@ -464,6 +464,9 @@ $('#checkboxGroup input').click(function(){
 		$(this).prop('checked',true);
 	}
 });
+$('#watchBtn').click(function(){
+	location.href = "watchCourse.html?id="+course_id;
+});
 $('#logout').click(function(){
     alert("logout!!!");
     logout(); 
