@@ -73,10 +73,7 @@
       <section class="jumbotron text-center">
         <div class="row no-gutters">
 				<div id="coachPicture" class="col-md-3">
-					<img
-						src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTxDQcl1SA2jzxtsOqnl0eA-zF9p0JoDFZCALHVI25lqAdzR-Ec"
-						class="card-img-top" alt="..." width="12rem" height="270rem">
-				</div>
+				</div>	
 				<div class="col-md-9">
 					<div class="container">
 						<h1 id="coach_name" class="jumbotron-heading">這裡是教練名字</h1>
@@ -159,7 +156,18 @@ function getthisCoach() {
     	document.getElementById('coach_name').innerHTML = response['response']['data'][0]['name'];
     	document.getElementById('coach_information').innerHTML = response['response']['data'][0]['information'];
     	
-    	//document.getElementById('coachPicture').innerHTML = '<img src="response['response']['data'][0]['image']" class="card-img-top" alt="..." width="12rem" height="270rem">';
+    	//設定預設教練圖片
+    	if (response['response']['data'][0]['image'] == null){
+    		response['response']['data'][0]['image'] = "statics/img/coach.jpg"
+    		var img='<img src="'+response['response']['data'][0]['image']+'" class="card-img-top" alt="..." width="12rem" height="270rem">';
+        	document.getElementById('coachPicture').innerHTML = img;
+		}
+    	else{
+    		var img='<img src="'+response['response']['data'][0]['image']+'" class="card-img-top" alt="..." width="12rem" height="270rem">';
+        	document.getElementById('coachPicture').innerHTML = img;
+        	
+    	}
+    	
     	
     	getCoachCourse()
     	
@@ -284,10 +292,20 @@ function getCoachCourse() {
 
 	  
 	  function addCourse(data) {
-		  let inner_html = '';
+		  
+		  console.log(data.status);
+			if(data.status=='1'){
+				let inner_html = '';
+				return inner_html;
+			}
+			else{
+				if (data.image == null){
+					data.image = "statics/img/course.jpg"
+				}
+		    let inner_html = '';
 	  		inner_html += '<div class="col-md-4">';
 	  		inner_html += '<div class="card mb-4 box-shadow">';
-	  		inner_html += '<img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="https://img.ltn.com.tw/Upload/partner/page/2019/09/14/190914-4886-01-WvNZA.jpg"> ';
+	  		inner_html += '<img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="'+data.image+'"> ';
 	  		inner_html += '<div class="card-body">';
 	  		inner_html += '<p class="card-text">';
 	  		inner_html += '<h5>'+ data.name +'</h5>';
@@ -303,6 +321,7 @@ function getCoachCourse() {
 	  		getSubscribes(data.id);
 			console.log(data.id);
 			return inner_html;
+			}
 		  }
 	  
 //取得課程訂閱人數

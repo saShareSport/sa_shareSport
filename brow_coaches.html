@@ -172,6 +172,12 @@ function getAllCoach() {
 			return inner_html;
 		}
 		else{
+			
+			//預設圖片
+			if (data.image == null){
+				data.image = "statics/img/coach.jpg"
+			}
+			
 			let inner_html = '';
 	  		inner_html += '<div class="col-md-4">';
 	  		inner_html += '<div class="card mb-4 box-shadow">';
