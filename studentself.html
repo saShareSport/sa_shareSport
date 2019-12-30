@@ -281,13 +281,36 @@ margin-top: 100px;
 					deleteCourse(this.id);
 				});
 			   };
-			   
+			   function getStucoursepic(id) {
+				     $.ajax({
+				         type: "GET",
+				         url: "api/course.do",
+				         crossDomain: true,
+				         data: "id="+id,
+				         cache: false,
+				         dataType: 'json',
+				         timeout: 5000,
+				         success: function (response) {
+				      	   
+				             if(response.status == 200){
+				             	console.log(response['response']['data'][0]['image']);
+				             	var imagePath=response['response']['data'][0]['image'];
+				             	$("#coursepic").attr("src", imagePath);
+				             	
+				             	}
+				             console.log(response);
+				         },
+				         error: function () {
+				             alert("無法連線到伺服器！");
+				         }
+				     });
+				 }
 		   function addCourses(data) {//顯示學生訂閱課程
 			   //console.log(data);
 			   var courseAll = ""; 
 			   courseAll += ' <div class="col-md-4">';
 				courseAll += '<div class="card mb-4 box-shadow">';
-				courseAll +='<img class="card-img-top"  alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTxDQcl1SA2jzxtsOqnl0eA-zF9p0JoDFZCALHVI25lqAdzR-Ec" data-holder-rendered="true">'
+				courseAll +='<img id="coursepic" class="card-img-top"  alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="">'
 	
 				courseAll += '<div class="card-body">';
 				courseAll += '<h5 id ="courseName" class="card-title">'
@@ -310,7 +333,7 @@ margin-top: 100px;
 				courseAll += '</div>';
 					 
 		               getSubscribes(data[0]['id']);
-		               
+		               getStucoursepic(data[0]['id']);
 		               $("#coursesPanel").append(courseAll);//把所有COURSE資料顯現在COURSE區        
 				   
 			   }
@@ -458,10 +481,7 @@ margin-top: 100px;
 		               coachAll += ' <div class="card mb-4 box-shadow">';
 		               coachAll += '<img id="coachpic" class="card-img-top"  alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="">';
 		               coachAll += '<div class="card-body">';
-		               coachAll += '<h5 id ="coachName" class="card-title">'
-							+ data[0]['name'] + '</h5>';
-		               coachAll += '<p id ="coachTextarea" class="card-text">'
-							+ data[0]['information'] + '</p>';
+		               coachAll += '<h5 id ="coachName" class="card-title">'+ data[0]['name'] + '</h5>';
 		               coachAll += '<p id ="coachTextarea" class="card-text">'+data[0]['information']+'</p>';
 		               coachAll += '<p id ="follow'+data[0]['id']+'" class="card-text"><small class="text-muted">追蹤人數</small></p>';
 		               coachAll += '<p hidden id ="status" class="card-text" ><small class="text-muted">'+data[0]['status']+'</small></p>';

@@ -249,6 +249,30 @@ margin-top: 100px;
 
 			});
 		};
+		function getStucoursepic(id) {
+		     $.ajax({
+		         type: "GET",
+		         url: "api/course.do",
+		         crossDomain: true,
+		         data: "id="+id,
+		         cache: false,
+		         dataType: 'json',
+		         timeout: 5000,
+		         success: function (response) {
+		      	   
+		             if(response.status == 200){
+		             	console.log(response['response']['data'][0]['image']);
+		             	var imagePath=response['response']['data'][0]['image'];
+		             	$("#coursepic").attr("src", imagePath);
+		             	
+		             	}
+		             console.log(response);
+		         },
+		         error: function () {
+		             alert("無法連線到伺服器！");
+		         }
+		     });
+		 }
 		function addCourses(data) {//讀取教練的課程
 			var arrCoursesid = [];
 			var courseAll = "";
@@ -261,7 +285,7 @@ margin-top: 100px;
 								//console.log(index);   
 								courseAll += ' <div class="col-md-4">';
 								courseAll += '<div class="card mb-4 box-shadow">';
-								courseAll +='<img class="card-img-top"  alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTxDQcl1SA2jzxtsOqnl0eA-zF9p0JoDFZCALHVI25lqAdzR-Ec" data-holder-rendered="true">'
+								courseAll +='<img id="coursepic" class="card-img-top"  alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="">'
 					
 								courseAll += '<div class="card-body">';
 								courseAll += '<h5 id ="courseName" class="card-title">'
@@ -284,7 +308,7 @@ margin-top: 100px;
 								courseAll += '</div>';
 								courseAll += '</div>';
 					              
-					                
+								getStucoursepic(value['id']);
 								arrCoursesid.push(value['id']);//依據COURSEID查看訂閱人數
 							})
 			//console.log(arrCoursesid);
