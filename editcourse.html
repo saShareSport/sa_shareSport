@@ -134,11 +134,14 @@ html, body {
 		<br>
 		<br>
 		<div class="video">
-				<label for="course_video">新增影片</label>
-				<label class="star">原網址為「https://www.youtube.com/watch?v=影片id」，請將網址改為「https://www.youtube.com/embed/影片id」再按新增！</label><br>
-                <br><input type="text" id="videoAddress">
+				<h3>新增影片</h3>
+				<input type="text" id="videoAddress">
                 <button type="button" id="add" class="btn btn-dark">上傳</button>
-        </div>
+        </div><br>
+        <form>
+        <div id="list"></div>
+        </form>
+        
 	</div>
 
 	<script>
@@ -149,7 +152,7 @@ html, body {
 
 		var course_status;
 		var image = "";
-
+		
 		var ups = '<input class="form-check-input" type="radio" name="exampleRadios" id="upradio" value="1" checked disabled><h5 class="form-check-label" >上肢</h5>';
 		var mids = '<input class="form-check-input" type="radio" name="exampleRadios" id="midradio" value="1" checked disabled><h5 class="form-check-label" >核心</h5>';
 		var downs = '<input class="form-check-input" type="radio" name="exampleRadios" id="downradio" value="1" checked disabled><h5 class="form-check-label" >下肢</h5>';
@@ -191,9 +194,6 @@ html, body {
 						}
 					});
 		}
-
-		//var cname = $('#coursename').val();
-		//var cinfo = $('#coursetext').val();
 
 		function updatetextinfo(id) {//更新coursetextinfo
 
@@ -288,16 +288,128 @@ html, body {
 				}
 			})
 		});
+		var address;
+		
+            
+		$("#add").click(function() {//新增影片
+			var result=$('#videoAddress').val();
+			address=result.replace('watch?v=', 'embed/');
+			console.log(address);
+			
+			var data_object = {
+					"course_id" : id,
+					"video_link" : address
+				};
+
+				// 將JSON格式轉換成字串
+				var data_string = JSON.stringify(data_object);
+				$.ajax({
+					url : 'api/video.do',
+					type : 'POST',
+					crossDomain : true,
+					data : data_string,
+					cache : false,
+					dataType : 'json',
+					timeout : 5000,
+					success : function(response) {
+						console.log(response);
+					},
+					error : function() {
+						alert("無法連線到伺服器！");
+					}
+				})
+				addVideo();
+				isDeleteVideo();
+			});
+		function addVideo(){
+			var videoAll="";
+			videoAll+='<div class="col-md-4">';
+			videoAll += '<div class="card mb-4 box-shadow">';
+			videoAll+='<iframe width="320" height="240" src="'+address+'"></iframe>';
+			videoAll+='<button type="button" class="btn btn-sm btn-outline-secondary deleteVideo">刪除影片</button>';
+            videoAll+='</div>';
+            videoAll+='</div>';
+			$("#list").append(videoAll);
+            $('#videoAddress').val('');                 //清空input格
+            
+            }; 
+            function isDeleteVideo(evt) {//刪除特定coursecard
+    			$('.deleteVideo').click(function() {
+    				alert("delete");
+    				console.log("刪除" + this.id);
+    				deleteCourseVideo(this.id);
+
+    			});
+    		};
+    		function deleteCourseVideo(deleteId) {//刪除COURSE並清空course資訊
+    			// 將資料組成JSON格式
+    			var data_object = {
+    				"id" : deleteId,
+    			};
+    			// 將JSON格式轉換成字串
+    			var data_string = JSON.stringify(data_object);
+    			$.ajax({
+    				type : "DELETE",
+    				url : "api/video.do",
+    				crossDomain : true,
+    				data : data_string,
+    				cache : false,
+    				dataType : 'json',
+    				timeout : 5000,
+    				success : function(response) {
+    					if (response.status == 200) {
+    						$("#list").empty();
+    						getVideo(id);
+
+    					}
+    					console.log(response);
+    				},
+    				error : function() {
+    					alert("無法連線到伺服器！");
+    				}
+    			});
+    		}
+            function getVideo(id) {
+    			$.ajax({
+    						type : "GET",
+    						url : "api/video.do",
+    						crossDomain : true,
+    						data : "id=" + id,
+    						cache : false,
+    						dataType : 'json',
+    						timeout : 5000,
+    						success : function(response) {
+    							console.log(response);
+    							if (response.status == 200) {
+    								 $.each(response.response.data,function(index, value){
+    									 //console.log(value)
+    				            		   showVideo(value);
+    				            		   isDeleteVideo();
+    				            	   })
+    							}
+    						},
+    						error : function() {
+    							alert("無法連線到伺服器！");
+    						}
+    					});
+    		}
+            function showVideo(value){
+    			var videoAll="";
+    			videoAll+='<table border="4">';
+    			videoAll+='<iframe width="320" height="240" src="'+value['video_link']+'"></iframe>';
+    			videoAll+='<button id="'+value['id']+'" type="button" class="btn btn-sm btn-outline-secondary deleteVideo">刪除影片</button>';
+                videoAll+='</table>';
+    			$("#list").append(videoAll);
+                $('#videoAddress').val('');                 //清空input格
+                
+                }; 
 		$(document).ready(function() {
 			getCourse(id)
-
+			getVideo(id)
+			
 		});
-		$("#add").click(function() {
-			var result=$('#videoAddress').val();
-			console.log(result);
-			var address=document.write(result.replace(/watch?v=/, "embed/"));
-			console.log(address);
-		})
+		
+		
 		$("#file").click(function() { //瀏覽
 			$("#upload").css("visibility", "visible");
 		});
