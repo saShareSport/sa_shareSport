@@ -76,6 +76,7 @@ body {
             <th scope="col">帳號</th>
             <th scope="col">性別</th>
             <th scope="col">更新時間</th>
+            <th scope="col">status</th>
             <th scope="col">編輯</th>
           </tr>
         </thead>
@@ -185,6 +186,7 @@ body {
 			 CoachTable_html +='<td>' + value['email'] + '</td>';
 			 CoachTable_html +='<td>' + value['sex'] + '</td>';
 			 CoachTable_html +='<td>' + value['modified'] + '</td>';
+			 CoachTable_html +='<td>' + value['status'] + '</td>';
 			 CoachTable_html +='<td>' + '<a class="btn btn-secondary" href="Admincoachmodify.html?id=' + value['id'] + '">編輯</a>'+'</td>';
 			 //StudentTable_html +='<td>'+'<a id="StudentButton" class="btn btn-primary" href="javascript:deleteMember(' + value['id'] + ') onclick="click()" ; ">復權</a></td></tr>';
 		 })
