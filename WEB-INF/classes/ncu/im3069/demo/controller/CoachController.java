@@ -178,12 +178,11 @@ public class CoachController extends HttpServlet {
         String password = jso.getString("password");
         String name = jso.getString("name");
         String sex = jso.getString("sex");
-        String image = jso.getString("image");
         String information = jso.getString("information");
         int status = jso.getInt("status");
 
         /** 透過傳入之參數，新建一個以這些參數之教練Member物件 */
-        Coach c = new Coach(id, email, password, name, sex, image, information, status);
+        Coach c = new Coach(id, email, password, name, sex, information, status);
         
         /** 透過Member物件的update()方法至資料庫更新該名教練資料，回傳之資料為JSONObject物件 */
         JSONObject data = c.update();

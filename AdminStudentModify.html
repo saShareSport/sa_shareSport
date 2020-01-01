@@ -86,7 +86,6 @@ body {
 </form>
 </body>
 <script>
-var image= null;
 var role = null;
 $("#self").click(function() {
 	$.ajax({
@@ -137,8 +136,7 @@ $("#self").click(function() {
 	    var sex = $("#studentSex :selected").val();
 	    //var info = $('#studentTextarea').val();
 	    var status = $('#studentStatus').val();
-	    console.log(image)
-	
+
 	    var password_rule = /^.[A-Za-z0-9]+$/;
 	
 	    if(!password_rule.test(password)) {
@@ -155,7 +153,6 @@ $("#self").click(function() {
 	                "email": email,
 	                "password": password,
 	                "sex": sex,
-	                "image":image,
 	                "status":status, 
 	        };
 	
@@ -174,8 +171,8 @@ $("#self").click(function() {
 	                success: function (response) {
 	                	console.log(response);
 	                    if(response.status == 200){
-	                        getStudent();
-	                    	//window.location.href = "studentlist.html"
+	                        //getStudent();
+	                    	window.location.href = "studentlist.html"
 	                    }
 	                },
 	                error: function () {
@@ -203,9 +200,7 @@ $("#self").click(function() {
 		                   	document.getElementById('studentPassword').value = response['response']['data'][0]['password'];
 		                   	document.getElementById('studentPasswordcheck').value = response['response']['data'][0]['password'];
 		                   	document.getElementById('selectedSex').value = response['response']['data'][0]['sex'];
-		                   	document.getElementById('studentStatus').value = response['response']['data'][0]['status'];
-		                   	image=response['response']['data'][0]['image'];
-		                   	console.log(image)
+		                   	document.getElementById('studentStatus').value = response['response']['data'][0]['status'];		                   			                
 	               }
 	               console.log(response);	            
 	           },
