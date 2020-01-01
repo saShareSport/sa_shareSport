@@ -59,7 +59,7 @@
     <form class="form-signin" style="font-family: Microsoft JhengHei;" action="api/login.do" method="POST">
       
       <h1 class="h5 mb-3 font-weight-normal"><i class="fas fa-dumbbell"></i> ShareSport</h1>
-      <h1 class="h3 mb-3 font-weight-normal">登入</h1>
+      <h1 class="h3 mb-3 font-weight-normal">登入/登出</h1>
       <br>
       <label for="inputEmail" class="sr-only">Email address</label>
       <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
@@ -73,7 +73,7 @@
 			<input type="checkbox" class="checkbox" name="admin" value="admin">admin
 		</div>
 	  <br>
-      <button class="btn btn-lg btn-primary btn-block" type="submit" value="submit">Login</button>
+      <button class="btn btn-lg btn-primary btn-block" type="submit" id="login" value="submit">Login</button>
     </form>
     <br>
     <button class="btn btn-lg btn-primary btn-block" id="logout" value="logout" style="font-family: Microsoft JhengHei;">Logout</button>
@@ -136,12 +136,14 @@ body {
     	                if(response.status == 200){
     	                 console.log("logout");
     	                 login = response.login;
-    	                 if(login == "success"){
- 	       				 	document.getElementById("sign").innerHTML = "登出";
- 	       				 }
- 	       			 	 else{
- 	       			 		document.getElementById("sign").innerHTML = "登入";
- 	       			 	 }
+    	    
+ 	       			 	 document.getElementById("sign").innerHTML = "登入";
+ 	       			 	 document.getElementById("inputEmail").style.display = 'block';
+       					 document.getElementById("inputPassword").style.display = 'block';
+       					 document.getElementById("checkboxGroup").style.display = 'block';
+       					 document.getElementById("login").style.display = 'block';
+ 	       			 	 document.getElementById("logout").style.display = 'none';
+ 	       			 	 
     	              }
     	            },
     	            error: function () {
@@ -164,9 +166,19 @@ body {
     	                	console.log(login);
     	       			 	if(login == "success"){
     	       				 	document.getElementById("sign").innerHTML = "登出";
+    	       				 	document.getElementById("inputEmail").style.display = 'none';
+    	       					document.getElementById("inputPassword").style.display = 'none';
+    	       					document.getElementById("checkboxGroup").style.display = 'none';
+    	       					document.getElementById("login").style.display = 'none';
+    	       					document.getElementById("logout").style.display = 'block';
     	       				}
     	       			 	else{
     	       			 		document.getElementById("sign").innerHTML = "登入";
+	    	       			 	document.getElementById("inputEmail").style.display = 'block';
+	       						document.getElementById("inputPassword").style.display = 'block';
+	       						document.getElementById("checkboxGroup").style.display = 'block';
+	       						document.getElementById("login").style.display = 'block';
+	 	       			 		document.getElementById("logout").style.display = 'none';
     	       			 	}
     	              }
     	            },
