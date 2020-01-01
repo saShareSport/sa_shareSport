@@ -103,7 +103,6 @@ html, body {
 			timeout : 5000,
 			success : function(response) {
 				if (response.status == 200) {
-					// console.log(response);
 					console.log(response);
 					id = response.response.data[0].id;
 					role = response.role;
@@ -162,7 +161,7 @@ html, body {
 		}
 
 		function NewAdmin() {
-			location.href = "/sa_shareSport/RegisterAdmin.html";
+			location.href = "RegisterAdmin.html";
 		}
 
 		function getAllMember() {
@@ -203,7 +202,7 @@ html, body {
 								AdminsTable_html += '<td>' + value['modified']
 										+ '</td>';
 								AdminsTable_html += '<td>'
-										+ '<a class="btn btn-secondary" href="ModifyAdmin.html"?id='
+										+ '<a class="btn btn-secondary" href="ModifyAdmin.html?id='
 										+ value['id'] + '">編輯</a>' + '</td>';
 								//AdminsTable_html +='<td>'+'<a href="javascript: deleteMember(' + value['id'] + ');">停權</a></td></tr>';
 							})

@@ -161,7 +161,7 @@ public class CoachHelper {
                 int status = rs.getInt("status");
                 
                 /** 將每一筆教練資料產生一名新Coach物件 */
-                c = new Coach(coach_id,email, password,name,sex,image,information, followers_count, status);
+                c = new Coach(coach_id,email, password,name,sex,image,information, followers_count, status, modified );
                 /** 取出該名教練之資料並封裝至 JSONsonArray 內 */
                 jsa.put(c.getData());
             }
@@ -248,7 +248,7 @@ public class CoachHelper {
                 int status = rs.getInt("status");
                 
                 /** 將每一筆教練資料產生一名新Coach物件 */
-                c = new Coach(coach_id,email, password,name,sex,image,informaton, followers_count, status);
+                c = new Coach(coach_id,email, password,name,sex,image,informaton, followers_count, status, modified );
                 /** 取出該名教練之資料並封裝至 JSONsonArray 內 */
                 jsa.put(c.getData());
             }

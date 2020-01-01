@@ -52,23 +52,8 @@ body {
 			</nav>
 		</div>
 	</header>
-	
-    <ul class="nav justify-content-center">
-        <li class="nav-item">
-          <a id=AdminList class="nav-link active" href="AdminsList.html">管理員列表</a>
-        </li>
-        <li class="nav-item">
-          <a id=StudentList class="nav-link" href="studentlist.html">管理學生列表</a>
-        </li>
-        <li class="nav-item">
-          <a id=CoachList class="nav-link" href="CoachList.html">管理教練列表</a>
-        </li>
-        <li class="nav-item">
-            <a id=CourseList class="nav-link" href="CourseList.html">管理教程列表</a>
-          </li>
-      </ul>
       
-      <form id=registeredManagerForm >
+      <form id=registeredManagerForm  onclick="return false">
         <div class="form-group">
             <label for="name">姓名</label>
             <input type="text" style="width:600px" class="form-control" id="registeredAdminName" placeholder="請輸入姓名">
@@ -85,7 +70,7 @@ body {
             <label for="exampleInputPassword1">重複輸入密碼</label>
             <input type="password" style="width:600px" class="form-control" id="registeredAdminPassword2" placeholder="請確認密碼">
         </div>
-        <button type="submit" class="btn btn-primary" id="RegisterAdmin">註冊</button>
+        <button type="submit" class="btn btn-secondary" id="RegisterAdmin" href="AdminList.html">註冊</button>
       </form>
 		
 	<script type="text/javascript">
@@ -168,6 +153,22 @@ body {
          });
      }
  }         
+	 
+	 $(document).ready(function(){
+		    $("#RegisterAdmin").click(function(){
+		        if($("#registeredAdminName").val()==""){
+		            alert("你尚未填寫姓名");    
+		        }else if($("#registeredAdminEmail").val()==""){
+		            alert("你尚未填寫email");  
+		        }else if($("#registeredAdminPassword1").val()==""){
+		            alert("你尚未填寫密碼");  
+		        }else if($("#registeredAdminPassword2").val()==""){
+		            alert("你尚未填寫確認密碼");  
+		        }else{
+		        	window.location.href = "AdminsList.html";
+		        }
+		    })
+		 })
 	 
 	
 	</script>

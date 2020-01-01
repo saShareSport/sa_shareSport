@@ -86,12 +86,13 @@ body {
   			<label for="status">status</label>
   			<input type="text" id = "coachStatus" class="form-control status">
   		</div>
-  		<button type="submit" class="btn btn-primary" id = "submit" href="interface.html">儲存</button>
+  		<button type="submit" class="btn btn-secondary" id = "submit" href="interface.html">儲存</button>
 </form>
 </body>
 <script>
 var id = 0;
 var role = null;
+var image;
 $("#self").click(function() {
 	$.ajax({
 		type : "GET",
@@ -128,10 +129,10 @@ $("#self").click(function() {
 
 	var url_string = window.location.href;
 	var url = new URL(url_string);
-	//var id = url.searchParams.get("id");
-	var sql_num = 0;
+	var id = url.searchParams.get("id");
+
 	
-	var id=1;
+	//var id=1;
 		
 	function updateCoach(id) {
 	    var name = $('#coachName').val();
@@ -160,7 +161,7 @@ $("#self").click(function() {
 	            "password": password,
 	            "sex": sex,
 	            "information":info,
-	            "image":"null",
+	            "image":image,
 	            "status":status   
 	        };
 	
@@ -177,10 +178,10 @@ $("#self").click(function() {
 	                dataType: 'json',
 	                timeout: 5000,
 	                success: function (response) {
-	                    $('#flashMessage').html(response.message);
-	                    $('#flashMessage').show();
+	                	console.log(response);
 	                    if(response.status == 200){
-	                        getCoach();
+	                        //getCoach();
+	                        window.location.href = "CoachList.html";
 	                    }
 	                },
 	                error: function () {
@@ -202,7 +203,6 @@ $("#self").click(function() {
 	           success: function (response) {
 	        	   console.log(response);
 	               if(response.status == 200){
-	               	//updateSQLTable(response.response);
 	               	document.getElementById('coachName').value = response['response']['data'][0]['name'];
 	               	document.getElementById('disabledEmail').value = response['response']['data'][0]['email'];
 	               	document.getElementById('coachPassword').value = response['response']['data'][0]['password'];
@@ -210,8 +210,7 @@ $("#self").click(function() {
 	               	document.getElementById('selectedSex').value = response['response']['data'][0]['sex'];
 	               	document.getElementById('coachTextarea').value = response['response']['data'][0]['information'];
 	               	document.getElementById('coachStatus').value = response['response']['data'][0]['status'];
-	               	//document.getElementById('member_login_times').value = response['response']['data'][0]['login_times'];
-	               	//document.getElementById('member_status').value = response['response']['data'][0]['status'];
+	               	image = response['response']['data'][0]['image'];
 	               }
 	               console.log(response);
 	           },
@@ -220,6 +219,7 @@ $("#self").click(function() {
 	           }
 	       });
 	   }
+	   
 	   $('#submit').click(function() {
 		   console.log(id)
 	       updateCoach(id)
@@ -227,7 +227,6 @@ $("#self").click(function() {
 	   
 	   $(document).ready(function() {
 	   	// 發出GET的AJAX請求取得原本該會員的資料
-	    	//$("#sql_log > tbody").empty();
 	       getCoach();
 	   });
 	

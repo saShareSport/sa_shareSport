@@ -155,9 +155,9 @@ public class StudentHelper {
                 String sex = rs.getString("sex");
                 String image = rs.getString("image");
                 int status = rs.getInt("status");
-                
+                Timestamp modified = rs.getTimestamp("modified");
                 /** 將每一筆學生資料產生一名新Student物件 */
-                s = new Student(student_id, email, password, name, sex, image, status);
+                s = new Student(student_id, email, password, name, sex, image, status,modified);
                 /** 取出該名學生之資料並封裝至 JSONsonArray 內 */
                 jsa.put(s.getData());
             }
@@ -242,7 +242,7 @@ public class StudentHelper {
                 int status = rs.getInt("status");
                 
                 /** 將每一筆學生資料產生一名新Member物件 */
-                s = new Student(student_id,email, password,name,sex,image,status);
+                s = new Student(student_id,email, password,name,sex,image,status,modified);
                 /** 取出該名學生之資料並封裝至 JSONsonArray 內 */
                 jsa.put(s.getData());
             }
@@ -486,7 +486,7 @@ public class StudentHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "Update `sa_sharesport`.`students` SET `name` = ? ,`password` = ? ,`sex` = ?, `email` = ?,`image` = ?,`modified` = ? WHERE `id` = ?";
+            String sql = "Update `sa_sharesport`.`students` SET `name` = ? ,`password` = ? ,`sex` = ?, `email` = ?,`image` = ?,`modified` = ?,`status` = ? WHERE `id` = ?";
             /** 取得所需之參數 */
             String name = s.getName();
             String email = s.getEmail();
@@ -494,6 +494,7 @@ public class StudentHelper {
             String sex = s.getSex();
             String image = s.getImg();
             int id = s.getID();
+            int status = s.getStatus();
             
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
@@ -503,7 +504,8 @@ public class StudentHelper {
             pres.setString(4, email);
             pres.setString(5, image);
             pres.setTimestamp(6, Timestamp.valueOf(LocalDateTime.now()));
-            pres.setInt(7, id);
+            pres.setInt(7, status);
+            pres.setInt(8, id);
             /** 執行更新之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();
 
@@ -591,7 +593,7 @@ public class StudentHelper {
                 int status = rs.getInt("status");
                 
                 /** 將每一筆學生資料產生一名新Member物件 */
-                s = new Student(student_id,email, password,name,sex,image,status);
+                s = new Student(student_id,email, password,name,sex,image,status,modified);
                 /** 取出該名學生之資料並封裝至 JSONsonArray 內 */
                 jsa.put(s.getData());
             }

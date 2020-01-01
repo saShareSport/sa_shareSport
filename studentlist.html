@@ -135,8 +135,7 @@ body {
                 dataType: 'json',
                 timeout: 5000,
                 success: function (resp) {
-                    if(resp.status == 200){
-                       
+                    if(resp.status == 200){       
                         getAllMember();
                     }
                     console.log(resp);
@@ -191,12 +190,13 @@ body {
 		$("#StudentTable > tbody").empty();
 		var StudentTable_html='';
 		 $.each(data, function(index, value){
+			 console.log(value ['id'])
 			 StudentTable_html +='<tr><td scope="row">'+ value ['id'] + '</td>';
 			 StudentTable_html +='<td>' + value['name'] + '</td>';
 			 StudentTable_html +='<td>' + value['email'] + '</td>';
 			 StudentTable_html +='<td>' + value['sex'] + '</td>';
 			 StudentTable_html +='<td>' + value['modified'] + '</td>';
-			 StudentTable_html +='<td>' + '<a class="btn btn-secondary" href="AdminStudentModify.html"?id=' + value['id'] + '">編輯</a>'+'</td>';
+			 StudentTable_html +='<td>' + '<a class="btn btn-secondary" href="AdminStudentModify.html?id=' + value['id'] + '">編輯</a>'+'</td>';
 			 //StudentTable_html +='<td>'+'<a id="StudentButton" class="btn btn-primary" href="javascript:deleteMember(' + value['id'] + ') onclick="click()" ; ">復權</a></td></tr>';
 		 })
 		 $("#StudentTable > tbody").append(StudentTable_html);
