@@ -93,11 +93,11 @@ margin-top: 100px;
             			<div id="changePicture">
 							<form id="uploadPicture" enctype="multipart/form-data">
 								<input id="file" type="file" name="file" />
-								<button id="upload" type="button">上傳圖檔</button>
+								<button id="upload" type="button" class="btn btn-sm btn-outline-secondary">上傳圖檔</button>
 							</form>
 							
             			</div>
-            			<button id="confirm" type="button">完成</button>
+            			<button id="confirm" type="button" class="btn btn-sm btn-outline-secondary">完成</button>
         		</div>
         	</div>
         </div>
@@ -127,7 +127,6 @@ margin-top: 100px;
        </div> 
       </main>
 		<script>
-		
 		var id;
 		
 		$("#upload").click(function() {
@@ -527,7 +526,7 @@ margin-top: 100px;
 				// 將資料組成JSON格式
 			        var data_object = {
 			        		'foll_stuId' : id,
-							'foll_coaId' : deleteId,
+							'foll_coaId ' : deleteId,
 			        };
 			        // 將JSON格式轉換成字串
 			        var data_string = JSON.stringify(data_object);
@@ -613,6 +612,39 @@ margin-top: 100px;
 			$("#savecoach").css("visibility","hidden");
 			$(".deleteCoach").css("visibility","hidden");
 		});
+	    $("#self").click(function() {
+			$.ajax({
+				type : "GET",
+				url : "api/login.do",
+				crossDomain : true,
+				cache : false,
+				dataType : 'json',
+				timeout : 5000,
+				success : function(response) {
+					if (response.status == 200) {
+						// console.log(response);
+						console.log(response);
+						id = response.response.data[0].id;
+						role = response.role;
+						console.log(role);
+					}
+
+					if (role == "student") {
+						location.href = "studentself.html"
+					} else if (role == "coach") {
+						location.href = "coachself.html"
+					} else if (role == "admin") {
+						location.href = "interface.html"
+					} else {
+						alert("請登入會員")
+					}
+				},
+				error : function() {
+					alert("無法連線到伺服器！");
+				}
+			});
+
+		})
 		</script>
       
     

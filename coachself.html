@@ -88,11 +88,11 @@ margin-top: 100px;
             			<div id="changePicture">
 							<form id="uploadPicture" enctype="multipart/form-data">
 								<input id="file" type="file" name="file" />
-								<button id="upload" type="button">上傳圖檔</button>
+								<button id="upload" type="button" class="btn btn-sm btn-outline-secondary">上傳圖檔</button>
 							</form>
 							
             			</div>
-            			<button id="confirm" type="button">完成</button>
+            			<button id="confirm" type="button" class="btn btn-sm btn-outline-secondary">完成</button>
         		</div>
         	</div>
         </div>
@@ -116,12 +116,7 @@ margin-top: 100px;
 
     </body>
 <script>
-		var url_string = window.location.href;
-		var url = new URL(url_string);
-		//var id = url.searchParams.get("id");
-		var sql_num = 0;
 		var id;
-		
 		$("#upload").click(function() {
 		var formData = new FormData($('#uploadPicture')[0]);
 		$.ajax({
@@ -382,6 +377,7 @@ margin-top: 100px;
 	             timeout: 5000,
 	             success: function (response) {
 	                 if(response.status == 200){
+	                	 
 	               	 // console.log(response);
 	                 }
 	                 console.log(response);
@@ -429,7 +425,39 @@ margin-top: 100px;
 			$("#uploadPicture").css("visibility", "hidden");
 			$("#confirm").css("visibility", "hidden");
 		})
-		
+		$("#self").click(function() {
+				$.ajax({
+					type : "GET",
+					url : "api/login.do",
+					crossDomain : true,
+					cache : false,
+					dataType : 'json',
+					timeout : 5000,
+					success : function(response) {
+						if (response.status == 200) {
+							// console.log(response);
+							console.log(response);
+							id = response.response.data[0].id;
+							role = response.role;
+							console.log(role);
+						}
+
+						if (role == "student") {
+							location.href = "studentself.html"
+						} else if (role == "coach") {
+							location.href = "coachself.html"
+						} else if (role == "admin") {
+							location.href = "interface.html"
+						} else {
+							alert("請登入會員")
+						}
+					},
+					error : function() {
+						alert("無法連線到伺服器！");
+					}
+				});
+
+			})
 </script>
     <!-- Bootstrap core JavaScript
     ================================================== -->

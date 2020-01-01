@@ -57,7 +57,10 @@ html, body {
 .star {
 	color: red;
 }
-
+#demo {
+	width="320" ;
+	height="240";
+}
 #upload {
 	visibility: hidden;
 }
@@ -118,18 +121,21 @@ html, body {
 			<br> <br>
 			<div class="form-group">
 				<h3 for="exampleFormControlTextarea1">教程簡介</h3>
-				<textarea class="form-control" id="coursetext" rows="3"></textarea>
-				<button id="textinfo" type="button">完成</button>
+				<textarea class="form-control" id="coursetext" rows="3"></textarea><br>
+				<button id="textinfo" type="button" class="btn btn-sm btn-outline-secondary">完成</button>
 			</div>
 
 		</form>
 		<div class="cover">
 			<h3>教程封面</h3>
 			<form id="uploadPicture" enctype="multipart/form-data">
-			<input id="file" type="file" name="file" /> <img id="demo" />
-			<button id="upload" type="button">上傳圖檔</button>
+			<input id="file" type="file" name="file" /> 
+			<img width="320" id="demo" /><br>
+			<br>
+			<button id="upload" type="button" class="btn btn-sm btn-outline-secondary">上傳圖檔</button>
+			<button id="confirm" type="button" class="btn btn-sm btn-outline-secondary">完成</button>
 		</form>
-		<button id="confirm" type="button">完成</button>
+		
 		</div>
 		<br>
 		<br>
@@ -138,10 +144,12 @@ html, body {
 				<input type="text" id="videoAddress">
                 <button type="button" id="add" class="btn btn-dark">上傳</button>
         </div><br>
-        <form>
-        <div id="list"></div>
-        </form>
-        
+        <div class="py-5 ">
+        <div class="container" >	
+        	<div id="list"></div>
+        </div>
+        </div>
+            
 	</div>
 
 	<script>
@@ -149,7 +157,6 @@ html, body {
 		var url = new URL(url_string);
 		var id = url.searchParams.get("id");
 		var sql_num = 0;
-
 		var course_status;
 		var image = "";
 		
@@ -157,8 +164,7 @@ html, body {
 		var mids = '<input class="form-check-input" type="radio" name="exampleRadios" id="midradio" value="1" checked disabled><h5 class="form-check-label" >核心</h5>';
 		var downs = '<input class="form-check-input" type="radio" name="exampleRadios" id="downradio" value="1" checked disabled><h5 class="form-check-label" >下肢</h5>';
 		function getCourse(id) {//取得courseid
-			$
-					.ajax({
+			$.ajax({
 						type : "GET",
 						url : "api/course.do",
 						crossDomain : true,
@@ -313,26 +319,17 @@ html, body {
 					timeout : 5000,
 					success : function(response) {
 						console.log(response);
+						
 					},
 					error : function() {
 						alert("無法連線到伺服器！");
 					}
 				})
-				addVideo();
-				isDeleteVideo();
+				$("#list").empty();
+    			getVideo(id);
+				
 			});
-		function addVideo(){
-			var videoAll="";
-			videoAll+='<div class="col-md-4">';
-			videoAll += '<div class="card mb-4 box-shadow">';
-			videoAll+='<iframe width="320" height="240" src="'+address+'"></iframe>';
-			videoAll+='<button type="button" class="btn btn-sm btn-outline-secondary deleteVideo">刪除影片</button>';
-            videoAll+='</div>';
-            videoAll+='</div>';
-			$("#list").append(videoAll);
-            $('#videoAddress').val('');                 //清空input格
-            
-            }; 
+		
             function isDeleteVideo(evt) {//刪除特定coursecard
     			$('.deleteVideo').click(function() {
     				alert("delete");
@@ -396,9 +393,9 @@ html, body {
             function showVideo(value){
     			var videoAll="";
     			videoAll+='<table border="4">';
-    			videoAll+='<iframe width="320" height="240" src="'+value['video_link']+'"></iframe>';
+    			videoAll+='<iframe width="320" height="240" src="'+value['video_link']+'"></iframe><br>';
     			videoAll+='<button id="'+value['id']+'" type="button" class="btn btn-sm btn-outline-secondary deleteVideo">刪除影片</button>';
-                videoAll+='</table>';
+                videoAll+='</div>';
     			$("#list").append(videoAll);
                 $('#videoAddress').val('');                 //清空input格
                 
@@ -423,6 +420,39 @@ html, body {
 		$("#textinfo").click(function() {
 			updatetextinfo(id);
 		})
+		$("#self").click(function() {
+				$.ajax({
+					type : "GET",
+					url : "api/login.do",
+					crossDomain : true,
+					cache : false,
+					dataType : 'json',
+					timeout : 5000,
+					success : function(response) {
+						if (response.status == 200) {
+							// console.log(response);
+							console.log(response);
+							id = response.response.data[0].id;
+							role = response.role;
+							console.log(role);
+						}
+
+						if (role == "student") {
+							location.href = "studentself.html"
+						} else if (role == "coach") {
+							location.href = "coachself.html"
+						} else if (role == "admin") {
+							location.href = "interface.html"
+						} else {
+							alert("請登入會員")
+						}
+					},
+					error : function() {
+						alert("無法連線到伺服器！");
+					}
+				});
+
+			})
 	</script>
 
 
