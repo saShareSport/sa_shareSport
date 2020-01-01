@@ -53,7 +53,7 @@ body {
 	<form>
   		<div class="form-group">
     		<label for="adminName">名稱</label>
-    		<input type="text" id = "adminName" class="form-control name">
+    		<input type="text" id ="adminName" class="form-control">
     		<small  class="form-text text-muted">長度為30字 可接受中英文字符</small>
   		</div>
   		<div class="form-group">
@@ -74,7 +74,7 @@ body {
   			<label for="status">status</label>
   			<input type="text" id = "adminStatus" class="form-control status">
   		</div>
-  		<button type="submit" class="btn btn-primary" id = "submit" href="interface.html">儲存</button>
+  		<button type="submit" class="btn btn-secondary" id ="submit">儲存</button>
 </form>
 </body>
 <script>
@@ -116,18 +116,16 @@ $("#self").click(function() {
 
 	var url_string = window.location.href;
 	var url = new URL(url_string);
-	//var id = url.searchParams.get("id");
-	var sql_num = 0;
+	var id = url.searchParams.get("id");
 	
-	var id=1;
+	//var id=1;
 		
 	function updateAdmin(id) {
 	    var name = $('#adminName').val();
 	    var email = $('#disabledEmail').val();
 	    var password = $('#adminPassword').val();
 	    var repassword= $('#adminPasswordcheck').val();
-	    var status = $('#adminStatus').val();
-	    
+	    var status = $('#adminStatus').val();	    
 	
 	    var password_rule = /^.[A-Za-z0-9]+$/;
 	
@@ -163,13 +161,15 @@ $("#self").click(function() {
 	                    $('#flashMessage').html(response.message);
 	                    $('#flashMessage').show();
 	                    if(response.status == 200){
-	                        getAdmin();
+	                        //getAdmin();
+	                    	window.location.href = "AdminsList.html"
 	                    }
 	                },
 	                error: function () {
 	                    alert("無法連線到伺服器！");
 	                }
 	        });
+	        
 	    }
 	}
 	
@@ -185,14 +185,11 @@ $("#self").click(function() {
 	           success: function (response) {
 	        	   console.log(response);
 	               if(response.status == 200){
-	               	//updateSQLTable(response.response);
 	               	document.getElementById('adminName').value = response['response']['data'][0]['name'];
 	               	document.getElementById('disabledEmail').value = response['response']['data'][0]['email'];
 	               	document.getElementById('adminPassword').value = response['response']['data'][0]['password'];
 	               	document.getElementById('adminPasswordcheck').value = response['response']['data'][0]['password'];
 	               	document.getElementById('adminStatus').value = response['response']['data'][0]['status'];
-	               	//document.getElementById('member_login_times').value = response['response']['data'][0]['login_times'];
-	               	//document.getElementById('member_status').value = response['response']['data'][0]['status'];
 	               }
 	               console.log(response);
 	           },
@@ -201,6 +198,7 @@ $("#self").click(function() {
 	           }
 	       });
 	   }
+	   
 	   $('#submit').click(function() {
 		   console.log(id)
 	       updateAdmin(id)
@@ -208,19 +206,7 @@ $("#self").click(function() {
 	   
 	   $(document).ready(function() {
 	   	// 發出GET的AJAX請求取得原本該會員的資料
-	    	//$("#sql_log > tbody").empty();
 	       getAdmin();
 	   });
-	
-	var i = 0;//控制登入登出
-	$("#sign").click(function () {
-	    if (i == 0) {
-	        document.getElementById("sign").innerHTML = "登出";
-	        i = 1;
-	    } else {
-	        document.getElementById("sign").innerHTML = "登入";
-	        i = 0;
-	    }
-	});
 </script>
 </html>

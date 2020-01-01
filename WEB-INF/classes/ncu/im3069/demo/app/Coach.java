@@ -109,7 +109,7 @@ public class Coach {
      * @param login_times 更新時間的分鐘數
      * @param status the 教練之組別
      */
-    public Coach(int id, String email, String password, String name, String sex,String image,String information,int followers_count,int status) {
+    public Coach(int id, String email, String password, String name, String sex,String image,String information,int followers_count,int status,Timestamp modified) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -119,6 +119,7 @@ public class Coach {
         this.information = information;
         this.followers_count = followers_count;
         this.status = status;
+        this.modified= modified;
     }
     
     /**

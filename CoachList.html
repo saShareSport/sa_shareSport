@@ -98,7 +98,6 @@ body {
 			timeout : 5000,
 			success : function(response) {
 				if (response.status == 200) {
-					// console.log(response);
 					console.log(response);
 					id = response.response.data[0].id;
 					role = response.role;
@@ -186,7 +185,7 @@ body {
 			 CoachTable_html +='<td>' + value['email'] + '</td>';
 			 CoachTable_html +='<td>' + value['sex'] + '</td>';
 			 CoachTable_html +='<td>' + value['modified'] + '</td>';
-			 CoachTable_html +='<td>' + '<a class="btn btn-secondary" href="Admincoachmodify.html"?id=' + value['id'] + '">編輯</a>'+'</td>';
+			 CoachTable_html +='<td>' + '<a class="btn btn-secondary" href="Admincoachmodify.html?id=' + value['id'] + '">編輯</a>'+'</td>';
 			 //StudentTable_html +='<td>'+'<a id="StudentButton" class="btn btn-primary" href="javascript:deleteMember(' + value['id'] + ') onclick="click()" ; ">復權</a></td></tr>';
 		 })
 		 $("#CoachTable > tbody").append(CoachTable_html);
