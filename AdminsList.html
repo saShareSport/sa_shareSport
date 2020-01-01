@@ -79,6 +79,7 @@ html, body {
 				<th scope="col">姓名</th>
 				<th scope="col">帳號</th>
 				<th scope="col">更新時間</th>
+				<th scope="col">status</th>
 				<th scope="col">編輯</th>
 			</tr>
 		</thead>
@@ -200,6 +201,8 @@ html, body {
 								AdminsTable_html += '<td>' + value['email']
 										+ '</td>';
 								AdminsTable_html += '<td>' + value['modified']
+										+ '</td>';
+								AdminsTable_html += '<td>' + value['status']
 										+ '</td>';
 								AdminsTable_html += '<td>'
 										+ '<a class="btn btn-secondary" href="ModifyAdmin.html?id='

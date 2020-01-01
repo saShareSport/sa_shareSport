@@ -75,6 +75,7 @@ body {
             <th scope="col">教程名稱</th>
             <th scope="col">教練</th>
             <th scope="col">更新時間</th>
+            <th scope="col">status</th>
             <th scope="col">編輯</th>
           </tr>
         </thead>
@@ -182,6 +183,7 @@ body {
 			 CourseTable_html +='<td>' + value['information'] + '</td>';
 			 CourseTable_html +='<td>' + value['course_coach_id'] + '</td>';
 			 CourseTable_html +='<td>' + value['modified'] + '</td>';
+			 CourseTable_html +='<td>' + value['status'] + '</td>';
 			 CourseTable_html +='<td>' + '<a class="btn btn-secondary" href="edit.html?id=' + value['id'] + '">編輯</a>'+'</td>';
 			 //CourseTable_html +='<td>'+'<a href="javascript: deleteMember(' + value['id'] + ');">封鎖</a></td></tr>';
 		 })
