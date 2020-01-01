@@ -78,13 +78,12 @@ public class Student {
      * @param password 學生密碼
      * @param name 學生姓名
      */
-    public Student(int id, String email, String password, String name, String sex,String image,int status) {
+    public Student(int id, String email, String password, String name, String sex,int status) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;
         this.sex = sex;
-        this.image = image;
         this.status = status;
         this.modified = Timestamp.valueOf(LocalDateTime.now());
      

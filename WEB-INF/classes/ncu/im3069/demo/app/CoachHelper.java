@@ -494,7 +494,7 @@ public class CoachHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "Update `sa_sharesport`.`coaches` SET `name` = ? ,`password` = ? ,`sex` = ?, `email` = ?,`image` = ?,`information` = ?, `modified` = ?,`status` =? WHERE `id` = ?";
+            String sql = "Update `sa_sharesport`.`coaches` SET `name` = ? ,`password` = ? ,`sex` = ?, `email` = ?,`information` = ?, `modified` = ?,`status` =? WHERE `id` = ?";
             /** 取得所需之參數 */
             String name = c.getName();
             String email = c.getEmail();
@@ -511,11 +511,10 @@ public class CoachHelper {
             pres.setString(2, password);
             pres.setString(3, sex);
             pres.setString(4, email);
-            pres.setString(5, image);
-            pres.setString(6, information);
-            pres.setTimestamp(7, Timestamp.valueOf(LocalDateTime.now()));
-            pres.setInt(8, status);
-            pres.setInt(9, id);
+            pres.setString(5, information);
+            pres.setTimestamp(6, Timestamp.valueOf(LocalDateTime.now()));
+            pres.setInt(7, status);
+            pres.setInt(8, id);
             /** 執行更新之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();
 
@@ -603,7 +602,7 @@ public class CoachHelper {
                 int status = rs.getInt("status");
                 
                 /** 將每一筆教練資料產生一名新Member物件 */
-                c = new Coach(coach_id,email, password,name,sex,image,information,status);
+                c = new Coach(coach_id,email, password,name,sex,information,status);
                 /** 取出該名教練之資料並封裝至 JSONsonArray 內 */
                 jsa.put(c.getData());
             }

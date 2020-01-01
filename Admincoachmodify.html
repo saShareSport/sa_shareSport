@@ -92,7 +92,7 @@ body {
 <script>
 var id = 0;
 var role = null;
-var image;
+
 $("#self").click(function() {
 	$.ajax({
 		type : "GET",
@@ -161,7 +161,6 @@ $("#self").click(function() {
 	            "password": password,
 	            "sex": sex,
 	            "information":info,
-	            "image":image,
 	            "status":status   
 	        };
 	
@@ -210,7 +209,7 @@ $("#self").click(function() {
 	               	document.getElementById('selectedSex').value = response['response']['data'][0]['sex'];
 	               	document.getElementById('coachTextarea').value = response['response']['data'][0]['information'];
 	               	document.getElementById('coachStatus').value = response['response']['data'][0]['status'];
-	               	image = response['response']['data'][0]['image'];
+
 	               }
 	               console.log(response);
 	           },

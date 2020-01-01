@@ -181,11 +181,11 @@ public class StudentController extends HttpServlet {
         String password = jso.getString("password");
         String name = jso.getString("name");
         String sex = jso.getString("sex");
-        String image = jso.getString("image");
+        //String image = jso.getString("image");
         int status = jso.getInt("status");
 
         /** 透過傳入之參數，新建一個以這些參數之會員Member物件 */
-        Student s = new Student(id, email, password, name, sex, image,status);
+        Student s = new Student(id, email, password, name, sex,status);
         
         /** 透過Member物件的update()方法至資料庫更新該名會員資料，回傳之資料為JSONObject物件 */
         JSONObject data = s.update();
