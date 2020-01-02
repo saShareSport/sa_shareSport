@@ -57,10 +57,11 @@ html, body {
 .star {
 	color: red;
 }
-#demo {
-	width="320" ;
-	height="240";
+
+#demo {width ="320";height ="240";
+	
 }
+
 #upload {
 	visibility: hidden;
 }
@@ -68,10 +69,10 @@ html, body {
 #confirm {
 	visibility: hidden;
 }
-.videolist{
-	display:inline-block;
+
+.videolist {
+	display: inline-block;
 	margin-left: 150px;
-	
 }
 </style>
 
@@ -97,7 +98,7 @@ html, body {
 			</nav>
 		</div>
 	</header>
-	<div id="container">
+	<div style="font-family: Microsoft JhengHei" id="container">
 		<form>
 			<div class="name">
 				<h3 for="exampleFormControlInput1">教程名稱</h3>
@@ -127,336 +128,387 @@ html, body {
 			<br> <br>
 			<div class="form-group">
 				<h3 for="exampleFormControlTextarea1">教程簡介</h3>
-				<textarea class="form-control" id="coursetext" rows="3"></textarea><br>
-				<button id="textinfo" type="button" class="btn btn-sm btn-outline-secondary">完成</button>
+				<textarea class="form-control" id="coursetext" rows="3"></textarea>
+				<br>
 			</div>
 
 		</form>
 		<div class="cover">
 			<h3>教程封面</h3>
 			<form id="uploadPicture" enctype="multipart/form-data">
-			<input id="file" type="file" name="file" /> 
-			<img width="320" id="demo" /><br>
-			<br>
-			<button id="upload" type="button" class="btn btn-sm btn-outline-secondary">上傳圖檔</button>
-			<button id="confirm" type="button" class="btn btn-sm btn-outline-secondary">完成</button>
-		</form>
-		
+				<input id="file" type="file" name="file" /> <img width="320"
+					id="demo" /><br> <br>
+				<button id="upload" type="button"
+					class="btn btn-sm btn-outline-secondary">上傳圖檔</button>
+				<button id="confirm" type="button"
+					class="btn btn-sm btn-outline-secondary">完成</button>
+			</form>
+
 		</div>
-		<br>
-		<br>
+		<br> <br>
 		<div class="video">
-				<h3>新增影片</h3>
-				<input type="text" id="videoAddress">
-                <button type="button" id="add" class="btn btn-dark">上傳</button>
-        </div>
-    </div>
-        	<div id="list"></div>
-        
-	<script>
-		var url_string = window.location.href;
-		var url = new URL(url_string);
-		var id = url.searchParams.get("id");
-		var sql_num = 0;
-		var course_status;
-		var image = "";
-		
-		var ups = '<input class="form-check-input" type="radio" name="exampleRadios" id="upradio" value="1" checked disabled><h5 class="form-check-label" >上肢</h5>';
-		var mids = '<input class="form-check-input" type="radio" name="exampleRadios" id="midradio" value="1" checked disabled><h5 class="form-check-label" >核心</h5>';
-		var downs = '<input class="form-check-input" type="radio" name="exampleRadios" id="downradio" value="1" checked disabled><h5 class="form-check-label" >下肢</h5>';
-		function getCourse(id) {//取得courseid
-			$.ajax({
-						type : "GET",
-						url : "api/course.do",
-						crossDomain : true,
-						data : "id=" + id,
-						cache : false,
-						dataType : 'json',
-						timeout : 5000,
-						success : function(response) {
-							console.log(response);
-							if (response.status == 200) {
-								document.getElementById('coursename').value = response['response']['data'][0]['name'];
-								course_status = (response['response']['data'][0]['status']);
+			<h3>新增影片</h3>
+			<input type="text" id="videoAddress">
+			<button type="button" id="add" class="btn btn-dark">上傳</button>
+		</div>
+	</div>
+	<div id="list"></div>
+	<button style="font-family: Microsoft JhengHei" id="textinfo"
+		type="button" class="btn btn-sm btn-outline-secondary">完成</button>
+</body>
+<script>
+	var url_string = window.location.href;
+	var url = new URL(url_string);
+	var id = url.searchParams.get("id");
+	var sql_num = 0;
+	var course_status;
+	var image = "";
 
-								document.getElementById('coursetext').value = response['response']['data'][0]['information'];
-								if (response['response']['data'][0]['upper_limb'] == "1") {
-									$("#up").empty();
-									$("#up").append(ups);
-								}
-								;
-								if (response['response']['data'][0]['core'] == "1") {
-									$("#mid").empty();
-									$("#mid").append(mids);
-								}
-								;
-								if (response['response']['data'][0]['lower_limb'] == "1") {
-									$("#down").empty();
-									$("#down").append(downs);
-								}
-							}
-						},
-						error : function() {
-							alert("無法連線到伺服器！");
-						}
-					});
-		}
+	var ups = '<input class="form-check-input" type="radio" name="exampleRadios" id="upradio" value="1" checked disabled><h5 class="form-check-label" >上肢</h5>';
+	var mids = '<input class="form-check-input" type="radio" name="exampleRadios" id="midradio" value="1" checked disabled><h5 class="form-check-label" >核心</h5>';
+	var downs = '<input class="form-check-input" type="radio" name="exampleRadios" id="downradio" value="1" checked disabled><h5 class="form-check-label" >下肢</h5>';
 
-		function updatetextinfo(id) {//更新coursetextinfo
-
-			var data_object = {
-				"id" : id,
-				//"course_coach_id": coach_id,
-				"name" : $('#coursename').val(),
-				"information" : $('#coursetext').val(),
-				"status" : course_status,
-				"image" : "",
-
-			};
-			console.log(data_object);
-			// 將JSON格式轉換成字串
-			var data_string = JSON.stringify(data_object);
-			$.ajax({
-				type : "PUT",
-				url : "api/course.do",
-				crossDomain : true,
-				data : data_string,
-				cache : false,
-				dataType : 'json',
-				timeout : 5000,
-				success : function(response) {
-					console.log(response);
-					if (response.status == 200) {
-
-					}
-				},
-				error : function() {
-					alert("無法連線到伺服器！");
-				}
-			});
-		}
-
-		$('#file').change(function() {
-			var file = $('#file')[0].files[0];
-			image = $('#file')[0].files[0].name;
-			var reader = new FileReader;
-			reader.onload = function(e) {
-				$('#demo').attr('src', e.target.result);
-			};
-			reader.readAsDataURL(file);
-		});
-		$("#upload").click(function() {
-			var formData = new FormData($('#uploadPicture')[0]);
-			console.log(formData)
-			$.ajax({
-				url : 'api/upload.do',
-				type : 'POST',
-				cache : false,
-				data : formData,
-				processData : false,
-				contentType : false,
-				success : function(response) {
-					console.log("upload success!");
-				},
-				error : function() {
-					alert("無法連線到伺服器！");
-				}
-			})
-
-		});
-
-		$("#confirm").click(function() {
-
-			
-			// put不能用getParameter 所以要傳object，後端才撈得到
-			var data_object = {
-				"id" : id,
-				"name" : $('#coursename').val(),
-				"information" : $('#coursetext').val(),
-				"status" : course_status,
-				"image" : image,
-			};
-
-			// 將JSON格式轉換成字串
-			var data_string = JSON.stringify(data_object);
-			$.ajax({
-				url : 'api/course.do',
-				type : 'PUT',
-				crossDomain : true,
-				data : data_string,
-				cache : false,
-				dataType : 'json',
-				timeout : 5000,
-				success : function(response) {
-					console.log(response);
-				},
-				error : function() {
-					alert("無法連線到伺服器！");
-				}
-			})
-		});
-		var address;
-		
-            
-		$("#add").click(function() {//新增影片
-			var result=$('#videoAddress').val();
-			address=result.replace('watch?v=', 'embed/');
-			console.log(address);
-			
-			var data_object = {
-					"course_id" : id,
-					"video_link" : address
-				};
-
-				// 將JSON格式轉換成字串
-				var data_string = JSON.stringify(data_object);
-				$.ajax({
-					url : 'api/video.do',
-					type : 'POST',
+	function getCourse(id) {//取得courseid
+		$
+				.ajax({
+					type : "GET",
+					url : "api/course.do",
 					crossDomain : true,
-					data : data_string,
+					data : "id=" + id,
 					cache : false,
 					dataType : 'json',
 					timeout : 5000,
 					success : function(response) {
 						console.log(response);
-						
-					},
-					error : function() {
-						alert("無法連線到伺服器！");
-					}
-				})
-				$("#list").empty();
-    			getVideo(id);
-				
-			});
-		
-            function isDeleteVideo(evt) {//刪除特定coursecard
-    			$('.deleteVideo').click(function() {
-    				alert("delete");
-    				console.log("刪除" + this.id);
-    				deleteCourseVideo(this.id);
-
-    			});
-    		};
-    		function deleteCourseVideo(deleteId) {//刪除COURSE並清空course資訊
-    			// 將資料組成JSON格式
-    			var data_object = {
-    				"id" : deleteId,
-    			};
-    			// 將JSON格式轉換成字串
-    			var data_string = JSON.stringify(data_object);
-    			$.ajax({
-    				type : "DELETE",
-    				url : "api/video.do",
-    				crossDomain : true,
-    				data : data_string,
-    				cache : false,
-    				dataType : 'json',
-    				timeout : 5000,
-    				success : function(response) {
-    					if (response.status == 200) {
-    						$("#list").empty();
-    						getVideo(id);
-
-    					}
-    					console.log(response);
-    				},
-    				error : function() {
-    					alert("無法連線到伺服器！");
-    				}
-    			});
-    		}
-            function getVideo(id) {
-    			$.ajax({
-    						type : "GET",
-    						url : "api/video.do",
-    						crossDomain : true,
-    						data : "id=" + id,
-    						cache : false,
-    						dataType : 'json',
-    						timeout : 5000,
-    						success : function(response) {
-    							console.log(response);
-    							if (response.status == 200) {
-    								 $.each(response.response.data,function(index, value){
-    									 //console.log(value)
-    				            		   showVideo(value);
-    				            		   isDeleteVideo();
-    				            	   })
-    							}
-    						},
-    						error : function() {
-    							alert("無法連線到伺服器！");
-    						}
-    					});
-    		}
-            function showVideo(value){
-    			var videoAll="";
-    			videoAll+='<div class="videolist">';
-    			videoAll+='<iframe width="320" height="240" src="'+value['video_link']+'"></iframe><br>';
-    			videoAll+='<button id="'+value['id']+'" type="button" class="btn btn-sm btn-outline-secondary deleteVideo">刪除影片</button>';
-                videoAll+='</div>';
-    			$("#list").append(videoAll);
-                $('#videoAddress').val('');                 //清空input格
-                
-                }; 
-		$(document).ready(function() {
-			getCourse(id)
-			getVideo(id)
-			
-		});
-		
-		
-		$("#file").click(function() { //瀏覽
-			$("#upload").css("visibility", "visible");
-		});
-		$("#upload").click(function() {
-			$("#confirm").css("visibility", "visible");
-		})
-		$("#confirm").click(function() {
-			$("#upload").css("visibility", "hidden");
-			$("#confirm").css("visibility", "hidden");
-		})
-		$("#textinfo").click(function() {
-			updatetextinfo(id);
-		})
-		$("#self").click(function() {
-				$.ajax({
-					type : "GET",
-					url : "api/login.do",
-					crossDomain : true,
-					cache : false,
-					dataType : 'json',
-					timeout : 5000,
-					success : function(response) {
 						if (response.status == 200) {
-							// console.log(response);
-							console.log(response);
-							id = response.response.data[0].id;
-							role = response.role;
-							console.log(role);
-						}
+							document.getElementById('coursename').value = response['response']['data'][0]['name'];
+							course_status = (response['response']['data'][0]['status']);
 
-						if (role == "student") {
-							location.href = "studentself.html"
-						} else if (role == "coach") {
-							location.href = "coachself.html"
-						} else if (role == "admin") {
-							location.href = "interface.html"
-						} else {
-							alert("請登入會員")
+							document.getElementById('coursetext').value = response['response']['data'][0]['information'];
+							if (response['response']['data'][0]['upper_limb'] == "1") {
+								$("#up").empty();
+								$("#up").append(ups);
+							}
+							;
+							if (response['response']['data'][0]['core'] == "1") {
+								$("#mid").empty();
+								$("#mid").append(mids);
+							}
+							;
+							if (response['response']['data'][0]['lower_limb'] == "1") {
+								$("#down").empty();
+								$("#down").append(downs);
+							}
 						}
 					},
 					error : function() {
 						alert("無法連線到伺服器！");
 					}
 				});
+	}
 
-			})
-	</script>
+	function updatetextinfo(id) {//更新coursetextinfo
 
+		var data_object = {
+			"id" : id,
+			"name" : $('#coursename').val(),
+			"information" : $('#coursetext').val(),
+			"status" : course_status,
+			"image" : "",
 
-</body>
+		};
+		console.log(data_object);
+		// 將JSON格式轉換成字串
+		var data_string = JSON.stringify(data_object);
+		$.ajax({
+			type : "PUT",
+			url : "api/course.do",
+			crossDomain : true,
+			data : data_string,
+			cache : false,
+			dataType : 'json',
+			timeout : 5000,
+			success : function(response) {
+				console.log(response);
+				if (response.status == 200) {
 
+				}
+			},
+			error : function() {
+				alert("無法連線到伺服器！");
+			}
+		});
+	}
+
+	$('#file').change(function() {
+		var file = $('#file')[0].files[0];
+		image = $('#file')[0].files[0].name;
+		var reader = new FileReader;
+		reader.onload = function(e) {
+			$('#demo').attr('src', e.target.result);
+		};
+		reader.readAsDataURL(file);
+	});
+	$("#upload").click(function() {
+		var formData = new FormData($('#uploadPicture')[0]);
+		console.log(formData)
+		$.ajax({
+			url : 'api/upload.do',
+			type : 'POST',
+			cache : false,
+			data : formData,
+			processData : false,
+			contentType : false,
+			success : function(response) {
+				console.log("upload success!");
+			},
+			error : function() {
+				alert("無法連線到伺服器！");
+			}
+		})
+
+	});
+
+	$("#confirm").click(function() {
+
+		// put不能用getParameter 所以要傳object，後端才撈得到
+		var data_object = {
+			"id" : id,
+			"name" : $('#coursename').val(),
+			"information" : $('#coursetext').val(),
+			"status" : course_status,
+			"image" : image,
+		};
+
+		// 將JSON格式轉換成字串
+		var data_string = JSON.stringify(data_object);
+		$.ajax({
+			url : 'api/course.do',
+			type : 'PUT',
+			crossDomain : true,
+			data : data_string,
+			cache : false,
+			dataType : 'json',
+			timeout : 5000,
+			success : function(response) {
+				console.log(response);
+			},
+			error : function() {
+				alert("無法連線到伺服器！");
+			}
+		})
+	});
+	var address;
+
+	$("#add").click(function() {//新增影片
+		var result = $('#videoAddress').val();
+		address = result.replace('watch?v=', 'embed/');
+		console.log(address);
+
+		var data_object = {
+			"course_id" : id,
+			"video_link" : address
+		};
+
+		// 將JSON格式轉換成字串
+		var data_string = JSON.stringify(data_object);
+		$.ajax({
+			url : 'api/video.do',
+			type : 'POST',
+			crossDomain : true,
+			data : data_string,
+			cache : false,
+			dataType : 'json',
+			timeout : 5000,
+			success : function(response) {
+				console.log(response);
+
+			},
+			error : function() {
+				alert("無法連線到伺服器！");
+			}
+		})
+		$("#list").empty();
+		getVideo(id);
+
+	});
+
+	function isDeleteVideo(evt) {//刪除特定video
+		$('.deleteVideo').click(function() {
+			alert("delete");
+			console.log("刪除" + this.id);
+			deleteCourseVideo(this.id);
+
+		});
+	};
+	function deleteCourseVideo(deleteId) {//刪除video並清空video資訊
+		var data_object = {
+			"id" : deleteId,
+		};
+		// 將JSON格式轉換成字串
+		var data_string = JSON.stringify(data_object);
+		$.ajax({
+			type : "DELETE",
+			url : "api/video.do",
+			crossDomain : true,
+			data : data_string,
+			cache : false,
+			dataType : 'json',
+			timeout : 5000,
+			success : function(response) {
+				if (response.status == 200) {
+					$("#list").empty();
+					getVideo(id);
+
+				}
+				console.log(response);
+			},
+			error : function() {
+				alert("無法連線到伺服器！");
+			}
+		});
+	}
+	function getVideo(id) {
+		$.ajax({
+			type : "GET",
+			url : "api/video.do",
+			crossDomain : true,
+			data : "id=" + id,
+			cache : false,
+			dataType : 'json',
+			timeout : 5000,
+			success : function(response) {
+				console.log(response);
+				if (response.status == 200) {
+					$.each(response.response.data, function(index, value) {
+						showVideo(value);
+						isDeleteVideo();
+					})
+				}
+			},
+			error : function() {
+				alert("無法連線到伺服器！");
+			}
+		});
+	}
+	function showVideo(value) {
+		var videoAll = "";
+		videoAll += '<div class="videolist">';
+		videoAll += '<iframe width="320" height="240" src="'+value['video_link']+'"></iframe><br>';
+		videoAll += '<button id="'+value['id']+'" type="button" class="btn btn-sm btn-outline-secondary deleteVideo">刪除影片</button>';
+		videoAll += '</div>';
+		$("#list").append(videoAll);
+		$('#videoAddress').val(''); //清空input格
+
+	};
+	$('#logout').click(function() {
+		alert("logout!!!");
+		logout();
+
+	});
+	function logout() {
+		$.ajax({
+			type : "DELETE",
+			url : "api/login.do",
+			crossDomain : true,
+			cache : false,
+			dataType : 'json',
+			timeout : 5000,
+			success : function(response) {
+				console.log(response);
+				if (response.status == 200) {
+					console.log("logout");
+					login = response.login;
+					if (login == "success") {
+						document.getElementById("sign").innerHTML = "登出";
+					} else {
+						document.getElementById("sign").innerHTML = "登入";
+					}
+				}
+			},
+			error : function() {
+				alert("登出失敗");
+			}
+		});
+	}
+	//get login status for the header button login/logout
+	function getLogin() {
+		$.ajax({
+			type : "GET",
+			url : "api/login.do",
+			crossDomain : true,
+			cache : false,
+			dataType : 'json',
+			timeout : 5000,
+			success : function(response) {
+				if (response.status == 200) {
+					login = response.login;
+					console.log(login);
+					if (login == "success") {
+						document.getElementById("sign").innerHTML = "登出";
+					} else {
+						document.getElementById("sign").innerHTML = "登入";
+					}
+				}
+			},
+			error : function() {
+				alert("拿登入狀態失敗");
+			}
+		});
+	}
+	$(document).ready(function() {
+		getCourse(id)
+		getVideo(id)
+		getLogin();
+	});
+
+	$("#file").click(function() { //瀏覽
+		$("#upload").css("visibility", "visible");
+	});
+	$("#upload").click(function() {
+		$("#confirm").css("visibility", "visible");
+	})
+	$("#confirm").click(function() {
+		$("#upload").css("visibility", "hidden");
+		$("#confirm").css("visibility", "hidden");
+	})
+	$("#textinfo").click(function() {
+		updatetextinfo(id);
+	})
+	$("#textinfo").click(function() {
+		location.href = "coachself.html";
+	})
+	$("#self").click(function() {
+		$.ajax({
+			type : "GET",
+			url : "api/login.do",
+			crossDomain : true,
+			cache : false,
+			dataType : 'json',
+			timeout : 5000,
+			success : function(response) {
+				if (response.status == 200) {
+					console.log(response);
+					id = response.response.data[0].id;
+					role = response.role;
+					console.log(role);
+				}
+
+				if (role == "student") {
+					location.href = "studentself.html"
+				} else if (role == "coach") {
+					location.href = "coachself.html"
+				} else if (role == "admin") {
+					location.href = "interface.html"
+				} else {
+					alert("請登入會員")
+				}
+			},
+			error : function() {
+				alert("無法連線到伺服器！");
+			}
+		});
+
+	})
+</script>
 </html>
