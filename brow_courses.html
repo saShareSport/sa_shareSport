@@ -43,16 +43,16 @@
 <!-- Custom styles for this template -->
 </head>
 
-  <body>
+<body>
 
-    <header>
+	<header>
 		<div style="font-family: Microsoft JhengHei; color: white;">
 
 			<nav class="navbar fixed-top navbar-dark bg-dark">
 				<a class="navbar-brand" style="font-size: 30px">ShareSport</a>
 				<ul class="nav mr-auto">
-					<li class="nav-item"><a class="nav-link"
-						href="index.html" style="color: white;">首頁</a></li>
+					<li class="nav-item"><a class="nav-link" href="index.html"
+						style="color: white;">首頁</a></li>
 					<li class="nav-item"><a class="nav-link active"
 						href="brow_coaches.html" style="color: white;">瀏覽教練</a></li>
 					<li class="nav-item"><a class="nav-link active"
@@ -61,136 +61,117 @@
 						href=" " style="color: white;">個人專區</a></li>
 					<li class="nav-item"><a class="nav-link active" id="sign"
 						href="login.html" style="color: white;">登入</a></li>
-					<li class="nav-item" id="zxc"><a class="nav-link active" id="regsign"
-						href="register.html" style="color: white;">註冊</a></li>
+					<li class="nav-item" id="zxc"><a class="nav-link active"
+						id="regsign" href="register.html" style="color: white;">註冊</a></li>
 				</ul>
 			</nav>
 		</div>
 	</header>
 
-    <main role="main">
+	<main role="main">
 
-    
-      <div class="album py-5 bg-light">
-        <div class="container">
 
-          <div class="row" id="course_panel">
-            
-            
-            
-          </div>
-        </div>
-      </div>
+		<div class="album py-5 bg-light">
+			<div class="container">
 
-    </main>
+				<div class="row" id="course_panel"></div>
+			</div>
+		</div>
 
-    
+	</main>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
 
-<svg xmlns="http://www.w3.org/2000/svg" width="508" height="225" viewBox="0 0 508 225" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">Thumbnail</text></svg>
 </body>
 
 
 <style>
-
-#zxc{
-text-align:right;
+#zxc {
+	text-align: right;
 }
 
-.album{
-margin-top: 50px;
+.album {
+	margin-top: 50px;
 }
 
 .nav {
 	font-size: 20px;
-	
 }
 
-.btn{
-font-family: Microsoft JhengHei; 
-
+.btn {
+	font-family: Microsoft JhengHei;
 }
-
 </style>
 
 <script>
+	$(document).ready(function() {
+		getLogin();
 
-$(document).ready(function() {
-	 getLogin();
-	 
-});
+	});
 
-var login = "false";
+	var login = "false";
 
-$('#checkboxGroup input').click(function(){
-	if($(this).prop('checked')){
-	$('#checkboxGroup input:checkbox').prop('checked',false);
-		$(this).prop('checked',true);
+	$('#checkboxGroup input').click(function() {
+		if ($(this).prop('checked')) {
+			$('#checkboxGroup input:checkbox').prop('checked', false);
+			$(this).prop('checked', true);
+		}
+	});
+	$('#logout').click(function() {
+		alert("logout!!!");
+		logout();
+
+	});
+	function logout() {
+		$.ajax({
+			type : "DELETE",
+			url : "api/login.do",
+			crossDomain : true,
+			cache : false,
+			dataType : 'json',
+			timeout : 5000,
+			success : function(response) {
+				console.log(response);
+				if (response.status == 200) {
+					console.log("logout");
+					login = response.login;
+					if (login == "success") {
+						document.getElementById("sign").innerHTML = "登出";
+					} else {
+						document.getElementById("sign").innerHTML = "登入";
+					}
+				}
+			},
+			error : function() {
+				alert("登出失敗");
+			}
+		});
 	}
-});
-$('#logout').click(function(){
-    alert("logout!!!");
-    logout(); 
-  
-});
-function logout() {
-    $.ajax({
-        type: "DELETE",
-        url: "api/login.do",
-        crossDomain: true,
-        cache: false,
-        dataType: 'json',
-        timeout: 5000,
-        success: function (response) {
-         console.log(response);
-            if(response.status == 200){
-             console.log("logout");
-             login = response.login;
-             if(login == "success"){
-				 	document.getElementById("sign").innerHTML = "登出";
-				 }
-			 	 else{
-			 		document.getElementById("sign").innerHTML = "登入";
-			 	 }
-          }
-        },
-        error: function () {
-            alert("登出失敗");
-        }
-    });
-}
-//get login status for the header button login/logout
-function getLogin(){
-	$.ajax({
-        type: "GET",
-        url: "api/login.do",
-        crossDomain: true,
-        cache: false,
-        dataType: 'json',
-        timeout: 5000,
-        success: function (response) {
-            if(response.status == 200){
-            	login = response.login;
-            	console.log(login);
-   			 	if(login == "success"){
-   				 	document.getElementById("sign").innerHTML = "登出";
-   				}
-   			 	else{
-   			 		document.getElementById("sign").innerHTML = "登入";
-   			 	}
-          }
-        },
-        error: function () {
-            alert("拿登入狀態失敗");
-        }
-    });
-}
-	
+	//get login status for the header button login/logout
+	function getLogin() {
+		$.ajax({
+			type : "GET",
+			url : "api/login.do",
+			crossDomain : true,
+			cache : false,
+			dataType : 'json',
+			timeout : 5000,
+			success : function(response) {
+				if (response.status == 200) {
+					login = response.login;
+					console.log(login);
+					if (login == "success") {
+						document.getElementById("sign").innerHTML = "登出";
+					} else {
+						document.getElementById("sign").innerHTML = "登入";
+					}
+				}
+			},
+			error : function() {
+				alert("拿登入狀態失敗");
+			}
+		});
+	}
+
 	function getAllCourse() {
 		$.ajax({
 			type : "GET",
@@ -209,9 +190,9 @@ function getLogin(){
 					})
 
 					$("#course_panel").append(course_panel);
-					
+
 				}
-				
+
 			},
 			error : function() {
 				alert("無法連線到伺服器！");
@@ -220,109 +201,108 @@ function getLogin(){
 
 	}
 
-	
 	getAllCourse();
-	
 
 	function addCourse(data) {
-		
-		
-		console.log(data.status);
-		if(data.status=='1'){
+
+		if (data.status == '1') {
 			let inner_html = '';
 			return inner_html;
-		}
-		else{
-			
+		} else {
+
 			//預設圖片
-			if (data.image == null){
+			if (data.image == null) {
 				data.image = "statics/img/course.jpg"
 			}
-			
+
 			let inner_html = '';
-	  		inner_html += '<div class="col-md-4">';
-	  		inner_html += '<div class="card mb-4 box-shadow">';
-	  		inner_html += '<img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="'+data.image+'"> ';
-	  		inner_html += '<div class="card-body">';
-	  		inner_html += '<p class="card-text">';
-	  		inner_html += '<h5>'+ data.name +'</h5>';
-	  		inner_html += '<p class="card-text">' + data.information + '</p>';
-	  		inner_html += '<p class="card-text "><small class="text-muted">subscribers <span id ="subscribe'+data.id+'">這裡要是數字</span></small></p>';
-	  		inner_html += '</p>';
-	  		inner_html += '<div class="d-flex justify-content-between align-items-center">';
-	  		inner_html += '<div class="btn-group">';
-	  		inner_html += '<a href="course_information.html?id=' + data.id + '" class="btn btn-sm btn-outline-secondary">查看教程</a>';
-	  		inner_html += '</div>';
-	  		inner_html += '</div></div></div></div>';
-			
-	  		
+			inner_html += '<div class="col-md-4">';
+			inner_html += '<div class="card mb-4 box-shadow">';
+			inner_html += '<img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="'
+					+ data.image + '"> ';
+			inner_html += '<div class="card-body">';
+			inner_html += '<p class="card-text">';
+			inner_html += '<h5>' + data.name + '</h5>';
+			inner_html += '<p class="card-text">' + data.information + '</p>';
+			inner_html += '<p class="card-text "><small class="text-muted">subscribers <span id ="subscribe'+data.id+'">這裡要是數字</span></small></p>';
+			inner_html += '</p>';
+			inner_html += '<div class="d-flex justify-content-between align-items-center">';
+			inner_html += '<div class="btn-group">';
+			inner_html += '<a href="course_information.html?id=' + data.id
+					+ '" class="btn btn-sm btn-outline-secondary">查看教程</a>';
+			inner_html += '</div>';
+			inner_html += '</div></div></div></div>';
+
 			getSubscribes(data.id);
-			console.log(data.id);
+
 			return inner_html;
 		}
-		
+
 	}
 
 	//取得課程訂閱人數
 	function getSubscribes(id) {
-	       $.ajax({
-	           type: "GET",
-	           url: "api/subscribe.do",
-	           crossDomain: true,
-	           data: "id="+id,
-	           cache: false,
-	           dataType: 'json',
-	           timeout: 5000,
-	           success: function (response) {
-	        	   //console.log(response);
-	               if(response.status == 200){
-	            	   document.getElementById('subscribe'+id).innerHTML = response.count;
-	            	   console.log("id:"+id+" amount="+response.count);
-	               	};
-	               //console.log(response);
-	           },
-	           error: function () {
-	               alert("無法連線到伺服器！");
-	           }
-	       });
-	   }
+		$
+				.ajax({
+					type : "GET",
+					url : "api/subscribe.do",
+					crossDomain : true,
+					data : "id=" + id,
+					cache : false,
+					dataType : 'json',
+					timeout : 5000,
+					success : function(response) {
+						//console.log(response);
+						if (response.status == 200) {
+							document.getElementById('subscribe' + id).innerHTML = response.count;
+							console.log("id:" + id + " amount="
+									+ response.count);
+						}
+						;
+						
+					},
+					error : function() {
+						alert("無法連線到伺服器！");
+					}
+				});
+	}
 
-	
-var id = 0;
-var role = null;
-$("#self").click(function() {
-	$.ajax({
-		type : "GET",
-		url : "api/login.do",
-		crossDomain : true,
-		cache : false,
-		dataType : 'json',
-		timeout : 5000,
-		success : function(response) {
-			if (response.status == 200) {
-				// console.log(response);
-				console.log(response);
-				id = response.response.data[0].id;
-				role = response.role;
-				console.log(role);
+	//導入哪種個人專區	
+	var id = 0;
+	var role = null;
+	$("#self").click(function() {
+		$.ajax({
+			type : "GET",
+			url : "api/login.do",
+			crossDomain : true,
+			cache : false,
+			dataType : 'json',
+			timeout : 5000,
+			success : function(response) {
+				if (response.status == 200) {
+					
+					console.log(response);
+					id = response.response.data[0].id;
+					role = response.role;
+					console.log(role);
+				}
+
+				if (role == "student") {
+					location.href = "studentself.html"
+				} else if (role == "coach") {
+					location.href = "coachself.html"
+				} else if (role == "admin") {
+					location.href = "interface.html"
+				} else {
+					alert("請登入會員")
+				}
+			},
+			error : function() {
+				alert("無法連線到伺服器！");
 			}
+		});
 
-			if (role == "student") {
-				location.href = "studentself.html"
-			} else if (role == "coach") {
-				location.href = "coachself.html"
-			} else if (role == "admin") {
-				location.href = "interface.html"
-			} else {
-				alert("請登入會員")
-			}
-		},
-		error : function() {
-			alert("無法連線到伺服器！");
-		}
-	});
-
-})
+	})
 </script>
 
 </html>
