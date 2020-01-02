@@ -8,6 +8,7 @@
 <meta charset="BIG5">
 <title>修改教練資料</title>
 <style>
+<div style="font-family: Microsoft JhengHei; color: white;">
 	{
     box-sizing: border-box;
 }
@@ -89,14 +90,7 @@ body {
 </form>
 </body>
 <script>
-var login = "false";
 
-$('#checkboxGroup input').click(function(){
-	if($(this).prop('checked')){
-	$('#checkboxGroup input:checkbox').prop('checked',false);
-		$(this).prop('checked',true);
-	}
-});
 $('#logout').click(function(){
     alert("logout!!!");
     logout(); 
@@ -115,15 +109,12 @@ function logout() {
             if(response.status == 200){
              console.log("logout");
              login = response.login;
-
-			 	 document.getElementById("sign").innerHTML = "登入";
-			 	 document.getElementById("titleLog").innerHTML = "登入";
-			 	 document.getElementById("inputEmail").style.display = 'block';
-				 document.getElementById("inputPassword").style.display = 'block';
-				 document.getElementById("checkboxGroup").style.display = 'block';
-				 document.getElementById("login").style.display = 'block';
-			 	 document.getElementById("logout").style.display = 'none';
-			 	 
+             if(login == "success"){
+				 	document.getElementById("sign").innerHTML = "登出";
+				 }
+			 	 else{
+			 		document.getElementById("sign").innerHTML = "登入";
+			 	 }
           }
         },
         error: function () {
@@ -146,22 +137,9 @@ function getLogin(){
             	console.log(login);
    			 	if(login == "success"){
    				 	document.getElementById("sign").innerHTML = "登出";
-   				 	document.getElementById("titleLog").innerHTML = "登出";
-   				 	document.getElementById("inputEmail").style.display = 'none';
-   					document.getElementById("inputPassword").style.display = 'none';
-   					document.getElementById("checkboxGroup").style.display = 'none';
-   					document.getElementById("login").style.display = 'none';
-   					document.getElementById("logout").style.display = 'block';
    				}
    			 	else{
    			 		document.getElementById("sign").innerHTML = "登入";
-   			 		document.getElementById("titleLog").innerHTML = "登入";
-       			 	document.getElementById("inputEmail").style.display = 'block';
-						document.getElementById("inputPassword").style.display = 'block';
-						document.getElementById("checkboxGroup").style.display = 'block';
-						document.getElementById("login").style.display = 'block';
-    			 		document.getElementById("logout").style.display = 'none';
-    			 		
    			 	}
           }
         },
@@ -171,17 +149,13 @@ function getLogin(){
     });
 }
 
- $(document).ready(function() {
-	 getLogin();
-	 document.getElementById("logout").style.display = 'none';
- });
+$(document).ready(function() {
+	getLogin();
+});
 
 	var url_string = window.location.href;
 	var url = new URL(url_string);
 	var id = url.searchParams.get("id");
-
-	
-	//var id=1;
 		
 	function updateCoach(id) {
 	    var name = $('#coachName').val();
@@ -228,7 +202,6 @@ function getLogin(){
 	                success: function (response) {
 	                	console.log(response);
 	                    if(response.status == 200){
-	                        //getCoach();
 	                        window.location.href = "CoachList.html";
 	                    }
 	                },
