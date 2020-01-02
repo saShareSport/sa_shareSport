@@ -2,12 +2,23 @@
 <html>
 
 <head>
-     <title>shareSport - 註冊</title>
-     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	 <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<title>shareSport - 註冊</title>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link
+	href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
 
 </head>
 
@@ -18,8 +29,8 @@
 			<nav class="navbar fixed-top navbar-dark bg-dark">
 				<a class="navbar-brand" style="font-size: 30px">ShareSport</a>
 				<ul class="nav mr-auto">
-					<li class="nav-item"><a class="nav-link"
-						href="index.html" style="color: white;">首頁</a></li>
+					<li class="nav-item"><a class="nav-link" href="index.html"
+						style="color: white;">首頁</a></li>
 					<li class="nav-item"><a class="nav-link active"
 						href="brow_coaches.html" style="color: white;">瀏覽教練</a></li>
 					<li class="nav-item"><a class="nav-link active"
@@ -35,194 +46,226 @@
 		</div>
 	</header>
 
-    <div id="container">
-            <h1>註冊</h1>
-			
-            <form id="form" accept-charset="utf-8">
-            
-               <div>
-					<label for="member_identity">身分</label><label class="star">*</label>
-					<select class="custom-select" name="identity" id="member_identity" required="required">
+	<div id="container">
+		<h1>註冊</h1>
+
+		<form id="form" accept-charset="utf-8">
+
+			<div>
+				<br> <label for="member_identity">身分</label><label class="star">*</label>
+				<select class="custom-select" name="identity" id="member_identity"
+					required="required">
 					<option value="default">選擇身分</option>
 					<option value="student">學生</option>
 					<option value="coach">教練</option>
-					</select>
-               </div>
+				</select>
+			</div>
 
-                <div>
-                    <label for="member_name">姓名</label><label class="star">*</label>
-                    <input name="name" maxlength="45" type="text" id="member_name" class="form-control" required="required">
-                </div>
-              
-              <div>
-					<label for="member_sex">性別</label><label class="star">*</label>
-					<select class="custom-select" name="sex" id="member_sex" required="required">
+			<div>
+				<br> <label for="member_name">姓名</label><label class="star">*</label>
+				<input name="name" maxlength="45" type="text" id="member_name"
+					class="form-control" required="required">
+			</div>
+
+			<div>
+				<br> <label for="member_sex">性別</label><label class="star">*</label>
+				<select class="custom-select" name="sex" id="member_sex"
+					required="required">
 					<option value="default">選擇性別</option>
 					<option value="male">男</option>
 					<option value="female">女</option>
-					</select>
-               </div>
-               
-                <div>
-                    <label for="member_email">電子信箱</label><label class="star">*</label>
-                    <input name="email" maxlength="45" type="email" id="member_email"  class="form-control"  required="required">
-                </div>
-              
-                <div>
-                    <label for="member_password">密碼</label><label class="star">*</label>
-                    <input name="password" maxlength="45" type="password" id="member_password" class="form-control" required="required">
-                </div>
-                    
-                <div>
-                    <label for="confirm_password">確認密碼</label><label class="star">*</label>
-                    <input name="con_password" maxlength="45" type="password" id="confirm_password"  class="form-control" required="required">
-                </div><br>
+				</select>
+			</div>
 
-                <div class="submit"><input type="button" value="註冊" id="submit" class="btn btn-primary"></div>
-            </form>
-            
-            
-                </div>
-            
-           <script type="text/javascript">
-           
-           var id = 0;
-			var role = null;
-			$("#self").click(function() {
-				$.ajax({
-					type : "GET",
-					url : "api/login.do",
-					crossDomain : true,
-					cache : false,
-					dataType : 'json',
-					timeout : 5000,
-					success : function(response) {
-						if (response.status == 200) {
-							// console.log(response);
-							console.log(response);
-							id = response.response.data[0].id;
-							role = response.role;
-							console.log(role);
-						}
+			<div>
+				<br> <label for="member_email">電子信箱</label><label class="star">*</label>
+				<input name="email" maxlength="45" type="email" id="member_email"
+					class="form-control" required="required">
+			</div>
 
-						if (role == "student") {
-							location.href = "studentself.html"
-						} else if (role == "coach") {
-							location.href = "coachself.html"
-						} else if (role == "admin") {
-							location.href = "interface.html"
-						} else {
-							alert("請登入會員")
-						}
-					},
-					error : function() {
-						alert("無法連線到伺服器！");
+			<div>
+				<br> <label for="member_password">密碼</label><label class="star">*</label>
+				<input name="password" maxlength="45" type="password"
+					id="member_password" class="form-control" required="required">
+			</div>
+
+			<div>
+				<br> <label for="confirm_password">確認密碼</label><label
+					class="star">*</label> <input name="con_password" maxlength="45"
+					type="password" id="confirm_password" class="form-control"
+					required="required">
+			</div>
+			<br>
+
+			<div class="submit">
+				<input type="button" value="註冊" id="submit" class="btn btn-primary">
+			</div>
+		</form>
+
+
+	</div>
+
+	<script type="text/javascript">
+		var id = 0;
+		var role = null;
+		$("#self").click(function() {
+			$.ajax({
+				type : "GET",
+				url : "api/login.do",
+				crossDomain : true,
+				cache : false,
+				dataType : 'json',
+				timeout : 5000,
+				success : function(response) {
+					if (response.status == 200) {
+						// console.log(response);
+						console.log(response);
+						id = response.response.data[0].id;
+						role = response.role;
+						console.log(role);
 					}
-				});
 
+					if (role == "student") {
+						location.href = "studentself.html"
+					} else if (role == "coach") {
+						location.href = "coachself.html"
+					} else if (role == "admin") {
+						location.href = "interface.html"
+					} else {
+						alert("請登入會員")
+					}
+				},
+				error : function() {
+					alert("無法連線到伺服器！");
+				}
 			});
-            
-            
-               $(document).ready(function() {
-                    // 處理表單點擊事件
-                    var $form = $('#submit');
-                    $form.click(function() {
-                        submit();
-                    });
 
-                    function submit() {
-                    	var identity = $('#member_identity').val();
-                        var name = $('#member_name').val();
-                        var sex = $('#member_sex').val();
-                        var email = $('#member_email').val();
-                        var password = $('#member_password').val();
-                        var con_password = $('#confirm_password').val();
-                        
+		});
+		//get login status for the header button login/logout
+		function getLogin() {
+			$.ajax({
+				type : "GET",
+				url : "api/login.do",
+				crossDomain : true,
+				cache : false,
+				dataType : 'json',
+				timeout : 5000,
+				success : function(response) {
+					if (response.status == 200) {
+						login = response.login;
+						console.log(login);
+						if (login == "success") {
+							document.getElementById("sign").innerHTML = "登出";
+						} else {
+							document.getElementById("sign").innerHTML = "登入";
+						}
+					}
+				},
+				error : function() {
+					alert("拿登入狀態失敗");
+				}
+			});
+		}
 
-                        var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
-                        var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-                        
-                        if(identity=="default"){
-                       		alert("請選擇身分！");
-                        }
-                        
-                        else if(!name){
-                        	alert("請輸入姓名！");
-                        }
-                        
-                        else if(sex=="default"){
-                       		alert("請選擇性別！");
-                        }
-                        
-                        else if(!email_rule.test(email)) {
-                            alert("Email格式不符！");
-                        }
-                        
-                        else if(!password_rule.test(password)) {
-                            alert("密碼格式不符！\n密碼長度至少需為8，並包含至少一個數字和英文字母。\n同時不可包含特殊符號！");
-                        }
-                 
-                       else if(con_password!=password){
-                    	    alert("確認密碼與密碼不符！");
-                       }
-                        
-                        
-                        else {
-                        	  
-                            // 將資料組成JSON格式
-                            var data_object = {
-                            	"email": email,
-                            	"password": password,
-                            	"name": name,
-                                "sex": sex
-                            };
+		$(document)
+				.ready(
+						function() {
+							getLogin();
+							// 處理表單點擊事件
+							var $form = $('#submit');
+							$form.click(function() {
+								submit();
+							});
 
-                            // 將JSON格式轉換成字串
-                            var data_string = JSON.stringify(data_object);
-                            
+							function submit() {
+								var identity = $('#member_identity').val();
+								var name = $('#member_name').val();
+								var sex = $('#member_sex').val();
+								var email = $('#member_email').val();
+								var password = $('#member_password').val();
+								var con_password = $('#confirm_password').val();
+
+								var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+								var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+								if (identity == "default") {
+									alert("請選擇身分！");
+								}
+
+								else if (!name) {
+									alert("請輸入姓名！");
+								}
+
+								else if (sex == "default") {
+									alert("請選擇性別！");
+								}
+
+								else if (!email_rule.test(email)) {
+									alert("Email格式不符！");
+								}
+
+								else if (!password_rule.test(password)) {
+									alert("密碼格式不符！\n密碼長度至少需為8，並包含至少一個數字和英文字母。\n同時不可包含特殊符號！");
+								}
+
+								else if (con_password != password) {
+									alert("確認密碼與密碼不符！");
+								}
+
+								else {
+
+									// 將資料組成JSON格式
+									var data_object = {
+										"email" : email,
+										"password" : password,
+										"name" : name,
+										"sex" : sex
+									};
+
+									// 將JSON格式轉換成字串
+									var data_string = JSON
+											.stringify(data_object);
+
+									// 發出POST的AJAX請求
+									var options = {
+										type : "POST",
+										url : "api/student.do",
+										data : data_string,
+										crossDomain : true,
+										cache : false,
+										dataType : 'json',
+										timeout : 5000,
+
+										success : function(response) {
+											if (response.status == 200) {
+												alert("註冊成功！\n正在為您導回首頁！");
+												location.href = "index.html";
+											} else if (response.status == 400) {
+												alert("註冊失敗！\n此email已被註冊！");
+											}
+										},
+
+										error : function() {
+											alert("無法連線到伺服器！");
+
+										}
+									}
+
+									if (identity === "coach") {
+										options.url = "api/coach.do";
+									}
+									$.ajax(options);
+
+								}
+							}
+						});
+	</script>
 
 
-                            // 發出POST的AJAX請求
-                            var options = {
-                            	 type: "POST",
-                                 url: "api/student.do",
-                                 data: data_string,
-                                 crossDomain: true,
-                                 cache: false,
-                                 dataType: 'json',
-                                 timeout: 5000,
-                                 
-                                 success: function (response) {
-                                     if(response.status == 200){
-                                         alert("註冊成功！\n正在為您導回首頁！");
-                                         location.href="index.html";
-                                     }
-                                     else if(response.status == 400){
-                                    	 alert("註冊失敗！\n此email已被註冊！");
-                                     }
-                                 },
-                                 
-                                 error: function () {
-                                     alert("無法連線到伺服器！");
-                                     
-                                 }
-                            }
-                            
-                            if (identity === "coach") {options.url = "api/coach.do";}
-                            $.ajax(options);
-                      
-                           
-                        }
-                    }
-                });
-            </script>
 
-    
-    
-   <style type="text/css">
-   
+	<style type="text/css">
 .nav {
-    font-size: 20px;
+	font-size: 20px;
 }
 
 .star {
@@ -230,22 +273,21 @@
 }
 
 #container {
- 	margin-top: 100px;
- 	margin-left: 550px;
-   	margin-right: 550px;
+	margin-top: 0%;
+	margin-left: 27.5%;
+	margin-right: 27.5%;
 }
 
 * {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
-html,body {
-	text-align:center;
+html, body {
+	text-align: center;
 	font-family: Microsoft JhengHei;
-    margin-top: 60px;
-    margin-bottom: 2px;
-    padding: 0px;
-    
+	margin-top: 0%;
+	margin-bottom: 2px;
+	padding: 50px;
 }
 </style>
 </body>
