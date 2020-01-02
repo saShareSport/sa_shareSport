@@ -68,7 +68,13 @@ html, body {
 #confirm {
 	visibility: hidden;
 }
+.videolist{
+	display:inline-block;
+	margin-left: 150px;
+	
+}
 </style>
+
 <body>
 	<header>
 		<div style="font-family: Microsoft JhengHei; color: white;">
@@ -143,15 +149,10 @@ html, body {
 				<h3>新增影片</h3>
 				<input type="text" id="videoAddress">
                 <button type="button" id="add" class="btn btn-dark">上傳</button>
-        </div><br>
-        <div class="py-5 ">
-        <div class="container" >	
+        </div>
+    </div>
         	<div id="list"></div>
-        </div>
-        </div>
-            
-	</div>
-
+        
 	<script>
 		var url_string = window.location.href;
 		var url = new URL(url_string);
@@ -392,7 +393,7 @@ html, body {
     		}
             function showVideo(value){
     			var videoAll="";
-    			videoAll+='<table border="4">';
+    			videoAll+='<div class="videolist">';
     			videoAll+='<iframe width="320" height="240" src="'+value['video_link']+'"></iframe><br>';
     			videoAll+='<button id="'+value['id']+'" type="button" class="btn btn-sm btn-outline-secondary deleteVideo">刪除影片</button>';
                 videoAll+='</div>';
