@@ -212,7 +212,7 @@
 								response['response']['data'][0]['image'] = "statics/img/coach.jpg"
 							}
 							var imagePath = '';
-							imagePath += '<img src="'+response['response']['data'][0]['image']+'" class="card-img" alt="..." width="12rem" height="270rem">';
+							imagePath += '<img src="'+response['response']['data'][0]['image']+'" class="card-img" alt="無法顯示圖片"  width="12rem" height="270rem">';
 							document.getElementById('studentPicture').innerHTML = imagePath;
 						}
 						console.log(response);
@@ -311,7 +311,7 @@
 		var courseAll = "";
 		courseAll += ' <div class="col-md-4">';
 		courseAll += '<div class="card mb-4 box-shadow">';
-		courseAll += '<img id="coursepic" class="card-img-top"  alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="'
+		courseAll += '<img id="coursepic" class="card-img-top"  alt="無法顯示圖片"  style="height: 225px; width: 100%; display: block;" src="'
 				+ data[0]['image'] + '">'
 
 		courseAll += '<div class="card-body">';
@@ -457,7 +457,7 @@
 		var coachAll = "";
 		coachAll += ' <div class="col-md-4">';
 		coachAll += ' <div class="card mb-4 box-shadow">';
-		coachAll += '<img id="coachpic" class="card-img-top"  alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="'
+		coachAll += '<img id="coachpic" class="card-img-top"  alt="無法顯示圖片"  style="height: 225px; width: 100%; display: block;" src="'
 				+ data[0]['image'] + '">';
 		coachAll += '<div class="card-body">';
 		coachAll += '<h5 id ="coachName" class="card-title">' + data[0]['name']
