@@ -22,7 +22,6 @@ body {
 }
 .nav {
     font-size: 20px;
-    margin-bottom: 25px;
 }
 .form-group{
 	width: 600px;
@@ -90,42 +89,92 @@ body {
 </form>
 </body>
 <script>
-var id = 0;
-var role = null;
+var login = "false";
 
-$("#self").click(function() {
+$('#checkboxGroup input').click(function(){
+	if($(this).prop('checked')){
+	$('#checkboxGroup input:checkbox').prop('checked',false);
+		$(this).prop('checked',true);
+	}
+});
+$('#logout').click(function(){
+    alert("logout!!!");
+    logout(); 
+  
+});
+function logout() {
+    $.ajax({
+        type: "DELETE",
+        url: "api/login.do",
+        crossDomain: true,
+        cache: false,
+        dataType: 'json',
+        timeout: 5000,
+        success: function (response) {
+         console.log(response);
+            if(response.status == 200){
+             console.log("logout");
+             login = response.login;
+
+			 	 document.getElementById("sign").innerHTML = "登入";
+			 	 document.getElementById("titleLog").innerHTML = "登入";
+			 	 document.getElementById("inputEmail").style.display = 'block';
+				 document.getElementById("inputPassword").style.display = 'block';
+				 document.getElementById("checkboxGroup").style.display = 'block';
+				 document.getElementById("login").style.display = 'block';
+			 	 document.getElementById("logout").style.display = 'none';
+			 	 
+          }
+        },
+        error: function () {
+            alert("登出失敗");
+        }
+    });
+}
+//get login status for the header button login/logout
+function getLogin(){
 	$.ajax({
-		type : "GET",
-		url : "api/login.do",
-		crossDomain : true,
-		cache : false,
-		dataType : 'json',
-		timeout : 5000,
-		success : function(response) {
-			if (response.status == 200) {
-				// console.log(response);
-				console.log(response);
-				id = response.response.data[0].id;
-				role = response.role;
-				console.log(role);
-			}
+        type: "GET",
+        url: "api/login.do",
+        crossDomain: true,
+        cache: false,
+        dataType: 'json',
+        timeout: 5000,
+        success: function (response) {
+            if(response.status == 200){
+            	login = response.login;
+            	console.log(login);
+   			 	if(login == "success"){
+   				 	document.getElementById("sign").innerHTML = "登出";
+   				 	document.getElementById("titleLog").innerHTML = "登出";
+   				 	document.getElementById("inputEmail").style.display = 'none';
+   					document.getElementById("inputPassword").style.display = 'none';
+   					document.getElementById("checkboxGroup").style.display = 'none';
+   					document.getElementById("login").style.display = 'none';
+   					document.getElementById("logout").style.display = 'block';
+   				}
+   			 	else{
+   			 		document.getElementById("sign").innerHTML = "登入";
+   			 		document.getElementById("titleLog").innerHTML = "登入";
+       			 	document.getElementById("inputEmail").style.display = 'block';
+						document.getElementById("inputPassword").style.display = 'block';
+						document.getElementById("checkboxGroup").style.display = 'block';
+						document.getElementById("login").style.display = 'block';
+    			 		document.getElementById("logout").style.display = 'none';
+    			 		
+   			 	}
+          }
+        },
+        error: function () {
+            alert("拿登入狀態失敗");
+        }
+    });
+}
 
-			if (role == "student") {
-				location.href = "studentself.html"
-			} else if (role == "coach") {
-				location.href = "coachself.html"
-			} else if (role == "admin") {
-				location.href = "interface.html"
-			} else {
-				alert("請登入會員")
-			}
-		},
-		error : function() {
-			alert("無法連線到伺服器！");
-		}
-	});
-
-})
+ $(document).ready(function() {
+	 getLogin();
+	 document.getElementById("logout").style.display = 'none';
+ });
 
 	var url_string = window.location.href;
 	var url = new URL(url_string);
