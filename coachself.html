@@ -195,7 +195,7 @@
 							console
 									.log(response['response']['data'][0]['image']);
 							var imagePath = '';
-							imagePath += '<img src="'+response['response']['data'][0]['image']+'" class="card-img" alt="..." width="12rem" height="270rem">';
+							imagePath += '<img src="'+response['response']['data'][0]['image']+'" class="card-img" alt="無法顯示圖片"  width="12rem" height="270rem">';
 							document.getElementById('coachPicture').innerHTML = imagePath;
 						}
 						console.log(response);
@@ -297,10 +297,11 @@
 								if (value['image'] == null) {
 									value['image'] = "statics/img/course.jpg"
 								}
+							
 								courseAll += ' <div class="col-md-4">';
 								courseAll += '<div class="card mb-4 box-shadow">';
-								courseAll += '<img id="coursepic" class="card-img-top"  alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="'
-										+ value['image'] + '">'
+								courseAll += '<img id="coursepic"  class="card-img-top"  alt="無法顯示圖片" style="height: 225px; width: 100%; display: block;" src="'
+										+ value['image'] + '">';
 
 								courseAll += '<div class="card-body">';
 								courseAll += '<h5 id ="courseName" class="card-title">'

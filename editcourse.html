@@ -331,14 +331,14 @@ html, body {
 			timeout : 5000,
 			success : function(response) {
 				console.log(response);
-
+				$("#list").empty();
+				getVideo(id);
 			},
 			error : function() {
 				alert("無法連線到伺服器！");
 			}
 		})
-		$("#list").empty();
-		getVideo(id);
+		
 
 	});
 
