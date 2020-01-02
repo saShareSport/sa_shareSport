@@ -2,17 +2,13 @@
 <html>
 
 <head>
-	 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">	 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	 <meta name="description" content="content">
-	 <meta name="author" content="content">
      <title>shareSport - 註冊</title>
-     <script src="https://code.jquery.com/jquery-3.1.1.min.js">
+     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	 <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
-	 <link href="form-validation.css" rel="stylesheet">
-	 <link href="signin.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -40,15 +36,13 @@
 	</header>
 
     <div id="container">
-        
-        <div id="content" class="text-center">
             <h1>註冊</h1>
 			
             <form id="form" accept-charset="utf-8">
             
                <div>
 					<label for="member_identity">身分</label><label class="star">*</label>
-					<select class="custom-select d-block w-100" name="identity" id="member_identity" required="required">
+					<select class="custom-select" name="identity" id="member_identity" required="required">
 					<option value="default">選擇身分</option>
 					<option value="student">學生</option>
 					<option value="coach">教練</option>
@@ -62,7 +56,7 @@
               
               <div>
 					<label for="member_sex">性別</label><label class="star">*</label>
-					<select class="custom-select d-block w-100" name="sex" id="member_sex" required="required">
+					<select class="custom-select" name="sex" id="member_sex" required="required">
 					<option value="default">選擇性別</option>
 					<option value="male">男</option>
 					<option value="female">女</option>
@@ -82,7 +76,7 @@
                 <div>
                     <label for="confirm_password">確認密碼</label><label class="star">*</label>
                     <input name="con_password" maxlength="45" type="password" id="confirm_password"  class="form-control" required="required">
-                </div>
+                </div><br>
 
                 <div class="submit"><input type="button" value="註冊" id="submit" class="btn btn-primary"></div>
             </form>
@@ -128,18 +122,6 @@
 
 			});
             
-            var i = 0;//控制登入登出
-            $("#sign").click(function () {
-                if (i == 0) {
-                    document.getElementById("sign").innerHTML = "登出";
-                    i = 1;
-                    document.getElementById("regsign").style.display="none";
-                } else {
-                    document.getElementById("sign").innerHTML = "登入";
-                    i = 0;
-                    document.getElementById("regsign").style.display="block";
-                }
-            });
             
                $(document).ready(function() {
                     // 處理表單點擊事件
@@ -211,10 +193,12 @@
                                  timeout: 5000,
                                  
                                  success: function (response) {
-                                     $('#flashMessage').html(response.message);
-                                     $('#flashMessage').show();
                                      if(response.status == 200){
-                                         updateSQLTable(response.response);
+                                         alert("註冊成功！\n正在為您導回首頁！");
+                                         location.href="index.html";
+                                     }
+                                     else if(response.status == 400){
+                                    	 alert("註冊失敗！\n此email已被註冊！");
                                      }
                                  },
                                  
@@ -227,13 +211,12 @@
                             if (identity === "coach") {options.url = "api/coach.do";}
                             $.ajax(options);
                       
-                            alert("註冊成功！\n正在為您導回首頁！");
+                           
                         }
                     }
                 });
             </script>
 
-    </div>
     
     
    <style type="text/css">
@@ -242,12 +225,18 @@
     font-size: 20px;
 }
 
-* {
-    box-sizing: border-box;
-}
-
 .star {
 	color: red;
+}
+
+#container {
+ 	margin-top: 100px;
+ 	margin-left: 550px;
+   	margin-right: 550px;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 html,body {
