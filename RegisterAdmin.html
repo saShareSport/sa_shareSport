@@ -10,6 +10,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <style>
+<div style="font-family: Microsoft JhengHei; color: white;">
 .nav {
     font-size: 20px;
     margin-bottom: 25px;
@@ -70,49 +71,75 @@ body {
             <label for="exampleInputPassword1">重複輸入密碼</label>
             <input type="password" style="width:600px" class="form-control" id="registeredAdminPassword2" placeholder="請確認密碼">
         </div>
-        <button type="submit" class="btn btn-secondary" id="RegisterAdmin" href="AdminList.html">註冊</button>
+        <button type="submit" class="btn btn-secondary" id="RegisterAdmin" >註冊</button>
       </form>
 		
 	<script type="text/javascript">
-	var id = 0;
-	var role = null;
-	$("#self").click(function() {
+	$('#logout').click(function(){
+	    alert("logout!!!");
+	    logout(); 
+	  
+	});
+	function logout() {
+	    $.ajax({
+	        type: "DELETE",
+	        url: "api/login.do",
+	        crossDomain: true,
+	        cache: false,
+	        dataType: 'json',
+	        timeout: 5000,
+	        success: function (response) {
+	         console.log(response);
+	            if(response.status == 200){
+	             console.log("logout");
+	             login = response.login;
+	             if(login == "success"){
+					 	document.getElementById("sign").innerHTML = "登出";
+					 }
+				 	 else{
+				 		document.getElementById("sign").innerHTML = "登入";
+				 	 }
+	          }
+	        },
+	        error: function () {
+	            alert("登出失敗");
+	        }
+	    });
+	}
+	//get login status for the header button login/logout
+	function getLogin(){
 		$.ajax({
-			type : "GET",
-			url : "api/login.do",
-			crossDomain : true,
-			cache : false,
-			dataType : 'json',
-			timeout : 5000,
-			success : function(response) {
-				if (response.status == 200) {
-					// console.log(response);
-					console.log(response);
-					id = response.response.data[0].id;
-					role = response.role;
-					console.log(role);
-				}
+	        type: "GET",
+	        url: "api/login.do",
+	        crossDomain: true,
+	        cache: false,
+	        dataType: 'json',
+	        timeout: 5000,
+	        success: function (response) {
+	            if(response.status == 200){
+	            	login = response.login;
+	            	console.log(login);
+	   			 	if(login == "success"){
+	   				 	document.getElementById("sign").innerHTML = "登出";
+	   				}
+	   			 	else{
+	   			 		document.getElementById("sign").innerHTML = "登入";
+	   			 	}
+	          }
+	        },
+	        error: function () {
+	            alert("拿登入狀態失敗");
+	        }
+	    });
+	}
 
-				if (role == "student") {
-					location.href = "studentself.html"
-				} else if (role == "coach") {
-					location.href = "coachself.html"
-				} else if (role == "admin") {
-					location.href = "interface.html"
-				} else {
-					alert("請登入會員")
-				}
-			},
-			error : function() {
-				alert("無法連線到伺服器！");
-			}
-		});
+	$(document).ready(function() {
+		getLogin();
+	});
 
-	})
 	
     $('#RegisterAdmin').click(function() {
         updateMember()
-
     });
     
 	 function updateMember() {
@@ -145,6 +172,10 @@ body {
                      if(resp.status == 200){
                     	 console.log(resp);
                     	 alert("成功註冊");
+                     }
+                     if(resp.status == 400){
+                    	 alert("此email已被註冊");
+                    	 window.location.href = "RegisterAdmin.html";
                      }
                  },
                  error: function () {
