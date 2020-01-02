@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <title>shareSport - 上傳教程</title>
+     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	 <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+<header>
+		<div style="font-family: Microsoft JhengHei; color: white;">
+
+			<nav class="navbar fixed-top navbar-dark bg-dark">
+				<a class="navbar-brand" style="font-size: 30px">ShareSport</a>
+				<ul class="nav mr-auto">
+					<li class="nav-item"><a class="nav-link"
+						href="index.html" style="color: white;">首頁</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="brow_coaches.html" style="color: white;">瀏覽教練</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="brow_courses.html" style="color: white;">瀏覽教程</a></li>
+					<li class="nav-item"><a id="self" class="nav-link active"
+						href=" " style="color: white;">個人專區</a></li>
+					<li class="nav-item"><a class="nav-link active" id="sign"
+						href="login.html" style="color: white;">登入</a></li>
+					<li class="nav-item"><a class="nav-link active" id="regsign"
+						href="register.html" style="color: white;">註冊</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+    <div id="container">
+        
+        <div id="content">
+			<h1>新增教程</h1>
+
+            <form id="form" accept-charset="utf-8">
+                    
+                <div>
+                    <label for="course_name">教程名稱</label><label class="star">*</label>
+                    <input name="name" maxlength="45" type="text" id="course_name"  class="form-control"  required="required">
+                </div><br>
+
+                <div>
+               		<label for="course_area">教程類別</label><label class="star">*</label><br>
+                	<input type="checkbox" id="upper_limb" value="0">上肢<br>
+					<input type="checkbox" id="core"       value="0">核心<br>
+					<input type="checkbox" id="lower_limb" value="0">下肢<br>
+                </div><br>
+               
+                <div>
+                	<label for="course_information">教程簡介</label>
+                    <textarea name="information" id="course_information" class="form-control" required="required"></textarea>
+                </div><br>
+                
+                 </form>
+                
+                <div class="cover">
+                <label for="course_cover">教程封面</label><label class="star">*</label>
+					<form id="uploadPicture" enctype="multipart/form-data">
+					<input id="file" type="file" name="file" /> 
+					<img width="320" id="demo" /><br>
+					<br>
+					<button id="upload" type="button" class="btn btn-sm btn-outline-secondary">上傳圖檔</button><br>
+					<button id="confirm" type="button" class="btn btn-sm btn-outline-secondary">完成</button>
+					</form>
+				</div><br>
+              
+              	<div class="video">
+              	<label for="add">新增影片</label><label class="star">*</label><br>
+				<input type="text" id="videoAddress">
+                <button type="button" id="add" class="btn btn-dark">上傳</button>
+        		</div><br>
+        		<div class="py-5 ">
+        		<div class="container" >	
+        			<div id="list"></div>
+        		</div>
+        		</div>
+            
+            
+            
+            <script type="text/javascript">
+            var id = 0;
+			var role = null;
+			var image = "";
+			
+			if ($('#upper_limb').prop('checked')==true ){
+				$('#upper_limb').val() = "1";
+			};
+			else{
+				$('#upper_limb').val() = "0";
+			};
+			
+			if ($('#core').prop('checked')==true ){
+				$('#core').val() = "1";
+			}else{
+				$('#core').val() = "0";
+			};
+			
+			if ($('#lower_limb').prop('checked')==true ){
+				$('#lower_limb').val() = "1";
+			}else{
+				$('#lower_limb').val() = "0";
+			};
+			
+			
+			
+			$("#self").click(function() {
+				$.ajax({
+					type : "GET",
+					url : "api/login.do",
+					crossDomain : true,
+					cache : false,
+					dataType : 'json',
+					timeout : 5000,
+					success : function(response) {
+						if (response.status == 200) {
+							// console.log(response);
+							console.log(response);
+							id = response.response.data[0].id;
+							role = response.role;
+							console.log(role);
+						}
+
+						if (role == "student") {
+							location.href = "studentself.html"
+						} else if (role == "coach") {
+							location.href = "coachself.html"
+						} else if (role == "admin") {
+							location.href = "interface.html"
+						} else {
+							alert("請登入會員")
+						}
+					},
+					error : function() {
+						alert("無法連線到伺服器！");
+					}
+				});
+
+			});
+
+			$('#file').change(function() {          //上傳圖檔
+    			var file = $('#file')[0].files[0];
+    			image = $('#file')[0].files[0].name;
+    			var reader = new FileReader;
+    			reader.onload = function(e) {
+    				$('#demo').attr('src', e.target.result);
+    			};
+    			reader.readAsDataURL(file);
+    		});   
+        	$("#upload").click(function() {        //上傳BUTTON
+    			var formData = new FormData($('#uploadPicture')[0]);
+    			console.log(formData);
+    			$.ajax({
+    				url : 'api/upload.do',
+    				type : 'POST',
+    				cache : false,
+    				data : formData,
+    				processData : false,
+    				contentType : false,
+    				success : function(response) {
+    					console.log("上傳成功!");
+    				},
+    				error : function() {
+    					alert("無法連線到伺服器！");
+    				}
+    			})
+    		});
+            
+
+            $(document).ready(function() {
+                var $form = $('#confirm');         //完成
+                $form.click(function() {
+                	confirm();
+                });
+
+                function confirm() {
+                	var cname = $('#course_name').val();
+                	
+                	var checkU = $('#upper_limb').val();
+                	var checkC = $('#core').val();
+                	var checkL = $('#lower_limb').val();
+                	
+                	var information = $('#course_information').val();
+                    
+                    if(!cname){
+                    	alert("請輸入教程名稱！");
+                    }
+                    
+                    else if(checkU=="0"&&checkC=="0"&&checkL=="0"){
+                   		alert("請選擇教程類別！");
+                    }
+                    
+                    else if($('#list').children().length === 0){
+                    	alert("請上傳至少一個影片！");
+                    }
+    
+                    else {
+                    	  
+                        // 將資料組成JSON格式
+                        var data_object = {
+                        	"coach_id": id,
+                            "name": cname,
+                            "information": information,
+                        	"upper_limb": checkU,
+                        	"lower_limb": checkL,
+                            "core": checkC,
+                            "image" : image
+                        };
+
+                        // 將JSON格式轉換成字串
+                        var data_string = JSON.stringify(data_object);
+                        
+                        
+                        
+                        // 發出POST的AJAX請求
+                        var options = {
+                        	 type: "POST",
+                             url: "api/course.do",
+                             data: data_string,
+                             crossDomain: true,
+                             cache: false,
+                             dataType: 'json',
+                             timeout: 5000,
+                             
+                             success : function(response) {
+             					console.log(response);
+             					alert("上傳成功！\n正在為您導回首頁！");
+                                location.href="index.html";
+                             },
+                             
+                             error: function () {
+                                 alert("無法連線到伺服器！");
+                             }
+                        }
+                        
+                        $.ajax(options);
+                        
+                    }
+                }
+            });
+               
+            
+    		var address;
+                
+    		$("#add").click(function() {//新增影片
+    			var result=$('#videoAddress').val();
+    			address=result.replace('watch?v=', 'embed/');
+    			console.log(address);
+    			
+    			var data_object = {
+    					"video_link" : address
+    				};
+
+    				// 將JSON格式轉換成字串
+    				var data_string = JSON.stringify(data_object);
+    				$.ajax({
+    					url : 'api/video.do',
+    					type : 'POST',
+    					crossDomain : true,
+    					data : data_string,
+    					cache : false,
+    					dataType : 'json',
+    					timeout : 5000,
+    					success : function(response) {
+    						console.log(response);
+    						
+    					},
+    					error : function() {
+    						alert("無法連線到伺服器！");
+    					}
+    				})
+    				
+    				$("#list").append("<table border=\"1\">");  //加頭
+                	$("#list").append("<iframe width=\"320\" height=\"240\" src="+address+"></iframe>"); 
+                	$("#list").append("</table>");              //加尾
+                	$('#videoAddress').val('');                 //清空input格
+    				
+    			});
+    		
+            
+            
+            </script>
+        </div>
+    </div>
+    
+    
+   <style type="text/css">
+.nav {
+    font-size: 20px;
+}
+* {
+    box-sizing: border-box;
+}
+
+#submit {
+    margin-left: 80px;
+}
+
+html,
+body {
+	text-align:center;
+	font-family: Microsoft JhengHei;
+    margin-top: 60px;
+    margin-bottom: 2px;
+    padding: 0px;
+}
+
+.star {
+	color: red;
+}
+
+</style>
+</body>
+
+</html>
