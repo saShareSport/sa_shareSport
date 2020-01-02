@@ -75,7 +75,6 @@ body {
             <th scope="col">教程名稱</th>
             <th scope="col">教練</th>
             <th scope="col">更新時間</th>
-            <th scope="col">status</th>
             <th scope="col">編輯</th>
           </tr>
         </thead>
@@ -164,8 +163,6 @@ body {
                 timeout: 5000,
                 success: function (resp) {
                     if(resp.status == 200){
-                        $("#flashMessage").html("課程封鎖成功");
-                        $("#flashMessage").show();
                         getAllMember();
                     }
                     console.log(resp);
@@ -191,8 +188,7 @@ body {
             success: function (resp) {
                 if(resp.status == 200){
                 	console.log(resp);
-                    updateCourseTable(resp.response.data);
-                    
+                    updateCourseTable(resp.response.data);                  
                 }
                 console.log(resp);
             },
@@ -210,8 +206,7 @@ body {
 			 CourseTable_html +='<td>' + value['information'] + '</td>';
 			 CourseTable_html +='<td>' + value['coach_id'] + '</td>';
 			 CourseTable_html +='<td>' + value['modified'] + '</td>';
-			 CourseTable_html +='<td>' + value['status'] + '</td>';
-			 CourseTable_html +='<td>' + '<a class="btn btn-secondary" href="edit.html?id=' + value['id'] + '">編輯</a>'+'</td>';
+			 CourseTable_html +='<td>' + '<a class="btn btn-secondary" href="AdminCourseModify.html?id=' + value['id'] + '">編輯</a>'+'</td>';
 		 })
 		 $("#CourseTable > tbody").append(CourseTable_html);
 	}
