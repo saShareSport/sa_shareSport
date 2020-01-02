@@ -220,10 +220,32 @@
 						if (response.status == 200) {
 							document.getElementById('coachName').innerHTML = response['response']['data'][0]['name'];
 							document.getElementById('coachTextarea').innerHTML = response['response']['data'][0]['information'];
-							document.getElementById('coachFollows').innerHTML = "<small>followers "
-									+ response['response']['data'][0]['followers_count'];
+							getCoachFollower(id)
 						}
 						console.log(response);
+					},
+					error : function() {
+						alert("無法連線到伺服器！");
+					}
+				});
+	}
+	function getCoachFollower(id) {//取得學生追蹤coachid
+		$
+				.ajax({
+					type : "GET",
+					url : "api/follow.do",
+					crossDomain : true,
+					data : "id=" + id,
+					cache : false,
+					dataType : 'json',
+					timeout : 5000,
+					success : function(response) {
+						console.log(response);
+						if (response.status == 200) {
+							document.getElementById('coachFollows').innerHTML = "<small>followers "
+									+ response.count;
+						}
+						;
 					},
 					error : function() {
 						alert("無法連線到伺服器！");
@@ -271,39 +293,41 @@
 						function(index, value) {
 							if (value['status'] == "1") {//如果status =1(停權)則跳過
 								return;
+							} else {
+								if (value['image'] == null) {
+									value['image'] = "statics/img/course.jpg"
+								}
+								courseAll += ' <div class="col-md-4">';
+								courseAll += '<div class="card mb-4 box-shadow">';
+								courseAll += '<img id="coursepic" class="card-img-top"  alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="'
+										+ value['image'] + '">'
+
+								courseAll += '<div class="card-body">';
+								courseAll += '<h5 id ="courseName" class="card-title">'
+										+ value['name'] + '</h5>';
+								courseAll += '<p id ="courseTextarea" class="card-text">'
+										+ value['information'] + '</p>';
+								courseAll += '<p id ="subscribe'+value['id']+'" class="card-text"><small class="text-muted">訂閱人數</small></p>';
+								courseAll += '<p hidden id ="status" class="card-text" ><small class="text-muted">'
+										+ value['status'] + '</small></p>';
+								courseAll += '<p hidden id ="id" class="card-text" ><small class="text-muted">'
+										+ value['id'] + '</small></p>';
+
+								courseAll += '<div class="d-flex justify-content-between align-items-center">';
+								courseAll += '<div class="btn-group">';
+								courseAll += '<a href="editcourse.html?id='
+										+ value['id']
+										+ '" class="btn btn-sm btn-outline-secondary modifythiscourse" >修改教程</a>';
+								courseAll += '<button id="'+value['id']+'" type="button" name="deleteCourse" class="btn btn-sm btn-outline-secondary deleteCourse" >刪除教程</button>';
+								courseAll += '</div>';
+								courseAll += '</div>';
+								courseAll += '</div>';
+								courseAll += '</div>';
+								courseAll += '</div>';
+
+								arrCoursesid.push(value['id']);//依據COURSEID查看訂閱人數
 							}
-							if (value['image'] == null) {
-								value['image'] = "statics/img/course.jpg"
-							}
-							courseAll += ' <div class="col-md-4">';
-							courseAll += '<div class="card mb-4 box-shadow">';
-							courseAll += '<img id="coursepic" class="card-img-top"  alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="'
-									+ value['image'] + '">'
 
-							courseAll += '<div class="card-body">';
-							courseAll += '<h5 id ="courseName" class="card-title">'
-									+ value['name'] + '</h5>';
-							courseAll += '<p id ="courseTextarea" class="card-text">'
-									+ value['information'] + '</p>';
-							courseAll += '<p id ="subscribe'+value['id']+'" class="card-text"><small class="text-muted">訂閱人數</small></p>';
-							courseAll += '<p hidden id ="status" class="card-text" ><small class="text-muted">'
-									+ value['status'] + '</small></p>';
-							courseAll += '<p hidden id ="id" class="card-text" ><small class="text-muted">'
-									+ value['id'] + '</small></p>';
-
-							courseAll += '<div class="d-flex justify-content-between align-items-center">';
-							courseAll += '<div class="btn-group">';
-							courseAll += '<a href="editcourse.html?id='
-									+ value['id']
-									+ '" class="btn btn-sm btn-outline-secondary modifythiscourse" >修改教程</a>';
-							courseAll += '<button id="'+value['id']+'" type="button" name="deleteCourse" class="btn btn-sm btn-outline-secondary deleteCourse" >刪除教程</button>';
-							courseAll += '</div>';
-							courseAll += '</div>';
-							courseAll += '</div>';
-							courseAll += '</div>';
-							courseAll += '</div>';
-
-							arrCoursesid.push(value['id']);//依據COURSEID查看訂閱人數
 						})
 		for (var i = 0; i < arrCoursesid.length; i++) {
 			getSubscribes(arrCoursesid[i]);
