@@ -39,20 +39,18 @@
 <link rel="canonical"
 	href="https://getbootstrap.com/docs/4.0/examples/album/">
 
-<!-- Bootstrap core CSS -->
-<!-- Custom styles for this template -->
 </head>
 
-  <body>
+<body>
 
-    <header>
+	<header>
 		<div style="font-family: Microsoft JhengHei; color: white;">
 
 			<nav class="navbar fixed-top navbar-dark bg-dark">
 				<a class="navbar-brand" style="font-size: 30px">ShareSport</a>
 				<ul class="nav mr-auto">
-					<li class="nav-item"><a class="nav-link"
-						href="index.html" style="color: white;">首頁</a></li>
+					<li class="nav-item"><a class="nav-link" href="index.html"
+						style="color: white;">首頁</a></li>
 					<li class="nav-item"><a class="nav-link active"
 						href="brow_coaches.html" style="color: white;">瀏覽教練</a></li>
 					<li class="nav-item"><a class="nav-link active"
@@ -68,152 +66,374 @@
 		</div>
 	</header>
 
-    <main role="main">
+	<main role="main">
 
-      <section class="jumbotron text-center">
-        <div class="row no-gutters">
-				<div id="coachPicture" class="col-md-3">
-				</div>	
+		<section class="jumbotron text-center">
+			<div class="row no-gutters">
+				<div id="coachPicture" class="col-md-3"></div>
 				<div class="col-md-9">
 					<div class="container">
 						<h1 id="coach_name" class="jumbotron-heading">這裡是教練名字</h1>
 						<p id="coach_information" class="lead text-muted">教練資訊</p>
-						<small  class="card-text followers">followers
-							<small id="coachFollows">這裡放追蹤人數</small>
+						<small class="card-text followers">followers <small
+							id="coachFollows">這裡放追蹤人數</small>
 						</small>
 						<p>
-							
-							<button class="btn btn-secondary my-2" id="followBtn" style="font-family: Microsoft JhengHei; color: white;">追蹤</button>
+
+							<button class="btn btn-secondary my-2" id="followBtn"
+								style="font-family: Microsoft JhengHei; color: white;">追蹤</button>
 						</p>
 					</div>
 				</div>
 			</div>
-      </section>
+		</section>
 
-      <div class="album py-5 bg-light">
-        <div class="container">
+		<div class="album py-5 bg-light">
+			<div class="container">
 
-          <div class="row" id="course_panel">
-            
-            
-          </div>
-        </div>
-      </div>
+				<div class="row" id="course_panel"></div>
+			</div>
+		</div>
 
-    </main>
-
-    
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-
-<svg xmlns="http://www.w3.org/2000/svg" width="508" height="225" viewBox="0 0 508 225" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">Thumbnail</text></svg>
+	</main>
 </body>
 
 
 <style>
-
-.jumbotron{
+.jumbotron {
 	margin-top: 100px;
 }
 
 .nav {
 	font-size: 20px;
-	
 }
-
 </style>
 
 <script>
+	//取得網址參數
+	var url_string = window.location.href;
+	var url = new URL(url_string);
+	var id = url.searchParams.get("id");
+	var coach_id;
+	var identity_id = 0;
+	var identity = null;
+	var j; //追蹤、取消追蹤鈕變換，j=0時按鈕顯示追蹤
 
-//取得網址參數
-var url_string = window.location.href;
-var url = new URL(url_string);
-var id = url.searchParams.get("id");
-var coach_id;
-var identity_id=0;
-var identity=null;
-var j; //追蹤、取消追蹤鈕變換，j=0時按鈕顯示追蹤
+	function getthisCoach() {
+		$
+				.ajax({
+					type : "GET",
+					url : "api/coach.do",
+					data : "id=" + id,
+					crossDomain : true,
+					cache : false,
+					dataType : 'json',
+					timeout : 5000,
+					success : function(response) {
+						if (response.status == 200) {
 
+							console.log(response)
+							coach_id = id
+							document.getElementById('coach_name').innerHTML = response['response']['data'][0]['name'];
+							document.getElementById('coach_information').innerHTML = response['response']['data'][0]['information'];
 
-function getthisCoach() {
-  $.ajax({
-    type: "GET",
-    url: "api/coach.do",
-    data: "id=" + id,
-    crossDomain: true,
-    cache: false,
-    dataType: 'json',
-    timeout: 5000,
-    success: function (response) {
-      if (response.status == 200) {
-      	
-      console.log(response)
-    	coach_id=id
-    	document.getElementById('coach_name').innerHTML = response['response']['data'][0]['name'];
-    	document.getElementById('coach_information').innerHTML = response['response']['data'][0]['information'];
-    	
-    	//設定預設教練圖片
-    	if (response['response']['data'][0]['image'] == null){
-    		response['response']['data'][0]['image'] = "statics/img/coach.jpg"
-    		var img='<img src="'+response['response']['data'][0]['image']+'" class="card-img-top" alt="..." width="12rem" height="270rem">';
-        	document.getElementById('coachPicture').innerHTML = img;
+							//設定預設教練圖片
+							if (response['response']['data'][0]['image'] == null) {
+								response['response']['data'][0]['image'] = "statics/img/coach.jpg"
+								var img = '<img src="'+response['response']['data'][0]['image']+'" class="card-img-top" alt="..." width="12rem" height="270rem">';
+								document.getElementById('coachPicture').innerHTML = img;
+							} else {
+								var img = '<img src="'+response['response']['data'][0]['image']+'" class="card-img-top" alt="..." width="12rem" height="270rem">';
+								document.getElementById('coachPicture').innerHTML = img;
+
+							}
+
+							getCoachCourse()
+
+						}
+					},
+					error : function() {
+						alert("無法連線到伺服器！");
+					}
+				});
+	}
+
+	//取得教練追蹤人數
+	function getfollows(id) {
+		$
+				.ajax({
+					type : "GET",
+					url : "api/follow.do",
+					crossDomain : true,
+					data : "id=" + id,
+					cache : false,
+					dataType : 'json',
+					timeout : 5000,
+					success : function(response) {
+						
+						if (response.status == 200) {
+							document.getElementById('coachFollows').innerHTML = response.count;
+							console.log("id:" + id + " amount="
+									+ response.count);
+						}
+						;
+						
+					},
+					error : function() {
+						alert("無法連線到伺服器！");
+					}
+				});
+	}
+
+	//確認按鈕初始狀態	
+	function getBtnStatus() {
+
+		if (identity == "student") {
+			//以使用者id取得使用者的所有追蹤資料
+			$
+					.ajax({
+						type : "GET",
+						url : "api/follow.do",
+						data : "foll_stuId=" + identity_id,
+						crossDomain : true,
+						cache : false,
+						dataType : 'json',
+						timeout : 5000,
+						success : function(response) {
+							if (response.status == 200) {
+								console.log(response);
+
+								//把此使用者有追蹤的所有教練id放入陣列中
+								var i = 0;
+								var array = new Array();
+
+								$
+										.each(
+												response.response.data,
+												function(i) {
+
+													var subcoaches = response['response']['data'][i]['foll_coaId'];
+													array.push(subcoaches);
+
+												})
+
+								console.log(array);
+
+								outer_loop: for (var k = 0; k < array.length; k++) {
+
+									if (coach_id == array[k]) {
+										document.getElementById('followBtn').innerHTML = '取消追蹤';
+										j = 1;
+										break outer_loop;
+									} else {
+										j = 0;
+									}
+
+								}
+
+							}
+						},
+						error : function() {
+							alert("無法連線到伺服器！");
+						}
+
+					});
 		}
-    	else{
-    		var img='<img src="'+response['response']['data'][0]['image']+'" class="card-img-top" alt="..." width="12rem" height="270rem">';
-        	document.getElementById('coachPicture').innerHTML = img;
-        	
-    	}
-    	
-    	
-    	getCoachCourse()
-    	
-      }
-    },
-    error: function () {
-      alert("無法連線到伺服器！");
-    }
-  });
-}
 
-//取得教練追蹤人數
-function getfollows(id) {
-       $.ajax({
-           type: "GET",
-           url: "api/follow.do",
-           crossDomain: true,
-           data: "id="+id,
-           cache: false,
-           dataType: 'json',
-           timeout: 5000,
-           success: function (response) {
-        	   //console.log(response);
-               if(response.status == 200){
-            	   document.getElementById('coachFollows').innerHTML = response.count;
-            	   console.log("id:"+id+" amount="+response.count);
-               	};
-               //console.log(response);
-           },
-           error: function () {
-               alert("無法連線到伺服器！");
-           }
-       });
-   }
+	}
 
-
-
-//確認按鈕初始狀態	
-function getBtnStatus(){
-	
-	if(identity=="student"){
-		//以使用者id取得使用者的所有追蹤資料
+	function getCoachCourse() {
 		$.ajax({
 			type : "GET",
-			url : "api/follow.do",
-			data : "foll_stuId=" + identity_id,
+			url : "api/course.do",
+			data : "coach_id=" + coach_id,
+			crossDomain : true,
+			cache : false,
+			dataType : 'json',
+			timeout : 5000,
+			success : function(response) {
+				if (response.status == 200) {
+					var course_panel = '';
+
+					$.each(response.response.data, function() {
+						course_panel += addCourse(this);
+					})
+
+					$("#course_panel").append(course_panel);
+
+				}
+			},
+			error : function() {
+				alert("無法連線到伺服器！");
+			}
+		});
+	}
+
+	function addCourse(data) {
+
+		console.log(data.status);
+		if (data.status == '1') {
+			let inner_html = '';
+			return inner_html;
+		} else {
+			if (data.image == null) {
+				data.image = "statics/img/course.jpg"
+			}
+			let inner_html = '';
+			inner_html += '<div class="col-md-4">';
+			inner_html += '<div class="card mb-4 box-shadow">';
+			inner_html += '<img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="'
+					+ data.image + '"> ';
+			inner_html += '<div class="card-body">';
+			inner_html += '<p class="card-text">';
+			inner_html += '<h5>' + data.name + '</h5>';
+			inner_html += '<p class="card-text">' + data.information + '</p>';
+			inner_html += '<p class="card-text "><small class="text-muted">subscribers <span id ="subscribe'+data.id+'">這裡要是數字</span></small></p>';
+			inner_html += '</p>';
+			inner_html += '<div class="d-flex justify-content-between align-items-center">';
+			inner_html += '<div class="btn-group">';
+			inner_html += '<a href="course_information.html?id=' + data.id
+					+ '" class="btn btn-sm btn-outline-secondary">查看教程</a>';
+			inner_html += '</div>';
+			inner_html += '</div></div></div></div>';
+
+			getSubscribes(data.id);
+			console.log(data.id);
+			return inner_html;
+		}
+	}
+
+	//取得課程訂閱人數
+	function getSubscribes(id) {
+		$
+				.ajax({
+					type : "GET",
+					url : "api/subscribe.do",
+					crossDomain : true,
+					data : "id=" + id,
+					cache : false,
+					dataType : 'json',
+					timeout : 5000,
+					success : function(response) {
+						
+						if (response.status == 200) {
+							document.getElementById('subscribe' + id).innerHTML = response.count;
+							console.log("id:" + id + " amount="
+									+ response.count);
+						}
+						;
+					
+					},
+					error : function() {
+						alert("無法連線到伺服器！");
+					}
+				});
+	}
+
+	//按下追蹤教程按鈕	  
+	$("#followBtn")
+			.click(
+					function() {
+
+						if (identity == "student") {
+
+							if (j == 0) {
+
+								//新增追蹤資料
+
+								// 將資料組成JSON格式
+								var data_object = {
+
+									'foll_stuId' : identity_id,
+									'foll_coaId ' : coach_id,
+
+								};
+
+								// 將JSON格式轉換成字串
+								var data_string = JSON.stringify(data_object);
+
+								$
+										.ajax({
+											type : "POST",
+											url : "api/follow.do",
+											data : data_string,
+											crossDomain : true,
+											cache : false,
+											dataType : 'json',
+											timeout : 5000,
+											success : function(response) {
+
+												if (response.status == 200) {
+													document
+															.getElementById("followBtn").innerHTML = "取消追蹤";
+													getfollows(id);
+													j = 1;
+
+													console.log(response);
+												}
+											},
+											error : function() {
+												alert("無法連線到伺服器！");
+											}
+										});
+
+							} else if (j == 1) {
+
+								//刪除追蹤資料
+
+								// 將資料組成JSON格式
+								var data_object = {
+
+									'foll_stuId' : identity_id,
+									'foll_coaId ' : coach_id,
+								};
+
+								// 將JSON格式轉換成字串
+								var data_string = JSON.stringify(data_object);
+
+								$
+										.ajax({
+											type : "DELETE",
+											url : "api/follow.do",
+											data : data_string,
+											crossDomain : true,
+											cache : false,
+											dataType : 'json',
+											timeout : 5000,
+											success : function(response) {
+
+												if (response.status == 200) {
+													document
+															.getElementById("followBtn").innerHTML = "追蹤";
+													getfollows(id);
+													j = 0;
+
+												}
+											},
+											error : function() {
+												alert("無法連線到伺服器！");
+											}
+										})
+
+							}
+
+						} else {
+							alert("請登入學員身分，始可追蹤教練")
+						}
+
+					});
+
+	$(document).ready(function() {
+
+		getLogin();
+		getthisCoach();
+		console.log("現在教練的id是" + id)
+		getfollows(id);
+
+		//去抓身分
+		$.ajax({
+			type : "GET",
+			url : "api/login.do",
 			crossDomain : true,
 			cache : false,
 			dataType : 'json',
@@ -221,340 +441,121 @@ function getBtnStatus(){
 			success : function(response) {
 				if (response.status == 200) {
 					console.log(response);
-					
-					
-					//把此使用者有追蹤的所有教練id放入陣列中
-					var i = 0;
-					var array = new Array();
-					 
-					$.each(response.response.data, function(i) {
-						
-						var subcoaches = response['response']['data'][i]['foll_coaId'];
-						array.push(subcoaches);
-							
-					
-					})
-					
-					console.log(array);
-					
-					outer_loop:for(var k = 0 ;k<array.length;k++){
-						
-						if(coach_id==array[k]){
-							document.getElementById('followBtn').innerHTML = '取消追蹤';
-							j=1;
-							break outer_loop;
-						}
-						else{
-							j=0;
-							}
-							
-					}
-					
 
+					identity = response.role;
+					identity_id = response['response']['data'][0]['id']
+
+					console.log("role=" + identity + ",id=" + identity_id);
+
+					getBtnStatus();
 				}
 			},
 			error : function() {
 				alert("無法連線到伺服器！");
 			}
-
 		});
-	}	
-	
-}
+	});
 
+	var login = "false";
 
-function getCoachCourse() {
-	    $.ajax({
-	      type: "GET",
-	      url: "api/course.do",
-	      data: "coach_id=" + coach_id,
-	      crossDomain: true,
-	      cache: false,
-	      dataType: 'json',
-	      timeout: 5000,
-	      success: function (response) {
-	        if (response.status == 200) {
-	      	var course_panel = '';
-	      	
-	      	$.each(response.response.data, function (){
-	      		course_panel += addCourse(this);
-	      	})
-	      	
-	      	$("#course_panel").append(course_panel);
-	      	
-	        }
-	      },
-	      error: function () {
-	        alert("無法連線到伺服器！");
-	      }
-	    });
-	  }
-
-	  
-	  function addCourse(data) {
-		  
-		  console.log(data.status);
-			if(data.status=='1'){
-				let inner_html = '';
-				return inner_html;
-			}
-			else{
-				if (data.image == null){
-					data.image = "statics/img/course.jpg"
-				}
-		    let inner_html = '';
-	  		inner_html += '<div class="col-md-4">';
-	  		inner_html += '<div class="card mb-4 box-shadow">';
-	  		inner_html += '<img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="'+data.image+'"> ';
-	  		inner_html += '<div class="card-body">';
-	  		inner_html += '<p class="card-text">';
-	  		inner_html += '<h5>'+ data.name +'</h5>';
-	  		inner_html += '<p class="card-text">' + data.information + '</p>';
-	  		inner_html += '<p class="card-text "><small class="text-muted">subscribers <span id ="subscribe'+data.id+'">這裡要是數字</span></small></p>';
-	  		inner_html += '</p>';
-	  		inner_html += '<div class="d-flex justify-content-between align-items-center">';
-	  		inner_html += '<div class="btn-group">';
-	  		inner_html += '<a href="course_information.html?id=' + data.id + '" class="btn btn-sm btn-outline-secondary">查看教程</a>';
-	  		inner_html += '</div>';
-	  		inner_html += '</div></div></div></div>';
-		  	
-	  		getSubscribes(data.id);
-			console.log(data.id);
-			return inner_html;
-			}
-		  }
-	  
-//取得課程訂閱人數
-function getSubscribes(id) {
-		       $.ajax({
-		           type: "GET",
-		           url: "api/subscribe.do",
-		           crossDomain: true,
-		           data: "id="+id,
-		           cache: false,
-		           dataType: 'json',
-		           timeout: 5000,
-		           success: function (response) {
-		        	   //console.log(response);
-		               if(response.status == 200){
-		            	   document.getElementById('subscribe'+id).innerHTML = response.count;
-		            	   console.log("id:"+id+" amount="+response.count);
-		               	};
-		               //console.log(response);
-		           },
-		           error: function () {
-		               alert("無法連線到伺服器！");
-		           }
-		       });
-}
-	
-//按下追蹤教程按鈕	  
-$("#followBtn").click(function () {
-	
-	if(identity=="student"){
-		
-		if(j==0){
-			
-			//新增追蹤資料
-			
-			// 將資料組成JSON格式
-	        var data_object = {
-					
-	            'foll_stuId': identity_id,
-	            'foll_coaId ': coach_id,
-	            
-	        };
-	
-	        // 將JSON格式轉換成字串
-	        var data_string = JSON.stringify(data_object);
-	        
-		    $.ajax({
-		        type: "POST",
-		        url: "api/follow.do",
-		        data: data_string,
-		        crossDomain: true,
-		        cache: false,
-		        dataType: 'json',
-		        timeout: 5000,
-		        success: function (response) {
-		            
-		            if(response.status == 200){
-		            	document.getElementById("followBtn").innerHTML = "取消追蹤";
-		            	getfollows(id);
-		                j = 1;
-		                
-		                console.log(response);
-		            }
-		        },
-		        error: function () {
-		            alert("無法連線到伺服器！");
-		        }
-			});
-		
-		}
-		else if(j==1){
-			
-			//刪除追蹤資料
-			
-			// 將資料組成JSON格式
-	        var data_object = {
-					
-	        		'foll_stuId': identity_id,
-		            'foll_coaId ': coach_id,
-	        };
-	
-	        // 將JSON格式轉換成字串
-	        var data_string = JSON.stringify(data_object);
-			
-			$.ajax({
-		        type: "DELETE",
-		        url: "api/follow.do",
-		        data: data_string,
-		        crossDomain: true,
-		        cache: false,
-		        dataType: 'json',
-		        timeout: 5000,
-		        success: function (response) {
-		            
-		            if(response.status == 200){
-		            	document.getElementById("followBtn").innerHTML = "追蹤";
-		            	getfollows(id);
-		                j = 0;
-		               
-		            }
-		        },
-		        error: function () {
-		            alert("無法連線到伺服器！");
-		        }
-			})
-			
-		}
-	
-	}
-	else{
-		alert("請登入學員身分，始可追蹤教練")
-	}
-		
-});
-
-$("#self").click(function() {
-
-			if (role == "student") {
-				location.href = "studentself.html"
-			} else if (role == "coach") {
-				location.href = "coachself.html"
-			} else if (role == "admin") {
-				location.href = "interface.html"
-			} else {
-				alert("請登入會員")
-			}
-				
-})
-
-
-
-$(document).ready(function() {
-	
-	getLogin();
-	getthisCoach();
-	console.log("現在教練的id是"+id)
-	getfollows(id);
-	
-	
-	//去抓身分
-	$.ajax({
-		type : "GET",
-		url : "api/login.do",
-		crossDomain : true,
-		cache : false,
-		dataType : 'json',
-		timeout : 5000,
-		success : function(response) {
-			if (response.status == 200) {
-				console.log(response);
-				
-				identity = response.role;
-				identity_id = response['response']['data'][0]['id']
-				
-				console.log("role="+identity+",id="+identity_id);
-				
-				getBtnStatus();
-			}
-		},
-		error : function() {
-			alert("無法連線到伺服器！");
+	$('#checkboxGroup input').click(function() {
+		if ($(this).prop('checked')) {
+			$('#checkboxGroup input:checkbox').prop('checked', false);
+			$(this).prop('checked', true);
 		}
 	});
-});
+	$('#logout').click(function() {
+		alert("logout!!!");
+		logout();
 
-var login = "false";
-
-$('#checkboxGroup input').click(function(){
-	if($(this).prop('checked')){
-	$('#checkboxGroup input:checkbox').prop('checked',false);
-		$(this).prop('checked',true);
+	});
+	function logout() {
+		$.ajax({
+			type : "DELETE",
+			url : "api/login.do",
+			crossDomain : true,
+			cache : false,
+			dataType : 'json',
+			timeout : 5000,
+			success : function(response) {
+				console.log(response);
+				if (response.status == 200) {
+					console.log("logout");
+					login = response.login;
+					if (login == "success") {
+						document.getElementById("sign").innerHTML = "登出";
+					} else {
+						document.getElementById("sign").innerHTML = "登入";
+					}
+				}
+			},
+			error : function() {
+				alert("登出失敗");
+			}
+		});
 	}
-});
-$('#logout').click(function(){
-    alert("logout!!!");
-    logout(); 
-  
-});
-function logout() {
-    $.ajax({
-        type: "DELETE",
-        url: "api/login.do",
-        crossDomain: true,
-        cache: false,
-        dataType: 'json',
-        timeout: 5000,
-        success: function (response) {
-         console.log(response);
-            if(response.status == 200){
-             console.log("logout");
-             login = response.login;
-             if(login == "success"){
-				 	document.getElementById("sign").innerHTML = "登出";
-				 }
-			 	 else{
-			 		document.getElementById("sign").innerHTML = "登入";
-			 	 }
-          }
-        },
-        error: function () {
-            alert("登出失敗");
-        }
-    });
-}
-//get login status for the header button login/logout
-function getLogin(){
-	$.ajax({
-        type: "GET",
-        url: "api/login.do",
-        crossDomain: true,
-        cache: false,
-        dataType: 'json',
-        timeout: 5000,
-        success: function (response) {
-            if(response.status == 200){
-            	login = response.login;
-            	console.log(login);
-   			 	if(login == "success"){
-   				 	document.getElementById("sign").innerHTML = "登出";
-   				}
-   			 	else{
-   			 		document.getElementById("sign").innerHTML = "登入";
-   			 	}
-          }
-        },
-        error: function () {
-            alert("拿登入狀態失敗");
-        }
-    });
-}
+	//get login status for the header button login/logout
+	function getLogin() {
+		$.ajax({
+			type : "GET",
+			url : "api/login.do",
+			crossDomain : true,
+			cache : false,
+			dataType : 'json',
+			timeout : 5000,
+			success : function(response) {
+				if (response.status == 200) {
+					login = response.login;
+					console.log(login);
+					if (login == "success") {
+						document.getElementById("sign").innerHTML = "登出";
+					} else {
+						document.getElementById("sign").innerHTML = "登入";
+					}
+				}
+			},
+			error : function() {
+				alert("拿登入狀態失敗");
+			}
+		});
+	}
 
+	//導入哪種個人專區	
+	var idself = 0;
+	var role = null;
+	$("#self").click(function() {
+		$.ajax({
+			type : "GET",
+			url : "api/login.do",
+			crossDomain : true,
+			cache : false,
+			dataType : 'json',
+			timeout : 5000,
+			success : function(response) {
+				if (response.status == 200) {
+					// console.log(response);
+					console.log(response);
+					idself = response.response.data[0].id;
+					role = response.role;
+					console.log(role);
+				}
 
+				if (role == "student") {
+					location.href = "studentself.html"
+				} else if (role == "coach") {
+					location.href = "coachself.html"
+				} else if (role == "admin") {
+					location.href = "interface.html"
+				} else {
+					alert("請登入會員")
+				}
+			},
+			error : function() {
+				alert("無法連線到伺服器！");
+			}
+		});
 
+	})
 </script>
 
 </html>
