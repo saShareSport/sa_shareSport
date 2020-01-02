@@ -139,8 +139,7 @@ html, body {
 
 		});
 		function logout() {
-			$
-					.ajax({
+					$.ajax({
 						type : "DELETE",
 						url : "api/login.do",
 						crossDomain : true,
@@ -170,8 +169,7 @@ html, body {
 		}
 		//get login status for the header button login/logout
 		function getLogin() {
-			$
-					.ajax({
+					$.ajax({
 						type : "GET",
 						url : "api/login.do",
 						crossDomain : true,
@@ -204,7 +202,7 @@ html, body {
 								console.log(login);
 								if (login == "not") {
 									alert("Not success, Please Login again or Register first");
-									logout();
+									
 								}
 							}
 						},
