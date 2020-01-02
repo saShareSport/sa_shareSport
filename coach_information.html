@@ -140,10 +140,10 @@
 							//設定預設教練圖片
 							if (response['response']['data'][0]['image'] == null) {
 								response['response']['data'][0]['image'] = "statics/img/coach.jpg"
-								var img = '<img src="'+response['response']['data'][0]['image']+'" class="card-img-top" alt="..." width="12rem" height="270rem">';
+								var img = '<img src="'+response['response']['data'][0]['image']+'" class="card-img-top" alt="無法顯示圖片" width="12rem" height="270rem">';
 								document.getElementById('coachPicture').innerHTML = img;
 							} else {
-								var img = '<img src="'+response['response']['data'][0]['image']+'" class="card-img-top" alt="..." width="12rem" height="270rem">';
+								var img = '<img src="'+response['response']['data'][0]['image']+'" class="card-img-top" alt="無法顯示圖片" width="12rem" height="270rem">';
 								document.getElementById('coachPicture').innerHTML = img;
 
 							}
@@ -282,7 +282,7 @@
 			let inner_html = '';
 			inner_html += '<div class="col-md-4">';
 			inner_html += '<div class="card mb-4 box-shadow">';
-			inner_html += '<img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="'
+			inner_html += '<img class="card-img-top" alt="無法顯示圖片" style="height: 225px; width: 100%; display: block;" src="'
 					+ data.image + '"> ';
 			inner_html += '<div class="card-body">';
 			inner_html += '<p class="card-text">';

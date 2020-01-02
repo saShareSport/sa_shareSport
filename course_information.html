@@ -169,10 +169,10 @@
 							//設定預設教程圖片
 							if (response['response']['data'][0]['image'] == null) {
 								response['response']['data'][0]['image'] = "statics/img/course.jpg"
-								var img = '<img src="'+response['response']['data'][0]['image']+'" class="card-img-top" alt="..." width="12rem" height="270rem">';
+								var img = '<img src="'+response['response']['data'][0]['image']+'" alt="無法顯示圖片" class="card-img-top" alt="..." width="12rem" height="270rem">';
 								document.getElementById('coursePicture').innerHTML = img;
 							} else {
-								var img = '<img src="'+response['response']['data'][0]['image']+'" class="card-img-top" alt="..." width="12rem" height="270rem">';
+								var img = '<img src="'+response['response']['data'][0]['image']+'" alt="無法顯示圖片" class="card-img-top" alt="..." width="12rem" height="270rem">';
 								document.getElementById('coursePicture').innerHTML = img;
 
 							}
