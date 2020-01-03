@@ -216,10 +216,10 @@
                     }                                                      */
     
                     else {
-                    	  
+                    	  console.log(cname)
                         // 將資料組成JSON格式
                         var data_object = {
-                        	"coach_id": id,
+                        	"course_coach_id": id,
                             "name": cname,
                             "information": information,
                         	"upper_limb": checkU,
@@ -246,7 +246,7 @@
                              success : function(response) {
              					console.log(response);
              					alert("上傳成功！\n正在為您導回首頁！");
-                                location.href="index.html";
+                                //location.href="index.html";
                              },
                              
                              error: function () {
