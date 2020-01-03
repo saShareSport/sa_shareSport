@@ -478,7 +478,6 @@
 		coachAll += '</div>';
 
 		getFollows(data[0]['id']);
-		getStucoachpic(data[0]['id']);
 
 		$("#coachesPanel").append(coachAll);//把所有coach資料顯現在coach區        
 
@@ -495,10 +494,10 @@
 					timeout : 5000,
 					success : function(response) {
 						if (response.status == 200) {
-							document.getElementById('follow' + id).innerHTML = "<small>追蹤人數"
+							window.onload = function what(){
+								document.getElementById('follow' + id).innerHTML = "<small>追蹤人數"
 									+ response.count;
-							console.log("followid:" + id + " amount="
-									+ response.count);
+							}
 						}
 						;
 					},
