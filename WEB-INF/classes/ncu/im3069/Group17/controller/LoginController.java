@@ -1,21 +1,14 @@
 package ncu.im3069.Group17.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.Optional;
-import java.util.stream.Stream;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.annotation.*;
