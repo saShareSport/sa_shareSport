@@ -105,14 +105,14 @@ public class LoginController extends HttpServlet {
 			response.addCookie(roleCookie);
 			response.addCookie(loginCookie);
 
-			response.sendRedirect("/sa_shareSport/index.html");
+			response.sendRedirect("../index.html");
 
 		} else {
 			String login = "not";
 			loginCookie = new Cookie("login", login);
 			loginCookie.setMaxAge(30 * 60);
 			response.addCookie(loginCookie);
-			response.sendRedirect("/sa_shareSport/login.html");
+			response.sendRedirect("../login.html");
 		}
 	}
 
