@@ -273,15 +273,17 @@ html, body {
 
 	});
 
-	$("#confirm").click(function() {
-
+$("#confirm").click(function() {
+		
+		address = image.replace('.\\upload\\','')
+		console.log(address);
 		// put不能用getParameter 所以要傳object，後端才撈得到
 		var data_object = {
 			"id" : id,
 			"name" : $('#coursename').val(),
 			"information" : $('#coursetext').val(),
 			"status" : course_status,
-			"image" : image,
+			"image" : address,
 		};
 
 		// 將JSON格式轉換成字串

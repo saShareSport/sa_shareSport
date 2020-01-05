@@ -111,8 +111,6 @@
 							//console.log(response);
 							if (response.status == 200) {
 								document.getElementById('subscribe' + id).innerHTML = response.count;
-								console.log("id:" + id + " amount="
-										+ response.count);
 							}
 							;
 							//console.log(response);
@@ -137,9 +135,7 @@
 						success : function(response) {
 							//console.log(response);
 							if (response.status == 200) {
-								document.getElementById('follow' + id).innerHTML = response.count;
-								console.log("id:" + id + " amount="
-										+ response.count);
+								document.getElementById('follow' + id).innerHTML = response.count;								
 							}
 							;
 							//console.log(response);
@@ -249,15 +245,12 @@
 			inner_html += '<a href="course_information.html?id=' + data.id
 					+ '" class="btn btn-sm btn-outline-secondary">查看教程</a>';
 			inner_html += '</div>';
-			inner_html += '</div></div></div></div>';
-			console.log(data.id);
+			inner_html += '</div></div></div></div>';			
 			getSubscribes(data.id);
 			return inner_html;
 		}
 
 		function addCoach(data) {
-
-			console.log(data.status);
 			if (data.status == '1') {
 				let inner_html = '';
 				return inner_html;
@@ -289,8 +282,6 @@
 				inner_html += '</div></div></div></div>';
 
 				getfollows(data.id);
-				console.log(data.id);
-
 				return inner_html;
 			}
 

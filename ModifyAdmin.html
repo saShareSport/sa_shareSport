@@ -1,237 +1,244 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+	crossorigin="anonymous"></script>
 <meta charset="BIG5">
 <title>修改管理員資料</title>
 <style>
-<div style="font-family: Microsoft JhengHei; color: white;">
-	{
-    box-sizing: border-box;
+* {
+	box-sizing: border-box;
 }
 
-html,
-body {
-    margin-top: 60px;
-    margin-bottom: 2px;
-    margin-left: 27px;
-    margin-right: 27px;
-    padding: 0px;
+html, body {
+	margin-top: 60px;
+	margin-bottom: 2px;
+	margin-left: 27px;
+	margin-right: 27px;
+	padding: 0px;
 }
+
 .nav {
-    font-size: 20px;
+	font-size: 20px;
 }
-.form-group{
+
+.form-group {
 	width: 600px;
 }
 </style>
 </head>
 <body>
-<div style="font-family: Microsoft JhengHei; color: white;">
+	<div style="font-family: Microsoft JhengHei; color: white;">
 
-			<nav class="navbar fixed-top navbar-dark bg-dark">
-				<a class="navbar-brand" style="font-size: 30px">ShareSport</a>
-				<ul class="nav mr-auto">
-					<li class="nav-item"><a class="nav-link"
-						href="index.html" style="color: white;">首頁</a></li>
-					<li class="nav-item"><a class="nav-link active"
-						href="brow_coaches.html" style="color: white;">瀏覽教練</a></li>
-					<li class="nav-item"><a class="nav-link active"
-						href="brow_courses.html" style="color: white;">瀏覽教程</a></li>
-					<li class="nav-item"><a id="self" class="nav-link active"
-						href=" " style="color: white;">個人專區</a></li>
-					<li class="nav-item"><a class="nav-link active" id="sign"
-						href="login.html" style="color: white;">登入</a></li>
-					<li class="nav-item"><a class="nav-link active" id="regsign"
-						href="register.html" style="color: white;">註冊</a></li>
-				</ul>
-			</nav>
-		</div>
+		<nav class="navbar fixed-top navbar-dark bg-dark">
+			<a class="navbar-brand" style="font-size: 30px">ShareSport</a>
+			<ul class="nav mr-auto">
+				<li class="nav-item"><a class="nav-link" href="index.html"
+					style="color: white;">首頁</a></li>
+				<li class="nav-item"><a class="nav-link active"
+					href="brow_coaches.html" style="color: white;">瀏覽教練</a></li>
+				<li class="nav-item"><a class="nav-link active"
+					href="brow_courses.html" style="color: white;">瀏覽教程</a></li>
+				<li class="nav-item"><a id="self" class="nav-link active"
+					href=" " style="color: white;">個人專區</a></li>
+				<li class="nav-item"><a class="nav-link active" id="sign"
+					href="login.html" style="color: white;">登入</a></li>
+				<li class="nav-item"><a class="nav-link active" id="regsign"
+					href="register.html" style="color: white;">註冊</a></li>
+			</ul>
+		</nav>
+	</div>
 	<form>
-  		<div class="form-group">
-    		<label for="adminName">名稱</label>
-    		<input type="text" id ="adminName" class="form-control">
-    		<small  class="form-text text-muted">長度為30字 可接受中英文字符</small>
-  		</div>
-  		<div class="form-group">
-  			<label for="disabledEmail">Email</label>
-      		<input type="email" id="disabledEmail" class="form-control" placeholder="email@example.com">
-  		</div> 
-  		<div class="form-group">
-    		<label for="adminPassword">密碼</label>
-    		<input type="password" id = "adminPassword" class="form-control password" >
-    		<small  class="form-text text-muted">僅接受英文或數字 不可為空白鍵</small>
-  		</div>
-  		<div class="form-group">
-    		<label for="adminPasswordcheck">確認密碼</label>
-    		<input type="password" id = "adminPasswordcheck" class="form-control passwordtest" >
-    		<small  class="form-text text-muted">請再輸入一次密碼</small>
-  		</div>
-  		<div class="form-group">
-  			<label for="status">status</label>
-  			<input type="text" id = "adminStatus" class="form-control status">
-  		</div>
-  		<button type="submit" class="btn btn-secondary" id ="submit">儲存</button>
-</form>
+		<div class="form-group">
+			<label for="adminName">名稱</label> <input type="text" id="adminName"
+				class="form-control"> <small class="form-text text-muted">長度為30字
+				可接受中英文字符</small>
+		</div>
+		<div class="form-group">
+			<label for="disabledEmail">Email</label> <input type="email"
+				id="disabledEmail" class="form-control"
+				placeholder="email@example.com">
+		</div>
+		<div class="form-group">
+			<label for="adminPassword">密碼</label> <input type="password"
+				id="adminPassword" class="form-control password"> <small
+				class="form-text text-muted">僅接受英文或數字 不可為空白鍵</small>
+		</div>
+		<div class="form-group">
+			<label for="adminPasswordcheck">確認密碼</label> <input type="password"
+				id="adminPasswordcheck" class="form-control passwordtest">
+			<small class="form-text text-muted">請再輸入一次密碼</small>
+		</div>
+		<div class="form-group">
+			<label for="status">status</label> <input type="text"
+				id="adminStatus" class="form-control status">
+		</div>
+		<button type="submit" class="btn btn-secondary" id="submit">儲存</button>
+	</form>
 </body>
 <script>
+	$('#logout').click(function() {
+		alert("logout!!!");
+		logout();
 
-$('#logout').click(function(){
-    alert("logout!!!");
-    logout(); 
-  
-});
-function logout() {
-    $.ajax({
-        type: "DELETE",
-        url: "api/login.do",
-        crossDomain: true,
-        cache: false,
-        dataType: 'json',
-        timeout: 5000,
-        success: function (response) {
-         console.log(response);
-            if(response.status == 200){
-             console.log("logout");
-             login = response.login;
-             if(login == "success"){
-				 	document.getElementById("sign").innerHTML = "登出";
-				 }
-			 	 else{
-			 		document.getElementById("sign").innerHTML = "登入";
-			 	 }
-          }
-        },
-        error: function () {
-            alert("登出失敗");
-        }
-    });
-}
-//get login status for the header button login/logout
-function getLogin(){
-	$.ajax({
-        type: "GET",
-        url: "api/login.do",
-        crossDomain: true,
-        cache: false,
-        dataType: 'json',
-        timeout: 5000,
-        success: function (response) {
-            if(response.status == 200){
-            	login = response.login;
-            	console.log(login);
-   			 	if(login == "success"){
-   				 	document.getElementById("sign").innerHTML = "登出";
-   				}
-   			 	else{
-   			 		document.getElementById("sign").innerHTML = "登入";
-   			 	}
-          }
-        },
-        error: function () {
-            alert("拿登入狀態失敗");
-        }
-    });
-}
+	});
+	function logout() {
+		$.ajax({
+			type : "DELETE",
+			url : "api/login.do",
+			crossDomain : true,
+			cache : false,
+			dataType : 'json',
+			timeout : 5000,
+			success : function(response) {
+				console.log(response);
+				if (response.status == 200) {
+					console.log("logout");
+					login = response.login;
+					if (login == "success") {
+						document.getElementById("sign").innerHTML = "登出";
+					} else {
+						document.getElementById("sign").innerHTML = "登入";
+					}
+				}
+			},
+			error : function() {
+				alert("登出失敗");
+			}
+		});
+	}
+	//get login status for the header button login/logout
+	function getLogin() {
+		$.ajax({
+			type : "GET",
+			url : "api/login.do",
+			crossDomain : true,
+			cache : false,
+			dataType : 'json',
+			timeout : 5000,
+			success : function(response) {
+				if (response.status == 200) {
+					login = response.login;
+					console.log(login);
+					if (login == "success") {
+						document.getElementById("sign").innerHTML = "登出";
+					} else {
+						document.getElementById("sign").innerHTML = "登入";
+					}
+				}
+			},
+			error : function() {
+				alert("拿登入狀態失敗");
+			}
+		});
+	}
 
-$(document).ready(function() {
-	getLogin();
-});
+	$(document).ready(function() {
+		getLogin();
+	});
 	var url_string = window.location.href;
 	var url = new URL(url_string);
 	var id = url.searchParams.get("id");
-	
+
 	//var id=1;
-		
+
 	function updateAdmin(id) {
-	    var name = $('#adminName').val();
-	    var email = $('#disabledEmail').val();
-	    var password = $('#adminPassword').val();
-	    var repassword= $('#adminPasswordcheck').val();
-	    var status = $('#adminStatus').val();	    
-	
-	    var password_rule = /^.[A-Za-z0-9]+$/;
-	
-	    if(!password_rule.test(password)) {
-	        alert("密碼格式不符，僅接受英文或數字 不可為空白鍵！");
-	    }
-	    if(repassword!=password){
-	    	alert("確認密碼輸入錯誤，與密碼不符");
-	    }
-	    else {
-	        // 將資料組成JSON格式
-	        var data_object = {
-	            "id": id,
-	            "name": name,
-	            "email": email,
-	            "password": password,
-	            "status":status   
-	        };
-	
-	        // 將JSON格式轉換成字串
-	        var data_string = JSON.stringify(data_object);
-	
-	        // 發出POST的PUT請求
-	        $.ajax({
-	                type: "PUT",
-	                url: "api/admin.do",
-	                data: data_string,
-	                crossDomain: true,
-	                cache: false,
-	                dataType: 'json',
-	                timeout: 5000,
-	                success: function (response) {
-	                    $('#flashMessage').html(response.message);
-	                    $('#flashMessage').show();
-	                    if(response.status == 200){
-	                    	window.location.href = "AdminsList.html"
-	                    }
-	                },
-	                error: function () {
-	                    alert("無法連線到伺服器！");
-	                }
-	        });
-	        
-	    }
+		var name = $('#adminName').val();
+		var email = $('#disabledEmail').val();
+		var password = $('#adminPassword').val();
+		var repassword = $('#adminPasswordcheck').val();
+		var status = $('#adminStatus').val();
+
+		var password_rule = /^.[A-Za-z0-9]+$/;
+
+		if (!password_rule.test(password)) {
+			alert("密碼格式不符，僅接受英文或數字 不可為空白鍵！");
+		}
+		if (repassword != password) {
+			alert("確認密碼輸入錯誤，與密碼不符");
+		} else {
+			// 將資料組成JSON格式
+			var data_object = {
+				"id" : id,
+				"name" : name,
+				"email" : email,
+				"password" : password,
+				"status" : status
+			};
+
+			// 將JSON格式轉換成字串
+			var data_string = JSON.stringify(data_object);
+
+			// 發出POST的PUT請求
+			$.ajax({
+				type : "PUT",
+				url : "api/admin.do",
+				data : data_string,
+				crossDomain : true,
+				cache : false,
+				dataType : 'json',
+				timeout : 5000,
+				success : function(response) {
+					$('#flashMessage').html(response.message);
+					$('#flashMessage').show();
+					if (response.status == 200) {
+						window.location.href = "AdminsList.html"
+					}
+				},
+				error : function() {
+					alert("無法連線到伺服器！");
+				}
+			});
+
+		}
 	}
-	
-	   function getAdmin() {
-	       $.ajax({
-	           type: "GET",
-	           url: "api/admin.do",
-	           crossDomain: true,
-	           data: "id="+id,
-	           cache: false,
-	           dataType: 'json',
-	           timeout: 5000,
-	           success: function (response) {
-	        	   console.log(response);
-	               if(response.status == 200){
-	               	document.getElementById('adminName').value = response['response']['data'][0]['name'];
-	               	document.getElementById('disabledEmail').value = response['response']['data'][0]['email'];
-	               	document.getElementById('adminPassword').value = response['response']['data'][0]['password'];
-	               	document.getElementById('adminPasswordcheck').value = response['response']['data'][0]['password'];
-	               	document.getElementById('adminStatus').value = response['response']['data'][0]['status'];
-	               }
-	               console.log(response);
-	           },
-	           error: function () {
-	               alert("無法連線到伺服器！");
-	           }
-	       });
-	   }
-	   
-	   $('#submit').click(function() {
-		   console.log(id)
-	       updateAdmin(id)
-	   });
-	   
-	   $(document).ready(function() {
-	   	// 發出GET的AJAX請求取得原本該會員的資料
-	       getAdmin();
-	   });
+
+	function getAdmin() {
+		$
+				.ajax({
+					type : "GET",
+					url : "api/admin.do",
+					crossDomain : true,
+					data : "id=" + id,
+					cache : false,
+					dataType : 'json',
+					timeout : 5000,
+					success : function(response) {
+						console.log(response);
+						if (response.status == 200) {
+							document.getElementById('adminName').value = response['response']['data'][0]['name'];
+							document.getElementById('disabledEmail').value = response['response']['data'][0]['email'];
+							document.getElementById('adminPassword').value = response['response']['data'][0]['password'];
+							document.getElementById('adminPasswordcheck').value = response['response']['data'][0]['password'];
+							document.getElementById('adminStatus').value = response['response']['data'][0]['status'];
+						}
+						console.log(response);
+					},
+					error : function() {
+						alert("無法連線到伺服器！");
+					}
+				});
+	}
+
+	$('#submit').click(function() {
+		console.log(id)
+		updateAdmin(id)
+	});
+
+	$(document).ready(function() {
+		// 發出GET的AJAX請求取得原本該會員的資料
+		getAdmin();
+	});
 </script>
 </html>

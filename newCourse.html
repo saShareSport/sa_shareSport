@@ -324,6 +324,11 @@
 				//新增影片
 				$("#add").click(function() {
 									var result = $('#videoAddress').val();
+									if(!result){
+										alert("未上傳網址")
+									}else{
+										
+									
 									address = result.replace('watch?v=','embed/');
 									console.log(address);
 									var data_object = {
@@ -354,9 +359,9 @@
 									$("#list").append("<iframe width=\"320\" height=\"240\" src="+address+"></iframe>");													
 									$("#list").append("</table>"); //加尾
 									$('#videoAddress').val(''); //清空input格
-
+									}
 								});
-
+				
 				$("#file").click(function() {
 					$("#upload").css("visibility", "visible");
 				})
