@@ -203,7 +203,7 @@ body {
 		var CourseTable_html='';
 		 $.each(data, function(index, value){
 			 CourseTable_html +='<tr><td scope="row">'+ value ['id'] + '</td>';
-			 CourseTable_html +='<td>' + value['information'] + '</td>';
+			 CourseTable_html +='<td>' + value['name'] + '</td>';
 			 CourseTable_html +='<td>' + value['coach_id'] + '</td>';
 			 CourseTable_html +='<td>' + value['modified'] + '</td>';
 			 CourseTable_html +='<td>' + '<a class="btn btn-secondary" href="AdminCourseModify.html?id=' + value['id'] + '">編輯</a>'+'</td>';

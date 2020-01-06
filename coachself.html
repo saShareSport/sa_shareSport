@@ -448,21 +448,22 @@
 	}
 	$(document).ready(function() {
 		getLogin();
-		$.ajax({//取得登入者的ID
+	   $.ajax({//取得登入者的ID
 			type : "GET",
 			url : "api/login.do",
 			crossDomain : true,
 			cache : false,
 			dataType : 'json',
 			timeout : 5000,
-			success : function(response) {
+			success :function(response) {
 				if (response.status == 200) {
+					console.log(response);
+					id = response.response.data[0].id;
+					role = response.role;
+					console.log(role);
+					console.log(id);
 				}
-				console.log(response);
-				id = response.response.data[0].id;
-				role = response.role;
-				console.log(role);
-				console.log(id);
+				
 				getCoach(id);
 				getCourse(id);
 				getCoachPic(id);
