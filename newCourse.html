@@ -95,7 +95,7 @@
 
 			<div class="cover">
 				<h3>
-					教程封面<label class="star">*</label>
+					教程封面
 				</h3>
 				<form id="uploadPicture" enctype="multipart/form-data">
 					<input id="file" type="file" name="file" /> <img width="320"
@@ -133,7 +133,7 @@
 				var course_id;
 				var address;
 				var role = null;
-				var image = "";
+				var image;
 				var place = "";
 
 				$("#self").click(function() {
@@ -240,7 +240,7 @@
 					}
 
 					var information = $('#course_information').val();
-					var picture = $('#file').val();
+					//var picture = $('#file').val();
 
 					if (!cname) {
 						alert("請輸入教程名稱！");
@@ -250,10 +250,10 @@
 						alert("請選擇教程類別！");
 					}
 
-					else if (!picture) {
+				/*	else if (!picture) {
 						alert("請上傳教程封面！");
-					}
-
+					
+*/
 					else {
 						console.log(cname)
 						// 將資料組成JSON格式

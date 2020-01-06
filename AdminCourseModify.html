@@ -66,13 +66,17 @@ html, body {
 	visibility: hidden;
 }
 
-#confirm {
-	visibility: hidden;
-}
 
 .videolist {
 	display: inline-block;
 	margin-left: 150px;
+}
+
+#endbt {
+	margin-left: 500px;
+	font-size: 40px;
+	width: 250px;
+	height: 200px;
 }
 </style>
 
@@ -138,10 +142,8 @@ html, body {
 			<form id="uploadPicture" enctype="multipart/form-data">
 				<input id="file" type="file" name="file" /> <img width="320"
 					id="demo" /><br> <br>
-				<button id="upload" type="button"
-					class="btn btn-sm btn-outline-secondary">上傳圖檔</button>
-				<button id="confirm" type="button"
-					class="btn btn-sm btn-outline-secondary">完成</button>
+
+
 			</form>
 
 		</div>
@@ -153,8 +155,13 @@ html, body {
 		</div>
 	</div>
 	<div id="list"></div>
-	<button style="font-family: Microsoft JhengHei" id="textinfo"
-		type="button" class="btn btn-sm btn-outline-secondary">完成</button>
+	<div id="endbt">
+		<button id="upload" type="button"
+			class="btn btn-sm btn-outline-secondary">上傳圖檔</button>
+		<button style="font-family: Microsoft JhengHei" id="confirm"
+			type="button" class="btn btn-sm btn-outline-secondary">完成</button>
+	</div>
+
 </body>
 <script>
 	var url_string = window.location.href;
@@ -162,7 +169,7 @@ html, body {
 	var id = url.searchParams.get("id");
 	var sql_num = 0;
 	var course_status;
-	var image = "";
+	var image ;
 
 	var ups = '<input class="form-check-input" type="radio" name="exampleRadios" id="upradio" value="1" checked disabled><h5 class="form-check-label" >上肢</h5>';
 	var mids = '<input class="form-check-input" type="radio" name="exampleRadios" id="midradio" value="1" checked disabled><h5 class="form-check-label" >核心</h5>';
@@ -183,7 +190,9 @@ html, body {
 						if (response.status == 200) {
 							document.getElementById('coursename').value = response['response']['data'][0]['name'];
 							course_status = (response['response']['data'][0]['status']);
-
+							image=response['response']['data'][0]['image'];
+							$('#demo').attr('src',
+									image);
 							document.getElementById('coursetext').value = response['response']['data'][0]['information'];
 							if (response['response']['data'][0]['upper_limb'] == "1") {
 								$("#up").empty();
@@ -206,49 +215,13 @@ html, body {
 					}
 				});
 	}
-	
-	var url_string = window.location.href;
-	var url = new URL(url_string);
-	var id = url.searchParams.get("id");
-
-	function updatetextinfo(id) {//更新coursetextinfo
-
-		var data_object = {
-			"id" : id,
-			"name" : $('#coursename').val(),
-			"information" : $('#coursetext').val(),
-			"status" : course_status,
-			"image" : "",
-
-		};
-		console.log(data_object);
-		// 將JSON格式轉換成字串
-		var data_string = JSON.stringify(data_object);
-		$.ajax({
-			type : "PUT",
-			url : "api/course.do",
-			crossDomain : true,
-			data : data_string,
-			cache : false,
-			dataType : 'json',
-			timeout : 5000,
-			success : function(response) {
-				console.log(response);
-				if (response.status == 200) {
-					window.location.href = "CourseList.html"
-				}
-			},
-			error : function() {
-				alert("無法連線到伺服器！");
-			}
-		});
-	}
 
 	$('#file').change(function() {
 		var file = $('#file')[0].files[0];
 		image = $('#file')[0].files[0].name;
 		var reader = new FileReader;
 		reader.onload = function(e) {
+			$('#demo').empty();
 			$('#demo').attr('src', e.target.result);
 		};
 		reader.readAsDataURL(file);
@@ -265,6 +238,7 @@ html, body {
 			contentType : false,
 			success : function(response) {
 				console.log("upload success!");
+				address = image.replace('.\\upload\\','')
 			},
 			error : function() {
 				alert("無法連線到伺服器！");
@@ -273,9 +247,9 @@ html, body {
 
 	});
 
-$("#confirm").click(function() {
-		
-		address = image.replace('.\\upload\\','')
+	$("#confirm").click(function() {
+		console.log(image);
+		//address = image.replace('.\\upload\\','')
 		console.log(address);
 		// put不能用getParameter 所以要傳object，後端才撈得到
 		var data_object = {
@@ -298,6 +272,7 @@ $("#confirm").click(function() {
 			timeout : 5000,
 			success : function(response) {
 				console.log(response);
+				location.href = "CourseList.html";
 			},
 			error : function() {
 				alert("無法連線到伺服器！");
@@ -328,14 +303,13 @@ $("#confirm").click(function() {
 			timeout : 5000,
 			success : function(response) {
 				console.log(response);
-
+				$("#list").empty();
+				getVideo(id);
 			},
 			error : function() {
 				alert("無法連線到伺服器！");
 			}
 		})
-		$("#list").empty();
-		getVideo(id);
 
 	});
 
@@ -471,19 +445,12 @@ $("#confirm").click(function() {
 	$("#file").click(function() { //瀏覽
 		$("#upload").css("visibility", "visible");
 	});
-	$("#upload").click(function() {
-		$("#confirm").css("visibility", "visible");
-	})
+	
 	$("#confirm").click(function() {
 		$("#upload").css("visibility", "hidden");
 		$("#confirm").css("visibility", "hidden");
 	})
-	$("#textinfo").click(function() {
-		updatetextinfo(id);
-	})
-	$("#textinfo").click(function() {
-		location.href = "CourseList.html";
-	})
+
 	$("#self").click(function() {
 		$.ajax({
 			type : "GET",

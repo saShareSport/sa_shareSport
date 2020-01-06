@@ -238,7 +238,7 @@ html, body {
 			contentType : false,
 			success : function(response) {
 				console.log("upload success!");
-			
+				address = image.replace('.\\upload\\','')
 			},
 			error : function() {
 				alert("無法連線到伺服器！");
@@ -248,8 +248,8 @@ html, body {
 	});
 
 	$("#confirm").click(function() {
-		
-		address = image.replace('.\\upload\\','')
+		console.log(image);
+		//address = image.replace('.\\upload\\','')
 		console.log(address);
 		// put不能用getParameter 所以要傳object，後端才撈得到
 		var data_object = {

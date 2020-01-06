@@ -34,6 +34,19 @@ public class Course {
 		this.created = Timestamp.valueOf(LocalDateTime.now());
 
 	}
+	
+	// 建立教程(不上傳照片)
+	public Course(int coach_id, String name, String information, int upper, int lower, int core) {
+		this.coach_id = coach_id;
+		this.name = name;
+		this.information = information;
+		this.upper_limb = upper;
+		this.lower_limb = lower;
+		this.core = core;
+		this.modified = Timestamp.valueOf(LocalDateTime.now());
+		this.created = Timestamp.valueOf(LocalDateTime.now());
+	}
+	
 	// 更新教程
 	public Course(int id, String name, String information, String image, int status) {
 		this.id = id;
@@ -44,6 +57,15 @@ public class Course {
 		this.modified = Timestamp.valueOf(LocalDateTime.now());
 		
 	}
+	//更新教程(不上傳圖片)
+	public Course(int id, String name, String information,  int status) {
+		this.id = id;
+		this.name = name;
+		this.information = information;
+		this.status = status;
+		this.modified = Timestamp.valueOf(LocalDateTime.now());		
+	}
+	
 	// 刪除教程 
 	public Course (int id, int status) {
 		this.id = id;
@@ -130,17 +152,17 @@ public class Course {
     }
     
 	 /**
-     * 更新課程照片
+     * 沒有上傳照片下更新
      *
      * @return the JSON object 回傳SQL更新之結果與相關封裝之資料
      */
-    public JSONObject saveImg() {
+    public JSONObject updateWithoutImg() {
         /** 新建一個JSONObject用以儲存更新後之資料 */
         JSONObject data = new JSONObject();
         /** 檢查該名課程是否已經在資料庫 */
              
             /** 透過MemberHelper物件，更新目前之課程資料置資料庫中 */
-        data = courh.saveImage(this);
+        data = courh.updateWithoutImg(this);
         
         
         return data;

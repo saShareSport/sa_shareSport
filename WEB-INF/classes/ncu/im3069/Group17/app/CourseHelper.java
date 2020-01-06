@@ -468,6 +468,7 @@ public class CourseHelper {
             String name = c.getName();
             String information = c.getInfo();
             String image = c.getImage();
+            System.out.print(image);
             int upper_limb = c.getUpper();
             int lower_limb = c.getLower();
             int core = c.getCore();
@@ -521,8 +522,10 @@ public class CourseHelper {
         return response;
     }
     
+    
+    
     /**
-     * 更新教程之資料
+     * 更新教程之資料(上傳照片)
      *
      * @param c 教程之Course物件
      * @return the JSONObject 回傳SQL指令執行結果與執行之資料
@@ -541,14 +544,11 @@ public class CourseHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "Update `sa_sharesport`.`courses` SET `name` = ? ,`information` = ? ,`image` = ?, `upper_limb` = ?,`lower_limb` = ?,`core` = ?, `status` =? ,`modified` =? WHERE `id` = ?";
+            String sql = "Update `sa_sharesport`.`courses` SET `name` = ? ,`information` = ? ,`image` = ?,`status` = ?, `modified` =? WHERE `id` = ?";
             /** 取得所需之參數 */
             String name = c.getName();
             String information = c.getInfo();
-            String image = c.getImage();
-            int upper_limb = c.getUpper();
-            int lower_limb = c.getLower();
-            int core = c.getCore();
+            String image = c.getImage();            
             int status = c.getStatus();
             Timestamp modified = c.getModified();
             int id = c.getID();
@@ -558,12 +558,9 @@ public class CourseHelper {
             pres.setString(1, name);
             pres.setString(2, information);
             pres.setString(3, image);
-            pres.setInt(4, upper_limb);
-            pres.setInt(5, lower_limb);
-            pres.setInt(6, core);
-            pres.setInt(7, status);
-            pres.setTimestamp(8, modified);
-            pres.setInt(9, id);
+            pres.setInt(4, status);
+            pres.setTimestamp(5, modified);
+            pres.setInt(6, id);
     
             /** 執行更新之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();
@@ -599,12 +596,12 @@ public class CourseHelper {
     }
     
     /**
-     * 上傳教程之照片
+     * 更新教程(不上傳照片)
      *
      * @param c 一名教程之Coach物件
      * @return the JSONObject 回傳SQL指令執行結果與執行之資料
      */
-    public JSONObject saveImage(Course c) {
+    public JSONObject updateWithoutImg(Course c) {
 
         /** 紀錄回傳之資料 */
         JSONArray jsa = new JSONArray();
@@ -619,16 +616,22 @@ public class CourseHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "Update `sa_sharesport`.`courses` SET `image` = ? WHERE `id` = ?";
+            String sql = "Update `sa_sharesport`.`courses` SET `name` = ? ,`information` = ? , `modified` =?,`status` = ? WHERE `id` = ?";
             /** 取得所需之參數 */
             
-            String image = c.getName();  //因為用同一個建構子取得 filePath 變成getName方法     
+            String name = c.getName();
+            String information = c.getInfo();           
+            int status = c.getStatus();
+            Timestamp modified = c.getModified();
             int id = c.getID();
 
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
-            pres.setString(1, image);
-            pres.setInt(2, id);
+            pres.setString(1, name);
+            pres.setString(2, information);
+            pres.setTimestamp(3, modified);
+            pres.setInt(4, status);
+            pres.setInt(5, id);
             /** 執行更新之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();
 
