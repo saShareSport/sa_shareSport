@@ -75,6 +75,7 @@ body {
             <th scope="col">教程名稱</th>
             <th scope="col">教練</th>
             <th scope="col">更新時間</th>
+            <th scope="col">status</th>
             <th scope="col">編輯</th>
           </tr>
         </thead>
@@ -204,8 +205,9 @@ body {
 		 $.each(data, function(index, value){
 			 CourseTable_html +='<tr><td scope="row">'+ value ['id'] + '</td>';
 			 CourseTable_html +='<td>' + value['name'] + '</td>';
-			 CourseTable_html +='<td>' + value['coach_id'] + '</td>';
+			 CourseTable_html +='<td>' + value['coach_id'] + '</td>';			 
 			 CourseTable_html +='<td>' + value['modified'] + '</td>';
+			 CourseTable_html +='<td>' + value['status'] + '</td>';
 			 CourseTable_html +='<td>' + '<a class="btn btn-secondary" href="AdminCourseModify.html?id=' + value['id'] + '">編輯</a>'+'</td>';
 		 })
 		 $("#CourseTable > tbody").append(CourseTable_html);

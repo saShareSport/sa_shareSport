@@ -135,7 +135,11 @@ html, body {
 				<textarea class="form-control" id="coursetext" rows="3"></textarea>
 				<br>
 			</div>
-
+			<div class="name">
+				<h3 for="exampleFormControlInput1">status</h3>
+				<input type='text' class="form-control" id="courseStatus">
+				<br>
+			</div>
 		</form>
 		<div class="cover">
 			<h3>教程封面</h3>
@@ -167,8 +171,6 @@ html, body {
 	var url_string = window.location.href;
 	var url = new URL(url_string);
 	var id = url.searchParams.get("id");
-	var sql_num = 0;
-	var course_status;
 	var image ;
 
 	var ups = '<input class="form-check-input" type="radio" name="exampleRadios" id="upradio" value="1" checked disabled><h5 class="form-check-label" >上肢</h5>';
@@ -189,7 +191,7 @@ html, body {
 						console.log(response);
 						if (response.status == 200) {
 							document.getElementById('coursename').value = response['response']['data'][0]['name'];
-							course_status = (response['response']['data'][0]['status']);
+							document.getElementById('courseStatus').value = (response['response']['data'][0]['status']);
 							image=response['response']['data'][0]['image'];
 							$('#demo').attr('src',
 									image);
@@ -256,7 +258,7 @@ html, body {
 			"id" : id,
 			"name" : $('#coursename').val(),
 			"information" : $('#coursetext').val(),
-			"status" : course_status,
+			"status" :  $('#courseStatus').val(),
 			"image" : address,
 		};
 
